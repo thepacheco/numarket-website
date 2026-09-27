@@ -274,7 +274,7 @@ Interactivity is how numarket sells. We **show** the journey from messy data to 
 | 3D-5 | **Secure Vault** | Security | Rotating database core inside layered shields (encryption, access, logging, backups). Hover a shield for a one-line explanation. |
 
 ### Technical requirements
-- Next.js (App Router) + TypeScript, Tailwind with brand tokens as CSS variables, light and dark modes.
+- Next.js (App Router) + TypeScript, brand tokens as CSS variables (`app/globals.css`), light pages with dark "stage" sections.
 - Three.js via `@react-three/fiber` + `@react-three/drei`; GSAP ScrollTrigger for scroll scenes; Framer Motion for UI transitions.
 - 3D lazy-loaded (`ssr: false`), rendered only in viewport, render loop paused off-screen, DPR capped at 2.
 - Fallbacks for mobile, `prefers-reduced-motion`, and no WebGL.
@@ -345,21 +345,30 @@ Full page-by-page website specification: [`docs/website-brief.md`](docs/website-
 
 ```
 /
-├── README.md                  ← this file
+├── README.md                  ← this file (not served by the website)
 ├── docs/
-│   ├── website-brief.md       ← full website build specification
-│   ├── operations/            ← delivery runbooks, onboarding checklists, handover process
-│   ├── sales/                 ← call scripts, objection handling, proposal templates
-│   ├── partners/              ← partner program terms, pitch, onboarding
-│   └── legal/                 ← MSA, DPA, SOW templates (attorney-reviewed versions only)
-├── content/                   ← shared data files used by the website and demos
-│   ├── steps.ts
-│   ├── tiers.ts
-│   ├── effort.ts
-│   ├── industries.ts
-│   └── faq.ts
-└── web/                       ← website source (Next.js)
+│   └── website-brief.md       ← full website build specification
+├── content/                   ← all website copy and numbers live here
+│   ├── site.ts                ← contact info, form endpoint, Calendly link
+│   ├── steps.ts               ← the six steps
+│   ├── tiers.ts               ← pricing tiers and comparison table
+│   ├── effort.ts              ← effort, timeline, readiness levels
+│   ├── industries.ts          ← the 8 industries (sources, questions, sites)
+│   ├── products.ts            ← Foundation, Workspace, Insight Review, Engineering
+│   └── faq.ts                 ← FAQs by page
+├── lib/sample-data.ts         ← sample-data engine behind every demo dashboard
+├── components/                ← nav, footer, industry explorer, charts, forms
+├── app/                       ← one folder per page (Next.js App Router)
+├── public/                    ← favicon and static files (the only files served as-is)
+└── legacy/                    ← the previous single-page site, kept for reference
 ```
+
+### Running the website
+- `npm install`, then `npm run dev` (local preview at http://localhost:3000) or `npm run build`.
+- Deployed on Vercel as a Next.js project (`vercel.json` sets the framework).
+- To change a price, a phone number, or an industry: edit the file in `content/`. Every page that uses it updates.
+- Demo dashboards are generated from row-level sample records in `lib/sample-data.ts`. Every KPI, chart, table row, and action item is calculated from those records, so filtered views always add up. Ratios are computed from summed parts, never averaged.
+- Styling uses brand tokens defined once as CSS variables in `app/globals.css`.
 
 ---
 
