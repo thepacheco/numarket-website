@@ -37,7 +37,9 @@ export function LineChart({
   bLabel,
   format,
   title,
+  height = 220,
 }: {
+  height?: number;
   points: { label: string; a: number; b: number }[];
   aLabel: string;
   bLabel: string;
@@ -46,7 +48,6 @@ export function LineChart({
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [hover, setHover] = useState<number | null>(null);
-  const height = 220;
   const pad = { l: 56, r: 14, t: 12, b: 28 };
   const vals = points.flatMap((p) => [p.a, p.b]);
   const minV = Math.min(...vals);

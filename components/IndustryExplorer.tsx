@@ -27,6 +27,7 @@ export default function IndustryExplorer({
   const [size, setSize] = useState<Size>(initialSize);
   const [site, setSite] = useState<string | null>(null);
   const [period, setPeriod] = useState<Period>(12);
+  const [tab, setTab] = useState<"overview" | "sites">("overview");
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   /* read ?industry=&size= on first load */
@@ -92,14 +93,6 @@ export default function IndustryExplorer({
             ))}
           </div>
         )}
-        <div className="seg" role="group" aria-label="Company size">
-          <button type="button" aria-pressed={size === "small"} onClick={() => setSize("small")}>
-            Small / Growing
-          </button>
-          <button type="button" aria-pressed={size === "large"} onClick={() => setSize("large")}>
-            Larger Organization
-          </button>
-        </div>
       </div>
 
       <div id="explorer-panel" role={lockIndustry ? undefined : "tabpanel"} aria-labelledby={lockIndustry ? undefined : `tab-${slug}`} className="stage">
@@ -147,6 +140,14 @@ export default function IndustryExplorer({
             <span className="app-name">
               {sampleCompany[slug]} · <span>Workspace</span>
             </span>
+            <span className="app-tabs" role="tablist" aria-label="Dashboard view">
+              <button type="button" role="tab" aria-selected={tab === "overview"} onClick={() => setTab("overview")}>
+                Overview
+              </button>
+              <button type="button" role="tab" aria-selected={tab === "sites"} onClick={() => setTab("sites")}>
+                By {ind.siteNoun.one.toLowerCase()}
+              </button>
+            </span>
             <span className="label-sample">Sample data</span>
           </div>
 
@@ -170,16 +171,26 @@ export default function IndustryExplorer({
                   </button>
                 ))}
               </div>
-              <span className="rows tnum">Built from {view.rowCount} monthly records</span>
+              <div className="seg small-seg" role="group" aria-label="Company size">
+                <button type="button" aria-pressed={size === "small"} onClick={() => setSize("small")}>
+                  Small
+                </button>
+                <button type="button" aria-pressed={size === "large"} onClick={() => setSize("large")}>
+                  Large
+                </button>
+              </div>
+              <span className="rows tnum">{view.rowCount} monthly records</span>
             </div>
 
+            {tab === "overview" ? (
+            <>
             <div className="kpis">
               {view.kpis.map((k) => {
                 const d = k.value - k.prior;
                 const good = k.better === "none" || Math.abs(d) < 1e-9 ? null : (k.better === "up") === d > 0;
                 const pctChange = k.prior !== 0 && ["money", "num", "hrs"].includes(k.fmt) ? d / Math.abs(k.prior) : null;
                 return (
-                  <div className="kpi" key={k.key}>
+                  <div className="kpi" key={k.key} title={k.hint}>
                     <div className="kpi-l">{k.label}</div>
                     <div className="kpi-v tnum">{fmt(k.value, k.fmt)}</div>
                     <div className={`kpi-d ${good === null ? "" : good ? "up" : "down"}`}>
@@ -188,17 +199,38 @@ export default function IndustryExplorer({
                         : `${d >= 0 ? "▲" : "▼"} from ${fmt(k.prior, k.fmt)}`}{" "}
                       <span>vs. prior {period} mo</span>
                     </div>
-                    {k.hint && <div className="kpi-hint">{k.hint}</div>}
                   </div>
                 );
               })}
             </div>
 
             <div className="charts">
-              <LineChart points={view.trend.points} aLabel={view.trend.aLabel} bLabel={view.trend.bLabel} format={view.trend.fmt} title={view.trend.title} />
+              <LineChart height={150} points={view.trend.points} aLabel={view.trend.aLabel} bLabel={view.trend.bLabel} format={view.trend.fmt} title={view.trend.title} />
               <BarChart items={view.breakdown.items} format={view.breakdown.fmt} title={view.breakdown.title} />
             </div>
 
+            <div className={`action compact ${view.action.status}`}>
+              <div className="action-ic">
+                <Icon name={view.action.status === "good" ? "check" : "alert"} />
+              </div>
+              <div>
+                <div className="action-h">
+                  <span className="action-k">{view.action.status === "good" ? "Note" : "Action item"} · </span>
+                  {view.action.headline}
+                </div>
+                <p>{view.action.detail}</p>
+                <div className="action-meta">
+                  <span>
+                    <b>Owner:</b> {view.action.owner}
+                  </span>
+                  <span>
+                    <b>Due:</b> {view.action.due}
+                  </span>
+                </div>
+              </div>
+            </div>
+            </>
+            ) : (
             <div className="site-table">
               <table>
                 <caption className="sr-only">
@@ -219,7 +251,14 @@ export default function IndustryExplorer({
                   {view.table.map((r) => (
                     <tr key={r.site} className={site === r.site ? "sel" : ""}>
                       <th scope="row">
-                        <button type="button" className="linkish" onClick={() => setSite(site === r.site ? null : r.site)}>
+                        <button
+                          type="button"
+                          className="linkish"
+                          onClick={() => {
+                            setSite(r.site);
+                            setTab("overview");
+                          }}
+                        >
                           {r.site}
                         </button>
                       </th>
@@ -240,24 +279,7 @@ export default function IndustryExplorer({
               </table>
             </div>
 
-            <div className={`action ${view.action.status}`}>
-              <div className="action-ic">
-                <Icon name={view.action.status === "good" ? "check" : "alert"} />
-              </div>
-              <div>
-                <div className="action-k">{view.action.status === "good" ? "This month's note" : "Action item"}</div>
-                <div className="action-h">{view.action.headline}</div>
-                <p>{view.action.detail}</p>
-                <div className="action-meta">
-                  <span>
-                    <b>Owner:</b> {view.action.owner}
-                  </span>
-                  <span>
-                    <b>Due:</b> {view.action.due}
-                  </span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

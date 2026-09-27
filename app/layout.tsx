@@ -4,11 +4,13 @@ import { DM_Sans, DM_Serif_Display, Space_Grotesk } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RevealObserver from "@/components/RevealObserver";
+import ScrollProgress from "@/components/ScrollProgress";
 import { site } from "@/content/site";
 import "./globals.css";
 import "./explorer.css";
 import "./motion.css";
 import "./week4.css";
+import "./review.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 const dmSerif = DM_Serif_Display({ subsets: ["latin"], weight: "400", style: ["italic", "normal"], variable: "--font-dm-serif", display: "swap" });
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} ${grotesk.variable}`}>
       <body>
+        <ScrollProgress />
         <Header />
         <main id="main">{children}</main>
         <Footer />

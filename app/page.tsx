@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
+import GeoField from "@/components/GeoField";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
@@ -34,6 +35,7 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="hero">
+        <GeoField density={10} />
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-fade" aria-hidden="true" />
         <div className="container hero-grid">

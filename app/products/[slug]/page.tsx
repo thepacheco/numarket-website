@@ -5,6 +5,7 @@ import InsightDemo from "@/components/InsightDemo";
 import { MigrationDemo, ReconcileDemo } from "@/components/NeedDemos";
 import { ProductArt, ProductGlyph } from "@/components/ProductArt";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
+import ProductStory from "@/components/ProductStory";
 import { CtaBand, Faq, PrimaryCta, SectionHead } from "@/components/ui";
 import { productBySlug, products } from "@/content/products";
 
@@ -67,6 +68,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 24 }}>
+        <div className="container">
+          <SectionHead eyebrow="How it works" title="Scroll through it." />
+          <ProductStory kind={p.kind} />
         </div>
       </section>
 

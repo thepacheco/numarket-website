@@ -3,10 +3,12 @@ import type { ReactNode } from "react";
 import Icon from "./Icon";
 import { cta } from "@/content/site";
 import type { QA } from "@/content/faq";
+import GeoField from "./GeoField";
 
 export function PageHero({ eyebrow, title, lead, children, art }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode; art?: ReactNode }) {
   return (
     <section className="page-hero">
+      <GeoField density={art ? 8 : 12} side={art ? "right" : "both"} />
       <div className="hero-gradient" aria-hidden="true" />
       <div className="hero-fade" aria-hidden="true" />
       <div className={`container ${art ? "hero-grid" : ""}`}>
@@ -16,7 +18,11 @@ export function PageHero({ eyebrow, title, lead, children, art }: { eyebrow: str
           {lead && <p className="lead">{lead}</p>}
           {children && <div style={{ marginTop: 28 }}>{children}</div>}
         </div>
-        {art && <div className="page-hero-art">{art}</div>}
+        {art && (
+          <div className="page-hero-art" data-parallax="0.12">
+            {art}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -81,6 +87,7 @@ export function CtaBand({
 }) {
   return (
     <section className="cta-light">
+      <GeoField density={14} />
       <div className="container">
         <span className="eyebrow">Trust the Data.</span>
         <h2>{title}</h2>

@@ -70,10 +70,18 @@ export default function Header() {
     onMouseLeave: scheduleClose,
   });
 
+  const section = (id: Exclude<MenuId, null>) =>
+    id === "products"
+      ? pathname.startsWith("/products") || pathname === "/platform"
+      : id === "solutions"
+        ? pathname.startsWith("/solutions")
+        : resourceLinks.some((l) => pathname.startsWith(l.href));
+  const cur = (href: string) => (pathname === href || pathname.startsWith(href + "/") ? "current" : "");
+
   const trigger = (id: Exclude<MenuId, null>, label: string) => (
     <button
       type="button"
-      className="nav-item"
+      className={`nav-item ${section(id) ? "current" : ""}`}
       aria-expanded={open === id}
       aria-controls={`menu-${id}`}
       onClick={() => {
@@ -135,7 +143,7 @@ export default function Header() {
                     <p className="mega-h">By industry</p>
                     <div className="mega-ind">
                       {industryLinks.map((l) => (
-                        <Link key={l.href} href={l.href}>
+                        <Link key={l.href} href={l.href} className={`ind-${l.href.split("/").pop()}`}>
                           <Icon name={l.icon} width={16} height={16} />
                           {l.title}
                         </Link>
@@ -146,17 +154,17 @@ export default function Header() {
               </div>
             </li>
             <li>
-              <Link className="nav-item" href="/how-it-works">
+              <Link className={`nav-item ${cur("/how-it-works")}`} href="/how-it-works">
                 How It Works
               </Link>
             </li>
             <li>
-              <Link className="nav-item" href="/pricing">
+              <Link className={`nav-item ${cur("/pricing")}`} href="/pricing">
                 Pricing
               </Link>
             </li>
             <li>
-              <Link className="nav-item" href="/demos">
+              <Link className={`nav-item ${cur("/demos")}`} href="/demos">
                 Demos
               </Link>
             </li>

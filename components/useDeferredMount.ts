@@ -24,7 +24,7 @@ export function useDeferredMount(ref: RefObject<HTMLElement | null>, enabled = t
       { rootMargin: margin }
     );
     io.observe(ref.current);
-    const events = ["scroll", "pointerdown", "keydown", "touchstart", "wheel"] as const;
+    const events = ["scroll", "pointerdown", "pointermove", "keydown", "touchstart", "wheel"] as const;
     const onAct = () => {
       acted = true;
       check();
