@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import IndustryExplorer from "@/components/IndustryExplorer";
-import { CtaBand, Dots, FeatureCard, PrimaryCta, SectionHead } from "@/components/ui";
-import { steps } from "@/content/steps";
+import ProductBento from "@/components/ProductBento";
+import StepScene from "@/components/StepScene";
+import WorkspaceDemo from "@/components/WorkspaceDemo";
+import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
 import { tiers, money } from "@/content/tiers";
 import { effort } from "@/content/effort";
 
@@ -19,39 +21,22 @@ const tiles = [
   { l: 67, t: 44, x: -150, y: -110, r: -12 },
 ];
 
-const why = [
-  { icon: "clean", title: "We fix the foundation, not just the view.", body: "Dashboards on messy data are a Band-Aid. We clean it first." },
-  { icon: "key", title: "You own it.", body: "No lock-in. Leave any time after your term with a clean database." },
-  { icon: "users", title: "Built for your size.", body: "Simple and affordable for a 20-person company. Flexible enough for a large company's platform." },
-  { icon: "chat", title: "People, not just software.", body: "A real analyst reviews your numbers and tells you what to do." },
-  { icon: "spreadsheet", title: "Replace the spreadsheet shuffle.", body: "Your team enters data once, in one place. Everyone sees the same numbers." },
-  { icon: "sparkle", title: "Ready for AI.", body: "Ask questions in plain English today. Plug in any AI tool tomorrow." },
+const problems = [
+  { icon: "spreadsheet", text: "Numbers in 12 spreadsheets" },
+  { icon: "alert", text: "Reports that don't agree" },
+  { icon: "sparkle", text: "“Use AI” — on data that isn't ready" },
 ];
 
 const scenarios = [
-  {
-    who: "A regional general contractor",
-    before: "Job costs lived in Excel, QuickBooks, and Procore. PMs rebuilt the same budget report every Friday, and overruns showed up at month-end.",
-    after: "One Workspace shows every job's budget vs. actual as it happens. Supers log progress from a phone. The owner gets a short list of jobs to look at every Monday.",
-  },
-  {
-    who: "A multi-site clinic group",
-    before: "Staffing lived in spreadsheets and visits lived in the scheduling system. Nobody could see a short-staffed clinic until patients were already waiting.",
-    after: "Managers see staffing gaps before the schedule is posted, next to wait times and denied claims — in one place.",
-  },
-  {
-    who: "A professional services firm",
-    before: "Hours, billing, and collections were in three systems. Partners found out about unbilled time at quarter-end.",
-    after: "Partners see utilization, unbilled hours, and cash weekly, with the reasons time went unbilled.",
-  },
+  { who: "Regional contractor", before: "Friday budget reports rebuilt by hand", after: "Every job's budget, live, every morning" },
+  { who: "Multi-site clinic group", before: "Staffing gaps found when patients wait", after: "Gaps seen before the schedule posts" },
+  { who: "Professional services firm", before: "Unbilled time found at quarter-end", after: "Utilization and cash, weekly" },
 ];
 
 export default function Home() {
-  const small = effort[0];
-  const large = effort[2];
   return (
     <>
-      {/* 1. HERO */}
+      {/* HERO */}
       <section className="hero">
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-fade" aria-hidden="true" />
@@ -61,10 +46,7 @@ export default function Home() {
             <h1>
               Your data, <em className="accent">cleaned up</em> and working for you.
             </h1>
-            <p className="lead">
-              We gather your data from everywhere it lives, clean it, store it securely, and give your team live dashboards, simple apps, and
-              clear next steps. Get ready for AI — without the headache.
-            </p>
+            <p className="lead">We gather it, clean it, secure it, and turn it into live dashboards and clear next steps. Ready for AI — and you own all of it.</p>
             <div className="btn-row">
               <PrimaryCta />
               <Link href="#journey" className="btn btn-secondary">
@@ -79,7 +61,7 @@ export default function Home() {
                 <Icon name="check" /> No new software to buy
               </li>
               <li>
-                <Icon name="clock" /> Live in weeks, not months
+                <Icon name="clock" /> Live in weeks
               </li>
             </ul>
           </div>
@@ -122,19 +104,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. PROBLEM */}
-      <section className="section-tight">
+      {/* PROBLEM — one line, not a wall */}
+      <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="grid g3">
-            <FeatureCard icon="spreadsheet" title="Your numbers live in 12 spreadsheets." body="Different versions, emailed around, rebuilt every week by hand." />
-            <FeatureCard icon="alert" title="Nobody trusts the reports." body="Finance says one thing, operations says another. Meetings turn into arguments about whose number is right." />
-            <FeatureCard icon="sparkle" title="Everyone says “use AI.” The data isn’t ready." body="AI is only as good as the data under it. On messy data it gives confident wrong answers." />
-          </div>
+          <ul className="problem-strip stagger">
+            {problems.map((p) => (
+              <li key={p.text}>
+                <span className="icon-badge" style={{ margin: 0 }}>
+                  <Icon name={p.icon} />
+                </span>
+                {p.text}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* 3. THE DATA JOURNEY */}
-      <section className="section dark" id="journey">
+      {/* THE SIX STEPS — one scene that changes per step */}
+      <section className="section" id="journey">
         <div className="container">
           <SectionHead
             eyebrow="How it works"
@@ -143,26 +130,20 @@ export default function Home() {
                 Six steps from scattered to <em className="accent">sure.</em>
               </>
             }
-            lead="We fix the foundation first — so when you use AI, it's actually right. Every client, every industry, the same six steps."
           />
-          <div className="steps6">
-            {steps.map((s) => (
-              <div key={s.key}>
-                <div className="n">STEP {s.n}</div>
-                <h3>{s.title}</h3>
-                <p>{s.plain}</p>
-              </div>
-            ))}
-          </div>
-          <div className="btn-row" style={{ marginTop: 32 }}>
-            <Link href="/how-it-works" className="btn btn-secondary">
-              See the full walkthrough
-            </Link>
-          </div>
+          <StepScene />
         </div>
       </section>
 
-      {/* 4. PICK YOUR BUSINESS */}
+      {/* PRODUCTS — each with its own object */}
+      <section className="section soft">
+        <div className="container">
+          <SectionHead eyebrow="Products" title="Four pieces. One foundation." lead="Tap a product to take a quick look." />
+          <ProductBento />
+        </div>
+      </section>
+
+      {/* PICK YOUR BUSINESS */}
       <section className="section" id="pick-your-business">
         <div className="container">
           <SectionHead
@@ -172,130 +153,135 @@ export default function Home() {
                 See what <em className="accent">your</em> numbers would look like.
               </>
             }
-            lead="Pick an industry and a company size. Everything below changes: where the data lives, the dashboard, the questions it answers, and the action item. Filter it — every number is calculated from the same sample records, so it always adds up."
+            lead="Switch industries. Filter it. Every number adds up."
           />
           <IndustryExplorer syncUrl />
         </div>
       </section>
 
-      {/* 6. TWO PATHS */}
-      <section className="section soft">
+      {/* WORKSPACE DEMO */}
+      <section className="section soft" id="try-it">
+        <div className="container">
+          <SectionHead
+            eyebrow="Try it"
+            title={
+              <>
+                Your team doesn&apos;t just look at data. <em className="accent">They work in it.</em>
+              </>
+            }
+            lead="Change a number and watch the dashboard react. Or ask a question."
+          />
+          <WorkspaceDemo />
+        </div>
+      </section>
+
+      {/* TWO PATHS */}
+      <section className="section">
         <div className="container">
           <SectionHead eyebrow="Two paths" title="Built for your size." center />
-          <div className="grid g2">
-            <Link href="/solutions/small-business" className="card">
-              <div className="icon-badge">
-                <Icon name="sprout" />
+          <div className="grid g2 stagger">
+            <Link href="/solutions/small-business" className="card path-card">
+              <div className="path-top">
+                <div className="icon-badge">
+                  <Icon name="sprout" />
+                </div>
+                <span className="pill">10–250 employees</span>
               </div>
-              <span className="pill">10–250 employees</span>
-              <h3 style={{ marginTop: 14 }}>Small & growing businesses</h3>
-              <p>We host it, run it, and explain it. Very easy to start. About {small.timeRequired.replace("~", "").replace(" total", "")} of your time.</p>
+              <h3>Small & growing</h3>
+              <p>We host it, run it, and explain it.</p>
+              <dl className="path-stats">
+                <div>
+                  <dt>Effort</dt>
+                  <dd>
+                    <Dots n={1} /> Very easy
+                  </dd>
+                </div>
+                <div>
+                  <dt>Live in</dt>
+                  <dd>2–3 weeks</dd>
+                </div>
+              </dl>
               <span className="more">The data team you don&apos;t have to hire →</span>
             </Link>
-            <Link href="/solutions/enterprise" className="card">
-              <div className="icon-badge">
-                <Icon name="building" />
+            <Link href="/solutions/enterprise" className="card path-card">
+              <div className="path-top">
+                <div className="icon-badge">
+                  <Icon name="building" />
+                </div>
+                <span className="pill navy">250+ employees</span>
               </div>
-              <span className="pill navy">250+ employees</span>
-              <h3 style={{ marginTop: 14 }}>Larger organizations</h3>
-              <p>Your platform or ours. We work with IT, not against it — and make the investment you already made pay off.</p>
-              <span className="more">Make your data ready for AI →</span>
+              <h3>Larger organizations</h3>
+              <p>Your platform or ours. We work with IT.</p>
+              <dl className="path-stats">
+                <div>
+                  <dt>Effort</dt>
+                  <dd>
+                    <Dots n={3} /> Moderate
+                  </dd>
+                </div>
+                <div>
+                  <dt>Live in</dt>
+                  <dd>6–10 weeks</dd>
+                </div>
+              </dl>
+              <span className="more">Make your data AI-ready →</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 7. HOW HARD / LONG / MUCH */}
-      <section className="section">
+      {/* HOW HARD / LONG / MUCH — cards, not a table */}
+      <section className="section soft">
         <div className="container">
           <SectionHead
-            eyebrow="Before you ever get on a call"
+            eyebrow="Before you ever call"
             title={
               <>
                 How hard. How long. <em className="accent">How much.</em>
               </>
             }
           />
-          <div className="table-wrap">
-            <table className="t">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  {effort.map((e) => (
-                    <th scope="col" key={e.id}>
-                      {e.label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Difficulty for you</th>
-                  {effort.map((e) => (
-                    <td key={e.id}>
-                      <Dots n={e.difficulty} /> <span style={{ marginLeft: 6 }}>{e.difficultyLabel}</span>
-                    </td>
-                  ))}
-                </tr>
-                <tr>
-                  <th scope="row">Your time required</th>
-                  {effort.map((e) => (
-                    <td key={e.id}>{e.timeRequired}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <th scope="row">Time to first dashboard</th>
-                  {effort.map((e) => (
-                    <td key={e.id}>{e.firstDashboard}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <th scope="row">Typical setup</th>
-                  {effort.map((e) => (
-                    <td key={e.id} className="tnum">
-                      {e.setup}
-                    </td>
-                  ))}
-                </tr>
-                <tr>
-                  <th scope="row">Typical monthly</th>
-                  {effort.map((e) => (
-                    <td key={e.id} className="tnum">
-                      {e.monthly}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="btn-row" style={{ marginTop: 24 }}>
-            <Link href="/getting-started" className="btn btn-secondary">
-              Get your estimate in 60 seconds
-            </Link>
-            <span className="muted small">
-              Large organizations: {large.firstDashboard} to first dashboard.
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. WHY */}
-      <section className="section soft">
-        <div className="container">
-          <SectionHead eyebrow="Why numarket" title="A data department, without building one." />
-          <div className="grid g3">
-            {why.map((w) => (
-              <FeatureCard key={w.title} icon={w.icon} title={w.title} body={w.body} />
+          <div className="grid g3 stagger">
+            {effort.map((e) => (
+              <div className="card effort-card" key={e.id}>
+                <span className="pill navy">{e.label}</span>
+                <div className="effort-row">
+                  <Dots n={e.difficulty} /> <b>{e.difficultyLabel}</b>
+                </div>
+                <dl className="est-grid">
+                  <div>
+                    <dt>Your time</dt>
+                    <dd>{e.timeRequired.replace(" total", "")}</dd>
+                  </div>
+                  <div>
+                    <dt>First dashboard</dt>
+                    <dd>{e.firstDashboard}</dd>
+                  </div>
+                  <div>
+                    <dt>Setup</dt>
+                    <dd className="tnum">{e.setup}</dd>
+                  </div>
+                  <div>
+                    <dt>Monthly</dt>
+                    <dd className="tnum">{e.monthly}</dd>
+                  </div>
+                </dl>
+              </div>
             ))}
           </div>
+          <div className="btn-row" style={{ marginTop: 24 }}>
+            <Link href="/getting-started#estimator" className="btn btn-secondary">
+              Get your estimate in 60 seconds
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 9. PRICING TEASER */}
+      {/* PRICING TEASER */}
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." lead="A one-time setup and a monthly subscription. Published starting prices. Fixed quotes after your Readiness Check." />
-          <div className="grid g3">
+          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." />
+          <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>
                 {t.popular && <span className="badge">Most popular</span>}
@@ -318,21 +304,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. PROOF — illustrative only until real, permissioned case studies exist */}
+      {/* BEFORE / AFTER — illustrative only */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="What changes" title="Before and after." lead="These are illustrative scenarios based on typical engagements — not named clients." />
-          <div className="grid g3">
+          <SectionHead eyebrow="What changes" title="Before and after." lead="Illustrative scenarios — not named clients." />
+          <div className="grid g3 stagger">
             {scenarios.map((s) => (
-              <div className="card" key={s.who}>
-                <span className="label-sample">Illustrative scenario</span>
-                <h3 style={{ marginTop: 14 }}>{s.who}</h3>
-                <p style={{ marginTop: 10 }}>
-                  <strong style={{ color: "var(--ink)" }}>Before:</strong> {s.before}
-                </p>
-                <p style={{ marginTop: 10 }}>
-                  <strong style={{ color: "var(--ink)" }}>After:</strong> {s.after}
-                </p>
+              <div className="card ba-card" key={s.who}>
+                <span className="label-sample">Illustrative</span>
+                <h3 style={{ marginTop: 12 }}>{s.who}</h3>
+                <div className="ba">
+                  <span className="ba-before">{s.before}</span>
+                  <Icon name="arrow" className="ba-arrow" />
+                  <span className="ba-after">{s.after}</span>
+                </div>
               </div>
             ))}
           </div>

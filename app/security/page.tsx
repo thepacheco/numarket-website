@@ -1,33 +1,28 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Icon from "@/components/Icon";
+import SecureVault from "@/components/SecureVault";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { faq } from "@/content/faq";
-import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Security & Trust",
-  description: "Your data is yours. Private by design, least access, everything logged, and leave with everything.",
-};
+export const metadata: Metadata = { title: "Security & Trust", description: "Your data is yours. Private by design, least access, everything logged, and leave with everything." };
 
 const promises = [
-  { icon: "key", title: "Your data is yours.", body: "The contract says so. Always." },
-  { icon: "lock", title: "Private by design.", body: "Every client gets their own separate, encrypted database. Your data is never mixed with anyone else's." },
-  { icon: "users", title: "Least access.", body: "We only access what we need, through named accounts with multi-factor sign-in." },
-  { icon: "file", title: "Everything logged.", body: "Every change and every login is recorded." },
-  { icon: "own", title: "Leave with everything.", body: "After your term, a full export or account handover within 30 days." },
+  { icon: "key", title: "Yours", body: "The contract says so." },
+  { icon: "lock", title: "Private", body: "Your own encrypted database." },
+  { icon: "users", title: "Least access", body: "Named accounts + multi-factor." },
+  { icon: "file", title: "Logged", body: "Every login and change." },
+  { icon: "own", title: "Portable", body: "Leave with everything in 30 days." },
 ];
 
 const details = [
-  { h: "Where your data is stored", b: "In your own dedicated account on Snowflake, an enterprise-grade cloud data platform. On Command, it can live in your own cloud instead." },
-  { h: "Encryption", b: "Your data is encrypted at rest and in transit." },
-  { h: "Access control", b: "You decide who sees what. Access is role-based, with multi-factor sign-in for every named account." },
-  { h: "Logging", b: "Every login and every change is recorded in an audit log." },
-  { h: "Connections to your systems", b: "Read-only wherever possible. We never need to change anything in your source systems." },
-  { h: "Devices", b: "No client data is stored on laptops or personal devices." },
-  { h: "Healthcare", b: "HIPAA-eligible configuration and a Business Associate Agreement are available on Command or on request." },
-  { h: "Contracts", b: "Every engagement includes a Master Services Agreement with a data-ownership clause and a Data Processing Addendum." },
-  { h: "Incident response", b: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-  { h: "Leaving", b: "Full export (CSV or Parquet) or a complete account handover within 30 days of exit, at no charge." },
+  { q: "Where is my data stored?", a: "In your own dedicated account on Snowflake, an enterprise cloud data platform. On Command, it can live in your own cloud instead." },
+  { q: "How do you connect to our systems?", a: "Read-only wherever possible. We never need to change anything in your source systems." },
+  { q: "Is anything stored on laptops?", a: "No. No client data is stored on laptops or personal devices." },
+  { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },
+  { q: "Can you support healthcare data?", a: "Yes. A HIPAA-eligible configuration and a Business Associate Agreement are available on Command or on request." },
+  { q: "What if there's an incident?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
+  { q: "How does leaving work?", a: "After your term: a full export (CSV or Parquet) or a complete account handover within 30 days, at no charge." },
 ];
 
 export default function Security() {
@@ -37,58 +32,41 @@ export default function Security() {
         eyebrow="Security & trust"
         title={
           <>
-            Your data. <em className="accent">Your rules.</em> Always.
+            Your data. <em className="accent">Your rules.</em>
           </>
         }
-        lead="Five plain-language promises, and the detail behind each one."
       />
-      <section className="section dark">
+      <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="vault" aria-hidden="true">
-            <span className="ring r1" />
-            <span className="ring r2" />
-            <span className="ring r3" />
-            <span className="ring r4" />
-            <span className="vault-core">
-              <Icon name="database" />
-            </span>
-          </div>
-          <div className="grid g3" style={{ marginTop: 8 }}>
-            {promises.map((p, i) => (
-              <div key={p.title} className="card">
-                <div className="icon-badge" style={{ background: "rgba(128,237,153,.1)", borderColor: "rgba(128,237,153,.3)", color: "var(--light-green)" }}>
+          <ul className="promise-row stagger">
+            {promises.map((p) => (
+              <li key={p.title}>
+                <span className="icon-badge" style={{ margin: 0 }}>
                   <Icon name={p.icon} />
-                </div>
-                <h3>
-                  {i + 1}. {p.title}
-                </h3>
-                <p>{p.body}</p>
-              </div>
+                </span>
+                <b>{p.title}</b>
+                <span className="small muted">{p.body}</span>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <SectionHead eyebrow="The detail" title="How it actually works." />
-          <div className="grid g2">
-            {details.map((d) => (
-              <div key={d.h} className="card">
-                <h3>{d.h}</h3>
-                <p>{d.b}</p>
-              </div>
-            ))}
-          </div>
-          <p className="muted small" style={{ marginTop: 24 }}>
-            numarket does not claim certifications it does not hold. Snowflake&apos;s own certifications, including SOC 2, belong to Snowflake as our platform
-            provider. Our Data Processing Addendum is summarized on the <Link href="/legal/dpa">DPA page</Link>.
-          </p>
+          </ul>
         </div>
       </section>
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="FAQ" title="Security questions." />
-          <Faq items={faq.security} />
+          <SectionHead eyebrow="Layers of protection" title="Tap a ring." />
+          <SecureVault />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container split">
+          <div>
+            <SectionHead eyebrow="The detail" title="Straight answers." />
+            <p className="muted small">
+              We don&apos;t claim certifications we don&apos;t hold. Snowflake&apos;s certifications, including SOC 2, belong to Snowflake as our platform provider. See
+              the <Link href="/legal/dpa">DPA summary</Link>.
+            </p>
+          </div>
+          <Faq items={[...details, ...faq.security]} />
         </div>
       </section>
       <CtaBand />

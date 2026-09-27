@@ -47,7 +47,7 @@ export default function About() {
       <section className="section soft">
         <div className="container">
           <SectionHead eyebrow="Values" title="What we stand for." />
-          <div className="grid g4">
+          <div className="grid g4 stagger">
             {values.map(([t, b]) => (
               <div className="card" key={t}>
                 <h3>{t}</h3>

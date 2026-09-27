@@ -1,11 +1,12 @@
 import { industries } from "@/content/industries";
+import type { ProductKind } from "./ProductArt";
 
-export const productLinks = [
-  { href: "/products/foundation", title: "Foundation", desc: "Collect, clean & secure your data" },
-  { href: "/products/workspace", title: "Workspace", desc: "Your team's app: dashboards, input screens, Ask Your Data" },
-  { href: "/products/insight-review", title: "Insight Review", desc: "Monthly action items from a real analyst" },
-  { href: "/products/engineering", title: "Engineering", desc: "Migrations, custom apps, working in your platform" },
-  { href: "/platform", title: "Platform", desc: "What's under the hood, in plain English" },
+export const productLinks: { href: string; title: string; desc: string; kind: ProductKind }[] = [
+  { href: "/products/foundation", title: "Foundation", desc: "Collect, clean & secure your data", kind: "foundation" },
+  { href: "/products/workspace", title: "Workspace", desc: "Dashboards, input screens, Ask Your Data", kind: "workspace" },
+  { href: "/products/insight-review", title: "Insight Review", desc: "Action items from a real analyst", kind: "insight" },
+  { href: "/products/engineering", title: "Engineering", desc: "Migrations and custom builds", kind: "engineering" },
+  { href: "/platform", title: "Platform", desc: "What's under the hood", kind: "platform" },
 ];
 
 export const sizeLinks = [
@@ -13,13 +14,14 @@ export const sizeLinks = [
   { href: "/solutions/enterprise", title: "Larger organizations" },
 ];
 
-export const industryLinks = industries.map((i) => ({ href: `/solutions/${i.slug}`, title: i.name }));
+export const industryLinks = industries.map((i) => ({ href: `/solutions/${i.slug}`, title: i.name, icon: i.icon as string }));
 
+/* Each need has its own page with its own interactive demo. */
 export const needLinks = [
-  { href: "/products/workspace", title: "Replace spreadsheets" },
-  { href: "/getting-started", title: "Get AI-ready" },
-  { href: "/products/foundation", title: "Trust your numbers" },
-  { href: "/products/engineering", title: "Move off old systems" },
+  { href: "/solutions/replace-spreadsheets", title: "Replace spreadsheets" },
+  { href: "/solutions/ai-ready", title: "Get AI-ready" },
+  { href: "/solutions/trust-your-numbers", title: "Trust your numbers" },
+  { href: "/solutions/move-off-old-systems", title: "Move off old systems" },
 ];
 
 export const resourceLinks = [

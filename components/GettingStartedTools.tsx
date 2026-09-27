@@ -36,7 +36,7 @@ function Meter({ level, done }: { level: number; done: boolean }) {
           <stop offset="100%" stopColor="#57CC99" />
         </linearGradient>
       </defs>
-      <circle cx="90" cy="90" r={r} fill="none" stroke="rgba(255,255,255,.1)" strokeWidth="14" />
+      <circle cx="90" cy="90" r={r} fill="none" stroke="var(--gray-100)" strokeWidth="14" />
       <circle
         cx="90"
         cy="90"
@@ -50,10 +50,10 @@ function Meter({ level, done }: { level: number; done: boolean }) {
         transform="rotate(-90 90 90)"
         style={{ transition: "stroke-dasharray .8s cubic-bezier(.2,.7,.2,1)" }}
       />
-      <text x="90" y="86" textAnchor="middle" fill="#fff" fontSize="40" fontWeight="700">
+      <text x="90" y="86" textAnchor="middle" fill="var(--ink)" fontSize="40" fontWeight="700">
         {done ? level : "?"}
       </text>
-      <text x="90" y="110" textAnchor="middle" fill="#9fb6c7" fontSize="12" fontWeight="600" letterSpacing="1">
+      <text x="90" y="110" textAnchor="middle" fill="var(--text-3)" fontSize="12" fontWeight="600" letterSpacing="1">
         OF 5
       </text>
     </svg>
@@ -120,28 +120,28 @@ export default function GettingStartedTools() {
   return (
     <>
       {/* QUIZ */}
-      <section className="section dark" id="quiz">
+      <section className="section soft" id="quiz">
         <div className="container split">
           <div>
             <span className="eyebrow">Readiness quiz · 5 questions</span>
             <h2 style={{ margin: "14px 0 16px" }}>
               How big of a problem is <em className="accent">your</em> data?
             </h2>
-            <p className="lead">Answer five questions. The meter fills as you go and tells you where you are — and what it takes to get to AI-ready.</p>
+            <p className="lead">Five questions. See where you stand.</p>
             <div className="meter-box">
               <Meter level={level} done={quizDone} />
               <div aria-live="polite">
                 {quizDone ? (
                   <>
-                    <div className="pill" style={{ background: "rgba(128,237,153,.12)", color: "var(--light-green)", borderColor: "rgba(128,237,153,.4)" }}>
+                    <div className="pill">
                       Level {level} · {lvl.name}
                     </div>
-                    <p style={{ marginTop: 12, color: "#d6e4ee" }}>{lvl.looks}</p>
+                    <p style={{ marginTop: 12 }}>{lvl.looks}</p>
                     <p style={{ marginTop: 8 }} className="muted">
-                      <strong style={{ color: "#fff" }}>What it takes:</strong> {lvl.takes}
+                      <strong style={{ color: "var(--ink)" }}>What it takes:</strong> {lvl.takes}
                     </p>
                     <p style={{ marginTop: 8 }} className="muted">
-                      <strong style={{ color: "#fff" }}>Recommended path:</strong>{" "}
+                      <strong style={{ color: "var(--ink)" }}>Recommended path:</strong>{" "}
                       {(answers[4] ?? 0) >= 2 ? (
                         <Link href="/solutions/enterprise">Larger organizations</Link>
                       ) : (
@@ -186,7 +186,7 @@ export default function GettingStartedTools() {
           <div className="section-head">
             <span className="eyebrow">Cost & timeline estimator</span>
             <h2>Your estimate, in about 60 seconds.</h2>
-            <p className="lead">Move the sliders. The recommendation, timeline, and price range update instantly.</p>
+            <p className="lead">Move the sliders. It updates instantly.</p>
           </div>
           <div className="est">
             <form className="card form est-in" onSubmit={(e) => e.preventDefault()}>

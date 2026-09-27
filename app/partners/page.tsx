@@ -20,10 +20,10 @@ export default function Partners() {
             Your clients are asking about AI. <em className="accent">Be the firm with an answer.</em>
           </>
         }
-        lead="We deliver. You earn. Your clients get clean data, live dashboards, and clear next steps — and you stay the trusted advisor."
+        lead="We deliver. You earn. You stay the trusted advisor."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
-        <div className="container grid g4">
+        <div className="container grid g4 stagger">
           <FeatureCard icon="code" title="IT managed service providers" body="Clients are asking about AI. Now you have a data offering." />
           <FeatureCard icon="dollar" title="CPA & fractional CFO firms" body="Clean data makes your advisory more valuable." />
           <FeatureCard icon="layers" title="Software resellers & implementers" body="You install the systems. We make the data usable afterward." />
@@ -63,7 +63,7 @@ export default function Partners() {
       </section>
       <section className="section" id="apply">
         <div className="container split">
-          <SectionHead eyebrow="Partner inquiry" title="Let's talk." lead="Tell us about your firm and your clients. We reply within 1 business day." />
+          <SectionHead eyebrow="Partner inquiry" title="Let's talk." lead="We reply within 1 business day." />
           <ContactForm variant="partner" />
         </div>
       </section>

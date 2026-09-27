@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import GettingStartedTools from "@/components/GettingStartedTools";
-import { CheckList, CtaBand, Dots, Faq, PageHero, SectionHead } from "@/components/ui";
+import { CtaBand, Dots, Faq, PageHero, SectionHead } from "@/components/ui";
 import { effort, startSteps, valueCompare } from "@/content/effort";
 import { faq } from "@/content/faq";
 import Link from "next/link";
@@ -31,7 +31,7 @@ export default function GettingStarted() {
             Here&apos;s exactly what <em className="accent">starting</em> looks like.
           </>
         }
-        lead="How hard, how long, how much — before you ever get on a call."
+        lead="How hard, how long, how much — before you call."
       >
         <div className="btn-row">
           <Link href="#quiz" className="btn btn-primary">
@@ -48,7 +48,7 @@ export default function GettingStarted() {
       <section className="section soft">
         <div className="container split">
           <div>
-            <SectionHead eyebrow="The 5 steps" title="From first call to first action item." lead="Every engagement starts the same way. Nothing is hidden, and you see progress every week." />
+            <SectionHead eyebrow="The 5 steps" title="From first call to first action item." />
           </div>
           <ol className="timeline">
             {startSteps.map((s, i) => (
@@ -104,25 +104,10 @@ export default function GettingStarted() {
         </div>
       </section>
 
-      <section className="section soft">
-        <div className="container">
-          <SectionHead eyebrow="Checklists" title="What we'll need from you." />
-          <div className="grid g3">
-            {effort.map((e) => (
-              <div className="card" key={e.id}>
-                <span className="pill navy">{e.label}</span>
-                <h3 style={{ margin: "14px 0 14px" }}>{e.timeRequired}</h3>
-                <CheckList items={e.checklist} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section">
         <div className="container">
           <SectionHead eyebrow="Value" title="Compared to doing it yourself." />
-          <div className="grid g3">
+          <div className="grid g3 stagger">
             {valueCompare.map((v) => (
               <div key={v.option} className={`card ${v.highlight ? "tier popular" : ""}`}>
                 <h3>{v.option}</h3>

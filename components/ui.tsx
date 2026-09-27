@@ -21,7 +21,7 @@ export function PageHero({ eyebrow, title, lead, children }: { eyebrow: string; 
 
 export function SectionHead({ eyebrow, title, lead, center }: { eyebrow?: string; title: ReactNode; lead?: ReactNode; center?: boolean }) {
   return (
-    <div className={`section-head ${center ? "center" : ""}`}>
+    <div className={`section-head reveal ${center ? "center" : ""}`}>
       {eyebrow && <span className="eyebrow">{eyebrow}</span>}
       <h2>{title}</h2>
       {lead && <p className="lead">{lead}</p>}
@@ -71,13 +71,13 @@ export function CtaBand({
       Find out how ready your data is. <em className="accent">30 minutes. Free.</em>
     </>
   ),
-  lead = "You'll leave with a readiness score, three specific findings, and a clear idea of what it would take to fix them.",
+  lead = "A readiness score and 3 findings. No pitch deck.",
 }: {
   title?: ReactNode;
   lead?: ReactNode;
 }) {
   return (
-    <section className="dark cta-band">
+    <section className="cta-light">
       <div className="container">
         <span className="eyebrow">Trust the Data.</span>
         <h2>{title}</h2>

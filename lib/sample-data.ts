@@ -739,6 +739,7 @@ export type View = {
   tableKpis: { key: string; label: string; fmt: Fmt }[];
   action: Action & { site: string; status: Status };
   rowCount: number;
+  statusKey: string;
 };
 
 export function buildView(slug: IndustrySlug, size: Size, site: string | null, period: Period): View {
@@ -816,5 +817,30 @@ export function buildView(slug: IndustrySlug, size: Size, site: string | null, p
     tableKpis: model.kpis.map((k) => ({ key: k.key, label: k.label, fmt: k.fmt })),
     action: { ...action, site: worst.site, status: worst.status },
     rowCount: cur.length,
+    statusKey: model.statusKpi,
   };
+}
+
+/* ---------- shared helpers for demos ---------- */
+
+/* Jobs over budget (construction, large company, last 12 months). Used by the
+   hero scenes and Ask Your Data so every mention of it matches the dashboards. */
+export function overBudgetSummary() {
+  const v = buildView("construction", "large", null, 12);
+  const rows = v.table
+    .map((r) => ({ site: r.site, over: r.values.find((x) => x.key === "over")!.value }))
+    .filter((r) => r.over > 0)
+    .sort((a, b) => b.over - a.over);
+  return { count: rows.length, total: rows.reduce((s, r) => s + r.over, 0), rows };
+}
+
+/* Per-job totals for the "Change a Number" demo. */
+export function constructionJobs() {
+  const recs = records("construction", "large").filter((r) => r.month >= MONTHS - 12);
+  const sites = industries.find((i) => i.slug === "construction")!.sites.large;
+  const progress = [0.62, 0.48, 0.35, 0.71, 0.55];
+  return sites.map((site, i) => {
+    const t = aggregate(recs.filter((r) => r.site === site));
+    return { site, cost: t.actual, earned: t.earned, progress: progress[i], budget: t.earned / progress[i] };
+  });
 }

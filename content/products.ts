@@ -2,6 +2,8 @@ import type { QA } from "./faq";
 
 export type Product = {
   slug: "foundation" | "workspace" | "insight-review" | "engineering";
+  kind: "foundation" | "workspace" | "insight" | "engineering";
+  short: string;
   name: string;
   step: string;
   icon: string;
@@ -17,16 +19,18 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "foundation",
+    kind: "foundation",
+    short: "All your data in one clean, private database.",
     name: "Foundation",
     step: "Collect · Clean · Secure",
     icon: "database",
     promise: "All your data, in one clean, private database you own.",
-    intro: "We find, connect, clean, and organize your data into a private database built just for your company. It's the one-time setup every engagement starts with.",
+    intro: "The one-time setup every engagement starts with.",
     get: [
-      "A clean, documented database with all your key numbers in one place",
-      "Automatic data updates — no more copying and pasting",
-      "Checks on every update, so bad data is caught before anyone sees it",
-      "A plain-English data dictionary: what every number means",
+      "Every key number in one place",
+      "Updates on its own — no copy and paste",
+      "Bad data caught before anyone sees it",
+      "A plain-English dictionary of every number",
     ],
     looks: [
       { title: "Before", body: "Budgets in Excel, costs in QuickBooks, schedules in a project tool, and three versions of the truth." },
@@ -42,16 +46,18 @@ export const products: Product[] = [
   },
   {
     slug: "workspace",
+    kind: "workspace",
+    short: "The app your team uses every day.",
     name: "Workspace",
     step: "See",
     icon: "see",
     promise: "The app your team actually uses — built on your clean data.",
-    intro: "A private web app for your company. Live dashboards, simple input screens that replace emailed spreadsheets, plain-English questions, and alerts.",
+    intro: "Dashboards, input screens, plain-English questions, and alerts — in one private app.",
     get: [
-      "Live dashboards that update on their own",
-      "Input screens so your team enters updates once — budgets, job status, counts",
-      "Ask Your Data: type a question in plain English and get an answer from your real numbers",
-      "Alerts when something crosses a line: a budget overrun, a late shipment, a staffing gap",
+      "Live dashboards",
+      "Input screens that replace spreadsheets",
+      "Ask Your Data, in plain English",
+      "Alerts when something crosses a line",
     ],
     looks: [
       { title: "Dashboards", body: "Each role sees what matters to them — owner, manager, or crew lead." },
@@ -68,16 +74,18 @@ export const products: Product[] = [
   },
   {
     slug: "insight-review",
+    kind: "insight",
+    short: "A real analyst tells you what to do next.",
     name: "Insight Review",
     step: "Act",
     icon: "act",
     promise: "A real analyst tells you what changed — and what to do next.",
-    intro: "A standing review with a numarket analyst. What changed, why it matters, and a short list of action items with owners and due dates.",
+    intro: "What changed, why it matters, and what to do — with owners and due dates.",
     get: [
-      "What changed since last time, in plain language",
-      "What's at risk, before it becomes a problem",
-      "A short list of action items with owners and due dates",
-      "A follow-up on last review's action items",
+      "What changed, in plain language",
+      "What's at risk, early",
+      "Action items with owners and dates",
+      "Follow-up on last time's list",
     ],
     looks: [{ title: "An action item", body: "“Route 9 Bridge: design-error change orders are the #1 cost driver. Owner: PM team. Due Friday.”" }],
     need: ["30–60 minutes per review", "The right decision-maker in the room"],
@@ -89,16 +97,18 @@ export const products: Product[] = [
   },
   {
     slug: "engineering",
+    kind: "engineering",
+    short: "Migrations and custom builds, when you need them.",
     name: "Engineering",
     step: "Optional project work",
     icon: "code",
     promise: "Migrations, custom apps, and work inside your existing platform.",
-    intro: "For larger organizations and special requests. Fixed-scope project work that sits alongside your subscription.",
+    intro: "Fixed-scope projects that sit alongside your subscription.",
     get: [
-      "Data migration — off old systems or out of spreadsheets for good",
+      "Move off old systems for good",
       "Custom apps and automations",
-      "Work inside your existing platform (your cloud data platform, Azure, Databricks, and others)",
-      "A data readiness assessment for AI initiatives",
+      "Work inside your existing cloud",
+      "AI readiness assessments",
     ],
     looks: [{ title: "Typical projects", body: "Retiring a legacy reporting system. Automating a monthly close package. Standing up a governed data layer for an AI pilot." }],
     need: ["A sponsor and a clear goal", "Access to the systems involved", "A security review where required"],

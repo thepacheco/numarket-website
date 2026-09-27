@@ -20,7 +20,7 @@ export default function Pricing() {
             Clear pricing. <em className="accent">No surprise bills.</em>
           </>
         }
-        lead="A one-time setup to build your foundation, then a monthly subscription to run it. Published starting prices, fixed quotes after your free Readiness Check, and no per-user fees."
+        lead="One-time setup. Monthly subscription. No per-user fees."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
@@ -45,6 +45,7 @@ export default function Pricing() {
       <section className="section soft">
         <div className="container">
           <SectionHead eyebrow="Compare" title="Everything in each plan." />
+          <p className="small muted" style={{ marginBottom: 12 }}>Scroll sideways on small screens.</p>
           <div className="table-wrap">
             <table className="t">
               <thead>
@@ -78,12 +79,9 @@ export default function Pricing() {
             <SectionHead
               eyebrow="Platform usage"
               title="What's “platform usage”?"
-              lead="Your private database costs money to store and run. We include that cost up to an allowance. Most small and mid-size clients stay well inside it."
+              lead="Running your database costs money. We include it — up to an allowance."
             />
-            <p className="muted">
-              If usage ever goes above the allowance, the overage is billed at cost + 15% and shown on its own line on your invoice. We alert you before you
-              get close — never after.
-            </p>
+            <p className="muted">Over the allowance? Billed at cost + 15%, on its own invoice line. We warn you first.</p>
           </div>
           <div className="card">
             <h3>Operate allowance: $800/mo</h3>

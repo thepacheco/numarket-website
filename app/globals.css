@@ -24,6 +24,13 @@
   --series-b: #2e9e6b;
   --series-c: #d9603f;
 
+  /* products: each has its own color */
+  --p-foundation: #22577a;
+  --p-workspace: #2a8f91;
+  --p-insight: #2e9e6b;
+  --p-engineering: #6c5dd3;
+  --p-platform: #0b1f2e;
+
   /* status */
   --good: #1f8a5b;
   --good-bg: #e6f7ee;
@@ -565,6 +572,7 @@ table.t .hl {
 
 /* ---------- header / nav ---------- */
 .site-header {
+  transition: box-shadow 0.25s var(--ease), background 0.25s;
   position: sticky;
   top: 0;
   z-index: 50;
@@ -603,7 +611,22 @@ table.t .hl {
 .site-footer .logo .mk {
   color: var(--light-green);
 }
+.site-header.scrolled {
+  box-shadow: 0 6px 24px rgba(11, 31, 46, 0.07);
+}
+.nav-main {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.nav-links > li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
 .nav-links {
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -643,19 +666,15 @@ table.t .hl {
 }
 .mega {
   position: absolute;
-  top: calc(100% + 10px);
-  left: -16px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  padding: 12px;
-  min-width: 360px;
+  top: 100%;
+  left: -20px;
+  padding-top: 14px; /* invisible bridge: the pointer can travel from trigger to panel */
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
   pointer-events: none;
   transition: opacity 0.18s var(--ease), transform 0.18s var(--ease), visibility 0s linear 0.18s;
+  z-index: 60;
 }
 .mega.open {
   opacity: 1;
@@ -664,11 +683,40 @@ table.t .hl {
   pointer-events: auto;
   transition: opacity 0.18s var(--ease), transform 0.18s var(--ease), visibility 0s;
 }
-.mega.wide {
-  min-width: 680px;
+.mega-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 10px;
+  min-width: 340px;
+}
+.mega-panel.wide {
+  min-width: 700px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
+}
+.mega-products {
+  min-width: 420px;
+}
+.mega-prod {
+  display: flex !important;
+  gap: 14px;
+  align-items: center;
+}
+.mega-ind {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.mega-ind a {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+}
+.mega-ind svg {
+  color: var(--teal-700);
+  flex: none;
 }
 .mega-col h4 {
   font-size: 12px;
@@ -1475,4 +1523,83 @@ input[type="range"] {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ---------- product glyphs ---------- */
+.glyph {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gc) 70%, #fff), var(--gc));
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--gc) 35%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.glyph svg {
+  width: 20px;
+  height: 20px;
+}
+.glyph.sm {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+.glyph.sm svg {
+  width: 15px;
+  height: 15px;
+}
+.glyph-foundation {
+  --gc: var(--p-foundation);
+}
+.glyph-workspace {
+  --gc: var(--p-workspace);
+}
+.glyph-insight {
+  --gc: var(--p-insight);
+}
+.glyph-engineering {
+  --gc: var(--p-engineering);
+}
+.glyph-platform {
+  --gc: #2b4a60;
+}
+.m-prod {
+  display: flex !important;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ---------- light CTA band ---------- */
+.cta-light {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(72px, 10vw, 120px) 0;
+  background: linear-gradient(180deg, #fff, #f1faf4);
+  border-top: 1px solid var(--border);
+}
+.cta-light::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1000px;
+  height: 1000px;
+  transform: translate(-50%, -30%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(128, 237, 153, 0.35), rgba(56, 163, 165, 0.12) 55%, transparent);
+  pointer-events: none;
+}
+.cta-light h2 {
+  max-width: 720px;
+  margin: 14px auto 14px;
+}
+.cta-light .lead {
+  margin: 0 auto 30px;
+}
+.cta-light .btn-row {
+  justify-content: center;
+  position: relative;
 }

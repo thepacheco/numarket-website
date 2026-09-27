@@ -3,9 +3,11 @@ import Script from "next/script";
 import { DM_Sans, DM_Serif_Display, Space_Grotesk } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RevealObserver from "@/components/RevealObserver";
 import { site } from "@/content/site";
 import "./globals.css";
 import "./explorer.css";
+import "./motion.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 const dmSerif = DM_Serif_Display({ subsets: ["latin"], weight: "400", style: ["italic", "normal"], variable: "--font-dm-serif", display: "swap" });
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <RevealObserver />
         <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
       </body>
     </html>

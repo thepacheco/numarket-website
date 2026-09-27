@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import Icon from "./Icon";
+import { ProductGlyph } from "./ProductArt";
 import { cta } from "@/content/site";
 import { industryLinks, needLinks, productLinks, resourceLinks, sizeLinks } from "./nav-data";
 
@@ -13,8 +14,21 @@ type MenuId = "products" | "solutions" | "resources" | null;
 export default function Header() {
   const [open, setOpen] = useState<MenuId>(null);
   const [mobile, setMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverOpenedAt = useRef(0);
+
+  const cancelClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = null;
+  };
+  /* Close with a short delay so the pointer can travel from the trigger into the menu. */
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    closeTimer.current = setTimeout(() => setOpen(null), 260);
+  }, []);
 
   useEffect(() => {
     setOpen(null);
@@ -31,11 +45,15 @@ export default function Header() {
     const onClick = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) setOpen(null);
     };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     document.addEventListener("keydown", onKey);
     document.addEventListener("click", onClick);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => {
       document.removeEventListener("keydown", onKey);
       document.removeEventListener("click", onClick);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -43,14 +61,27 @@ export default function Header() {
     document.body.style.overflow = mobile ? "hidden" : "";
   }, [mobile]);
 
+  const hoverProps = (id: Exclude<MenuId, null>) => ({
+    onMouseEnter: () => {
+      cancelClose();
+      if (open !== id) hoverOpenedAt.current = Date.now();
+      setOpen(id);
+    },
+    onMouseLeave: scheduleClose,
+  });
+
   const trigger = (id: Exclude<MenuId, null>, label: string) => (
     <button
       type="button"
       className="nav-item"
       aria-expanded={open === id}
       aria-controls={`menu-${id}`}
-      onClick={() => setOpen(open === id ? null : id)}
-      onMouseEnter={() => setOpen(id)}
+      onClick={() => {
+        cancelClose();
+        /* A click right after hover-open should keep the menu open, not toggle it shut. */
+        if (open === id && Date.now() - hoverOpenedAt.current > 600) setOpen(null);
+        else setOpen(id);
+      }}
     >
       {label}
       <Icon name="chevron" className="chev" />
@@ -58,54 +89,59 @@ export default function Header() {
   );
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
       <a href="#main" className="skip-link">
         Skip to content
       </a>
       <div className="container nav">
         <Logo />
-        <nav ref={navRef} aria-label="Main" style={{ flex: 1 }} onMouseLeave={() => setOpen(null)}>
+        <nav ref={navRef} aria-label="Main" className="nav-main">
           <ul className="nav-links">
-            <li>
+            <li {...hoverProps("products")}>
               {trigger("products", "Products")}
               <div id="menu-products" className={`mega ${open === "products" ? "open" : ""}`}>
-                {productLinks.map((l) => (
-                  <Link key={l.href} href={l.href}>
-                    <strong>{l.title}</strong>
-                    <span>{l.desc}</span>
-                  </Link>
-                ))}
-              </div>
-            </li>
-            <li>
-              {trigger("solutions", "Solutions")}
-              <div id="menu-solutions" className={`mega wide ${open === "solutions" ? "open" : ""}`}>
-                <div className="mega-col">
-                  <h4>By size</h4>
-                  {sizeLinks.map((l) => (
-                    <Link key={l.href} href={l.href}>
-                      {l.title}
-                    </Link>
-                  ))}
-                  <h4 style={{ marginTop: 10 }}>By need</h4>
-                  {needLinks.map((l) => (
-                    <Link key={l.title} href={l.href}>
-                      {l.title}
+                <div className="mega-panel mega-products">
+                  {productLinks.map((l) => (
+                    <Link key={l.href} href={l.href} className="mega-prod">
+                      <ProductGlyph kind={l.kind} />
+                      <span>
+                        <strong>{l.title}</strong>
+                        <span>{l.desc}</span>
+                      </span>
                     </Link>
                   ))}
                 </div>
-                <div className="mega-col" style={{ gridColumn: "span 2" }}>
-                  <h4>By industry</h4>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                    {industryLinks.map((l) => (
+              </div>
+            </li>
+            <li {...hoverProps("solutions")}>
+              {trigger("solutions", "Solutions")}
+              <div id="menu-solutions" className={`mega ${open === "solutions" ? "open" : ""}`}>
+                <div className="mega-panel wide">
+                  <div className="mega-col">
+                    <h4>By size</h4>
+                    {sizeLinks.map((l) => (
+                      <Link key={l.href} href={l.href}>
+                        {l.title}
+                      </Link>
+                    ))}
+                    <h4 style={{ marginTop: 10 }}>By need</h4>
+                    {needLinks.map((l) => (
                       <Link key={l.href} href={l.href}>
                         {l.title}
                       </Link>
                     ))}
                   </div>
-                  <Link href="/solutions" style={{ color: "var(--teal-700)", fontWeight: 600 }}>
-                    See all solutions →
-                  </Link>
+                  <div className="mega-col" style={{ gridColumn: "span 2" }}>
+                    <h4>By industry</h4>
+                    <div className="mega-ind">
+                      {industryLinks.map((l) => (
+                        <Link key={l.href} href={l.href}>
+                          <Icon name={l.icon} width={16} height={16} />
+                          {l.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
@@ -124,15 +160,17 @@ export default function Header() {
                 Demos
               </Link>
             </li>
-            <li>
+            <li {...hoverProps("resources")}>
               {trigger("resources", "Resources")}
               <div id="menu-resources" className={`mega ${open === "resources" ? "open" : ""}`}>
-                {resourceLinks.map((l) => (
-                  <Link key={l.href} href={l.href}>
-                    <strong>{l.title}</strong>
-                    <span>{l.desc}</span>
-                  </Link>
-                ))}
+                <div className="mega-panel">
+                  {resourceLinks.map((l) => (
+                    <Link key={l.href} href={l.href}>
+                      <strong>{l.title}</strong>
+                      <span>{l.desc}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </li>
           </ul>
@@ -156,12 +194,13 @@ export default function Header() {
       <div id="mobile-panel" className={`mobile-panel ${mobile ? "open" : ""}`}>
         <h4>Products</h4>
         {productLinks.map((l) => (
-          <Link key={l.href} href={l.href}>
+          <Link key={l.href} href={l.href} className="m-prod">
+            <ProductGlyph kind={l.kind} small />
             {l.title}
           </Link>
         ))}
         <h4>Solutions</h4>
-        {[...sizeLinks, ...industryLinks].map((l) => (
+        {[...sizeLinks, ...needLinks, ...industryLinks].map((l) => (
           <Link key={l.href} href={l.href}>
             {l.title}
           </Link>

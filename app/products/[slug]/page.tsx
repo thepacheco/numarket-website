@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
-import { CheckList, CtaBand, Faq, PageHero, PrimaryCta, SectionHead } from "@/components/ui";
+import InsightDemo from "@/components/InsightDemo";
+import { MigrationDemo, ReconcileDemo } from "@/components/NeedDemos";
+import { ProductArt, ProductGlyph } from "@/components/ProductArt";
+import WorkspaceDemo from "@/components/WorkspaceDemo";
+import { CtaBand, Faq, PrimaryCta, SectionHead } from "@/components/ui";
 import { productBySlug, products } from "@/content/products";
 
 export const dynamicParams = false;
@@ -14,40 +18,77 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return p ? { title: p.name, description: p.promise } : {};
 }
 
+const demoTitle: Record<string, [string, string]> = {
+  foundation: ["See it clean", "Three reports. Watch them agree."],
+  workspace: ["Try it", "Change a number. Ask a question."],
+  insight: ["Run a review", "From numbers to a to-do list."],
+  engineering: ["Watch a migration", "Move it. Check it. Switch off the old one."],
+};
+
+function Demo({ kind }: { kind: string }) {
+  if (kind === "foundation") return <ReconcileDemo />;
+  if (kind === "workspace") return <WorkspaceDemo />;
+  if (kind === "insight") return <InsightDemo />;
+  return <MigrationDemo />;
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const p = productBySlug((await params).slug);
   if (!p) notFound();
+  const [dEyebrow, dTitle] = demoTitle[p.kind];
   return (
-    <>
-      <PageHero eyebrow={`numarket ${p.name} · ${p.step}`} title={p.promise} lead={p.intro}>
-        <PrimaryCta />
-      </PageHero>
-      <section className="section-tight">
-        <div className="container split">
+    <div style={{ ["--pc" as string]: `var(--p-${p.kind})` }}>
+      <section className="page-hero prod-hero">
+        <div className="prod-glow" aria-hidden="true" />
+        <div className="container hero-grid">
           <div>
-            <SectionHead eyebrow="What you get" title="Included." />
-            <CheckList items={p.get} />
+            <span className="eyebrow prod-eyebrow">
+              <ProductGlyph kind={p.kind} small /> {p.name} · {p.step}
+            </span>
+            <h1>{p.promise}</h1>
+            <p className="lead">{p.intro}</p>
+            <div className="btn-row" style={{ marginTop: 26 }}>
+              <PrimaryCta />
+            </div>
           </div>
-          <div className="grid" style={{ gap: 16 }}>
-            {p.looks.map((l) => (
-              <div className="card" key={l.title}>
-                <div className="icon-badge">
-                  <Icon name={p.icon} />
-                </div>
-                <h3>{l.title}</h3>
-                <p>{l.body}</p>
+          <div className="prod-art reveal">
+            <ProductArt kind={p.kind} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-tight">
+        <div className="container">
+          <div className="get-grid stagger">
+            {p.get.map((g) => (
+              <div key={g} className="get-item">
+                <Icon name="check" />
+                {g}
               </div>
             ))}
           </div>
         </div>
       </section>
+
       <section className="section soft">
-        <div className="container grid g2">
+        <div className="container">
+          <SectionHead eyebrow={dEyebrow} title={dTitle} />
+          <Demo kind={p.kind} />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container grid g2 stagger">
           <div className="card">
             <h3>What we need from you</h3>
-            <div style={{ marginTop: 12 }}>
-              <CheckList items={p.need} />
-            </div>
+            <ul className="check-list" style={{ marginTop: 12 }}>
+              {p.need.map((n) => (
+                <li key={n}>
+                  <Icon name="check" />
+                  <span>{n}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="card">
             <h3>Included in</h3>
@@ -58,13 +99,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
-      <section className="section">
+
+      <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="FAQ" title={`${p.name} questions.`} />
+          <SectionHead eyebrow="FAQ" title="Questions." />
           <Faq items={p.faq} />
         </div>
       </section>
       <CtaBand />
-    </>
+    </div>
   );
 }

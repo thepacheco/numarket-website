@@ -19,7 +19,7 @@ export default function Contact() {
             Let&apos;s see how ready <em className="accent">your data</em> is.
           </>
         }
-        lead={`Book a free 30-minute Readiness Check, or send us a note. We reply within ${site.responseTime}.`}
+        lead={`30 minutes. Free. We reply within ${site.responseTime}.`}
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container split">

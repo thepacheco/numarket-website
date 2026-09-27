@@ -50,19 +50,20 @@
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   gap: 20px;
-  background: var(--ink);
+  background: linear-gradient(160deg, #f3f8fb, #eef7f2);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow);
 }
 .stage::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(50% 60% at 12% 30%, rgba(224, 122, 95, 0.14), transparent 70%),
-    radial-gradient(60% 60% at 70% 80%, rgba(87, 204, 153, 0.14), transparent 70%);
+  background: radial-gradient(50% 60% at 10% 25%, rgba(224, 122, 95, 0.1), transparent 70%),
+    radial-gradient(60% 60% at 75% 85%, rgba(87, 204, 153, 0.16), transparent 70%);
   pointer-events: none;
 }
 @media (max-width: 1000px) {
@@ -75,7 +76,7 @@
 
 .flow {
   position: relative;
-  color: #c9d9e4;
+  color: var(--gray-800);
   padding: 8px 4px;
   animation: fadeUp 0.45s var(--ease);
 }
@@ -84,7 +85,7 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #8fb0c4;
+  color: var(--text-2);
   margin-bottom: 10px;
 }
 .explorer-foot .flow-h {
@@ -105,8 +106,8 @@
   border-radius: 10px;
   font-size: 14.5px;
   font-weight: 500;
-  color: #f6d7cd;
-  background: rgba(224, 122, 95, 0.1);
+  color: #8e3a22;
+  background: rgba(255, 255, 255, 0.7);
   border: 1px dashed rgba(224, 122, 95, 0.55);
   transform: rotate(calc((var(--i) - 2) * 0.6deg));
   animation: srcIn 0.5s var(--ease) both;
@@ -161,25 +162,25 @@
   align-items: center;
   padding: 14px;
   border-radius: 14px;
-  border: 1px solid rgba(128, 237, 153, 0.5);
-  background: linear-gradient(180deg, rgba(87, 204, 153, 0.18), rgba(56, 163, 165, 0.06));
-  box-shadow: 0 0 40px rgba(87, 204, 153, 0.2);
+  border: 1px solid rgba(87, 204, 153, 0.7);
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(87, 204, 153, 0.25);
 }
 .flow-core svg {
   width: 22px;
   height: 22px;
-  color: var(--light-green);
+  color: var(--green-700);
   flex: none;
 }
 .flow-core strong {
   display: block;
-  color: #fff;
+  color: var(--ink);
   font-size: 15px;
 }
 .flow-core span {
   display: block;
   font-size: 13px;
-  color: #a9d9bf;
+  color: var(--green-700);
 }
 .questions {
   list-style: none;
@@ -190,11 +191,11 @@
 }
 .questions li {
   font-size: 14.5px;
-  color: #e3eef5;
+  color: var(--ink);
   padding: 10px 12px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #fff;
+  border: 1px solid var(--border);
 }
 @media (max-width: 1000px) {
   .flow {
@@ -220,7 +221,8 @@
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 24px 60px rgba(11, 31, 46, 0.14);
+  border: 1px solid var(--border);
   animation: fadeUp 0.45s var(--ease);
   min-width: 0;
 }
@@ -678,8 +680,9 @@
   gap: 14px;
 }
 .quiz fieldset {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
   border-radius: 14px;
   padding: 16px;
   margin: 0;
@@ -691,7 +694,7 @@
   gap: 10px;
   align-items: center;
   font-weight: 600;
-  color: #fff;
+  color: var(--ink);
   margin-bottom: 12px;
   font-size: 16px;
 }
@@ -703,8 +706,8 @@
   place-items: center;
   font-size: 12px;
   font-weight: 700;
-  background: rgba(128, 237, 153, 0.15);
-  color: var(--light-green);
+  background: var(--mint-50);
+  color: var(--green-700);
   flex: none;
 }
 .opts {
@@ -725,19 +728,20 @@
   padding: 10px 12px;
   min-height: 44px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--border-strong);
   cursor: pointer;
   font-size: 14.5px;
-  color: #d6e4ee;
+  color: var(--gray-800);
   transition: all 0.15s;
 }
 .opts label:hover {
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: var(--navy);
 }
 .opts label.on {
-  border-color: var(--light-green);
-  background: rgba(128, 237, 153, 0.1);
-  color: #fff;
+  border-color: var(--green-700);
+  background: var(--mint-50);
+  color: var(--ink);
+  font-weight: 600;
 }
 .opts input {
   accent-color: var(--green);

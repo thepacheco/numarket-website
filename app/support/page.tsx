@@ -11,7 +11,7 @@ export default function Support() {
       <PageHero eyebrow="Support" title="Help when you need it." lead="Clients get a real person who knows their data." />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="grid g3">
+          <div className="grid g3 stagger">
             <div className="card">
               <h3>Email</h3>
               <p>

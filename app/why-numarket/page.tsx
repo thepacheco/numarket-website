@@ -33,10 +33,10 @@ export default function Why() {
             The data department for companies <em className="accent">that don&apos;t have one.</em>
           </>
         }
-        lead="Bigger than a freelancer or consultant. Far easier and cheaper than a big-firm transformation."
+        lead="Bigger than a freelancer. Easier than a big firm."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
-        <div className="container grid g3">
+        <div className="container grid g3 stagger">
           {points.map(([i, t, b]) => (
             <FeatureCard key={t} icon={i} title={t} body={b} />
           ))}
