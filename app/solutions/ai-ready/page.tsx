@@ -4,12 +4,14 @@ import NeedPage from "@/components/NeedPage";
 import { AiCompare } from "@/components/NeedDemos";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
 import { SectionHead } from "@/components/ui";
+import { InsightArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Get AI-Ready", description: "AI is only as good as the data under it. Fix the foundation first." };
 
 export default function Page() {
   return (
     <NeedPage
+      art={<InsightArt />}
       eyebrow="Get AI-ready"
       title={
         <>

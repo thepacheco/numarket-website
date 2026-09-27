@@ -355,8 +355,12 @@ Full page-by-page website specification: [`docs/website-brief.md`](docs/website-
 │   ├── effort.ts              ← effort, timeline, readiness levels
 │   ├── industries.ts          ← the 8 industries (sources, questions, sites)
 │   ├── products.ts            ← Foundation, Workspace, Insight Review, Engineering
-│   └── faq.ts                 ← FAQs by page
+│   ├── faq.ts                 ← FAQs by page
+│   ├── docs.ts                ← client documentation articles (/docs)
+│   └── legal.ts               ← Terms, Privacy, DPA drafts (attorney review required)
 ├── lib/sample-data.ts         ← sample-data engine behind every demo dashboard
+├── lib/ask.ts                 ← industry-specific Ask Your Data questions and answers
+├── lib/savings.ts             ← "where the money is" math per industry (illustrative)
 ├── components/                ← nav, footer, industry explorer, charts, forms, demos
 │   └── journey/               ← 3D scenes (three.js): Data Journey + Security vault
 ├── app/                       ← one folder per page (Next.js App Router)

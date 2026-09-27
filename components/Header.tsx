@@ -102,7 +102,7 @@ export default function Header() {
               <div id="menu-products" className={`mega ${open === "products" ? "open" : ""}`}>
                 <div className="mega-panel mega-products">
                   {productLinks.map((l) => (
-                    <Link key={l.href} href={l.href} className="mega-prod">
+                    <Link key={l.href} href={l.href} className={`mega-prod pg-${l.kind}`}>
                       <ProductGlyph kind={l.kind} />
                       <span>
                         <strong>{l.title}</strong>

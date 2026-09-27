@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { site } from "@/content/site";
+import { InsightArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Support", description: "How to get help, and how fast we respond on each plan." };
 
 export default function Support() {
   return (
     <>
-      <PageHero eyebrow="Support" title="Help when you need it." lead="Clients get a real person who knows their data." />
+      <PageHero
+        art={<InsightArt />} eyebrow="Support" title="Help when you need it." lead="Clients get a real person who knows their data." />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <h2 className="sr-only">Ways to reach us</h2>

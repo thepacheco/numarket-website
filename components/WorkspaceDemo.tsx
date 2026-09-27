@@ -4,7 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Icon from "./Icon";
 import Toast from "./Toast";
 import { industries, type IndustrySlug } from "@/content/industries";
-import { buildView, constructionJobs, fmt } from "@/lib/sample-data";
+import { constructionJobs, fmt } from "@/lib/sample-data";
+import { introFor, questionsFor, sampleCompany, type QA } from "@/lib/ask";
 
 /* ============ Tab 1: Change a Number ============ */
 
@@ -189,57 +190,6 @@ function ChangeANumber() {
 
 /* ============ Tab 2: Ask Your Data ============ */
 
-type QA = { q: string; a: string; chart?: { label: string; value: number; text: string; risk?: boolean }[] };
-
-function questionsFor(slug: IndustrySlug): QA[] {
-  const ind = industries.find((i) => i.slug === slug)!;
-  const v = buildView(slug, "large", null, 12);
-  const noun = ind.siteNoun.one.toLowerCase();
-  const out: QA[] = [];
-
-  /* 1. what needs attention */
-  out.push({
-    q: `Which ${noun} needs attention first?`,
-    a: `${v.action.site}. ${v.action.detail}`,
-    chart: v.table.map((r) => {
-      const x = r.values.find((y) => y.key === v.statusKey)!;
-      return { label: r.site, value: x.value, text: fmt(x.value, x.fmt), risk: r.status !== "good" };
-    }),
-  });
-
-  /* 2. vs prior period */
-  const lines = v.kpis
-    .filter((k) => k.better !== "none")
-    .slice(0, 3)
-    .map((k) => {
-      const up = k.value > k.prior;
-      const good = (k.better === "up") === up;
-      return `${k.label} is ${fmt(k.value, k.fmt)}, ${up ? "up" : "down"} from ${fmt(k.prior, k.fmt)}${good ? " (better)" : " (worse)"}.`;
-    });
-  out.push({ q: "How did we do compared to the year before?", a: lines.join(" ") });
-
-  /* 3. drivers */
-  const items = [...v.breakdown.items].sort((a, b) => b.value - a.value);
-  const tot = items.reduce((s, x) => s + x.value, 0);
-  out.push({
-    q: `What's driving ${v.breakdown.title.toLowerCase().replace(/ \(.+\)/, "")}?`,
-    a: `${items[0].label} is the biggest share at ${fmt(items[0].value / tot, "pct")}, followed by ${items[1].label.toLowerCase()} at ${fmt(items[1].value / tot, "pct")}.`,
-    chart: items.map((x, i) => ({ label: x.label, value: x.value, text: fmt(x.value, v.breakdown.fmt), risk: i === 0 })),
-  });
-
-  /* 4. a KPI by site */
-  const k2 = v.tableKpis[1];
-  const rows = v.table.map((r) => ({ site: r.site, v: r.values.find((x) => x.key === k2.key)!.value }));
-  const kpi = v.kpis.find((k) => k.key === k2.key)!;
-  const sorted = [...rows].sort((a, b) => (kpi.better === "down" ? a.v - b.v : b.v - a.v));
-  out.push({
-    q: `Show ${k2.label.toLowerCase()} by ${noun}.`,
-    a: `Best: ${sorted[0].site} at ${fmt(sorted[0].v, k2.fmt)}. Needs work: ${sorted[sorted.length - 1].site} at ${fmt(sorted[sorted.length - 1].v, k2.fmt)}. Overall: ${fmt(kpi.value, kpi.fmt)}.`,
-    chart: rows.map((r) => ({ label: r.site, value: r.v, text: fmt(r.v, k2.fmt), risk: r.site === sorted[sorted.length - 1].site })),
-  });
-  return out;
-}
-
 function Typed({ text, onDone }: { text: string; onDone: () => void }) {
   const [n, setN] = useState(0);
   const done = useRef(false);
@@ -302,7 +252,7 @@ function AskYourData({ initial = "construction" }: { initial?: IndustrySlug }) {
       <div className="chat" ref={chatRef} aria-live="polite">
         {log.length === 0 && (
           <div className="msg a">
-            Ask me about your {ind.siteNoun.many.replace("All ", "")}. Pick a question below.
+            {introFor(slug)}
             <span className="src">Pre-scripted demo · answers are calculated from sample data</span>
           </div>
         )}

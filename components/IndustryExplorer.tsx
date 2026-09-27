@@ -8,18 +8,7 @@ import { Dots } from "./ui";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { effort } from "@/content/effort";
 import { buildView, fmt, type Period, type Size } from "@/lib/sample-data";
-
-/* Fictional sample companies, one per industry. */
-const sampleCompany: Record<IndustrySlug, string> = {
-  construction: "Summit Builders",
-  manufacturing: "Ridgeway Manufacturing",
-  "food-production": "Harvest Table Foods",
-  healthcare: "Magnolia Health Partners",
-  utilities: "Piedmont Electric Co-op",
-  "professional-services": "Crescent Advisory Group",
-  logistics: "Southline Freight",
-  "real-estate": "Oakmont Properties",
-};
+import { sampleCompany } from "@/lib/ask";
 
 const statusText = { good: "On track", watch: "Watch", risk: "At risk" } as const;
 
@@ -93,7 +82,7 @@ export default function IndustryExplorer({
                 aria-selected={slug === i.slug}
                 aria-controls="explorer-panel"
                 tabIndex={slug === i.slug ? 0 : -1}
-                className="ind-tab"
+                className={`ind-tab ind-${i.slug}`}
                 onClick={() => setSlug(i.slug)}
                 onKeyDown={(e) => onTabKey(e, idx)}
               >

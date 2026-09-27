@@ -11,6 +11,7 @@ export default function NeedPage({
   demo,
   points,
   extra,
+  art,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -19,10 +20,11 @@ export default function NeedPage({
   demo: ReactNode;
   points: { icon: string; title: string; body: string }[];
   extra?: ReactNode;
+  art?: ReactNode;
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} lead={lead}>
+      <PageHero eyebrow={eyebrow} title={title} lead={lead} art={art}>
         <PrimaryCta />
       </PageHero>
       <section className="section-tight" style={{ paddingTop: 0 }}>

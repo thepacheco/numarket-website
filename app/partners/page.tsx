@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { CtaBand, FeatureCard, PageHero, SectionHead } from "@/components/ui";
+import { NetworkArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = { title: "Partners", description: "Your clients are asking about AI. Be the firm with an answer." };
 
@@ -14,6 +15,7 @@ export default function Partners() {
   return (
     <>
       <PageHero
+        art={<NetworkArt />}
         eyebrow="Partners"
         title={
           <>

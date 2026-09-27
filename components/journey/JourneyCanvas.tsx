@@ -163,7 +163,7 @@ export default function JourneyCanvas({ progress, onReady }: { progress: React.M
     const mk = (map: THREE.Texture) => new THREE.MeshBasicMaterial({ map, transparent: true, opacity: 0, side: THREE.FrontSide, toneMapped: false, depthTest: false });
     const panelDefs = [
       { front: tx.dashboard, back: tx.action, to: new THREE.Vector3(-2.1, 1.85, 0.6) },
-      { front: tx.form, to: new THREE.Vector3(3.2, 1.7, 0.6) },
+      { front: tx.form, to: new THREE.Vector3(2.6, 1.75, 0.6) },
       { front: tx.ask, to: new THREE.Vector3(-1.8, -1.35, 1.6) },
       { front: tx.alert, to: new THREE.Vector3(2.6, -1.35, 1.6) },
     ];
@@ -229,7 +229,7 @@ export default function JourneyCanvas({ progress, onReady }: { progress: React.M
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.fov = w / h < 1 ? 52 : 38;
-      if (w >= 900) camera.setViewOffset(w * 1.28, h, 0, 0, w, h);
+      if (w >= 900) camera.setViewOffset(w * 1.42, h, 0, 0, w, h);
       else camera.clearViewOffset();
       camera.updateProjectionMatrix();
     };

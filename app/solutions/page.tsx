@@ -5,6 +5,7 @@ import IndustryExplorer from "@/components/IndustryExplorer";
 import { needLinks } from "@/components/nav-data";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { industries } from "@/content/industries";
+import { TilesArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = { title: "Solutions", description: "numarket by size, by industry, and by need." };
 
@@ -15,6 +16,7 @@ export default function Solutions() {
   return (
     <>
       <PageHero
+        art={<TilesArt />}
         eyebrow="Solutions"
         title={
           <>
@@ -51,7 +53,7 @@ export default function Solutions() {
           <SectionHead eyebrow="By industry" title="Built around how you run." />
           <div className="ind-grid stagger">
             {industries.map((i) => (
-              <Link key={i.slug} href={`/solutions/${i.slug}`} className="ind-card">
+              <Link key={i.slug} href={`/solutions/${i.slug}`} className={`ind-card ind-${i.slug}`}>
                 <span className="ind-ic">
                   <Icon name={i.icon} />
                 </span>

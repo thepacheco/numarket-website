@@ -31,6 +31,8 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState("");
   const [prefill, setPrefill] = useState<Record<string, string>>({});
+  const [step, setStep] = useState<1 | 2>(1);
+  const isContact = variant === "contact";
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
@@ -43,12 +45,10 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
   const defaultPath = prefill.tier ? (prefill.tier === "Command" ? "Larger organization" : "Small or growing business") : "";
   const defaultStart = prefill.timing === "asap" ? "ASAP" : prefill.timing === "soon" ? "1–3 months" : prefill.timing === "exploring" ? "Just exploring" : "";
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  /* Returns true when the required fields are filled in. */
+  function checkRequired() {
     const form = formRef.current!;
     const data = new FormData(form);
-    if (data.get("website")) return; // honeypot: bots fill hidden fields
-
     const required = variant === "partner" ? ["First Name", "Last Name", "Work Email", "Firm Name"] : ["First Name", "Last Name", "Work Email", "Company"];
     const missing = required.filter((k) => !String(data.get(k) ?? "").trim());
     const email = String(data.get("Work Email") ?? "").trim();
@@ -56,9 +56,19 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
     form.querySelectorAll<HTMLInputElement>("input[required]").forEach((el) => el.setAttribute("aria-invalid", String(!el.value.trim())));
     if (missing.length) {
       setError(`Please complete: ${missing.join(", ")}.`);
-      return;
+      if (isContact) setStep(1);
+      return false;
     }
     setError("");
+    return true;
+  }
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = formRef.current!;
+    const data = new FormData(form);
+    if (data.get("website")) return; // honeypot: bots fill hidden fields
+    if (!checkRequired()) return;
     setState("sending");
 
     const fields: Record<string, string> = { "Form": variant === "partner" ? "Partner inquiry" : "Readiness Check request", "Submitted": new Date().toISOString(), "Page": window.location.pathname };
@@ -89,6 +99,17 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
 
   return (
     <form ref={formRef} className="card form" onSubmit={onSubmit} noValidate>
+      {isContact && (
+        <div className="form-steps" aria-label={`Step ${step} of 2`}>
+          <span className={step === 1 ? "on" : ""}>
+            <i>1</i> About you
+          </span>
+          <span className="line" />
+          <span className={step === 2 ? "on" : ""}>
+            <i>2</i> Details <span className="muted">(optional)</span>
+          </span>
+        </div>
+      )}
       {fromEstimator && (
         <div className="notice">
           <strong>Your estimate is attached:</strong> {prefill.tier} · {prefill.estimate}
@@ -100,6 +121,7 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
           Website <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
+      <div hidden={isContact && step !== 1} className="form fade-in">
       <div className="form-row">
         <div className="field">
           <label htmlFor="fn">First name *</label>
@@ -184,6 +206,12 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
               </select>
             </div>
           </div>
+          </>
+      )}
+      </div>
+
+      {isContact && (
+        <div hidden={step !== 2} className="form fade-in">
           <div className="form-row">
             <div className="field">
               <label htmlFor="size">Company size</label>
@@ -246,10 +274,10 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
               </select>
             </div>
           </div>
-        </>
+        </div>
       )}
 
-      <div className="field">
+      <div className="field" hidden={isContact && step !== 2}>
         <label htmlFor="msg">{variant === "partner" ? "Tell us about your clients" : "What are you trying to see more clearly?"}</label>
         <textarea
           id="msg"
@@ -279,10 +307,38 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
           {error}
         </div>
       )}
-      <button type="submit" className="btn btn-primary" disabled={state === "sending"}>
-        {state === "sending" ? "Sending…" : variant === "partner" ? "Send partner inquiry" : "Send request"}
-        {state !== "sending" && <Icon name="arrow" className="arrow" width={16} height={16} />}
-      </button>
+      <div className="btn-row">
+        {isContact && step === 1 ? (
+          <>
+            <button
+              key="next"
+              type="button"
+              className="btn btn-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                if (checkRequired()) setStep(2);
+              }}
+            >
+              Next: a few details <Icon name="arrow" className="arrow" width={16} height={16} />
+            </button>
+            <button key="skip" type="submit" className="btn btn-ghost" disabled={state === "sending"}>
+              {state === "sending" ? "Sending…" : "Skip and send"}
+            </button>
+          </>
+        ) : (
+          <>
+            <button key="send" type="submit" className="btn btn-primary" disabled={state === "sending"}>
+              {state === "sending" ? "Sending…" : variant === "partner" ? "Send partner inquiry" : "Send request"}
+              {state !== "sending" && <Icon name="arrow" className="arrow" width={16} height={16} />}
+            </button>
+            {isContact && (
+              <button key="back" type="button" className="btn btn-ghost" onClick={() => setStep(1)}>
+                Back
+              </button>
+            )}
+          </>
+        )}
+      </div>
       <p className="small muted">
         We reply within {site.responseTime}. We never sell your information. See our <a href="/legal/privacy">Privacy Policy</a>.
       </p>

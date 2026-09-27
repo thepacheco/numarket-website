@@ -4,6 +4,7 @@ import PricingTiers from "@/components/PricingTiers";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { tierComparison, addOns } from "@/content/tiers";
 import { faq } from "@/content/faq";
+import { PricingArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -14,6 +15,7 @@ export default function Pricing() {
   return (
     <>
       <PageHero
+        art={<PricingArt />}
         eyebrow="Pricing"
         title={
           <>

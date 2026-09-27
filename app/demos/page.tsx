@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
+import { WorkspaceArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = {
   title: "Demos",
@@ -12,6 +13,7 @@ export default function Demos() {
   return (
     <>
       <PageHero
+        art={<WorkspaceArt />}
         eyebrow="Demos · Sample data"
         title={
           <>

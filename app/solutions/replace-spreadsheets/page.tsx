@@ -3,12 +3,14 @@ import NeedPage from "@/components/NeedPage";
 import { SpreadsheetDemo } from "@/components/NeedDemos";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
 import { SectionHead } from "@/components/ui";
+import { WorkspaceArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Replace Spreadsheets", description: "Stop emailing spreadsheets. Enter it once, in one place, and everyone sees the same number." };
 
 export default function Page() {
   return (
     <NeedPage
+      art={<WorkspaceArt />}
       eyebrow="Replace spreadsheets"
       title={
         <>

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import NeedPage from "@/components/NeedPage";
 import { MigrationDemo } from "@/components/NeedDemos";
+import { EngineeringArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Move Off Old Systems", description: "Migrations done carefully: every row moved, counted, and checked before the old system is switched off." };
 
 export default function Page() {
   return (
     <NeedPage
+      art={<EngineeringArt />}
       eyebrow="Move off old systems"
       title={
         <>

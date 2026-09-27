@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { site } from "@/content/site";
+import { PinArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = { title: "About Us", description: "Founded in Atlanta to make every company's data trustworthy and ready for AI." };
 
@@ -15,6 +16,7 @@ export default function About() {
   return (
     <>
       <PageHero
+        art={<PinArt />}
         eyebrow="About us"
         title={
           <>

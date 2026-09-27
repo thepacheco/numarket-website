@@ -157,7 +157,7 @@ const models: Record<IndustrySlug, Model> = {
   construction: {
     stock: ["rfis"],
     profile: (r, i, size) => ({
-      value: size === "large" ? 8e6 + r() * 46e6 : 3.5e5 + r() * 1.9e6,
+      value: size === "large" ? 8e6 + r() * 46e6 : 2.5e6 + r() * 6e6,
       cpi: 1 + BIAS[i] * 0.06 + (r() - 0.5) * 0.015,
       spi: 1 + (r() - 0.5) * 0.06,
     }),
@@ -279,7 +279,7 @@ const models: Record<IndustrySlug, Model> = {
   /* ---------------- FOOD PRODUCTION ---------------- */
   "food-production": {
     profile: (r, i, size) => ({
-      meals: size === "large" ? 9000 + r() * 16000 : 1400 + r() * 2200,
+      meals: size === "large" ? 9000 + r() * 16000 : 5000 + r() * 7000,
       over: 0.06 - BIAS[i] * 0.045 + r() * 0.01,
       cpm: 6.2 + r() * 3.4 - BIAS[i] * 0.4,
     }),
@@ -620,7 +620,7 @@ const models: Record<IndustrySlug, Model> = {
   "real-estate": {
     stock: ["expiring"],
     profile: (r, i, size) => ({
-      units: size === "large" ? 80 + Math.round(r() * 220) : 6 + Math.round(r() * 20),
+      units: size === "large" ? 80 + Math.round(r() * 220) : 40 + Math.round(r() * 110),
       rent: 1250 + r() * 900,
       occ: 0.94 + BIAS[i] * 0.04,
       maint: 0.09 - BIAS[i] * 0.045,
@@ -735,11 +735,13 @@ export type View = {
   kpis: { key: string; label: string; fmt: Fmt; better: Kpi["better"]; value: number; prior: number; hint?: string }[];
   trend: { title: string; fmt: Fmt; aLabel: string; bLabel: string; points: { label: string; a: number; b: number }[] };
   breakdown: { title: string; fmt: Fmt; items: { label: string; value: number }[] };
-  table: { site: string; status: Status; values: { key: string; label: string; fmt: Fmt; value: number }[] }[];
+  table: { site: string; status: Status; t: Totals; values: { key: string; label: string; fmt: Fmt; value: number }[] }[];
   tableKpis: { key: string; label: string; fmt: Fmt }[];
   action: Action & { site: string; status: Status };
   rowCount: number;
   statusKey: string;
+  totals: Totals;
+  priorTotals: Totals;
 };
 
 export function buildView(slug: IndustrySlug, size: Size, site: string | null, period: Period): View {
@@ -813,11 +815,13 @@ export function buildView(slug: IndustrySlug, size: Size, site: string | null, p
     kpis,
     trend: { title: model.trend.title, fmt: model.trend.fmt, aLabel: model.trend.a.label, bLabel: model.trend.b.label, points },
     breakdown: { title: model.breakdown.title, fmt: model.breakdown.fmt, items: breakdown },
-    table: table.map(({ site, status, values }) => ({ site, status, values })),
+    table: table.map(({ site, status, t, values }) => ({ site, status, t, values })),
     tableKpis: model.kpis.map((k) => ({ key: k.key, label: k.label, fmt: k.fmt })),
     action: { ...action, site: worst.site, status: worst.status },
     rowCount: cur.length,
     statusKey: model.statusKpi,
+    totals: t,
+    priorTotals: tp,
   };
 }
 

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import StepScene from "./StepScene";
+import { useDeferredMount } from "./useDeferredMount";
 import { steps } from "@/content/steps";
 
 const JourneyCanvas = dynamic(() => import("./journey/JourneyCanvas"), { ssr: false });
@@ -32,7 +33,6 @@ export default function DataJourney() {
   const [mode, setMode] = useState<"pending" | "3d" | "fallback">("pending");
   const [stage, setStage] = useState(0);
   const [ready, setReady] = useState(false);
-  const [near, setNear] = useState(false);
   const progress = useRef(0);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -61,21 +61,8 @@ export default function DataJourney() {
     };
   }, [mode]);
 
-  /* Don't load or build the 3D scene until the visitor scrolls near it. */
-  useEffect(() => {
-    if (mode !== "3d" || !sectionRef.current) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setNear(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "600px 0px" }
-    );
-    io.observe(sectionRef.current);
-    return () => io.disconnect();
-  }, [mode]);
+  /* Don't load or build the 3D scene until the visitor is near it and has interacted. */
+  const near = useDeferredMount(sectionRef, mode === "3d", "600px 0px");
 
   const onReady = useCallback(() => setReady(true), []);
 
@@ -103,21 +90,25 @@ export default function DataJourney() {
         {mode === "3d" && near && <JourneyCanvas progress={progress} onReady={onReady} />}
         <div className={`j-loading ${ready ? "done" : ""}`} aria-hidden="true" />
         <div className="j-overlay container">
-          <div className="j-copy" key={stage}>
-            <span className="eyebrow">
-              Step {step + 1} of 6 · {steps[step].title}
-            </span>
-            <h2>{labels[stage]}</h2>
-            <p>{steps[step].plain}</p>
-          </div>
-          <nav className="j-steps" aria-label="Jump to a step">
-            {steps.map((s, i) => (
-              <button key={s.key} type="button" className={i === step ? "on" : i < step ? "past" : ""} onClick={() => jump(i === 0 ? 0 : i + 1)} aria-current={i === step ? "step" : undefined} aria-label={`Step ${i + 1}: ${s.title}`}>
-                <i />
-                <span>{s.title}</span>
-              </button>
+          <ol className="j-rail" aria-label="The six steps">
+            {steps.map((st, i) => (
+              <li key={st.key}>
+                <button
+                  type="button"
+                  className={`j-rail-item ${i === step ? "on" : i < step ? "past" : ""}`}
+                  onClick={() => jump(i === 0 ? 0 : i + 1)}
+                  aria-current={i === step ? "step" : undefined}
+                >
+                  <span className="n">{i < step ? "✓" : i + 1}</span>
+                  <span className="t">{st.title}</span>
+                  <span className="d">
+                    <b style={{ color: "var(--ink)", display: "block" }}>{i === step ? labels[stage] : ""}</b>
+                    {st.plain}
+                  </span>
+                </button>
+              </li>
             ))}
-          </nav>
+          </ol>
           <div className="j-progress" aria-hidden="true">
             <span style={{ width: `${pct}%` }} />
           </div>

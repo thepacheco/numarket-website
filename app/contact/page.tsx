@@ -3,6 +3,7 @@ import ContactForm from "@/components/ContactForm";
 import Icon from "@/components/Icon";
 import { PageHero } from "@/components/ui";
 import { site } from "@/content/site";
+import { BubblesArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = {
   title: "Contact — Get a Free Readiness Check",
@@ -13,6 +14,7 @@ export default function Contact() {
   return (
     <>
       <PageHero
+        art={<BubblesArt />}
         eyebrow="Free Readiness Check"
         title={
           <>

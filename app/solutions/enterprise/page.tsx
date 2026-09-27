@@ -4,6 +4,7 @@ import { CheckList, CtaBand, Faq, PageHero, PrimaryCta, SectionHead } from "@/co
 import IndustryExplorer from "@/components/IndustryExplorer";
 import PlatformToggle from "@/components/PlatformToggle";
 import { faq } from "@/content/faq";
+import { EngineeringArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Larger Organizations", description: "Make the data you already have ready for AI. Your platform or ours." };
 
@@ -18,6 +19,7 @@ export default function Enterprise() {
   return (
     <>
       <PageHero
+        art={<EngineeringArt />}
         eyebrow="Larger organizations"
         title={
           <>

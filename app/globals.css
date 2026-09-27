@@ -1623,3 +1623,7 @@ p a:not(.btn),
   letter-spacing: -0.015em;
   line-height: 1.25;
 }
+
+[hidden] {
+  display: none !important;
+}

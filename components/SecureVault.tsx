@@ -1,7 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDeferredMount } from "./useDeferredMount";
 import Icon from "./Icon";
 
 const VaultCanvas = dynamic(() => import("./journey/VaultCanvas"), { ssr: false });
@@ -18,6 +19,8 @@ export default function SecureVault() {
   const [on, setOn] = useState<string | null>("encrypt");
   const [three, setThree] = useState(false);
   const cur = layers.find((l) => l.key === on);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const mount3d = useDeferredMount(sceneRef, three);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     try {
@@ -29,8 +32,8 @@ export default function SecureVault() {
   }, []);
   return (
     <div className="vault2">
-      <div className={`v-scene ${three ? "has3d" : ""}`}>
-        {three && <VaultCanvas active={layers.findIndex((l) => l.key === on)} />}
+      <div ref={sceneRef} className={`v-scene ${three ? "has3d" : ""}`}>
+        {mount3d && <VaultCanvas active={layers.findIndex((l) => l.key === on)} />}
         {layers.map((l, i) => {
           const inset = i * 9;
           return (

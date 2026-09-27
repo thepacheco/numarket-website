@@ -4,6 +4,7 @@ import { CtaBand, Dots, Faq, PageHero, SectionHead } from "@/components/ui";
 import { effort, startSteps, valueCompare } from "@/content/effort";
 import { faq } from "@/content/faq";
 import Link from "next/link";
+import { PathArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = {
   title: "Getting Started",
@@ -25,6 +26,7 @@ export default function GettingStarted() {
   return (
     <>
       <PageHero
+        art={<PathArt />}
         eyebrow="Getting started"
         title={
           <>

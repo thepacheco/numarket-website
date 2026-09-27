@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CtaBand, FeatureCard, PageHero, SectionHead } from "@/components/ui";
+import { FoundationArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Why numarket", description: "Bigger than a freelancer. Far easier and cheaper than a big-firm transformation." };
 
@@ -27,6 +28,7 @@ export default function Why() {
   return (
     <>
       <PageHero
+        art={<FoundationArt />}
         eyebrow="Why numarket"
         title={
           <>

@@ -4,9 +4,10 @@ import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
+import SavingsCalc from "@/components/SavingsCalc";
+import Roles from "@/components/Roles";
 import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
 import { tiers, money } from "@/content/tiers";
-import { effort } from "@/content/effort";
 
 /* Hero visual: messy tiles tidy themselves into rows above a secure core. */
 const tiles = [
@@ -27,11 +28,6 @@ const problems = [
   { icon: "sparkle", text: "“Use AI” — on data that isn't ready" },
 ];
 
-const scenarios = [
-  { who: "Regional contractor", before: "Friday budget reports rebuilt by hand", after: "Every job's budget, live, every morning" },
-  { who: "Multi-site clinic group", before: "Staffing gaps found when patients wait", after: "Gaps seen before the schedule posts" },
-  { who: "Professional services firm", before: "Unbilled time found at quarter-end", after: "Utilization and cash, weekly" },
-];
 
 export default function Home() {
   return (
@@ -160,8 +156,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHERE THE MONEY IS */}
+      <section className="section soft" id="savings">
+        <div className="container">
+          <SectionHead
+            eyebrow="Where the money is"
+            title={
+              <>
+                Clean data finds <em className="accent">real money.</em>
+              </>
+            }
+            lead="Pick an industry. See the leak, the math, and what fixing a slice is worth."
+          />
+          <SavingsCalc />
+        </div>
+      </section>
+
       {/* WORKSPACE DEMO */}
-      <section className="section soft" id="try-it">
+      <section className="section" id="try-it">
         <div className="container">
           <SectionHead
             eyebrow="Try it"
@@ -173,6 +185,14 @@ export default function Home() {
             lead="Change a number and watch the dashboard react. Or ask a question."
           />
           <WorkspaceDemo />
+        </div>
+      </section>
+
+      {/* PEOPLE */}
+      <section className="section soft">
+        <div className="container">
+          <SectionHead eyebrow="Who it's for" title="Everyone sees the same numbers." lead="Each person gets the view they need." />
+          <Roles />
         </div>
       </section>
 
@@ -231,55 +251,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW HARD / LONG / MUCH — cards, not a table */}
-      <section className="section soft">
-        <div className="container">
-          <SectionHead
-            eyebrow="Before you ever call"
-            title={
-              <>
-                How hard. How long. <em className="accent">How much.</em>
-              </>
-            }
-          />
-          <div className="grid g3 stagger">
-            {effort.map((e) => (
-              <div className="card effort-card" key={e.id}>
-                <span className="pill navy">{e.label}</span>
-                <div className="effort-row">
-                  <Dots n={e.difficulty} /> <b>{e.difficultyLabel}</b>
-                </div>
-                <dl className="est-grid">
-                  <div>
-                    <dt>Your time</dt>
-                    <dd>{e.timeRequired.replace(" total", "")}</dd>
-                  </div>
-                  <div>
-                    <dt>First dashboard</dt>
-                    <dd>{e.firstDashboard}</dd>
-                  </div>
-                  <div>
-                    <dt>Setup</dt>
-                    <dd className="tnum">{e.setup}</dd>
-                  </div>
-                  <div>
-                    <dt>Monthly</dt>
-                    <dd className="tnum">{e.monthly}</dd>
-                  </div>
-                </dl>
-              </div>
-            ))}
-          </div>
-          <div className="btn-row" style={{ marginTop: 24 }}>
-            <Link href="/getting-started#estimator" className="btn btn-secondary">
-              Get your estimate in 60 seconds
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* PRICING TEASER */}
-      <section className="section">
+      <section className="section soft">
         <div className="container">
           <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." />
           <div className="grid g3 stagger">
@@ -300,26 +273,6 @@ export default function Home() {
                 </div>
                 <span className="more">Compare plans →</span>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BEFORE / AFTER — illustrative only */}
-      <section className="section soft">
-        <div className="container">
-          <SectionHead eyebrow="What changes" title="Before and after." lead="Illustrative scenarios — not named clients." />
-          <div className="grid g3 stagger">
-            {scenarios.map((s) => (
-              <div className="card ba-card" key={s.who}>
-                <span className="label-sample">Illustrative</span>
-                <h3 style={{ marginTop: 12 }}>{s.who}</h3>
-                <div className="ba">
-                  <span className="ba-before">{s.before}</span>
-                  <Icon name="arrow" className="ba-arrow" />
-                  <span className="ba-after">{s.after}</span>
-                </div>
-              </div>
             ))}
           </div>
         </div>

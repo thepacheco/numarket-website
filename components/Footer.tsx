@@ -1,73 +1,84 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { site } from "@/content/site";
-import { industryLinks } from "./nav-data";
+import { cta, site } from "@/content/site";
+import { needLinks } from "./nav-data";
+import { industries } from "@/content/industries";
+
+const cols: { title: string; links: { href: string; title: string }[] }[] = [
+  {
+    title: "Products",
+    links: [
+      { href: "/products/foundation", title: "Foundation" },
+      { href: "/products/workspace", title: "Workspace" },
+      { href: "/products/insight-review", title: "Insight Review" },
+      { href: "/products/engineering", title: "Engineering" },
+      { href: "/platform", title: "Platform" },
+      { href: "/pricing", title: "Pricing" },
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [{ href: "/solutions/small-business", title: "Small business" }, { href: "/solutions/enterprise", title: "Larger organizations" }, ...needLinks],
+  },
+  { title: "Industries", links: industries.map((i) => ({ href: `/solutions/${i.slug}`, title: i.short })) },
+  {
+    title: "Resources",
+    links: [
+      { href: "/getting-started", title: "Getting started" },
+      { href: "/demos", title: "Demos" },
+      { href: "/docs", title: "Documentation" },
+      { href: "/security", title: "Security" },
+      { href: "/support", title: "Support" },
+      { href: "/status", title: "Status" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/about", title: "About" },
+      { href: "/why-numarket", title: "Why numarket" },
+      { href: "/partners", title: "Partners" },
+      { href: "/contact", title: "Contact" },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-grid">
-          <div className="footer-brand">
+        <div className="foot-top">
+          <div>
             <Logo />
-            <p style={{ marginTop: 14, maxWidth: 300 }}>
-              {site.tagline} We get your business ready for AI — and you own all of it.
-            </p>
-            <p style={{ marginTop: 18 }}>
-              <a href={`mailto:${site.email}`}>{site.email}</a>
-              <br />
-              <a href={site.phoneHref}>{site.phone}</a>
-            </p>
+            <p>{site.tagline} Your data, cleaned up and working for you.</p>
           </div>
-          <div>
-            <h2 className="f-h">Company</h2>
-            <ul>
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/why-numarket">Why numarket</Link></li>
-              <li><Link href="/partners">Partners</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="f-h">Products</h2>
-            <ul>
-              <li><Link href="/products/foundation">Foundation</Link></li>
-              <li><Link href="/products/workspace">Workspace</Link></li>
-              <li><Link href="/products/insight-review">Insight Review</Link></li>
-              <li><Link href="/products/engineering">Engineering</Link></li>
-              <li><Link href="/platform">Platform</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="f-h">Solutions</h2>
-            <ul>
-              <li><Link href="/solutions/small-business">Small Business</Link></li>
-              <li><Link href="/solutions/enterprise">Larger Organizations</Link></li>
-              {industryLinks.map((l) => (
-                <li key={l.href}><Link href={l.href}>{l.title}</Link></li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="f-h">Resources</h2>
-            <ul>
-              <li><Link href="/getting-started">Getting Started</Link></li>
-              <li><Link href="/docs">Documentation</Link></li>
-              <li><Link href="/security">Security</Link></li>
-              <li><Link href="/support">Support</Link></li>
-              <li><Link href="/status">Status</Link></li>
-              <li><Link href="/demos">Demos</Link></li>
-            </ul>
-          </div>
+          <Link href={cta.href} className="btn btn-primary">
+            {cta.label}
+          </Link>
         </div>
-        <div className="footer-legal">
+        <nav className="foot-cols" aria-label="Footer">
+          {cols.map((c) => (
+            <div key={c.title}>
+              <h2 className="f-h">{c.title}</h2>
+              <ul>
+                {c.links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+        <div className="foot-bottom">
+          <span>
+            © {site.year} {site.legalName} · {site.city} · <a href={`mailto:${site.email}`}>{site.email}</a> · <a href={site.phoneHref}>{site.phone}</a>
+          </span>
           <nav aria-label="Legal">
-            <Link href="/legal/terms">Terms of Service</Link>
-            <Link href="/legal/privacy">Privacy Policy</Link>
+            <Link href="/legal/terms">Terms</Link>
+            <Link href="/legal/privacy">Privacy</Link>
             <Link href="/legal/dpa">Data Processing Addendum</Link>
           </nav>
-          <span>© {site.year} {site.legalName} · {site.city}</span>
         </div>
       </div>
     </footer>

@@ -4,16 +4,19 @@ import Icon from "./Icon";
 import { cta } from "@/content/site";
 import type { QA } from "@/content/faq";
 
-export function PageHero({ eyebrow, title, lead, children }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode }) {
+export function PageHero({ eyebrow, title, lead, children, art }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode; art?: ReactNode }) {
   return (
     <section className="page-hero">
       <div className="hero-gradient" aria-hidden="true" />
       <div className="hero-fade" aria-hidden="true" />
-      <div className="container">
-        <span className="eyebrow">{eyebrow}</span>
-        <h1>{title}</h1>
-        {lead && <p className="lead">{lead}</p>}
-        {children && <div style={{ marginTop: 28 }}>{children}</div>}
+      <div className={`container ${art ? "hero-grid" : ""}`}>
+        <div>
+          <span className="eyebrow">{eyebrow}</span>
+          <h1>{title}</h1>
+          {lead && <p className="lead">{lead}</p>}
+          {children && <div style={{ marginTop: 28 }}>{children}</div>}
+        </div>
+        {art && <div className="page-hero-art">{art}</div>}
       </div>
     </section>
   );

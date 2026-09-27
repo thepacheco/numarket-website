@@ -6,6 +6,7 @@ import MondayPhone from "@/components/MondayPhone";
 import { effort } from "@/content/effort";
 import { tiers, money } from "@/content/tiers";
 import { faq } from "@/content/faq";
+import { WorkspaceArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Small & Growing Businesses", description: "The data team you don't have to hire. We host it, run it, and explain it." };
 
@@ -14,6 +15,7 @@ export default function SmallBusiness() {
   return (
     <>
       <PageHero
+        art={<WorkspaceArt />}
         eyebrow="Small & growing businesses"
         title={
           <>

@@ -4,6 +4,20 @@
 import * as THREE from "three";
 import { buildView, fmt, overBudgetSummary } from "@/lib/sample-data";
 
+/* Older Safari/Firefox lack roundRect; draw it with arcs instead. */
+if (typeof CanvasRenderingContext2D !== "undefined" && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x: number, y: number, w: number, h: number, r?: number | DOMPointInit | (number | DOMPointInit)[]) {
+    const rad = typeof r === "number" ? r : Array.isArray(r) && typeof r[0] === "number" ? (r[0] as number) : 0;
+    const rr = Math.min(rad, w / 2, h / 2);
+    this.moveTo(x + rr, y);
+    this.arcTo(x + w, y, x + w, y + h, rr);
+    this.arcTo(x + w, y + h, x, y + h, rr);
+    this.arcTo(x, y + h, x, y, rr);
+    this.arcTo(x, y, x + w, y, rr);
+    this.closePath();
+  };
+}
+
 const W = 640;
 const H = 420;
 const S = 2; // supersample for crisp text
