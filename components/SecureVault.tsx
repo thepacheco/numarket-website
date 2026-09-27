@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import Icon from "./Icon";
+
+const VaultCanvas = dynamic(() => import("./journey/VaultCanvas"), { ssr: false });
 
 /* Layered shields around your database. Hover or tap a ring to see what it does. */
 const layers = [
@@ -13,10 +16,21 @@ const layers = [
 
 export default function SecureVault() {
   const [on, setOn] = useState<string | null>("encrypt");
+  const [three, setThree] = useState(false);
   const cur = layers.find((l) => l.key === on);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    try {
+      const c = document.createElement("canvas");
+      setThree(!!(c.getContext("webgl2") || c.getContext("webgl")));
+    } catch {
+      /* no WebGL: the flat rings still work */
+    }
+  }, []);
   return (
     <div className="vault2">
-      <div className="v-scene">
+      <div className={`v-scene ${three ? "has3d" : ""}`}>
+        {three && <VaultCanvas active={layers.findIndex((l) => l.key === on)} />}
         {layers.map((l, i) => {
           const inset = i * 9;
           return (
@@ -34,9 +48,11 @@ export default function SecureVault() {
             </button>
           );
         })}
-        <div className="v-core">
-          <Icon name="database" />
-        </div>
+        {!three && (
+          <div className="v-core">
+            <Icon name="database" />
+          </div>
+        )}
       </div>
       <div className="v-detail" aria-live="polite">
         {cur && (

@@ -19,6 +19,7 @@ export default function Platform() {
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
+          <h2 className="sr-only">The six layers</h2>
           <PlatformLayers />
         </div>
       </section>

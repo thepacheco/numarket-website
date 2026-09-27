@@ -28,6 +28,7 @@ export default function Products() {
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
+          <h2 className="sr-only">Our four products</h2>
           <ProductBento />
         </div>
       </section>

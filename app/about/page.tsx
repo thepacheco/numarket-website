@@ -23,6 +23,7 @@ export default function About() {
         }
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
+        <h2 className="sr-only">Our story</h2>
         <div className="container split">
           <div className="prose">
             <p className="lead" style={{ marginBottom: 18 }}>

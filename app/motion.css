@@ -1058,7 +1058,7 @@
     border-bottom: 1px solid var(--border);
   }
 }
-.wsd-form h4 {
+.wsd-form .h4 {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -1386,7 +1386,7 @@
   align-content: start;
   transition: all 0.5s var(--ease);
 }
-.recon-col h4 {
+.recon-col .h4 {
   font-size: 14px;
 }
 .recon-col .tot {
@@ -1470,7 +1470,7 @@
   background: #f5f3ff;
   border-color: #ddd8fb;
 }
-.mig-box h4 {
+.mig-box .h4 {
   font-size: 14px;
   display: flex;
   gap: 8px;
@@ -1575,7 +1575,7 @@
   background: #f4fbf7;
   border-color: #cfe9dc;
 }
-.ai-side h4 {
+.ai-side .h4 {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -1611,7 +1611,7 @@
   min-height: 420px;
   align-content: start;
 }
-.phone-screen h4 {
+.phone-screen .h4 {
   font-size: 16px;
 }
 .feed {
@@ -1743,7 +1743,7 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--vc);
+  color: color-mix(in srgb, var(--vc) 62%, #000);
   background: #fff;
   padding: 2px 8px;
   border-radius: 999px;
@@ -1907,7 +1907,7 @@
   filter: blur(10px);
 }
 .prod-eyebrow {
-  color: var(--pc) !important;
+  color: color-mix(in srgb, var(--pc) 72%, #000) !important;
 }
 .prod-eyebrow::before {
   display: none;
@@ -2244,4 +2244,200 @@
 }
 .ws-dash {
   background: linear-gradient(160deg, #ffffff, #eaf5f5);
+}
+
+/* ---------- 3D Data Journey ---------- */
+.journey3d {
+  position: relative;
+  height: 520vh;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f7f9 8%, #eef7f2 92%, #ffffff 100%);
+}
+.j-sticky {
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  height: calc(100svh - 68px);
+  overflow: hidden;
+}
+.j-canvas,
+.j-canvas canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.j-loading {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(50% 45% at 60% 55%, rgba(87, 204, 153, 0.18), transparent 70%);
+  transition: opacity 0.8s;
+  pointer-events: none;
+}
+.j-loading.done {
+  opacity: 0;
+}
+.j-overlay {
+  position: relative;
+  height: 100%;
+  pointer-events: none;
+}
+.j-copy {
+  position: absolute;
+  left: var(--gutter);
+  top: 9%;
+  max-width: 420px;
+  pointer-events: auto;
+  animation: fadeUp 0.6s var(--ease);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 237, 242, 0.9);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+.j-copy h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin: 10px 0 10px;
+}
+.j-copy p {
+  color: var(--text-2);
+  font-size: 16px;
+}
+.j-steps {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  pointer-events: auto;
+}
+.j-steps button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 6px 10px;
+  min-height: 36px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+.j-steps button:hover {
+  background: var(--gray-50);
+}
+.j-steps i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-400);
+  transition: all 0.3s var(--ease);
+}
+.j-steps .past i {
+  background: var(--green);
+  border-color: var(--green);
+}
+.j-steps .on {
+  color: var(--ink);
+}
+.j-steps .on i {
+  width: 14px;
+  height: 14px;
+  background: var(--navy);
+  border-color: var(--navy);
+  box-shadow: 0 0 0 5px rgba(34, 87, 122, 0.15);
+}
+.j-progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(11, 31, 46, 0.08);
+  overflow: hidden;
+}
+.j-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--chaos), var(--teal), var(--green));
+  transition: width 0.15s linear;
+}
+.j-skip {
+  position: absolute;
+  right: var(--gutter);
+  top: 22px;
+  font-size: 13.5px;
+  font-weight: 600;
+  pointer-events: auto;
+}
+@media (max-width: 760px) {
+  .journey3d {
+    height: 460vh;
+  }
+  .j-copy {
+    top: auto;
+    bottom: 64px;
+    left: var(--gutter);
+    right: var(--gutter);
+    max-width: none;
+    padding: 16px 18px;
+  }
+  .j-copy p {
+    display: none;
+  }
+  .j-steps {
+    top: 16px;
+    bottom: auto;
+    transform: none;
+    left: var(--gutter);
+    right: var(--gutter);
+    justify-content: space-between;
+  }
+  .j-steps span {
+    display: none;
+  }
+  .j-skip {
+    top: auto;
+    bottom: 34px;
+  }
+}
+
+/* 3D vault canvas sits under the ring buttons */
+.v-canvas,
+.v-canvas canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+}
+.v-scene.has3d .v-ring {
+  background: transparent;
+  border-width: 1px;
+  border-color: color-mix(in srgb, var(--vc) 35%, transparent);
+}
+.v-scene.has3d .v-ring:hover,
+.v-scene.has3d .v-ring.on {
+  background: transparent;
+  box-shadow: none;
+  border-color: var(--vc);
+}
+.v-scene.has3d .v-ring.dim {
+  opacity: 1;
+}
+.meter-dots {
+  transform-origin: 100px 100px;
+  animation: spin 40s linear infinite;
 }

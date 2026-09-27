@@ -30,7 +30,7 @@ export default function Contact() {
               </div>
             ) : (
               <div className="card">
-                <h3>What you get in 30 minutes</h3>
+                <h2 className="tier-name">What you get in 30 minutes</h2>
                 <ul className="check-list" style={{ marginTop: 14 }}>
                   {[
                     "A readiness score from 1 (Scattered) to 5 (AI-ready)",
@@ -47,7 +47,7 @@ export default function Contact() {
               </div>
             )}
             <div className="card">
-              <h3>Prefer to talk now?</h3>
+              <h2 className="tier-name">Prefer to talk now?</h2>
               <p style={{ marginTop: 10, display: "grid", gap: 8 }}>
                 <a href={site.phoneHref} style={{ display: "inline-flex", gap: 8, alignItems: "center", fontWeight: 600 }}>
                   <Icon name="phone" width={18} height={18} /> {site.phone}

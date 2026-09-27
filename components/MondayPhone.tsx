@@ -23,7 +23,7 @@ export default function MondayPhone() {
               <span className="small muted" style={{ fontWeight: 600 }}>
                 Summit Builders · Workspace
               </span>
-              <h4>Good morning.</h4>
+              <h3 className="h4">Good morning.</h3>
               <div className="grid g2" style={{ gap: 8 }}>
                 <div className="kpi">
                   <div className="kpi-l">Cash</div>
@@ -58,7 +58,7 @@ export default function MondayPhone() {
               <span className="small muted" style={{ fontWeight: 600 }}>
                 Inbox · 14 unread
               </span>
-              <h4>Where are last week&apos;s numbers?</h4>
+              <h3 className="h4">Where are last week&apos;s numbers?</h3>
               <ul className="feed">
                 {["RE: RE: budget v3 FINAL", "Can you resend the job report?", "Which spreadsheet is current??", "Numbers don't match QuickBooks", "Updated file attached (again)"].map((m) => (
                   <li key={m} style={{ borderStyle: "dashed", borderColor: "rgba(224,122,95,.5)" }}>

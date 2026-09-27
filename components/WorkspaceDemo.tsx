@@ -52,9 +52,9 @@ function ChangeANumber() {
   return (
     <div className="wsd-body">
       <form className="wsd-form" onSubmit={(e) => { e.preventDefault(); setToast(`Saved — ${sel} updated for everyone`); }}>
-        <h4>
+        <h3 className="h4">
           <Icon name="spreadsheet" width={18} height={18} /> Update job budget <span className="pill navy">Input screen</span>
-        </h4>
+        </h3>
         <div className="field">
           <label htmlFor="cn-job">Job</label>
           <select id="cn-job" value={sel} onChange={(e) => setSel(e.target.value)}>

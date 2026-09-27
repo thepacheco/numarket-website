@@ -23,12 +23,18 @@ function levelFrom(answers: (number | null)[]) {
   return s <= 2 ? 1 : s <= 5 ? 2 : s <= 8 ? 3 : s <= 10 ? 4 : 5;
 }
 
-function Meter({ level, done }: { level: number; done: boolean }) {
+function Meter({ level, done, answered }: { level: number; done: boolean; answered: number }) {
   const r = 70;
   const c = 2 * Math.PI * r;
   const frac = done ? level / 5 : 0;
+  /* A ring of "data dust" that lights up and turns from coral to green as readiness rises. */
+  const N = 40;
+  const lit = done ? level / 5 : (answered / 5) * 0.6;
+  const chaos = [224, 122, 95];
+  const green = [87, 204, 153];
+  const mix = (k: number) => `rgb(${chaos.map((v, i) => Math.round(v + (green[i] - v) * k)).join(",")})`;
   return (
-    <svg viewBox="0 0 180 180" width="180" height="180" role="img" aria-label={done ? `Readiness level ${level} of 5` : "Readiness meter"}>
+    <svg viewBox="0 0 200 200" width="200" height="200" role="img" aria-label={done ? `Readiness level ${level} of 5` : "Readiness meter"}>
       <defs>
         <linearGradient id="meterGrad" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0%" stopColor="#E07A5F" />
@@ -36,10 +42,26 @@ function Meter({ level, done }: { level: number; done: boolean }) {
           <stop offset="100%" stopColor="#57CC99" />
         </linearGradient>
       </defs>
-      <circle cx="90" cy="90" r={r} fill="none" stroke="var(--gray-100)" strokeWidth="14" />
+      <g className="meter-dots">
+        {Array.from({ length: N }, (_, i) => {
+          const a = (i / N) * Math.PI * 2 - Math.PI / 2;
+          const on = i / N < lit;
+          return (
+            <circle
+              key={i}
+              cx={100 + Math.cos(a) * 90}
+              cy={100 + Math.sin(a) * 90}
+              r={on ? 3.2 : 2}
+              fill={on ? mix(i / N) : "var(--gray-200)"}
+              style={{ transition: "all .5s", transitionDelay: `${i * 12}ms` }}
+            />
+          );
+        })}
+      </g>
+      <circle cx="100" cy="100" r={r} fill="none" stroke="var(--gray-100)" strokeWidth="14" />
       <circle
-        cx="90"
-        cy="90"
+        cx="100"
+        cy="100"
         r={r}
         fill="none"
         stroke="url(#meterGrad)"
@@ -47,13 +69,13 @@ function Meter({ level, done }: { level: number; done: boolean }) {
         strokeLinecap="round"
         strokeOpacity={frac ? 1 : 0}
         strokeDasharray={`${c * frac} ${c}`}
-        transform="rotate(-90 90 90)"
+        transform="rotate(-90 100 100)"
         style={{ transition: "stroke-dasharray .8s cubic-bezier(.2,.7,.2,1)" }}
       />
-      <text x="90" y="86" textAnchor="middle" fill="var(--ink)" fontSize="40" fontWeight="700">
+      <text x="100" y="96" textAnchor="middle" fill="var(--ink)" fontSize="40" fontWeight="700">
         {done ? level : "?"}
       </text>
-      <text x="90" y="110" textAnchor="middle" fill="var(--text-3)" fontSize="12" fontWeight="600" letterSpacing="1">
+      <text x="100" y="120" textAnchor="middle" fill="var(--text-3)" fontSize="12" fontWeight="600" letterSpacing="1">
         OF 5
       </text>
     </svg>
@@ -129,7 +151,7 @@ export default function GettingStartedTools() {
             </h2>
             <p className="lead">Five questions. See where you stand.</p>
             <div className="meter-box">
-              <Meter level={level} done={quizDone} />
+              <Meter level={level} done={quizDone} answered={answered} />
               <div aria-live="polite">
                 {quizDone ? (
                   <>

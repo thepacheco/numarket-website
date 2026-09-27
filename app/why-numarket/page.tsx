@@ -36,6 +36,7 @@ export default function Why() {
         lead="Bigger than a freelancer. Easier than a big firm."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
+        <h2 className="sr-only">Seven reasons</h2>
         <div className="container grid g3 stagger">
           {points.map(([i, t, b]) => (
             <FeatureCard key={t} icon={i} title={t} body={b} />

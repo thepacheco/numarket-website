@@ -58,7 +58,7 @@ export default function StepScene() {
     <div className="stepper" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
       <ol className="step-list" role="tablist" aria-label="The six steps">
         {steps.map((st, i) => (
-          <li key={st.key}>
+          <li key={st.key} role="presentation">
             <button
               ref={(el) => {
                 tabs.current[i] = el;

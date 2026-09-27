@@ -32,9 +32,9 @@
   --p-platform: #0b1f2e;
 
   /* status */
-  --good: #1f8a5b;
+  --good: #1a7a50;
   --good-bg: #e6f7ee;
-  --watch: #a86b00;
+  --watch: #8a5700;
   --watch-bg: #fff4dc;
   --risk: #b93b22;
   --risk-bg: #fdebe6;
@@ -55,7 +55,7 @@
   --surface: var(--white);
   --text: var(--ink);
   --text-2: var(--gray-600);
-  --text-3: #6b7d8e;
+  --text-3: #5c6f81;
   --border: var(--gray-100);
   --border-strong: var(--gray-200);
   --link: var(--teal-700);
@@ -718,7 +718,7 @@ table.t .hl {
   color: var(--teal-700);
   flex: none;
 }
-.mega-col h4 {
+.mega-h {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -796,7 +796,7 @@ table.t .hl {
     z-index: 49;
     border-top: 1px solid var(--border);
   }
-  .mobile-panel h4 {
+  .mobile-panel .mega-h {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -836,7 +836,8 @@ table.t .hl {
   grid-template-columns: 1.4fr repeat(4, 1fr);
   gap: 32px;
 }
-.footer-grid h4 {
+.footer-grid .f-h {
+  letter-spacing: 0;
   color: #fff;
   font-size: 14px;
   margin-bottom: 14px;
@@ -1602,4 +1603,23 @@ input[type="range"] {
 .cta-light .btn-row {
   justify-content: center;
   position: relative;
+}
+h3.h4,
+.h4 {
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* links inside running text are underlined so they don't rely on color alone */
+p a:not(.btn),
+.prose a,
+.muted a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tier-name {
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
 }

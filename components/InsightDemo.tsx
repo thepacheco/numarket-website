@@ -41,7 +41,7 @@ export default function InsightDemo() {
         </select>
         <span className="label-sample">Sample data · last 3 months</span>
       </div>
-      <h4 style={{ marginBottom: 10 }}>What changed</h4>
+      <h3 className="h4" style={{ marginBottom: 10 }}>What changed</h3>
       <div className="grid g3" style={{ gap: 10 }}>
         {changes.map((c) => (
           <div className="kpi" key={c.key}>

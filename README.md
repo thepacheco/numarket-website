@@ -357,7 +357,8 @@ Full page-by-page website specification: [`docs/website-brief.md`](docs/website-
 │   ├── products.ts            ← Foundation, Workspace, Insight Review, Engineering
 │   └── faq.ts                 ← FAQs by page
 ├── lib/sample-data.ts         ← sample-data engine behind every demo dashboard
-├── components/                ← nav, footer, industry explorer, charts, forms
+├── components/                ← nav, footer, industry explorer, charts, forms, demos
+│   └── journey/               ← 3D scenes (three.js): Data Journey + Security vault
 ├── app/                       ← one folder per page (Next.js App Router)
 ├── public/                    ← favicon and static files (the only files served as-is)
 └── legacy/                    ← the previous single-page site, kept for reference
@@ -369,6 +370,7 @@ Full page-by-page website specification: [`docs/website-brief.md`](docs/website-
 - To change a price, a phone number, or an industry: edit the file in `content/`. Every page that uses it updates.
 - Demo dashboards are generated from row-level sample records in `lib/sample-data.ts`. Every KPI, chart, table row, and action item is calculated from those records, so filtered views always add up. Ratios are computed from summed parts, never averaged.
 - Styling uses brand tokens defined once as CSS variables in `app/globals.css`.
+- 3D scenes load only when scrolled near, pause off-screen, and fall back to a 2D storyboard for reduced-motion visitors or browsers without WebGL.
 
 ---
 

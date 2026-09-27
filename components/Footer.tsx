@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h4>Company</h4>
+            <h2 className="f-h">Company</h2>
             <ul>
               <li><Link href="/about">About Us</Link></li>
               <li><Link href="/why-numarket">Why numarket</Link></li>
@@ -29,7 +29,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Products</h4>
+            <h2 className="f-h">Products</h2>
             <ul>
               <li><Link href="/products/foundation">Foundation</Link></li>
               <li><Link href="/products/workspace">Workspace</Link></li>
@@ -40,7 +40,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Solutions</h4>
+            <h2 className="f-h">Solutions</h2>
             <ul>
               <li><Link href="/solutions/small-business">Small Business</Link></li>
               <li><Link href="/solutions/enterprise">Larger Organizations</Link></li>
@@ -50,7 +50,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Resources</h4>
+            <h2 className="f-h">Resources</h2>
             <ul>
               <li><Link href="/getting-started">Getting Started</Link></li>
               <li><Link href="/docs">Documentation</Link></li>

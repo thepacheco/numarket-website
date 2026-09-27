@@ -123,7 +123,7 @@ export default function IndustryEntry({ slug }: { slug: IndustrySlug }) {
           <span className="small muted" style={{ fontWeight: 600 }}>
             {c.who} · on their phone
           </span>
-          <h4>{c.title}</h4>
+          <h3 className="h4">{c.title}</h3>
           {c.fields.map((f) => (
             <div className="field" key={f.key}>
               <label htmlFor={`e-${slug}-${f.key}`}>{f.label}</label>

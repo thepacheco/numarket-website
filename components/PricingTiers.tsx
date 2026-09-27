@@ -24,7 +24,7 @@ export default function PricingTiers() {
           <div key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>
             {t.popular && <span className="badge">Most popular</span>}
             <div>
-              <h3>{t.name}</h3>
+              <h2 className="tier-name">{t.name}</h2>
               <p className="small">{t.bestFor}</p>
             </div>
             <div className="price" aria-live="polite">

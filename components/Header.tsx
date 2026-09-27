@@ -118,13 +118,13 @@ export default function Header() {
               <div id="menu-solutions" className={`mega ${open === "solutions" ? "open" : ""}`}>
                 <div className="mega-panel wide">
                   <div className="mega-col">
-                    <h4>By size</h4>
+                    <p className="mega-h">By size</p>
                     {sizeLinks.map((l) => (
                       <Link key={l.href} href={l.href}>
                         {l.title}
                       </Link>
                     ))}
-                    <h4 style={{ marginTop: 10 }}>By need</h4>
+                    <p className="mega-h" style={{ marginTop: 10 }}>By need</p>
                     {needLinks.map((l) => (
                       <Link key={l.href} href={l.href}>
                         {l.title}
@@ -132,7 +132,7 @@ export default function Header() {
                     ))}
                   </div>
                   <div className="mega-col" style={{ gridColumn: "span 2" }}>
-                    <h4>By industry</h4>
+                    <p className="mega-h">By industry</p>
                     <div className="mega-ind">
                       {industryLinks.map((l) => (
                         <Link key={l.href} href={l.href}>
@@ -192,20 +192,20 @@ export default function Header() {
         </div>
       </div>
       <div id="mobile-panel" className={`mobile-panel ${mobile ? "open" : ""}`}>
-        <h4>Products</h4>
+        <p className="mega-h">Products</p>
         {productLinks.map((l) => (
           <Link key={l.href} href={l.href} className="m-prod">
             <ProductGlyph kind={l.kind} small />
             {l.title}
           </Link>
         ))}
-        <h4>Solutions</h4>
+        <p className="mega-h">Solutions</p>
         {[...sizeLinks, ...needLinks, ...industryLinks].map((l) => (
           <Link key={l.href} href={l.href}>
             {l.title}
           </Link>
         ))}
-        <h4>Company</h4>
+        <p className="mega-h">Company</p>
         <Link href="/how-it-works">How It Works</Link>
         <Link href="/pricing">Pricing</Link>
         <Link href="/demos">Demos</Link>

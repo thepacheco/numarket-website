@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import StepScene from "@/components/StepScene";
+import DataJourney from "@/components/DataJourney";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { steps } from "@/content/steps";
 
@@ -34,8 +35,10 @@ export default function HowItWorks() {
           </>
         }
       />
-      <section className="section-tight" style={{ paddingTop: 0 }}>
+      <DataJourney />
+      <section className="section">
         <div className="container">
+          <SectionHead eyebrow="At a glance" title="All six steps." />
           <StepScene />
         </div>
       </section>

@@ -23,6 +23,7 @@ export default function Partners() {
         lead="We deliver. You earn. You stay the trusted advisor."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
+        <h2 className="sr-only">Who partners with us</h2>
         <div className="container grid g4 stagger">
           <FeatureCard icon="code" title="IT managed service providers" body="Clients are asking about AI. Now you have a data offering." />
           <FeatureCard icon="dollar" title="CPA & fractional CFO firms" body="Clean data makes your advisory more valuable." />

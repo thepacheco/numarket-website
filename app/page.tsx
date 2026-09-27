@@ -2,7 +2,7 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
-import StepScene from "@/components/StepScene";
+import DataJourney from "@/components/DataJourney";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
 import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
 import { tiers, money } from "@/content/tiers";
@@ -120,9 +120,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* THE SIX STEPS — one scene that changes per step */}
-      <section className="section" id="journey">
-        <div className="container">
+      {/* THE DATA JOURNEY — scroll-driven 3D */}
+      <div id="journey">
+        <div className="container" style={{ paddingTop: 72 }}>
           <SectionHead
             eyebrow="How it works"
             title={
@@ -130,10 +130,11 @@ export default function Home() {
                 Six steps from scattered to <em className="accent">sure.</em>
               </>
             }
+            lead="Scroll to watch your data get cleaned, secured, and put to work."
           />
-          <StepScene />
         </div>
-      </section>
+        <DataJourney />
+      </div>
 
       {/* PRODUCTS — each with its own object */}
       <section className="section soft">

@@ -69,9 +69,9 @@ export function ReconcileDemo() {
       <div className="recon">
         {reports.map((rep, i) => (
           <div className="recon-col" key={rep.dept}>
-            <h4>
+            <h3 className="h4">
               {rep.dept} <span className="muted small">· {rep.system}</span>
-            </h4>
+            </h3>
             <div className="tot" style={{ color: agree ? "var(--good)" : "var(--ink)" }}>
               {money(totals[i])}
             </div>
@@ -120,9 +120,9 @@ export function AiCompare() {
       </div>
       <div className="ai-compare">
         <div className="ai-side bad">
-          <h4>
+          <h3 className="h4">
             <Icon name="alert" width={18} height={18} style={{ color: "var(--risk)" }} /> On messy data
-          </h4>
+          </h3>
           {asked ? (
             <div style={{ animation: "popIn .4s" }}>
               <p>
@@ -138,9 +138,9 @@ export function AiCompare() {
           )}
         </div>
         <div className="ai-side good">
-          <h4>
+          <h3 className="h4">
             <Icon name="check" width={18} height={18} style={{ color: "var(--good)" }} /> On clean data
-          </h4>
+          </h3>
           {asked ? (
             <div style={{ animation: "popIn .4s .25s both" }}>
               <p>
@@ -202,9 +202,9 @@ export function MigrationDemo() {
     <div className="demo-card">
       <div className="mig">
         <div className="mig-box old">
-          <h4>
+          <h3 className="h4">
             <Icon name="database" width={18} height={18} /> Old reporting server
-          </h4>
+          </h3>
           <span className="small muted">Installed 2011 · on-premise</span>
           <div className="mig-count">{(TOTAL_ROWS - moved).toLocaleString("en-US")}</div>
           <span className="small muted">rows left to move</span>
@@ -213,9 +213,9 @@ export function MigrationDemo() {
           <i />
         </div>
         <div className="mig-box new">
-          <h4>
+          <h3 className="h4">
             <Icon name="lock" width={18} height={18} style={{ color: "var(--p-engineering)" }} /> Your new database
-          </h4>
+          </h3>
           <span className="small muted">Private · encrypted · yours</span>
           <div className="mig-count" style={{ color: "var(--p-engineering)" }}>
             {moved.toLocaleString("en-US")}
