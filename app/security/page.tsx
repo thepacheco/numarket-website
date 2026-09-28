@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import SecureVault from "@/components/SecureVault";
+import SecurityControls from "@/components/SecurityControls";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { faq } from "@/content/faq";
 
@@ -58,6 +59,12 @@ export default function Security() {
         </div>
       </section>
       <section className="section">
+        <div className="container">
+          <SectionHead eyebrow="What we actually do" title="The controls behind the promises." lead="Pick a category." />
+          <SecurityControls />
+        </div>
+      </section>
+      <section className="section soft">
         <div className="container split">
           <div>
             <SectionHead eyebrow="The detail" title="Straight answers." />

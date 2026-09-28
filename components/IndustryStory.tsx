@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollStory from "./ScrollStory";
+import IndustryScene from "./IndustryScenes";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { firstYearCost, leakFor, leakTotal } from "@/lib/savings";
 import { fmt, type Size } from "@/lib/sample-data";
@@ -118,5 +119,16 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
       ),
     },
   ];
-  return <ScrollStory steps={steps} visual={(a) => <DataMap slug={slug} s={a} leakLine={leakLine} saveLine={saveLine} />} />;
+  return (
+    <ScrollStory
+      steps={steps}
+      visual={(a) =>
+        a < 3 ? (
+          <DataMap slug={slug} s={a} leakLine={leakLine} saveLine={saveLine} />
+        ) : (
+          <IndustryScene slug={slug} fixed={a === 4} leakText={`${fmt(lost, "money")} a year · ${leak.short.toLowerCase()}`} fixText={`${fmt(saved, "money")} a year saved at 15%`} />
+        )
+      }
+    />
+  );
 }

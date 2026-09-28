@@ -11,6 +11,7 @@ import "./explorer.css";
 import "./motion.css";
 import "./week4.css";
 import "./review.css";
+import "./round6.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 const dmSerif = DM_Serif_Display({ subsets: ["latin"], weight: "400", style: ["italic", "normal"], variable: "--font-dm-serif", display: "swap" });

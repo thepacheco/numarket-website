@@ -8,7 +8,7 @@ const GeoCanvas = dynamic(() => import("./journey/GeoCanvas"), { ssr: false });
 
 /* Ambient 3D geometry behind a section. Loads only after the visitor interacts,
    never for reduced-motion visitors or browsers without WebGL. */
-export default function GeoField({ density = 12, side = "both" }: { density?: number; side?: "both" | "right" }) {
+export default function GeoField({ density = 12, side = "both", faint = false }: { density?: number; side?: "both" | "right"; faint?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [ok, setOk] = useState(false);
   useEffect(() => {
@@ -22,8 +22,8 @@ export default function GeoField({ density = 12, side = "both" }: { density?: nu
   }, []);
   const mount = useDeferredMount(ref, ok, "200px 0px");
   return (
-    <div ref={ref} className="geo-field" aria-hidden="true">
-      {mount && <GeoCanvas density={density} side={side} />}
+    <div ref={ref} className={`geo-field ${faint ? "faint" : ""}`} aria-hidden="true">
+      {mount && <GeoCanvas density={density} side={side} spread={faint ? 1.5 : 1} />}
     </div>
   );
 }

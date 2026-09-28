@@ -77,21 +77,21 @@ export function CheckList({ items }: { items: ReactNode[] }) {
 export function CtaBand({
   title = (
     <>
-      Find out how ready your data is. <em className="accent">30 minutes. Free.</em>
+      How ready is <em className="accent">your data?</em>
     </>
   ),
-  lead = "A readiness score and 3 findings. No pitch deck.",
+  lead = "",
 }: {
   title?: ReactNode;
   lead?: ReactNode;
 }) {
   return (
     <section className="cta-light">
-      <GeoField density={14} />
+      <GeoField density={8} faint />
       <div className="container">
         <span className="eyebrow">Trust the Data.</span>
         <h2>{title}</h2>
-        <p className="lead">{lead}</p>
+        {lead && <p className="lead">{lead}</p>}
         <div className="btn-row">
           <Link href={cta.href} className="btn btn-primary">
             {cta.label} <Icon name="arrow" className="arrow" width={16} height={16} />

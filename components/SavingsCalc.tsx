@@ -1,36 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { useTween } from "./useTween";
 import Icon from "./Icon";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { firstYearCost, leakFor, leakTotal, planFor } from "@/lib/savings";
 import { fmt, type Fmt, type Size } from "@/lib/sample-data";
-
-/* Smoothly animate a number when it changes. */
-function useTween(target: number, ms = 550) {
-  const [v, setV] = useState(target);
-  const from = useRef(target);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setV(target);
-      return;
-    }
-    const start = performance.now();
-    const a = from.current;
-    let raf = 0;
-    const tick = (now: number) => {
-      const k = Math.min(1, (now - start) / ms);
-      const e = 1 - Math.pow(1 - k, 3);
-      const x = a + (target - a) * e;
-      setV(x);
-      from.current = x;
-      if (k < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, ms]);
-  return v;
-}
 
 function Num({ value, format, className }: { value: number; format: Fmt; className?: string }) {
   const v = useTween(value);

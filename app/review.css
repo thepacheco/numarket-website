@@ -553,7 +553,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transform: translateY(calc(var(--d) * 22px)) translateZ(calc(var(--d) * -90px)) rotateX(calc(var(--d) * 6deg));
+  transform: translate(calc(var(--d) * 18px), calc(var(--d) * 18px)) scale(calc(1 - max(var(--d), var(--d) * -1) * 0.04));
   opacity: calc(1 - max(var(--d), var(--d) * -1) * 0.28);
   transition: transform 0.7s var(--ease), opacity 0.5s;
   z-index: calc(10 - max(var(--d), var(--d) * -1));
@@ -745,3 +745,23 @@
   height: 16px;
 }
 .story-sticky { overflow: hidden; }
+
+.geo-field.faint.on {
+  opacity: 0.35;
+}
+.flowline::before {
+  top: 38px;
+}
+/* center 3D objects on product pages */
+.prod-art {
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+}
+.art-insight .ins-deck {
+  left: 50%;
+  width: 64%;
+}
+.art-insight .ins-target {
+  inset: 38% 6% 4%;
+}

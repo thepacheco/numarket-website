@@ -89,7 +89,6 @@ export default function Support() {
         <div className="container">
           <SectionHead eyebrow="How it works" title="From “something's off” to fixed." center />
           <div className="flowline reveal">
-            <span className="runner" aria-hidden="true" />
             {flow.map((f) => (
               <div key={f.t} className="fstep" style={{ ["--fc" as string]: f.c }}>
                 <span className="fic">

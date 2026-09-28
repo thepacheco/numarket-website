@@ -29,7 +29,6 @@ const cols: { title: string; links: { href: string; title: string }[] }[] = [
       { href: "/docs", title: "Documentation" },
       { href: "/security", title: "Security" },
       { href: "/support", title: "Support" },
-      { href: "/status", title: "Status" },
     ],
   },
   {
@@ -50,7 +49,7 @@ export default function Footer() {
         <div className="foot-top">
           <div>
             <Logo />
-            <p>{site.tagline} Your data, cleaned up and working for you.</p>
+            <p>{site.tagline}</p>
           </div>
           <Link href={cta.href} className="btn btn-primary">
             {cta.label}

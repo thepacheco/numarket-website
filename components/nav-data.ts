@@ -29,7 +29,6 @@ export const resourceLinks = [
   { href: "/docs", title: "Documentation", desc: "Guides for clients" },
   { href: "/security", title: "Security & Trust", desc: "How we protect your data" },
   { href: "/support", title: "Support", desc: "How to get help" },
-  { href: "/status", title: "System Status", desc: "Platform health" },
   { href: "/partners", title: "Partners", desc: "Refer, co-sell, or white-label" },
   { href: "/about", title: "About Us", desc: "Who we are" },
 ];

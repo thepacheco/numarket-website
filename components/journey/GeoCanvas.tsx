@@ -8,7 +8,7 @@ import * as THREE from "three";
 
 const palette = [0x22577a, 0x38a3a5, 0x57cc99, 0x80ed99, 0x6c5dd3, 0xc7f9cc];
 
-export default function GeoCanvas({ density = 12, side = "both" }: { density?: number; side?: "both" | "right" }) {
+export default function GeoCanvas({ density = 12, side = "both", spread = 1 }: { density?: number; side?: "both" | "right"; spread?: number }) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = host.current!;
@@ -43,7 +43,7 @@ export default function GeoCanvas({ density = 12, side = "both" }: { density?: n
         : new THREE.MeshStandardMaterial({ color: palette[i % palette.length], flatShading: true, roughness: 0.45, metalness: 0.05, transparent: true, opacity: 0.92 });
       const m = new THREE.Mesh(geos[i % geos.length], mat);
       const onRight = side === "right" || i % 2 === 0;
-      const x = (onRight ? 1 : -1) * (5 + rnd() * 6);
+      const x = (onRight ? 1 : -1) * (5 + rnd() * 6) * spread;
       const y = (rnd() - 0.5) * 9;
       const z = -rnd() * 8;
       const s = 0.45 + rnd() * 0.9;
@@ -115,6 +115,6 @@ export default function GeoCanvas({ density = 12, side = "both" }: { density?: n
       renderer.dispose();
       el.removeChild(renderer.domElement);
     };
-  }, [density, side]);
+  }, [density, side, spread]);
   return <div ref={host} style={{ position: "absolute", inset: 0 }} />;
 }

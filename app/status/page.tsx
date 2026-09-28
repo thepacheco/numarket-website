@@ -9,7 +9,7 @@ const components = ["Client Workspaces", "Data refresh (automatic updates)", "As
 export default function Status() {
   return (
     <>
-      <PageHero eyebrow="System status" title="Platform status" lead="Live status will appear here once our monitoring service is connected. We never show uptime numbers that aren't measured." />
+      <PageHero eyebrow="For clients" title="Is my Workspace working?" lead="This page will show, live, whether client Workspaces, data updates, and Ask Your Data are running. It turns on with automated monitoring when the first client goes live — until then, we show nothing rather than made-up numbers." />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <div className="table-wrap">
