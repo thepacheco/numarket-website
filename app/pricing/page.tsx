@@ -5,6 +5,7 @@ import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { tierComparison, addOns } from "@/content/tiers";
 import { faq } from "@/content/faq";
 import { PricingArt } from "@/components/HeroArts";
+import { CostCompare, OperatingRhythm, SetupTimeline, TermsGlance } from "@/components/PricingOps";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -22,24 +23,50 @@ export default function Pricing() {
             Clear pricing. <em className="accent">No surprise bills.</em>
           </>
         }
-        lead="One-time setup. Monthly subscription. No per-user fees."
+        lead="A one-time setup and a flat monthly fee. Below: exactly what each one pays for."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <PricingTiers />
-          <div className="card" style={{ marginTop: 28, display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center", justifyContent: "space-between" }}>
-            <div>
-              <h3>Start with a free AI Readiness Check</h3>
-              <p>30 minutes. No cost. You get a readiness score and 3 specific findings.</p>
-            </div>
-            <div className="btn-row">
-              <Link href="/getting-started#estimator" className="btn btn-secondary">
-                Estimate my cost
-              </Link>
-              <Link href="/contact" className="btn btn-primary">
-                Book it
-              </Link>
-            </div>
+        </div>
+      </section>
+
+      <section className="section soft" id="how-it-runs">
+        <div className="container">
+          <SectionHead
+            eyebrow="What the monthly fee pays for"
+            title="Here's how we run your data."
+            lead="Pick a plan. See what happens every day, every week, and every review — and who does it."
+          />
+          <OperatingRhythm />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHead eyebrow="What the setup fee pays for" title="From kickoff to launch." lead="We do the work. Your part is marked with a person." />
+          <SetupTimeline />
+        </div>
+      </section>
+
+      <section className="section soft">
+        <div className="container">
+          <SectionHead eyebrow="The terms" title="No fine print." />
+          <TermsGlance />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHead eyebrow="The alternatives" title="What the same job costs elsewhere." />
+          <CostCompare />
+          <div className="btn-row" style={{ marginTop: 24 }}>
+            <Link href="/contact" className="btn btn-primary">
+              Book a free Readiness Check
+            </Link>
+            <Link href="/getting-started#estimator" className="btn btn-secondary">
+              Estimate my cost
+            </Link>
           </div>
         </div>
       </section>

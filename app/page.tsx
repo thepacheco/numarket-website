@@ -4,9 +4,7 @@ import GeoField from "@/components/GeoField";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
-import WorkspaceDemo from "@/components/WorkspaceDemo";
-import SavingsCalc from "@/components/SavingsCalc";
-import Roles from "@/components/Roles";
+import MoneyStats from "@/components/MoneyStats";
 import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
 import { tiers, money } from "@/content/tiers";
 
@@ -42,9 +40,9 @@ export default function Home() {
           <div>
             <span className="eyebrow">Trust the Data.</span>
             <h1>
-              Your data, <em className="accent">cleaned up</em> and working for you.
+              The data team you <em className="accent">don&apos;t have to hire.</em>
             </h1>
-            <p className="lead">We gather it, clean it, secure it, and turn it into live dashboards and clear next steps. Ready for AI — and you own all of it.</p>
+            <p className="lead">We pull your numbers into one private database, keep them clean, and give your team live dashboards plus an analyst who tells you what to do next. One flat monthly fee.</p>
             <div className="btn-row">
               <PrimaryCta />
               <Link href="#journey" className="btn btn-secondary">
@@ -118,6 +116,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PRODUCTS — each with its own object */}
+      <section className="section soft">
+        <div className="container">
+          <SectionHead
+            eyebrow="What you get"
+            title={
+              <>
+                Everything a data team does. <em className="accent">Done for you.</em>
+              </>
+            }
+            lead="Four parts, one monthly fee. Tap one for a quick look."
+          />
+          <ProductBento />
+        </div>
+      </section>
+
       {/* THE DATA JOURNEY — scroll-driven 3D */}
       <div id="journey">
         <div className="container" style={{ paddingTop: 72 }}>
@@ -125,83 +139,51 @@ export default function Home() {
             eyebrow="How it works"
             title={
               <>
-                Six steps from scattered to <em className="accent">sure.</em>
+                From scattered to <em className="accent">sure</em>, in six steps.
               </>
             }
-            lead="Scroll to watch your data get cleaned, secured, and put to work."
+            lead="Scroll. This is what happens to your data."
           />
         </div>
         <DataJourney />
       </div>
 
-      {/* PRODUCTS — each with its own object */}
-      <section className="section soft">
-        <div className="container">
-          <SectionHead eyebrow="Products" title="Four pieces. One foundation." lead="Tap a product to take a quick look." />
-          <ProductBento />
-        </div>
-      </section>
-
       {/* PICK YOUR BUSINESS */}
       <section className="section" id="pick-your-business">
         <div className="container">
           <SectionHead
-            eyebrow="Pick your business"
+            eyebrow="See it"
             title={
               <>
-                See what <em className="accent">your</em> numbers would look like.
+                Pick your business. <em className="accent">Get the dashboard.</em>
               </>
             }
-            lead="Switch industries. Filter it. Every number adds up."
+            lead="Sample numbers that add up. Filter anything."
           />
           <IndustryExplorer syncUrl />
         </div>
       </section>
 
-      {/* WHERE THE MONEY IS */}
+      {/* WHAT IT'S WORTH */}
       <section className="section soft" id="savings">
         <div className="container">
           <SectionHead
-            eyebrow="Where the money is"
+            eyebrow="What it's worth"
             title={
               <>
-                Clean data finds <em className="accent">real money.</em>
+                Messy data costs <em className="accent">real money.</em>
               </>
             }
-            lead="Pick an industry. See the leak, the math, and what fixing a slice is worth."
+            lead="What a typical small company in each industry loses a year. Tap yours for the math."
           />
-          <SavingsCalc />
-        </div>
-      </section>
-
-      {/* WORKSPACE DEMO */}
-      <section className="section" id="try-it">
-        <div className="container">
-          <SectionHead
-            eyebrow="Try it"
-            title={
-              <>
-                Your team doesn&apos;t just look at data. <em className="accent">They work in it.</em>
-              </>
-            }
-            lead="Change a number and watch the dashboard react. Or ask a question."
-          />
-          <WorkspaceDemo />
-        </div>
-      </section>
-
-      {/* PEOPLE */}
-      <section className="section soft">
-        <div className="container">
-          <SectionHead eyebrow="Who it's for" title="Everyone sees the same numbers." lead="Each person gets the view they need." />
-          <Roles />
+          <MoneyStats />
         </div>
       </section>
 
       {/* TWO PATHS */}
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Two paths" title="Built for your size." center />
+          <SectionHead eyebrow="Who it's for" title="Built for your size." center />
           <div className="grid g2 stagger">
             <Link href="/solutions/small-business" className="card path-card">
               <div className="path-top">
@@ -256,7 +238,7 @@ export default function Home() {
       {/* PRICING TEASER */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." />
+          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." lead="A one-time setup, then one flat monthly fee." />
           <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>
@@ -277,6 +259,11 @@ export default function Home() {
               </Link>
             ))}
           </div>
+          <p style={{ marginTop: 18 }}>
+            <Link href="/pricing#how-it-runs" className="more">
+              See exactly what the monthly fee pays for →
+            </Link>
+          </p>
         </div>
       </section>
 

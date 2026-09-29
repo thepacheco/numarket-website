@@ -2,6 +2,7 @@
 
 import { Box, p } from "./ProductArt";
 import { industries } from "@/content/industries";
+import { NuBadgeShape } from "./NuMark";
 
 const shadow = <ellipse cx="0" cy="40" rx="130" ry="56" className="art-shadow" />;
 
@@ -74,10 +75,9 @@ export function NetworkArt() {
             </text>
           </g>
         ))}
-        <circle r="44" fill="#0b1f2e" />
-        <text textAnchor="middle" y="6" fontSize="16" fontWeight="700" fill="#80ed99">
-          nu
-        </text>
+        <g transform="translate(-44 -44) scale(0.88)">
+          <NuBadgeShape />
+        </g>
       </svg>
     </div>
   );

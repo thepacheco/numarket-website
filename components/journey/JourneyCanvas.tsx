@@ -39,7 +39,9 @@ export default function JourneyCanvas({ progress, onReady }: { progress: React.M
   useEffect(() => {
     const host = hostRef.current!;
     const small = window.innerWidth < 768;
-    const COUNT = small ? 70 : 180;
+    const COUNT = small ? 40 : 64;
+    /* keep the scene to the right of the step list on wide screens */
+    const SHIFT = small ? 0 : 1.2;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, small ? 1.5 : 1.75));
@@ -104,7 +106,7 @@ export default function JourneyCanvas({ progress, onReady }: { progress: React.M
       const prev = data[i - 1];
       const start = dup
         ? prev.start.clone().add(new THREE.Vector3(0.16, -0.12, 0.06))
-        : new THREE.Vector3((rnd() - 0.5) * (small ? 10 : 20), (rnd() - 0.4) * 9, (rnd() - 0.6) * 10);
+        : new THREE.Vector3(small ? (rnd() - 0.5) * 9 : -2.6 + rnd() * 8, (rnd() - 0.4) * 8, (rnd() - 0.6) * 8);
       const rot = dup ? new THREE.Euler(prev.rot.x + 0.1, prev.rot.y, prev.rot.z + 0.12) : new THREE.Euler((rnd() - 0.5) * 2.2, (rnd() - 0.5) * 2.2, (rnd() - 0.5) * 2.2);
       const a = rnd() * Math.PI * 2;
       const ring = new THREE.Vector3(Math.cos(a) * 2.3, 2.4, Math.sin(a) * 2.3);
@@ -251,8 +253,11 @@ export default function JourneyCanvas({ progress, onReady }: { progress: React.M
       camLook.lerpVectors(camKeys[ci].look, camKeys[ci + 1].look, ct);
       if (camera.aspect < 1) camPos.z *= 1.25;
       camera.position.copy(camPos);
+      camera.position.x -= SHIFT;
       camera.position.x += Math.sin(time * 0.15) * 0.25;
+      camLook.x -= SHIFT;
       camera.lookAt(camLook);
+      camLook.x += SHIFT;
 
       /* tiles */
       const pull = stageT(p, 1);

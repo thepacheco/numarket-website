@@ -28,7 +28,7 @@ export default function Contact() {
           <div style={{ display: "grid", gap: 20 }}>
             {site.calendlyUrl ? (
               <div className="card" style={{ padding: 0, overflow: "hidden" }}>
-                <iframe src={site.calendlyUrl} title="Book a Readiness Check" style={{ width: "100%", height: 680, border: 0 }} loading="lazy" />
+                <iframe src={`${site.calendlyUrl}?hide_gdpr_banner=1&primary_color=22577a`} title="Book a Readiness Check" style={{ width: "100%", height: 680, border: 0 }} loading="lazy" />
               </div>
             ) : (
               <div className="card">

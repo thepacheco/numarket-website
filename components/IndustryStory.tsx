@@ -2,6 +2,7 @@
 
 import ScrollStory from "./ScrollStory";
 import IndustryScene from "./IndustryScenes";
+import IndustryIso from "./IndustryIso";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { firstYearCost, leakFor, leakTotal } from "@/lib/savings";
 import { fmt, type Size } from "@/lib/sample-data";
@@ -79,6 +80,8 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
   const co = sampleCompany[slug];
   const leakLine: [string, string] = [fmt(lost, "money") + " a year", `lost to ${leak.short.toLowerCase()}`];
   const saveLine: [string, string] = [`${fmt(saved, "money")} saved`, "if you fix 15% of it"];
+  const leakText = `${fmt(lost, "money")} a year · ${leak.short.toLowerCase()}`;
+  const fixText = `${fmt(saved, "money")} a year saved at 15%`;
   const steps = [
     {
       eyebrow: "Today",
@@ -126,7 +129,13 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
         a < 3 ? (
           <DataMap slug={slug} s={a} leakLine={leakLine} saveLine={saveLine} />
         ) : (
-          <IndustryScene slug={slug} fixed={a === 4} leakText={`${fmt(lost, "money")} a year · ${leak.short.toLowerCase()}`} fixText={`${fmt(saved, "money")} a year saved at 15%`} />
+          <IndustryIso
+            slug={slug}
+            mode={a === 4 ? "fixed" : "leak"}
+            label={a === 4 ? fixText : leakText}
+            chip={a === 4 ? { text: fixText, tone: "good" } : { text: leakText, tone: "bad" }}
+            fallback={<IndustryScene slug={slug} fixed={a === 4} leakText={leakText} fixText={fixText} />}
+          />
         )
       }
     />

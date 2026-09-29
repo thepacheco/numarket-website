@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { NuLetters } from "./NuMark";
 
 export default function Logo() {
   return (
     <Link href="/" className="logo" aria-label="numarket home">
-      <span className="nu">nu</span>
+      <NuLetters className="nu-svg" />
       <span className="mk">market</span>
     </Link>
   );

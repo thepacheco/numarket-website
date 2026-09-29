@@ -6,6 +6,7 @@ import { needLinks } from "@/components/nav-data";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { industries } from "@/content/industries";
 import { TilesArt } from "@/components/HeroArts";
+import IndGlyph from "@/components/IndGlyph";
 
 export const metadata: Metadata = { title: "Solutions", description: "numarket by size, by industry, and by need." };
 
@@ -23,6 +24,7 @@ export default function Solutions() {
             Pick your business. <em className="accent">See it work.</em>
           </>
         }
+        lead="Same service for every industry: we clean and run your data, then tell you what to do with it. Only the numbers change."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
@@ -55,7 +57,7 @@ export default function Solutions() {
             {industries.map((i) => (
               <Link key={i.slug} href={`/solutions/${i.slug}`} className={`ind-card ind-${i.slug}`}>
                 <span className="ind-ic">
-                  <Icon name={i.icon} />
+                  <IndGlyph size={30} />
                 </span>
                 <b>{i.short}</b>
                 <span className="small muted">“{i.questions[0]}”</span>

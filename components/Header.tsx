@@ -8,6 +8,7 @@ import Icon from "./Icon";
 import { ProductGlyph } from "./ProductArt";
 import { cta } from "@/content/site";
 import { industryLinks, needLinks, productLinks, resourceLinks, sizeLinks } from "./nav-data";
+import IndGlyph from "./IndGlyph";
 
 type MenuId = "products" | "solutions" | "resources" | null;
 
@@ -144,7 +145,7 @@ export default function Header() {
                     <div className="mega-ind">
                       {industryLinks.map((l) => (
                         <Link key={l.href} href={l.href} className={`ind-${l.href.split("/").pop()}`}>
-                          <Icon name={l.icon} width={16} height={16} />
+                          <IndGlyph />
                           {l.title}
                         </Link>
                       ))}

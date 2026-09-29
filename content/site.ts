@@ -14,7 +14,7 @@ export const site = {
   formEndpoint:
     "https://script.google.com/macros/s/AKfycbxG2dRg1FTBqH5Kc74uCW_ayrDqxm5NyZGHDtCRVeVmYLdIxqJQ7_hIZXiomnhlU3zr/exec",
   /* Paste the Calendly link here. While empty, the contact page shows the form only. */
-  calendlyUrl: "",
+  calendlyUrl: "https://calendly.com/nu-market/30min",
   linkedin: "",
 };
 

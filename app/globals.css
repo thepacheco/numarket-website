@@ -597,13 +597,24 @@ table.t .hl {
   line-height: 1;
   text-decoration: none !important;
 }
-.logo .nu {
+.logo .nu,
+.logo .nu-svg {
   color: var(--ink);
+}
+/* Drawn "nu", sized to sit exactly where the typed letters would */
+.nu-svg {
+  display: inline-block;
+  flex: none;
+  width: 1.116em;
+  height: 0.53em;
+  margin: 0 0.058em -0.015em 0.0625em;
 }
 .logo .mk {
   color: #00a862;
 }
 .dark .logo .nu,
+.dark .logo .nu-svg,
+.site-footer .logo .nu-svg,
 .site-footer .logo .nu {
   color: #fff;
 }

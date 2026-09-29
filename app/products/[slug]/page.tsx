@@ -8,6 +8,7 @@ import WorkspaceDemo from "@/components/WorkspaceDemo";
 import ProductStory from "@/components/ProductStory";
 import { CtaBand, Faq, PrimaryCta, SectionHead } from "@/components/ui";
 import { productBySlug, products } from "@/content/products";
+import Roles from "@/components/Roles";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -53,7 +54,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
           <div className="prod-art reveal">
-            <ProductArt kind={p.kind} />
+            <ProductArt kind={p.kind} eager />
           </div>
         </div>
       </section>
@@ -84,6 +85,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <Demo kind={p.kind} />
         </div>
       </section>
+
+      {p.kind === "workspace" && (
+        <section className="section">
+          <div className="container">
+            <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view they need." />
+            <Roles />
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container grid g2 stagger">

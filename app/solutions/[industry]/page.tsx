@@ -5,6 +5,7 @@ import IndustryEntry from "@/components/IndustryEntry";
 import Icon from "@/components/Icon";
 import { CtaBand, PrimaryCta, SectionHead } from "@/components/ui";
 import IndustryStory from "@/components/IndustryStory";
+import IndustryIso from "@/components/IndustryIso";
 import SavingsCalc from "@/components/SavingsCalc";
 import { industries, industryBySlug } from "@/content/industries";
 
@@ -39,18 +40,27 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
               <PrimaryCta />
             </div>
           </div>
-          <div className={`ind-hero reveal ind-${ind.slug}`} aria-hidden="true">
-            <div className="ind-orbit">
-              {ind.sources.map((s, i) => (
-                <span key={s} className="orb" style={{ ["--a" as string]: `${(360 / ind.sources.length) * i}deg` }}>
-                  {s}
-                </span>
-              ))}
-              <div className="ind-center">
-                <Icon name={ind.icon} />
+          <IndustryIso
+            slug={ind.slug}
+            mode="hero"
+            eager
+            className="ind-hero-iso"
+            label={`Animated 3D scene of a ${ind.short.toLowerCase()} business.`}
+            fallback={
+              <div className={`ind-hero ind-${ind.slug}`} aria-hidden="true">
+                <div className="ind-orbit">
+                  {ind.sources.map((s, i) => (
+                    <span key={s} className="orb" style={{ ["--a" as string]: `${(360 / ind.sources.length) * i}deg` }}>
+                      {s}
+                    </span>
+                  ))}
+                  <div className="ind-center">
+                    <Icon name={ind.icon} />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            }
+          />
         </div>
       </section>
 

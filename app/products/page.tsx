@@ -21,10 +21,10 @@ export default function Products() {
         eyebrow="Products"
         title={
           <>
-            A clean database — <em className="accent">and everything on top.</em>
+            Everything a data team does. <em className="accent">Done for you.</em>
           </>
         }
-        lead="Tap any product for a quick look."
+        lead="Foundation cleans and secures your data. Workspace puts it in front of your team. Insight Review tells you what to do. Engineering handles the big moves."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">

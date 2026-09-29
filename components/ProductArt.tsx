@@ -5,7 +5,9 @@
    ============================================================ */
 
 import type React from "react";
-import { fmt, overBudgetSummary } from "@/lib/sample-data";
+import WorkspaceArt from "./WorkspaceArt";
+
+export { WorkspaceArt };
 
 export type ProductKind = "foundation" | "workspace" | "insight" | "engineering" | "platform";
 
@@ -47,146 +49,39 @@ export function Box({
   );
 }
 
-/* ---------- Foundation: blocks fall, turn clean, and stack into the database ---------- */
+/* ---------- Product illustrations: isometric 3D models rendered to images
+   (components/iso/products.ts → scripts/render-art.mjs → public/art). ---------- */
 
-export function FoundationArt() {
-  const cubes = [
-    [-38, -38],
-    [2, -38],
-    [-38, 2],
-    [2, 2],
-  ];
+const artSize = {
+  foundation: [1706, 970],
+  workspace: [1554, 1097],
+  insight: [1598, 1116],
+  engineering: [1706, 1081],
+} as const;
+const artAlt = {
+  foundation: "Your tools feeding clean data through pipes into one locked, private database.",
+  workspace: "A live dashboard, a phone input screen, and a plain-English question with its answer.",
+  insight: "An analyst's review board with three action items, each with an owner and a due date.",
+  engineering: "An old server's records moving through a check gate into a new database, verified.",
+} as const;
+
+export function RenderedArt({ kind, eager }: { kind: keyof typeof artSize; eager?: boolean }) {
+  const [w, h] = artSize[kind];
   return (
-    <div className="art art-foundation" role="img" aria-label="Messy blocks dropping onto a database stack and turning green as they land.">
-      <svg viewBox="-150 -150 300 250">
-        <ellipse cx="0" cy="20" rx="120" ry="62" className="art-shadow" />
-        <Box a={-60} b={-60} c={0} w={120} d={120} h={16} top="#2f6c94" left="#173e59" right="#1f4f70" />
-        <Box a={-60} b={-60} c={24} w={120} d={120} h={16} top="#3b8fae" left="#1f5a78" right="#2a7091" />
-        <Box a={-60} b={-60} c={48} w={120} d={120} h={16} top="#5fc3b0" left="#2b8a82" right="#38a3a5" />
-        <ellipse cx="0" cy={-106} rx="98" ry="52" className="art-ring" />
-        {cubes.map(([a, b], i) => (
-          <g key={i} className="drop" style={{ animationDelay: `${i * 0.55}s` }}>
-            <g className="c-chaos">
-              <Box a={a} b={b} c={64} w={30} d={30} h={20} top="#f2a58e" left="#c4553a" right="#e07a5f" />
-            </g>
-            <g className="c-clean">
-              <Box a={a} b={b} c={64} w={30} d={30} h={20} top="#a6f5bd" left="#2e9e6b" right="#57cc99" />
-            </g>
-          </g>
-        ))}
-      </svg>
+    <div className={`art art-img art-${kind}-img`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/art/${kind}.webp`} width={w} height={h} alt={artAlt[kind]} loading={eager ? "eager" : "lazy"} decoding="async" />
     </div>
   );
 }
 
-/* ---------- Workspace: an exploded stack of app screens (real CSS 3D) ---------- */
+export const FoundationArt = () => <RenderedArt kind="foundation" eager />;
+export const InsightArt = () => <RenderedArt kind="insight" eager />;
+export const EngineeringArt = () => <RenderedArt kind="engineering" eager />;
 
-export function WorkspaceArt() {
-  const ob = overBudgetSummary();
-  return (
-    <div className="art art-workspace" role="img" aria-label="Three app screens stacked in 3D: a dashboard, an input form, and a chat.">
-      <div className="ws-stage">
-        <div className="ws-panel ws-dash">
-          <div className="ws-bars">
-            <i style={{ height: "40%" }} />
-            <i style={{ height: "65%" }} />
-            <i style={{ height: "52%" }} />
-            <i style={{ height: "85%" }} />
-            <i style={{ height: "70%" }} />
-          </div>
-        </div>
-        <div className="ws-panel ws-form">
-          <span className="ws-line" />
-          <span className="ws-input" />
-          <span className="ws-input" />
-          <span className="ws-btn" />
-        </div>
-        <div className="ws-panel ws-chat">
-          <span className="ws-bubble q">Which jobs are over budget?</span>
-          <span className="ws-bubble a">
-            {ob.count} jobs · {fmt(ob.total, "money")} over
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Insight Review: action cards flip up from a target ---------- */
-
-export function InsightArt() {
-  const cards = [
-    ["Review change orders", "PM team · Friday"],
-    ["Add 6 per-diem shifts", "Nurse manager · Monday"],
-    ["Book backhauls", "Dispatch · 2 weeks"],
-  ];
-  return (
-    <div className="art art-insight" role="img" aria-label="Action items with owners and due dates flipping up from a target.">
-      <svg viewBox="-150 -60 300 170" className="ins-target">
-        <ellipse cx="0" cy="50" rx="130" ry="46" className="ring r1" />
-        <ellipse cx="0" cy="50" rx="92" ry="32" className="ring r2" />
-        <ellipse cx="0" cy="50" rx="54" ry="19" className="ring r3" />
-        <ellipse cx="0" cy="50" rx="18" ry="6.5" className="ring r4" />
-        <ellipse cx="0" cy="50" rx="54" ry="19" className="pulse" />
-      </svg>
-      <div className="ins-deck">
-        {cards.map(([t, s], i) => (
-          <div key={t} className="ins-card" style={{ animationDelay: `${i * 2}s` }}>
-            <span className="ins-check">✓</span>
-            <span>
-              <b>{t}</b>
-              <small>{s}</small>
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Engineering: data flows from an old system into a new database ---------- */
-
-export function EngineeringArt() {
-  const pipe = `M ${p(-20, 10, 20).replace(",", " ")} L ${p(40, 10, 20).replace(",", " ")}`;
-  return (
-    <div className="art art-engineering" role="img" aria-label="Rows moving through a pipe from an old gray system into a new violet database.">
-      <svg viewBox="-160 -120 320 220">
-        <ellipse cx="0" cy="40" rx="140" ry="58" className="art-shadow" />
-        <g className="old">
-          <Box a={-100} b={-10} c={0} w={70} d={50} h={60} top="#d9dee4" left="#9aa6b2" right="#b8c2cc" />
-          <g className="rows">
-            {[0, 1, 2, 3].map((i) => (
-              <polyline key={i} points={`${p(-30, -2 + i * 10, 48)} ${p(-30, 6 + i * 10, 48)}`} />
-            ))}
-          </g>
-        </g>
-        <path d={pipe} className="pipe-bg" />
-        <path d={pipe} className="pipe-flow" />
-        {[0, 1, 2].map((i) => (
-          <rect key={i} x="-5" y="-5" width="10" height="10" rx="2" className="packet">
-            <animateMotion dur="2.4s" begin={`${i * 0.8}s`} repeatCount="indefinite" path={pipe} />
-          </rect>
-        ))}
-        <g className="new">
-          <Box a={40} b={-10} c={0} w={60} d={50} h={18} top="#9d8ff0" left="#4a3cb0" right="#6c5dd3" />
-          <Box a={40} b={-10} c={24} w={60} d={50} h={18} top="#b2a8f5" left="#5a4cc0" right="#7d6fe0" />
-          <Box a={40} b={-10} c={48} w={60} d={50} h={18} top="#c9c2fa" left="#6a5dcc" right="#8f83ea" />
-        </g>
-        <g className="gear" transform="translate(0,-78)">
-          <path d="M0,-22 l5,0 2,7 6,3 6,-4 4,4 -4,6 3,6 7,2 0,5 -7,2 -3,6 4,6 -4,4 -6,-4 -6,3 -2,7 -5,0 -2,-7 -6,-3 -6,4 -4,-4 4,-6 -3,-6 -7,-2 0,-5 7,-2 3,-6 -4,-6 4,-4 6,4 6,-3z" transform="translate(-2.5,0)" />
-          <circle r="7" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-export function ProductArt({ kind }: { kind: ProductKind }) {
-  if (kind === "foundation") return <FoundationArt />;
-  if (kind === "workspace") return <WorkspaceArt />;
-  if (kind === "insight") return <InsightArt />;
-  if (kind === "engineering") return <EngineeringArt />;
-  return <FoundationArt />;
+export function ProductArt({ kind, eager }: { kind: ProductKind; eager?: boolean }) {
+  if (kind === "platform") return <RenderedArt kind="foundation" eager={eager} />;
+  return <RenderedArt kind={kind} eager={eager} />;
 }
 
 /* ---------- product glyphs: tiny isometric objects, one per product ---------- */

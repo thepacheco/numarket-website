@@ -9,6 +9,7 @@ import { industries, type IndustrySlug } from "@/content/industries";
 import { effort } from "@/content/effort";
 import { buildView, fmt, type Period, type Size } from "@/lib/sample-data";
 import { sampleCompany } from "@/lib/ask";
+import IndGlyph from "./IndGlyph";
 
 const statusText = { good: "On track", watch: "Watch", risk: "At risk" } as const;
 
@@ -87,7 +88,7 @@ export default function IndustryExplorer({
                 onClick={() => setSlug(i.slug)}
                 onKeyDown={(e) => onTabKey(e, idx)}
               >
-                <Icon name={i.icon} />
+                <IndGlyph size={18} />
                 <span>{i.short}</span>
               </button>
             ))}

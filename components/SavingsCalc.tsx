@@ -6,6 +6,7 @@ import Icon from "./Icon";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { firstYearCost, leakFor, leakTotal, planFor } from "@/lib/savings";
 import { fmt, type Fmt, type Size } from "@/lib/sample-data";
+import IndGlyph from "./IndGlyph";
 
 function Num({ value, format, className }: { value: number; format: Fmt; className?: string }) {
   const v = useTween(value);
@@ -33,7 +34,7 @@ export default function SavingsCalc({ initialIndustry = "logistics", initialSize
           <div className="calc-inds" role="tablist" aria-label="Industry">
             {industries.map((i) => (
               <button key={i.slug} type="button" role="tab" aria-selected={slug === i.slug} className={`ind-chip ind-${i.slug}`} onClick={() => setSlug(i.slug)}>
-                <Icon name={i.icon} width={16} height={16} /> {i.short}
+                <IndGlyph /> {i.short}
               </button>
             ))}
           </div>

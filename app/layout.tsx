@@ -20,17 +20,17 @@ const grotesk = Space_Grotesk({ subsets: ["latin"], weight: ["700"], variable: "
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "numarket — Your data, cleaned up and working for you",
+    default: "numarket — The data team you don't have to hire",
     template: "%s · numarket",
   },
   description:
-    "numarket gets your business ready for AI. We gather your data from everywhere it lives, clean it, store it securely, and turn it into live apps, dashboards, and clear next steps — and you own all of it.",
+    "numarket is the data team you don't have to hire. We pull your numbers into one private database, keep them clean, and give your team live dashboards and an analyst who tells you what to do next. One flat monthly fee. You own all of it.",
   icons: { icon: "/favicon.svg" },
   openGraph: {
     type: "website",
     siteName: "numarket",
     title: "numarket — Trust the Data.",
-    description: "Your data, cleaned up and working for you. Get ready for AI — without the headache.",
+    description: "The data team you don't have to hire. Clean numbers, live dashboards, and clear next steps — for one flat monthly fee.",
   },
 };
 
