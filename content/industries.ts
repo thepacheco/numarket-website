@@ -51,7 +51,7 @@ export const industries: Industry[] = [
       "Where are rejects coming from?",
       "Are we on plan today?",
     ],
-    changes: "Shift leads log downtime in one screen. The plant manager sees every line live.",
+    changes: "Shift leads log downtime in one screen. The plant manager sees every line in one view.",
     siteNoun: { one: "Line", many: "All lines" },
     sites: {
       small: ["Line 1 · Cutting", "Line 2 · Assembly", "Line 3 · Packing"],
@@ -105,7 +105,7 @@ export const industries: Industry[] = [
       "Are crews being used well?",
       "What's causing the most outage minutes?",
     ],
-    changes: "One live operations view instead of 14 spreadsheets.",
+    changes: "One operations view instead of 14 spreadsheets.",
     siteNoun: { one: "District", many: "All districts" },
     sites: {
       small: ["North Service Area", "South Service Area", "East Service Area"],

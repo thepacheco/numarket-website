@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckList, CtaBand, Dots, Faq, PageHero, PrimaryCta, SectionHead } from "@/components/ui";
+import { CheckList, CtaBand, Dots, Faq, PageHero, SectionHead } from "@/components/ui";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import MondayPhone from "@/components/MondayPhone";
 import { effort } from "@/content/effort";
@@ -24,12 +24,9 @@ export default function SmallBusiness() {
         }
         lead="We host it, run it, and explain it — for less than one hire."
       >
-        <div className="btn-row">
-          <PrimaryCta />
-          <Link href="/getting-started#estimator" className="btn btn-secondary">
-            Estimate my cost
-          </Link>
-        </div>
+        <Link href="/getting-started#estimator" className="more">
+          Estimate your cost and timeline →
+        </Link>
       </PageHero>
 
       <section className="section-tight" style={{ paddingTop: 0 }}>
@@ -72,7 +69,7 @@ export default function SmallBusiness() {
                     </span>
                     <span className="per">+ {money(t.setupFrom)} setup</span>
                   </div>
-                  <CheckList items={t.highlights} />
+                  <CheckList items={[...t.includes.foundation.slice(0, 2), ...t.includes.workspace.slice(0, 2), t.includes.insight[0]]} />
                 </div>
               ))}
           </div>

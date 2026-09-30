@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import { cta, site } from "@/content/site";
+import { site } from "@/content/site";
 import { needLinks } from "./nav-data";
 import { industries } from "@/content/industries";
 
@@ -12,7 +12,6 @@ const cols: { title: string; links: { href: string; title: string }[] }[] = [
       { href: "/products/workspace", title: "Workspace" },
       { href: "/products/insight-review", title: "Insight Review" },
       { href: "/products/engineering", title: "Engineering" },
-      { href: "/platform", title: "Platform" },
       { href: "/pricing", title: "Pricing" },
     ],
   },
@@ -25,6 +24,8 @@ const cols: { title: string; links: { href: string; title: string }[] }[] = [
     title: "Resources",
     links: [
       { href: "/getting-started", title: "Getting started" },
+      { href: "/how-it-works", title: "How it works" },
+      { href: "/platform", title: "How it fits together" },
       { href: "/demos", title: "Demos" },
       { href: "/docs", title: "Documentation" },
       { href: "/security", title: "Security" },
@@ -51,9 +52,6 @@ export default function Footer() {
             <Logo />
             <p>{site.tagline}</p>
           </div>
-          <Link href={cta.href} className="btn btn-primary">
-            {cta.label}
-          </Link>
         </div>
         <nav className="foot-cols" aria-label="Footer">
           {cols.map((c) => (

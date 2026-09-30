@@ -109,9 +109,10 @@ export const docs: Doc[] = [
     slug: "refresh",
     group: "Your data",
     title: "How often data refreshes",
-    summary: "Most sources update automatically every few hours or daily.",
+    summary: "Data from your systems updates on a schedule, set by your size.",
     body: [
-      { p: "How often each source refreshes depends on the tool and on what you need. Most update every few hours or once a day. Input screens update instantly." },
+      { p: "Data from your other systems updates on a schedule: once a day, overnight, on Small; up to every hour during business hours on Mid; and a custom schedule on Large. Near-real-time feeds are available as Engineering work." },
+      { p: "What your team types into input screens shows up right away." },
       { p: "Your data dictionary lists the refresh schedule for each source, and every dashboard shows when it was last updated." },
     ],
   },
@@ -151,8 +152,9 @@ export const docs: Doc[] = [
     summary: "After your term: full export or account transfer within 30 days, at no charge.",
     body: [
       { p: "Your data is yours. If you decide to leave after your term, you choose how to take it:" },
-      { ul: ["A full export in open formats (CSV or Parquet), with the data dictionary.", "A complete account handover, so your own team or another provider can keep running it."] },
-      { p: "We finish within 30 days of your request, at no charge. After handover, we delete our copies on request." },
+      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, input screens, and Engineering builds.", "The data dictionary, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
+      { p: "One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
+      { p: "We finish within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing." },
     ],
   },
   {
@@ -163,7 +165,7 @@ export const docs: Doc[] = [
     body: [
       { h: "Database", p: "Where your clean data is stored — privately, just for your company." },
       { h: "Automatic data updates", p: "Secure connections that copy data from your tools on a schedule. Sometimes called “pipelines.”" },
-      { h: "Dashboard", p: "A live screen of your key numbers." },
+      { h: "Dashboard", p: "A screen of your key numbers that updates automatically." },
       { h: "Input screen", p: "A simple form that replaces a spreadsheet people used to email around." },
       { h: "Ask Your Data", p: "Plain-English questions answered from your own numbers." },
       { h: "Insight Review", p: "A regular meeting where your analyst explains what changed and what to do next." },

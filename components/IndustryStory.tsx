@@ -78,10 +78,10 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
   const lost = leakTotal(leak);
   const saved = lost * 0.15;
   const co = sampleCompany[slug];
-  const leakLine: [string, string] = [fmt(lost, "money") + " a year", `lost to ${leak.short.toLowerCase()}`];
-  const saveLine: [string, string] = [`${fmt(saved, "money")} saved`, "if you fix 15% of it"];
-  const leakText = `${fmt(lost, "money")} a year · ${leak.short.toLowerCase()}`;
-  const fixText = `${fmt(saved, "money")} a year saved at 15%`;
+  const leakLine: [string, string] = [fmt(lost, "money") + " a year", `est. lost to ${leak.short.toLowerCase()}`];
+  const saveLine: [string, string] = [`${fmt(saved, "money")} saved`, "est., if you fix 15%"];
+  const leakText = `Est. ${fmt(lost, "money")} a year · ${leak.short.toLowerCase()}`;
+  const fixText = `Est. ${fmt(saved, "money")} a year saved at 15%`;
   const steps = [
     {
       eyebrow: "Today",
@@ -103,7 +103,7 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
       title: "The leak shows up.",
       body: (
         <p>
-          <b style={{ color: "var(--ink)" }}>{leak.title}:</b> {fmt(lost, "money")} a year in this sample — worst at {leak.worst}.
+          <b style={{ color: "var(--ink)" }}>{leak.title}:</b> an estimated {fmt(lost, "money")} a year for this sample company — worst at {leak.worst}. Illustrative, from sample data.
         </p>
       ),
     },

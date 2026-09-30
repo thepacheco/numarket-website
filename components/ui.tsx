@@ -3,12 +3,12 @@ import type { ReactNode } from "react";
 import Icon from "./Icon";
 import { cta } from "@/content/site";
 import type { QA } from "@/content/faq";
-import GeoField from "./GeoField";
+import SolidsField from "./solids/SolidsField";
 
 export function PageHero({ eyebrow, title, lead, children, art }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode; art?: ReactNode }) {
   return (
     <section className="page-hero">
-      <GeoField density={art ? 8 : 12} side={art ? "right" : "both"} />
+      <SolidsField textZone="left" />
       <div className="hero-gradient" aria-hidden="true" />
       <div className="hero-fade" aria-hidden="true" />
       <div className={`container ${art ? "hero-grid" : ""}`}>
@@ -87,17 +87,13 @@ export function CtaBand({
 }) {
   return (
     <section className="cta-light">
-      <GeoField density={8} faint />
+      <SolidsField textZone="center" count={8} seed={11} />
       <div className="container">
-        <span className="eyebrow">Trust the Data.</span>
         <h2>{title}</h2>
         {lead && <p className="lead">{lead}</p>}
         <div className="btn-row">
           <Link href={cta.href} className="btn btn-primary">
             {cta.label} <Icon name="arrow" className="arrow" width={16} height={16} />
-          </Link>
-          <Link href="/getting-started" className="btn btn-secondary">
-            Estimate cost & timeline
           </Link>
         </div>
       </div>

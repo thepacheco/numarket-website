@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     template: "%s · numarket",
   },
   description:
-    "numarket is the data team you don't have to hire. We pull your numbers into one private database, keep them clean, and give your team live dashboards and an analyst who tells you what to do next. One flat monthly fee. You own all of it.",
+    "numarket is the data team you don't have to hire. We pull your numbers into one private database, keep them clean, and give your team dashboards that update automatically and an analyst who tells you what to do next. One predictable monthly fee. You own your data.",
   icons: { icon: "/favicon.svg" },
   openGraph: {
     type: "website",
     siteName: "numarket",
     title: "numarket — Trust the Data.",
-    description: "The data team you don't have to hire. Clean numbers, live dashboards, and clear next steps — for one flat monthly fee.",
+    description: "The data team you don't have to hire. Clean numbers, dashboards that update automatically, and clear next steps — for one predictable monthly fee.",
   },
 };
 

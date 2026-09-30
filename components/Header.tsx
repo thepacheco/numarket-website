@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import Icon from "./Icon";
-import { ProductGlyph } from "./ProductArt";
+import SolidIcon from "./solids/SolidIcon";
 import { cta } from "@/content/site";
 import { industryLinks, needLinks, productLinks, resourceLinks, sizeLinks } from "./nav-data";
 import IndGlyph from "./IndGlyph";
@@ -73,10 +73,10 @@ export default function Header() {
 
   const section = (id: Exclude<MenuId, null>) =>
     id === "products"
-      ? pathname.startsWith("/products") || pathname === "/platform"
+      ? pathname.startsWith("/products")
       : id === "solutions"
         ? pathname.startsWith("/solutions")
-        : resourceLinks.some((l) => pathname.startsWith(l.href));
+        : resourceLinks.some((l) => l.href !== "/platform" && pathname.startsWith(l.href));
   const cur = (href: string) => (pathname === href || pathname.startsWith(href + "/") ? "current" : "");
 
   const trigger = (id: Exclude<MenuId, null>, label: string) => (
@@ -112,7 +112,7 @@ export default function Header() {
                 <div className="mega-panel mega-products">
                   {productLinks.map((l) => (
                     <Link key={l.href} href={l.href} className={`mega-prod pg-${l.kind}`}>
-                      <ProductGlyph kind={l.kind} />
+                      <SolidIcon kind={l.kind} size={34} className="mega-solid" />
                       <span>
                         <strong>{l.title}</strong>
                         <span>{l.desc}</span>
@@ -155,7 +155,7 @@ export default function Header() {
               </div>
             </li>
             <li>
-              <Link className={`nav-item ${cur("/how-it-works")}`} href="/how-it-works">
+              <Link className={`nav-item ${cur("/how-it-works") || cur("/platform")}`} href="/how-it-works">
                 How It Works
               </Link>
             </li>
@@ -204,7 +204,7 @@ export default function Header() {
         <p className="mega-h">Products</p>
         {productLinks.map((l) => (
           <Link key={l.href} href={l.href} className="m-prod">
-            <ProductGlyph kind={l.kind} small />
+            <SolidIcon kind={l.kind} size={20} />
             {l.title}
           </Link>
         ))}

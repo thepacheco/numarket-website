@@ -23,7 +23,7 @@ const details = [
   { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },
   { q: "Can you support healthcare data?", a: "Yes. A HIPAA-eligible configuration and a Business Associate Agreement are available on Command or on request." },
   { q: "What if there's an incident?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-  { q: "How does leaving work?", a: "After your term: a full export (CSV or Parquet) or a complete account handover within 30 days, at no charge." },
+  { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and the data dictionary — or we transfer the whole database account to you. No charge. Then we delete our copies and confirm in writing." },
 ];
 
 export default function Security() {

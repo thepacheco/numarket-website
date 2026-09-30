@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import Icon from "./Icon";
 import Modal from "./Modal";
-import { ProductArt, ProductGlyph } from "./ProductArt";
+import ProductSolid from "./solids/ProductSolid";
+import SolidIcon from "./solids/SolidIcon";
 import { products, type Product } from "@/content/products";
 
 /* Product cards with their own 3D objects. Clicking opens a quick-view pop-up. */
@@ -14,11 +15,13 @@ export default function ProductBento() {
     <>
       <div className="bento stagger">
         {products.map((p) => (
-          <button key={p.slug} type="button" className={`bento-card b-${p.kind}`} onClick={() => setOpen(p)} aria-haspopup="dialog">
-            <ProductArt kind={p.kind} />
+          <button key={p.slug} type="button" className={`bento-card b-${p.kind}`} onClick={() => setOpen(p)} aria-haspopup="dialog" data-solid-host>
+            <div className="art solid-art">
+              <ProductSolid kind={p.kind} assemble={p.kind === "foundation"} />
+            </div>
             <span className="step">{p.step}</span>
             <h3>
-              <ProductGlyph kind={p.kind} small /> {p.name}
+              <SolidIcon kind={p.kind} size={26} /> {p.name}
             </h3>
             <p>{p.short}</p>
             <span className="open-hint">
@@ -30,13 +33,13 @@ export default function ProductBento() {
       <Modal open={!!open} onClose={() => setOpen(null)} label={open ? `${open.name} quick look` : ""}>
         {open && (
           <div style={{ display: "contents", ["--pc" as string]: `var(--p-${open.kind})` }}>
-            <div className="modal-art" style={{ ["--pc" as string]: `var(--p-${open.kind})` }}>
-              <ProductArt kind={open.kind} />
+            <div className="modal-art" style={{ ["--pc" as string]: `var(--p-${open.kind})` }} data-solid-host>
+              <ProductSolid kind={open.kind} scale={0.34} />
             </div>
             <div className="modal-body" style={{ ["--pc" as string]: `var(--p-${open.kind})` }}>
               <span className="step">{open.step}</span>
               <h3 style={{ fontSize: 26, display: "flex", gap: 12, alignItems: "center" }}>
-                <ProductGlyph kind={open.kind} /> {open.name}
+                <SolidIcon kind={open.kind} size={32} /> {open.name}
               </h3>
               <p className="muted">{open.intro}</p>
               <ul className="check-list">

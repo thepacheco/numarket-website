@@ -45,10 +45,25 @@ export default function IndustryIso({
     return () => window.clearTimeout(id);
   }, [eager]);
   const mount = useDeferredMount(ref, gl === true, "500px 0px") || (eager && idle && gl === true);
+  /* Release the 3D context when far off screen, so a page never holds two at once. */
+  const [near, setNear] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        setNear(e.isIntersecting);
+        if (!e.isIntersecting) setReady(false);
+      },
+      { rootMargin: "300px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   return (
     <div ref={ref} className={`iso-wrap ind-${slug} ${ready ? "ready" : ""} ${className}`} role="img" aria-label={label}>
       {gl === false ? fallback : <div className="iso-ghost" aria-hidden="true" />}
-      {gl && mount && <IsoCanvas slug={slug} mode={mode} onReady={() => setReady(true)} />}
+      {gl && mount && near && <IsoCanvas slug={slug} mode={mode} onReady={() => setReady(true)} />}
       {chip && (
         <div className={`iso-chip ${chip.tone}`} key={chip.text}>
           {chip.text}

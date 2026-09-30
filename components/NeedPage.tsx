@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Icon from "./Icon";
-import { CtaBand, PageHero, PrimaryCta, SectionHead } from "./ui";
+import { CtaBand, PageHero, SectionHead } from "./ui";
 
 /* Shared shell for the "by need" pages. Each page brings its own demo. */
 export default function NeedPage({
@@ -24,9 +24,7 @@ export default function NeedPage({
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} lead={lead} art={art}>
-        <PrimaryCta />
-      </PageHero>
+      <PageHero eyebrow={eyebrow} title={title} lead={lead} art={art} />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <SectionHead eyebrow="Try it" title={demoTitle} />

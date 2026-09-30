@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckList, CtaBand, Faq, PageHero, PrimaryCta, SectionHead } from "@/components/ui";
+import { CheckList, CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import PlatformToggle from "@/components/PlatformToggle";
 import { faq } from "@/content/faq";
@@ -28,12 +28,9 @@ export default function Enterprise() {
         }
         lead="We fix the layer underneath — inside your platform or ours."
       >
-        <div className="btn-row">
-          <PrimaryCta />
-          <Link href="/security" className="btn btn-secondary">
-            Security & trust
-          </Link>
-        </div>
+        <Link href="/security" className="more">
+          How we handle security reviews →
+        </Link>
       </PageHero>
 
       <section className="section-tight" style={{ paddingTop: 0 }}>

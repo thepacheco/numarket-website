@@ -36,7 +36,7 @@ export const steps: Step[] = [
     key: "see",
     title: "See",
     plain:
-      "Live dashboards and a simple app where your team views status, enters updates, and asks questions in plain English.",
+      "Dashboards that update automatically, and a simple app where your team views status, enters updates, and asks questions in plain English.",
     detail: "Dashboards that refresh on their own, input screens that replace emailed spreadsheets, and Ask Your Data.",
   },
   {
@@ -50,7 +50,7 @@ export const steps: Step[] = [
     n: 6,
     key: "own",
     title: "Own",
-    plain: "It's yours. If you ever leave, you walk away with a clean, organized database. No lock-in.",
-    detail: "Ownership is written into the contract. Full export or account handover within 30 days, at no charge.",
+    plain: "You own your data. If you ever leave, you walk away with it — clean, organized, and documented. No lock-in.",
+    detail: "You own your data, the cleaning rules, and your apps. Everything is handed over within 30 days if you leave, at no charge."
   },
 ];

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import IndustryEntry from "@/components/IndustryEntry";
 import Icon from "@/components/Icon";
-import { CtaBand, PrimaryCta, SectionHead } from "@/components/ui";
+import { CtaBand, SectionHead } from "@/components/ui";
 import IndustryStory from "@/components/IndustryStory";
 import IndustryIso from "@/components/IndustryIso";
 import SavingsCalc from "@/components/SavingsCalc";
@@ -33,12 +33,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
           <div>
             <span className="eyebrow">{ind.name}</span>
             <h1>
-              {ind.questions[0]} <em className="accent">Answered live.</em>
+              {ind.questions[0]} <em className="accent">Answered in one place.</em>
             </h1>
             <p className="lead">{ind.changes}</p>
-            <div className="btn-row" style={{ marginTop: 26 }}>
-              <PrimaryCta />
-            </div>
           </div>
           <IndustryIso
             slug={ind.slug}

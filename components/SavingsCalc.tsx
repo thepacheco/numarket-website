@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTween } from "./useTween";
 import Icon from "./Icon";
+import EstimateNote from "./EstimateNote";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { firstYearCost, leakFor, leakTotal, planFor } from "@/lib/savings";
 import { fmt, type Fmt, type Size } from "@/lib/sample-data";
@@ -51,7 +52,7 @@ export default function SavingsCalc({ initialIndustry = "logistics", initialSize
 
       <div className="calc-card" key={`${slug}-${size}`}>
         <div className="calc-head">
-          <span className="label-sample">Sample math · 12 months</span>
+          <span className="label-sample">Illustrative estimate · typical company · 12 months</span>
           <h3>{leak.title}</h3>
           <p>{leak.why}</p>
           <p className="small muted">
@@ -156,7 +157,7 @@ export default function SavingsCalc({ initialIndustry = "logistics", initialSize
         <p className="small muted calc-fix">
           <b style={{ color: "var(--ink)" }}>How we'd fix it:</b> {leak.fix}
         </p>
-        <p className="small muted">Illustrative math on sample data. Your free Readiness Check runs it on your real numbers.</p>
+        <EstimateNote slug={slug} size={size} assume={assume} />
       </div>
     </div>
   );

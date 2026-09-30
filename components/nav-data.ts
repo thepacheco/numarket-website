@@ -1,12 +1,11 @@
 import { industries } from "@/content/industries";
-import type { ProductKind } from "./ProductArt";
+import type { SolidKind } from "./solids/geometry";
 
-export const productLinks: { href: string; title: string; desc: string; kind: ProductKind }[] = [
+export const productLinks: { href: string; title: string; desc: string; kind: SolidKind }[] = [
   { href: "/products/foundation", title: "Foundation", desc: "Collect, clean & secure your data", kind: "foundation" },
-  { href: "/products/workspace", title: "Workspace", desc: "Dashboards, input screens, Ask Your Data", kind: "workspace" },
-  { href: "/products/insight-review", title: "Insight Review", desc: "Action items from a real analyst", kind: "insight" },
-  { href: "/products/engineering", title: "Engineering", desc: "Migrations and custom builds", kind: "engineering" },
-  { href: "/platform", title: "Platform", desc: "What's under the hood", kind: "platform" },
+  { href: "/products/workspace", title: "Workspace", desc: "Your reports and your apps", kind: "workspace" },
+  { href: "/products/insight-review", title: "Insight Review", desc: "What to do next, from an analyst", kind: "insight" },
+  { href: "/products/engineering", title: "Engineering", desc: "Custom builds and migrations (optional)", kind: "engineering" },
 ];
 
 export const sizeLinks = [
@@ -26,6 +25,7 @@ export const needLinks = [
 
 export const resourceLinks = [
   { href: "/getting-started", title: "Getting Started", desc: "How hard, how long, how much" },
+  { href: "/platform", title: "How It Fits Together", desc: "The products, what runs underneath, leaving" },
   { href: "/docs", title: "Documentation", desc: "Guides for clients" },
   { href: "/security", title: "Security & Trust", desc: "How we protect your data" },
   { href: "/support", title: "Support", desc: "How to get help" },

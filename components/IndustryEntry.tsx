@@ -150,7 +150,7 @@ export default function IndustryEntry({ slug }: { slug: IndustrySlug }) {
       </div>
       <div className="card">
         <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center", marginBottom: 14 }}>
-          <h3 style={{ fontSize: 17 }}>What the manager sees — live</h3>
+          <h3 style={{ fontSize: 17 }}>What the manager sees — right away</h3>
           <span className="label-sample">Sample</span>
         </div>
         <ul className="feed" aria-live="polite">

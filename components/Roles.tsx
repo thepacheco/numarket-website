@@ -2,7 +2,7 @@
 
 const people = [
   { role: "Owner", sees: "Cash, jobs, and three action items — on a phone, Monday morning.", c: ["#22577a", "#9fd3e6"] },
-  { role: "Operations lead", sees: "Every site live. Problems flagged before they spread.", c: ["#2a8f91", "#b8ecec"] },
+  { role: "Operations lead", sees: "Every site in one view. Problems flagged before they spread.", c: ["#2a8f91", "#b8ecec"] },
   { role: "Finance lead", sees: "Numbers that match the books, without rebuilding reports.", c: ["#6c5dd3", "#d9d3fb"] },
   { role: "Field team", sees: "One simple screen to enter today's update. That's it.", c: ["#2e9e6b", "#c7f9cc"] },
 ];

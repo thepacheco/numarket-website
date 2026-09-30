@@ -6,10 +6,10 @@ import Icon from "./Icon";
 /* Exploded stack: click a layer to lift it and read what it does. */
 const layers = [
   { name: "Ask Your Data", icon: "chat", plain: "Plain-English questions, answered from your numbers.", tech: "Snowflake Cortex + business definitions written for you." },
-  { name: "Workspace", icon: "window", plain: "The app your team uses.", tech: "Streamlit apps: dashboards, input screens, alerts." },
-  { name: "Clean layer", icon: "clean", plain: "Rules that fix and check every update.", tech: "dbt models and tests. Bad rows are flagged, not published." },
-  { name: "Your private database", icon: "lock", plain: "Encrypted. Yours alone.", tech: "A dedicated Snowflake account per client. Open formats." },
-  { name: "Connectors", icon: "plug", plain: "Secure, read-only pipes.", tech: "Airbyte or Fivetran, APIs, SharePoint / OneDrive / Drive sync." },
+  { name: "Workspace", icon: "window", plain: "The app your team uses.", tech: "Streamlit apps inside Snowflake, with single sign-on through Microsoft, Google, or Okta." },
+  { name: "Clean layer", icon: "clean", plain: "Rules that fix and check every update.", tech: "dbt models and tests, run on a schedule. Bad rows are flagged, not published." },
+  { name: "Your private database", icon: "lock", plain: "Encrypted, and separate from every other client.", tech: "Its own separate Snowflake account inside numarket's Snowflake organization. You own the data in it." },
+  { name: "Connectors", icon: "plug", plain: "Secure, read-only pipes.", tech: "Snowflake's own connectors or open-source Airbyte; paid connectors only on Large. APIs and SharePoint / OneDrive / Drive file sync." },
   { name: "Your sources", icon: "spreadsheet", plain: "Whatever you use today.", tech: "Accounting, project tools, HR, ERP, spreadsheets." },
 ];
 

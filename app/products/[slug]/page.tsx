@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
-import InsightDemo from "@/components/InsightDemo";
 import { MigrationDemo, ReconcileDemo } from "@/components/NeedDemos";
-import { ProductArt, ProductGlyph } from "@/components/ProductArt";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
 import ProductStory from "@/components/ProductStory";
-import { CtaBand, Faq, PrimaryCta, SectionHead } from "@/components/ui";
-import { productBySlug, products } from "@/content/products";
+import ProductSolid from "@/components/solids/ProductSolid";
+import SolidIcon from "@/components/solids/SolidIcon";
+import SampleReview from "@/components/SampleReview";
+import WsVsEng from "@/components/WsVsEng";
 import Roles from "@/components/Roles";
+import { CtaBand, Faq, SectionHead } from "@/components/ui";
+import { productBySlug, products } from "@/content/products";
+import { engineering, money, productPrices, sizes, type PricedProduct } from "@/content/tiers";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -23,15 +27,72 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const demoTitle: Record<string, [string, string]> = {
   foundation: ["See it clean", "Three reports. Watch them agree."],
   workspace: ["Try it", "Change a number. Ask a question."],
-  insight: ["Run a review", "From numbers to a to-do list."],
+  insight: ["A sample review", "What your analyst hands you."],
   engineering: ["Watch a migration", "Move it. Check it. Switch off the old one."],
 };
 
 function Demo({ kind }: { kind: string }) {
   if (kind === "foundation") return <ReconcileDemo />;
   if (kind === "workspace") return <WorkspaceDemo />;
-  if (kind === "insight") return <InsightDemo />;
+  if (kind === "insight") return <SampleReview />;
   return <MigrationDemo />;
+}
+
+const engExamples: [string, string][] = [
+  ["Crew scheduler", "Drag a crew onto a job and see its labor cost and schedule change before you commit."],
+  ["Estimate builder", "Build bids from your own past job costs instead of a blank spreadsheet."],
+  ["Write-back automation", "Approved change orders push straight into QuickBooks — no double entry."],
+  ["Migration", "Move off an old server or reporting system, table by table, verified to the cent."],
+  ["Near-real-time feeds", "When a schedule isn't fast enough, we build a feed for the numbers that truly need it."],
+  ["Work in your cloud", "We build inside your own Snowflake, Azure, or Databricks."],
+];
+
+function PriceBlock({ kind }: { kind: string }) {
+  if (kind === "engineering")
+    return (
+      <div className="card price-block">
+        <h3>What it costs</h3>
+        <p className="pb-big tnum">
+          From {money(engineering.from)} <small>per project</small>
+        </p>
+        <p>Fixed quote per project after a short scoping call, or {money(engineering.hourly)}/hr for small, open-ended work.</p>
+        <p className="small muted">Available on its own or on top of any plan.</p>
+      </div>
+    );
+  const id: PricedProduct = kind === "insight" ? "insight" : (kind as PricedProduct);
+  const pp = productPrices[id];
+  return (
+    <div className="card price-block">
+      <h3>What it costs</h3>
+      <div className="pb-cols">
+        {sizes.map((s) => {
+          const pr = pp.bySize[s.id];
+          return (
+            <div key={s.id}>
+              <span className="pb-size">{s.name}</span>
+              <b className="tnum">
+                {pr.from ? "from " : ""}
+                {money(pr.monthly)}
+                <small>/mo</small>
+              </b>
+              {pr.setup ? (
+                <span className="small muted tnum">
+                  + {pr.from ? "from " : ""}
+                  {money(pr.setup)} setup
+                </span>
+              ) : (
+                <span className="small muted">{pr.note}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <p className="small muted">Monthly covers: {pp.what.toLowerCase()}.</p>
+      <p className="small">
+        <Link href="/pricing">Build your price, or see the plans that bundle all three →</Link>
+      </p>
+    </div>
+  );
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -45,16 +106,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="container hero-grid">
           <div>
             <span className="eyebrow prod-eyebrow">
-              <ProductGlyph kind={p.kind} small /> {p.name} · {p.step}
+              <SolidIcon kind={p.kind} size={22} /> {p.name} · {p.step}
             </span>
             <h1>{p.promise}</h1>
             <p className="lead">{p.intro}</p>
-            <div className="btn-row" style={{ marginTop: 26 }}>
-              <PrimaryCta />
-            </div>
+            <p className="prod-needs">
+              <b>{p.kind === "foundation" ? "Required for all plans." : "Needs:"}</b> {p.kind === "foundation" ? "Everything else sits on it." : p.depends}
+            </p>
           </div>
-          <div className="prod-art reveal">
-            <ProductArt kind={p.kind} eager />
+          <div className="prod-solid" data-solid-host>
+            <ProductSolid kind={p.kind} assemble={p.kind === "foundation"} scale={0.34} label={`${p.name} shape`} />
           </div>
         </div>
       </section>
@@ -72,6 +133,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      {(p.kind === "workspace" || p.kind === "engineering") && (
+        <section className="section-tight">
+          <div className="container">
+            <WsVsEng />
+          </div>
+        </section>
+      )}
+
       <section className="section" style={{ paddingTop: 24 }}>
         <div className="container">
           <SectionHead eyebrow="How it works" title="Scroll through it." />
@@ -86,10 +155,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      {p.kind === "engineering" && (
+        <section className="section">
+          <div className="container">
+            <SectionHead eyebrow="What we build" title="Custom work, one sentence each." />
+            <div className="eng-examples stagger">
+              {engExamples.map(([t, b]) => (
+                <div key={t} className="card">
+                  <h3>{t}</h3>
+                  <p>{b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {p.kind === "workspace" && (
         <section className="section">
           <div className="container">
-            <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view they need." />
+            <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view they need. Your team signs in with the Microsoft or Google account they already use." />
             <Roles />
           </div>
         </section>
@@ -97,6 +182,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <section className="section">
         <div className="container grid g2 stagger">
+          <PriceBlock kind={p.kind} />
           <div className="card">
             <h3>What we need from you</h3>
             <ul className="check-list" style={{ marginTop: 12 }}>
@@ -107,12 +193,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="card">
-            <h3>Included in</h3>
-            <p style={{ marginTop: 8 }}>{p.includedIn}</p>
-            <p style={{ marginTop: 12 }}>
-              <a href="/pricing">See pricing →</a>
+            <p className="small muted" style={{ marginTop: 14 }}>
+              {p.includedIn}
             </p>
           </div>
         </div>

@@ -149,7 +149,7 @@ const sheetCaption = [
   "Step 1 — The versions disagree by thousands of dollars. Nobody knows which one the owner is looking at.",
   "Step 2 — We replace all five with one simple input screen. The files stop being the source.",
   "Step 3 — The PM enters the number once. It's checked as it's typed and logged with their name.",
-  "Step 4 — The owner, the PM, and the superintendent all see the same number, live.",
+  "Step 4 — The owner, the PM, and the superintendent all see the same number, right away.",
   "Done. One number, entered once, trusted by everyone.",
 ];
 

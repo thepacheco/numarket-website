@@ -302,7 +302,7 @@ export default function IndustryExplorer({
             <dd>{eff.firstDashboard}</dd>
           </div>
           <div className="stat-chip">
-            <dt>Setup from</dt>
+            <dt>Plan setup from</dt>
             <dd>{size === "small" ? "$7,500" : "$40,000"}</dd>
           </div>
         </dl>
@@ -316,9 +316,6 @@ export default function IndustryExplorer({
               {ind.short} solutions
             </Link>
           )}
-          <Link href="/contact" className="btn btn-primary">
-            Get a Free Readiness Check <Icon name="arrow" className="arrow" width={16} height={16} />
-          </Link>
         </div>
       </div>
     </div>

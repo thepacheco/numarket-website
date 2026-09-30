@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import GeoField from "@/components/GeoField";
+import SolidsField from "@/components/solids/SolidsField";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
@@ -33,16 +33,16 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="hero">
-        <GeoField density={10} />
+        <SolidsField textZone="left" seed={3} />
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-fade" aria-hidden="true" />
         <div className="container hero-grid">
           <div>
-            <span className="eyebrow">Trust the Data.</span>
+            <span className="eyebrow">Your outside data team</span>
             <h1>
               The data team you <em className="accent">don&apos;t have to hire.</em>
             </h1>
-            <p className="lead">We pull your numbers into one private database, keep them clean, and give your team live dashboards plus an analyst who tells you what to do next. One flat monthly fee.</p>
+            <p className="lead">We pull your numbers into one private database, keep them clean, and give your team dashboards that update automatically, plus an analyst who tells you what to do next. One predictable monthly fee.</p>
             <div className="btn-row">
               <PrimaryCta />
               <Link href="#journey" className="btn btn-secondary">
@@ -57,7 +57,7 @@ export default function Home() {
                 <Icon name="check" /> No new software to buy
               </li>
               <li>
-                <Icon name="clock" /> Live in weeks
+                <Icon name="clock" /> Up and running in weeks
               </li>
             </ul>
           </div>
@@ -202,7 +202,7 @@ export default function Home() {
                   </dd>
                 </div>
                 <div>
-                  <dt>Live in</dt>
+                  <dt>Up and running in</dt>
                   <dd>2–3 weeks</dd>
                 </div>
               </dl>
@@ -225,7 +225,7 @@ export default function Home() {
                   </dd>
                 </div>
                 <div>
-                  <dt>Live in</dt>
+                  <dt>Up and running in</dt>
                   <dd>6–10 weeks</dd>
                 </div>
               </dl>
@@ -238,7 +238,7 @@ export default function Home() {
       {/* PRICING TEASER */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." lead="A one-time setup, then one flat monthly fee." />
+          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." lead="Each product has its own price. Take all three as a plan and save about 10%." />
           <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>

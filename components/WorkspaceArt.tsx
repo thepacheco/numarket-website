@@ -5,7 +5,7 @@ import { constructionJobs, fmt, overBudgetSummary } from "@/lib/sample-data";
 
 /* Three app screens stacked in 3D. Point at (or tap) one and a flat,
    full-size copy appears beside the stack so it can actually be read. */
-const titles = ["Dashboard · live", "Update job budget", "Ask Your Data"];
+const titles = ["Dashboard · updated 6:00 AM", "Update job budget", "Ask Your Data"];
 
 export default function WorkspaceArt({ interactive = true }: { interactive?: boolean }) {
   const [on, setOn] = useState<number | null>(null);

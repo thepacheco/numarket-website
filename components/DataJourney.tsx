@@ -15,7 +15,7 @@ const labels = [
   "Pulled together, automatically.",
   "Cleaned. Matched. Trusted.",
   "Stored privately. Yours.",
-  "Live screens for your team.",
+  "Screens for your whole team.",
   "Know what to do next.",
   "Leave anytime. It's all yours.",
 ];

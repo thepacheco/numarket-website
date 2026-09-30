@@ -5,7 +5,6 @@ import IndustryExplorer from "@/components/IndustryExplorer";
 import { needLinks } from "@/components/nav-data";
 import { CtaBand, PageHero, SectionHead } from "@/components/ui";
 import { industries } from "@/content/industries";
-import { TilesArt } from "@/components/HeroArts";
 import IndGlyph from "@/components/IndGlyph";
 
 export const metadata: Metadata = { title: "Solutions", description: "numarket by size, by industry, and by need." };
@@ -17,7 +16,6 @@ export default function Solutions() {
   return (
     <>
       <PageHero
-        art={<TilesArt />}
         eyebrow="Solutions"
         title={
           <>

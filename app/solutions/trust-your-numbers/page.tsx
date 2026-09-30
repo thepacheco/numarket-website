@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import NeedPage from "@/components/NeedPage";
 import { ReconcileDemo } from "@/components/NeedDemos";
-import { FoundationArt } from "@/components/ProductArt";
 
 export const metadata: Metadata = { title: "Trust Your Numbers", description: "One source of truth. Duplicates removed, names matched, and checks on every update." };
 
 export default function Page() {
   return (
     <NeedPage
-      art={<FoundationArt />}
       eyebrow="Trust your numbers"
       title={
         <>

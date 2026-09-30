@@ -6,7 +6,7 @@
    ============================================================ */
 
 import type { IndustrySlug } from "@/content/industries";
-import { buildView, type Fmt, type Size } from "@/lib/sample-data";
+import { buildView, fmt, type Fmt, type Size } from "@/lib/sample-data";
 
 export type Leak = {
   title: string; // what's leaking, in plain words
@@ -39,7 +39,7 @@ export function leakFor(slug: IndustrySlug, size: Size, assume?: number): Leak {
       return {
         title: "Money spent past budget", short: "Budget overruns",
         why: "On jobs that ran over, costs went past the budget for the work actually done — and nobody saw it until month-end.",
-        fix: "A live budget-vs-actual view per job, with an alert the week a job starts to slip.",
+        fix: "A budget-vs-actual view per job, updated daily, with an alert the week a job starts to slip.",
         qty: null,
         qtyLabel: "Over budget on jobs that ran over",
         qtyFmt: "money",
@@ -147,3 +147,18 @@ export function leakFor(slug: IndustrySlug, size: Size, assume?: number): Leak {
 }
 
 export const leakTotal = (l: Leak) => (l.qty === null ? l.unit : l.qty * l.unit);
+
+/* Plain-language list of what an estimate is built on, for the
+   "How we estimated this" panel next to every loss figure. */
+export function estimateNotes(slug: IndustrySlug, size: Size, company: string, siteCount: number, siteNoun: string, assume?: number): string[] {
+  const l = leakFor(slug, size, assume);
+  const lost = leakTotal(l);
+  const out = [
+    `A made-up ${size === "small" ? "small" : "larger"} company (${company}) with ${siteCount} ${siteNoun} and 12 months of generated sample records. Not a real client.`,
+    l.qty === null ? `${l.qtyLabel}, added up from those records: ${fmt(lost, "money")} a year.` : `${l.qtyLabel}: ${fmt(l.qty, l.qtyFmt)} × ${l.unitLabel.toLowerCase()}: ${fmt(l.unit, "money2")} = ${fmt(lost, "money")} a year.`,
+  ];
+  if (l.assumption) out.push(`${l.assumption.label}: $${(assume ?? l.assumption.value).toFixed(2)} — a typical figure for the industry, not a measured one.`);
+  out.push("“Fix 15%” assumes you recover 15% of the loss. You can change that share in the calculator.");
+  out.push("Your real numbers will differ. The free Readiness Check runs the same math on your data.");
+  return out;
+}

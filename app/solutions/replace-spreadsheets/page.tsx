@@ -17,7 +17,7 @@ export default function Page() {
           Five versions of one number. <em className="accent">Make it one.</em>
         </>
       }
-      lead="Your team enters it once. Everyone sees it live."
+      lead="Your team enters it once. Everyone sees it right away."
       demoTitle="Collapse the versions."
       demo={<SpreadsheetDemo />}
       points={[

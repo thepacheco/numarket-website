@@ -19,7 +19,7 @@ export default function PlatformToggle() {
       <div className="homes">
         <div className={`home-box ${where === "ours" ? "active" : ""}`}>
           <b>numarket&apos;s managed environment</b>
-          <span className="small muted">Small & mid-size. You own the account.</span>
+          <span className="small muted">Small, Mid, and Large. Your own separate account; you own your data.</span>
           <div className="stack-mini">
             {stack.map((s) => (
               <span key={s}>{s}</span>
@@ -36,7 +36,7 @@ export default function PlatformToggle() {
           </div>
         </div>
       </div>
-      <p className="small muted">Same stack either way. Either way, it&apos;s yours.</p>
+      <p className="small muted">Same stack either way. Either way, you own your data.</p>
     </div>
   );
 }

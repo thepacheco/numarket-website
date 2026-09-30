@@ -53,7 +53,7 @@ export const legal: Record<string, LegalDoc> = {
       ["5. Subprocessors", ["Current subprocessors include Snowflake (data platform), cloud hosting, and data-connector providers. A current list is provided with the contract, and clients are notified before changes."]],
       ["6. Incident notification", ["We notify the client without undue delay, and within 72 hours of confirming a security incident affecting its data, with what we know and what we're doing about it."]],
       ["7. Assistance", ["We help clients respond to data-subject requests and regulatory inquiries related to the data we process for them."]],
-      ["8. Return and deletion", ["At the end of the engagement, the client receives a full export or an account handover within 30 days. We then delete our copies on request, except where the law requires us to keep them."]],
+      ["8. Return and deletion", ["At the end of the engagement, the client receives, within 30 days, a full copy of their data in open formats, the structure, the cleaning logic, the application code, and the data dictionary, or a transfer of the database account. We then delete our copies and confirm in writing, except where the law requires us to keep them."]],
       ["9. Audits", ["Clients may request reasonable information to confirm compliance with the DPA."]],
       ["10. Healthcare data", ["Where protected health information is involved, a Business Associate Agreement is signed and a HIPAA-eligible configuration is used."]],
     ],
