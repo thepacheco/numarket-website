@@ -12,6 +12,7 @@ export default function NeedPage({
   points,
   extra,
   art,
+  artBack,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -21,10 +22,11 @@ export default function NeedPage({
   points: { icon: string; title: string; body: string }[];
   extra?: ReactNode;
   art?: ReactNode;
+  artBack?: ReactNode;
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} lead={lead} art={art} />
+      <PageHero eyebrow={eyebrow} title={title} lead={lead} art={art} artBack={artBack} />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <SectionHead eyebrow="Try it" title={demoTitle} />

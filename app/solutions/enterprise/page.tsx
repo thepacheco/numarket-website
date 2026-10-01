@@ -19,7 +19,7 @@ export default function Enterprise() {
   return (
     <>
       <PageHero
-        art={<EngineeringArt />}
+        artBack={<EngineeringArt />}
         eyebrow="Larger organizations"
         title={
           <>

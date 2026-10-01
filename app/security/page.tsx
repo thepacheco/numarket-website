@@ -21,7 +21,7 @@ const details = [
   { q: "How do you connect to our systems?", a: "Read-only wherever possible. We never need to change anything in your source systems." },
   { q: "Is anything stored on laptops?", a: "No. No client data is stored on laptops or personal devices." },
   { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },
-  { q: "Can you support healthcare data?", a: "Yes. A HIPAA-eligible configuration and a Business Associate Agreement are available on Command or on request." },
+  { q: "Can you support healthcare data?", a: "Yes, at any size. Health data runs on a HIPAA-eligible configuration, and we sign a Business Associate Agreement. It adds +$500/mo on Small and +$800/mo on Mid; Large is quoted." },
   { q: "What if there's an incident?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
   { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and the data dictionary — or we transfer the whole database account to you. No charge. Then we delete our copies and confirm in writing." },
 ];

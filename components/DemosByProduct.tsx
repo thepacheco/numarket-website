@@ -9,15 +9,15 @@ import IndustryExplorer from "./IndustryExplorer";
 import IndustryEntry from "./IndustryEntry";
 import WorkspaceDemo from "./WorkspaceDemo";
 import SampleReview from "./SampleReview";
-import CrewScheduler from "./CrewScheduler";
+import EngineeringApps from "./EngineeringApps";
 import { MigrationDemo } from "./NarratedDemos";
 import { industries, type IndustrySlug } from "@/content/industries";
 
 const tabs: { id: SolidKind; name: string; line: string }[] = [
-  { id: "foundation", name: "Foundation", line: "Messy sources in, one clean table out." },
+  { id: "foundation", name: "Foundation", line: "Messy sources in, one clean table out — and a move off an old system." },
   { id: "workspace", name: "Workspace", line: "The dashboard, an input screen, and Ask Your Data." },
   { id: "insight", name: "Insight Review", line: "What your analyst hands you, with action items to check off." },
-  { id: "engineering", name: "Engineering", line: "A custom app built for one company, and a migration." },
+  { id: "engineering", name: "Engineering", line: "Four custom apps, each built for one company." },
 ];
 
 /* Demos organized by product, filtered by industry. */
@@ -62,7 +62,13 @@ export default function DemosByProduct() {
         <p className="dbp-line">
           {cur.line} <span className="label-sample">Sample data</span>
         </p>
-        {tab === "foundation" && <FoundationDemo slug={slug} />}
+        {tab === "foundation" && (
+          <div className="dbp-stack">
+            <FoundationDemo slug={slug} />
+            <h3 className="dbp-h">Moving off an old system, table by table</h3>
+            <MigrationDemo />
+          </div>
+        )}
         {tab === "workspace" && (
           <div className="dbp-stack">
             <h3 className="dbp-h">The dashboard</h3>
@@ -74,14 +80,7 @@ export default function DemosByProduct() {
           </div>
         )}
         {tab === "insight" && <SampleReview slug={slug} />}
-        {tab === "engineering" && (
-          <div className="dbp-stack">
-            <h3 className="dbp-h">A custom app: the scheduler</h3>
-            <CrewScheduler slug={slug} />
-            <h3 className="dbp-h">A migration, tracked table by table</h3>
-            <MigrationDemo />
-          </div>
-        )}
+        {tab === "engineering" && <EngineeringApps slug={slug} />}
       </div>
     </div>
   );

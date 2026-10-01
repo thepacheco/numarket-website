@@ -9,6 +9,7 @@ import ProductSolid from "@/components/solids/ProductSolid";
 import SolidIcon from "@/components/solids/SolidIcon";
 import SampleReview from "@/components/SampleReview";
 import WsVsEng from "@/components/WsVsEng";
+import EngineeringApps from "@/components/EngineeringApps";
 import Roles from "@/components/Roles";
 import { CtaBand, Faq, SectionHead } from "@/components/ui";
 import { productBySlug, products } from "@/content/products";
@@ -28,24 +29,27 @@ const demoTitle: Record<string, [string, string]> = {
   foundation: ["See it clean", "Three reports. Watch them agree."],
   workspace: ["Try it", "Change a number. Ask a question."],
   insight: ["A sample review", "What your analyst hands you."],
-  engineering: ["Watch a migration", "Move it. Check it. Switch off the old one."],
+  engineering: ["Try the apps", "Four custom apps, in use."],
 };
 
 function Demo({ kind }: { kind: string }) {
-  if (kind === "foundation") return <ReconcileDemo />;
+  if (kind === "foundation")
+    return (
+      <div style={{ display: "grid", gap: 28 }}>
+        <ReconcileDemo />
+        <div>
+          <h3 className="demo-sub">Moving off an old system? That&apos;s Foundation too.</h3>
+          <p className="muted" style={{ marginBottom: 14 }}>
+            Your data is mapped, moved table by table, and counted twice before the old system is switched off.
+          </p>
+          <MigrationDemo />
+        </div>
+      </div>
+    );
   if (kind === "workspace") return <WorkspaceDemo />;
   if (kind === "insight") return <SampleReview />;
-  return <MigrationDemo />;
+  return <EngineeringApps />;
 }
-
-const engExamples: [string, string][] = [
-  ["Crew scheduler", "Drag a crew onto a job and see its labor cost and schedule change before you commit."],
-  ["Estimate builder", "Build bids from your own past job costs instead of a blank spreadsheet."],
-  ["Write-back automation", "Approved change orders push straight into QuickBooks — no double entry."],
-  ["Migration", "Move off an old server or reporting system, table by table, verified to the cent."],
-  ["Near-real-time feeds", "When a schedule isn't fast enough, we build a feed for the numbers that truly need it."],
-  ["Work in your cloud", "We build inside your own Snowflake, Azure, or Databricks."],
-];
 
 function PriceBlock({ kind }: { kind: string }) {
   if (kind === "engineering")
@@ -154,22 +158,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <Demo kind={p.kind} />
         </div>
       </section>
-
-      {p.kind === "engineering" && (
-        <section className="section">
-          <div className="container">
-            <SectionHead eyebrow="What we build" title="Custom work, one sentence each." />
-            <div className="eng-examples stagger">
-              {engExamples.map(([t, b]) => (
-                <div key={t} className="card">
-                  <h3>{t}</h3>
-                  <p>{b}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {p.kind === "workspace" && (
         <section className="section">

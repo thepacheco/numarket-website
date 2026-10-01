@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import Icon from "./Icon";
 import { Dots } from "./ui";
 import { effort, readinessLevels } from "@/content/effort";
-import { tiers, money } from "@/content/tiers";
+import { sizes, tiers, money } from "@/content/tiers";
 
 /* ---------------- Readiness quiz ---------------- */
 
@@ -90,8 +90,9 @@ type Timing = "asap" | "soon" | "exploring";
 function estimate(employees: number, sources: number, users: number, loc: Loc, spreadsheets: boolean) {
   let tierId: "insight" | "operate" | "command";
   if (loc === "yours") tierId = "command";
-  else if (sources <= 3 && users <= 15 && employees < 100) tierId = "insight";
-  else if (sources <= 8 && users <= 50 && employees < 500) tierId = "operate";
+  /* size is set by the data (sources and users), not by headcount */
+  else if (sources <= 3 && users <= 15) tierId = "insight";
+  else if (sources <= 8 && users <= 50) tierId = "operate";
   else tierId = "command";
   const path = effort[tierId === "insight" ? 0 : tierId === "operate" ? 1 : 2];
   const base = {
@@ -275,10 +276,12 @@ export default function GettingStartedTools() {
               <div className="est-top">
                 <span className="eyebrow">Recommended</span>
                 <h3>
-                  {est.tier.name}
+                  {est.tier.name} plan · {sizes.find((s) => s.id === est.tier.size)!.name}
                   {est.tier.popular && <span className="pill" style={{ marginLeft: 10 }}>Most popular</span>}
                 </h3>
-                <p>{est.tier.bestFor}</p>
+                <p>
+                  {est.tier.bestFor}. Includes Foundation, Workspace, and Insight Review. <Link href="/pricing">Fewer products? Build your price →</Link>
+                </p>
               </div>
               <dl className="est-grid">
                 <div>

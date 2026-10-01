@@ -8,14 +8,14 @@ export const metadata: Metadata = { title: "Move Off Old Systems", description: 
 export default function Page() {
   return (
     <NeedPage
-      art={<EngineeringArt />}
+      artBack={<EngineeringArt />}
       eyebrow="Move off old systems"
       title={
         <>
           Retire the old system. <em className="accent">Lose nothing.</em>
         </>
       }
-      lead="Every row moved, counted, and checked."
+      lead="Every row moved, counted, and checked — as part of Foundation."
       demoTitle="Run a migration."
       demo={<MigrationDemo />}
       points={[

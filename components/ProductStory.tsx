@@ -62,10 +62,63 @@ const screens = [
   { t: "Ask Your Data", body: <div className="scr-chat"><span className="q">Which jobs are over budget?</span><span className="a">2 jobs · $1.10M over</span></div> },
   { t: "Alert", body: <div className="scr-alert"><b>Budget line crossed</b><span>Route 9 Bridge · sent to PM</span></div> },
 ];
-function ScreenViz({ s }: { s: number }) {
+const engScreens = [
+  {
+    t: "Crew scheduler",
+    body: (
+      <div className="scr-list">
+        <span>
+          <b>Framing crew</b> → Route 9 Bridge
+        </span>
+        <span>
+          <b>Concrete crew</b> → Terminal Expansion
+        </span>
+        <span className="hl">Labor $10,780 · finishes Mon, Oct 12</span>
+      </div>
+    ),
+  },
+  {
+    t: "Change orders → QuickBooks",
+    body: (
+      <div className="scr-list">
+        <span>
+          <b>CO-117 approved</b> · $42,750
+        </span>
+        <span>Sent to QuickBooks · 9:14</span>
+        <span className="hl">Posted ✓ · job budget updated</span>
+      </div>
+    ),
+  },
+  {
+    t: "Estimate builder",
+    body: (
+      <div className="scr-list">
+        <span>
+          <b>12,000 sq ft</b> · Standard · 15% margin
+        </span>
+        <span>From 4 past jobs · $245/sq ft</span>
+        <span className="hl">Price $3.46M</span>
+      </div>
+    ),
+  },
+  {
+    t: "Owner portal",
+    body: (
+      <div className="scr-list">
+        <span>
+          <b>Route 9 Bridge</b> · 62% complete
+        </span>
+        <span>Next: Dried in</span>
+        <span className="hl">On track · updated this morning</span>
+      </div>
+    ),
+  },
+];
+
+function ScreenViz({ s, list = screens }: { s: number; list?: typeof screens }) {
   return (
     <div className="scr-stage" aria-hidden="true">
-      {screens.map((sc, i) => {
+      {list.map((sc, i) => {
         const d = i - s;
         return (
           <div key={sc.t} className={`scr ${d === 0 ? "on" : ""}`} style={{ ["--d" as string]: d }}>
@@ -131,10 +184,10 @@ const stories: Record<Exclude<ProductKind, "platform">, { steps: { eyebrow: stri
   },
   engineering: {
     steps: [
-      { eyebrow: "Map", title: "Every old table, mapped.", body: "Old field names matched to clear new ones." },
-      { eyebrow: "Move", title: "Moved in batches.", body: "The old system keeps running while we copy." },
-      { eyebrow: "Check", title: "Counted twice.", body: "Rows and totals must match before anything switches." },
-      { eyebrow: "Switch", title: "Switch off the old one.", body: "Your team moves over. Nothing lost." },
+      { eyebrow: "App 1 · Scheduler", title: "Schedule crews against the budget.", body: "Drag a crew onto a job and see labor cost and finish date before you commit. Built around one company's crews, rates, and jobs." },
+      { eyebrow: "App 2 · Write-back", title: "Approved change orders post themselves.", body: "Approve once in the app. It posts to QuickBooks and the job budget updates. Nobody types it twice." },
+      { eyebrow: "App 3 · Estimate builder", title: "Bids from your own past jobs.", body: "Pick the size and complexity. The price comes from what similar jobs really cost you, not a blank spreadsheet." },
+      { eyebrow: "App 4 · Client portal", title: "Customers check status themselves.", body: "A branded page where each owner sees progress and the next milestone — straight from your clean data." },
     ],
   },
 };
@@ -144,8 +197,7 @@ export default function ProductStory({ kind }: { kind: Exclude<ProductKind, "pla
   const visual = (a: number) => {
     if (kind === "foundation")
       return <MapViz s={a} tint="var(--p-foundation)" sources={["Spreadsheets", "Accounting", "Project tools", "Email files"]} hub={["Your", "database"]} outs={[["One clean database", "documented, refreshed"], ["Encrypted & private", "yours to keep"]]} />;
-    if (kind === "engineering")
-      return <MapViz s={a} tint="var(--p-engineering)" sources={["Old ERP tables", "Legacy reports", "Access database", "Archive files"]} hub={["New", "database"]} outs={[["184,220 rows", "mapped and moved"], ["Counts match ✓", "safe to switch"]]} />;
+    if (kind === "engineering") return <ScreenViz s={a} list={engScreens} />;
     if (kind === "workspace") return <ScreenViz s={a} />;
     return <CardsViz s={a} />;
   };

@@ -104,6 +104,33 @@ export default function HowItWorks() {
               See how they fit, what runs underneath, and what you get if you leave →
             </Link>
           </div>
+          <div className="ft-solids">
+            <div className="ft-group">
+              <span className="ft-label">The three products</span>
+              <div className="ft-row">
+                {productRow.slice(0, 3).map((p) => (
+                  <Link key={p.kind} href={p.href} className="ft-solid" data-solid-host>
+                    <span className="ft-canvas">
+                      <ProductSolid kind={p.kind} scale={0.38} />
+                    </span>
+                    <b>{p.name}</b>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <span className="ft-plus" aria-hidden="true">
+              +
+            </span>
+            <div className="ft-group ft-addon">
+              <span className="ft-label">Optional add-on</span>
+              <Link href="/products/engineering" className="ft-solid" data-solid-host>
+                <span className="ft-canvas">
+                  <ProductSolid kind="engineering" scale={0.38} />
+                </span>
+                <b>Engineering</b>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
       <CtaBand />

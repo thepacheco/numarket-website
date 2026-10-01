@@ -5,7 +5,7 @@ export const productLinks: { href: string; title: string; desc: string; kind: So
   { href: "/products/foundation", title: "Foundation", desc: "Collect, clean & secure your data", kind: "foundation" },
   { href: "/products/workspace", title: "Workspace", desc: "Your reports and your apps", kind: "workspace" },
   { href: "/products/insight-review", title: "Insight Review", desc: "What to do next, from an analyst", kind: "insight" },
-  { href: "/products/engineering", title: "Engineering", desc: "Custom builds and migrations (optional)", kind: "engineering" },
+  { href: "/products/engineering", title: "Engineering", desc: "Custom apps and automations (optional)", kind: "engineering" },
 ];
 
 export const sizeLinks = [

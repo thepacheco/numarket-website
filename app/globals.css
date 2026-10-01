@@ -612,10 +612,7 @@ table.t .hl {
 .logo .mk {
   color: #00a862;
 }
-.dark .logo .nu,
-.dark .logo .nu-svg,
-.site-footer .logo .nu-svg,
-.site-footer .logo .nu {
+.dark .logo .nu {
   color: #fff;
 }
 .dark .logo .mk,

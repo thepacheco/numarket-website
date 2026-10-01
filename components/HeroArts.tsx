@@ -6,27 +6,6 @@ import { NuBadgeShape } from "./NuMark";
 
 const shadow = <ellipse cx="0" cy="40" rx="130" ry="56" className="art-shadow" />;
 
-/* Pricing: three columns that grow with the plan */
-export function PricingArt() {
-  const cols = [
-    { a: -80, h: 40, c: ["#9fd3e6", "#2a6a91", "#3b86b0"], label: "Insight" },
-    { a: -20, h: 72, c: ["#9ee6d6", "#1f7476", "#2a8f91"], label: "Operate" },
-    { a: 40, h: 110, c: ["#b3f0c9", "#1f7a52", "#2e9e6b"], label: "Command" },
-  ];
-  return (
-    <div className="art hero-art-float" role="img" aria-label="Three plans, growing in size: Insight, Operate, Command.">
-      <svg viewBox="-160 -150 320 230">
-        {shadow}
-        {cols.map((c, i) => (
-          <g key={c.label} className="rise" style={{ animationDelay: `${i * 0.15}s` }}>
-            <Box a={c.a} b={-10} c={0} w={44} d={44} h={c.h} top={c.c[0]} left={c.c[1]} right={c.c[2]} />
-          </g>
-        ))}
-      </svg>
-    </div>
-  );
-}
-
 /* Getting started: five steps up to a flag */
 export function PathArt() {
   return (

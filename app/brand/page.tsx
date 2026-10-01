@@ -5,9 +5,9 @@ import { PageHero } from "@/components/ui";
 
 export const metadata: Metadata = { title: "Logo", robots: { index: false, follow: false } };
 
-function Word({ size, dark }: { size: number; dark?: boolean }) {
+function Word({ size }: { size: number }) {
   return (
-    <span className={`logo brand-word ${dark ? "on-dark" : ""}`} style={{ fontSize: size }}>
+    <span className="logo brand-word" style={{ fontSize: size }}>
       <NuLetters className="nu-svg" />
       <span className="mk">market</span>
     </span>
@@ -29,8 +29,8 @@ export default function Brand() {
               <div className="lt light big">
                 <Word size={84} />
               </div>
-              <div className="lt dark big">
-                <Word size={84} dark />
+              <div className="lt icons big">
+                <Word size={84} />
               </div>
               <div className="lt icons">
                 <NuBadge size={96} />

@@ -45,7 +45,7 @@ export default function Products() {
             <div className="lvl side">
               Engineering
               <br />
-              <span style={{ fontWeight: 500 }}>migrations · custom builds</span>
+              <span style={{ fontWeight: 500 }}>custom apps · automations</span>
             </div>
           </div>
         </div>

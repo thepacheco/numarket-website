@@ -4,6 +4,7 @@ import SolidIcon from "./solids/SolidIcon";
 export default function WsVsEng() {
   return (
     <div className="wve">
+      <h2 className="sr-only">Workspace or Engineering?</h2>
       <p className="wve-line">Workspace is the app every client gets, set up for your business. Engineering is when you need something built that doesn&apos;t exist yet.</p>
       <div className="wve-cols">
         <div>
@@ -19,7 +20,7 @@ export default function WsVsEng() {
             <SolidIcon kind="engineering" size={26} /> Engineering
           </h3>
           <p className="wve-tag">Built from scratch, for you alone</p>
-          <p>A crew-scheduling app, an estimate builder, an automation that pushes approved change orders back into QuickBooks, a migration off an old server.</p>
+          <p>A crew-scheduling app, an estimate builder, an automation that pushes approved change orders back into QuickBooks, a portal your customers sign into.</p>
           <p className="small muted">Priced as a project: from $5,000, or $175/hr.</p>
         </div>
       </div>

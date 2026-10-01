@@ -139,7 +139,7 @@ export default function SavingsCalc({ initialIndustry = "logistics", initialSize
           </div>
           <div className="cmp-row">
             <span>
-              numarket {planFor(size)}, first year
+              numarket {planFor(size)} plan ({size === "small" ? "Small" : "Large"}), first year
             </span>
             <span className="cmp-track">
               <span className="cmp-fill cost" style={{ width: `${(cost / max) * 100}%` }} />

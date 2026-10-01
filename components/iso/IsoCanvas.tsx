@@ -14,7 +14,8 @@ function shadowTexture() {
   c.width = c.height = 128;
   const g = c.getContext("2d")!;
   const grd = g.createRadialGradient(64, 64, 8, 64, 64, 64);
-  grd.addColorStop(0, "rgba(11,31,46,0.22)");
+  grd.addColorStop(0, "rgba(11,31,46,0.16)");
+  grd.addColorStop(0.55, "rgba(11,31,46,0.07)");
   grd.addColorStop(1, "rgba(11,31,46,0)");
   g.fillStyle = grd;
   g.fillRect(0, 0, 128, 128);
@@ -67,9 +68,14 @@ export default function IsoCanvas({ slug, mode, onReady }: { slug: IndustrySlug;
     scene.add(fill);
 
     const shadowTex = shadowTexture();
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(26, 20), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
+    /* A soft shadow under the platform, sized to it and always fully in view,
+       so the scene sits in the page instead of looking like a cut-out image. */
+    const rootBox = new THREE.Box3().setFromObject(built.root);
+    const fw = (rootBox.max.x - rootBox.min.x) * 1.3,
+      fd = (rootBox.max.z - rootBox.min.z) * 1.3;
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(fw, fd), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
     floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -1.6;
+    floor.position.y = -1.4;
     scene.add(floor);
 
     const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 200);
@@ -79,7 +85,7 @@ export default function IsoCanvas({ slug, mode, onReady }: { slug: IndustrySlug;
     cam.updateMatrixWorld();
 
     /* Fit the whole diorama in view, whatever the box's shape. */
-    const box = new THREE.Box3().setFromObject(built.root);
+    const box = rootBox.clone().union(new THREE.Box3().setFromObject(floor));
     const corners = [0, 1, 2, 3, 4, 5, 6, 7].map((i) => new THREE.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y + 0.6 : box.min.y, i & 4 ? box.max.z : box.min.z));
     const view = corners.map((c) => c.clone().applyMatrix4(cam.matrixWorldInverse));
     const minX = Math.min(...view.map((v) => v.x)),

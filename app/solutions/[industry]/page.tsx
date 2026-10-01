@@ -26,22 +26,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
   if (!ind) notFound();
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero has-art-back ind-page-hero">
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-fade" aria-hidden="true" />
-        <div className="container hero-grid">
-          <div>
-            <span className="eyebrow">{ind.name}</span>
-            <h1>
-              {ind.questions[0]} <em className="accent">Answered in one place.</em>
-            </h1>
-            <p className="lead">{ind.changes}</p>
-          </div>
+        <div className="hero-art-back iso-back">
           <IndustryIso
             slug={ind.slug}
             mode="hero"
             eager
-            className="ind-hero-iso"
             label={`Animated 3D scene of a ${ind.short.toLowerCase()} business.`}
             fallback={
               <div className={`ind-hero ind-${ind.slug}`} aria-hidden="true">
@@ -58,6 +50,15 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
               </div>
             }
           />
+        </div>
+        <div className="container">
+          <div>
+            <span className="eyebrow">{ind.name}</span>
+            <h1>
+              {ind.questions[0]} <em className="accent">Answered in one place.</em>
+            </h1>
+            <p className="lead">{ind.changes}</p>
+          </div>
         </div>
       </section>
 

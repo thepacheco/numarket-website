@@ -31,7 +31,7 @@ export function SlaPicker() {
       <div className="seg" role="group" aria-label="Plan" style={{ justifySelf: "start" }}>
         {(Object.keys(plans) as Plan[]).map((k) => (
           <button key={k} type="button" aria-pressed={plan === k} onClick={() => setPlan(k)}>
-            {k}
+            {{ Insight: "Small", Operate: "Mid", Command: "Large" }[k]}
           </button>
         ))}
       </div>

@@ -303,7 +303,7 @@ export default function IndustryExplorer({
           </div>
           <div className="stat-chip">
             <dt>Plan setup from</dt>
-            <dd>{size === "small" ? "$7,500" : "$40,000"}</dd>
+            <dd>{size === "small" ? "$7,500 · Insight plan" : "$40,000 · Command plan"}</dd>
           </div>
         </dl>
         <div className="btn-row">

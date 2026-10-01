@@ -76,30 +76,6 @@ export default function About() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Leadership" title="Who you'll work with." />
-          <div className="leader card">
-            <div className="leader-photo" aria-hidden="true">
-              BP
-            </div>
-            <div>
-              <h3>Brandon Pacheco</h3>
-              <p className="leader-title">Founder</p>
-              <p>
-                Brandon founded numarket after 7+ years of data and analytics work across energy, construction, healthcare, manufacturing, and food
-                production. Every client works with Brandon directly, from the first Readiness Check to the monthly reviews.
-              </p>
-              {site.linkedin && (
-                <p style={{ marginTop: 10 }}>
-                  <a href={site.linkedin}>LinkedIn →</a>
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section soft">
-        <div className="container">
           <SectionHead eyebrow="Where we're headed" title="What comes next." />
           <div className="grid g3 stagger">
             {ahead.map(([t, b]) => (

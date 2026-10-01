@@ -47,7 +47,6 @@ export default function CrewScheduler({ slug }: { slug: IndustrySlug }) {
   return (
     <div className="sched">
       <div className="sched-top">
-        <span className="label-sample">Custom app example · Sample data</span>
         <p className="small muted">
           Drag a {c.res} onto a {c.target} — or tap a {c.res}, then tap a {c.target}.
         </p>
@@ -87,7 +86,7 @@ export default function CrewScheduler({ slug }: { slug: IndustrySlug }) {
               tabIndex={picked !== null ? 0 : -1}
               onKeyDown={(e) => picked !== null && (e.key === "Enter" || e.key === " ") && place(picked, j)}
             >
-              <h4>{job}</h4>
+              <h3 className="sched-h">{job}</h3>
               <p className="small muted">
                 {c.work[j]} {c.res}-days of work left · due in {c.due[j]} workdays
               </p>

@@ -6,7 +6,7 @@ import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
 import MoneyStats from "@/components/MoneyStats";
 import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
-import { tiers, money } from "@/content/tiers";
+import { sizes, tiers, money } from "@/content/tiers";
 
 /* Hero visual: messy tiles tidy themselves into rows above a secure core. */
 const tiles = [
@@ -245,7 +245,9 @@ export default function Home() {
                 {t.popular && <span className="badge">Most popular</span>}
                 <div>
                   <h3>{t.name}</h3>
-                  <p className="small">{t.bestFor}</p>
+                  <p className="small">
+                    {sizes.find((s) => s.id === t.size)!.name} · {sizes.find((s) => s.id === t.size)!.sources.toLowerCase()}
+                  </p>
                 </div>
                 <div className="price">
                   <span className="per">From</span>
@@ -255,7 +257,7 @@ export default function Home() {
                   </span>
                   <span className="per">+ {money(t.setupFrom)} setup</span>
                 </div>
-                <span className="more">Compare plans →</span>
+                <span className="more">All three products · see what’s included →</span>
               </Link>
             ))}
           </div>

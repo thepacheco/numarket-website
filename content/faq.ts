@@ -36,6 +36,6 @@ export const faq: Record<string, QA[]> = {
     { q: "Who owns the data?", a: "You do. Always. The contract says so." },
     { q: "Is my data mixed with other clients' data?", a: "Never. Every client gets their own separate, encrypted database." },
     { q: "What if something goes wrong?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-    { q: "Can you support healthcare data?", a: "Yes. HIPAA-eligible configuration and a Business Associate Agreement are available on Command or on request." },
+    { q: "Can you support healthcare data?", a: "Yes, at any size. Health data runs on a HIPAA-eligible configuration, and we sign a Business Associate Agreement. It adds +$500/mo on Small and +$800/mo on Mid; Large is quoted." },
   ],
 };

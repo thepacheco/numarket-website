@@ -71,8 +71,8 @@ const L = (key: string, text: string, at: THREE.Object3D, tone: LabelSpec["tone"
 /* ---------------- logistics: a semi on a loop between warehouse and customer ---------------- */
 function logistics(k: Kit, accent: number): Scene {
   const root = new THREE.Group();
-  root.add(k.platform(14.6, 9.6));
-  const Ls = 4.2,
+  root.add(k.platform(13, 9.6));
+  const Ls = 3.0,
     R = 1.95,
     W = 1.3;
   const road = stadiumShape(Ls, R + W / 2);
@@ -89,7 +89,7 @@ function logistics(k: Kit, accent: number): Scene {
   }
   // warehouse (left)
   const wh = new THREE.Group();
-  wh.position.set(-5.9, 0, 0);
+  wh.position.set(-5.15, 0, 0);
   wh.add(k.box(2.0, 1.8, 3.6, P.wall, 0, 0, 0, 0.08));
   wh.add(k.box(2.2, 0.14, 3.8, P.roof, 0, 1.8, 0, 0.05));
   wh.add(k.box(2.02, 0.24, 3.62, accent, 0, 1.46, 0, 0.03));
@@ -101,7 +101,7 @@ function logistics(k: Kit, accent: number): Scene {
   root.add(wh);
   // customer store (right)
   const st = new THREE.Group();
-  st.position.set(5.8, 0, -0.3);
+  st.position.set(5.05, 0, -0.3);
   st.add(k.box(1.9, 1.4, 2.8, P.white, 0, 0, 0, 0.08));
   st.add(k.box(2.0, 0.12, 2.9, P.roof, 0, 1.4, 0, 0.04));
   st.add(k.box(1.5, 0.62, 0.06, P.glass, 0, 0.22, 1.4, 0.02));
@@ -114,13 +114,13 @@ function logistics(k: Kit, accent: number): Scene {
     [3.4, 3.9, 0.9],
     [-3.6, -3.9, 0.9],
     [0.8, -4.0, 1],
-    [6.4, -3.6, 0.8],
+    [5.6, -3.7, 0.8],
     [-0.8, 0.1, 0.8],
     [1.0, -0.3, 0.95],
   ])
     root.add(k.tree(x, z, s));
   const { g: truck, load } = k.semi(accent);
-  truck.scale.setScalar(0.86);
+  truck.scale.setScalar(0.8);
   root.add(truck);
   const loadMat = k.mat(P.kraft, { unique: true });
   load.children.forEach((c) => c.children.forEach((m) => (m as THREE.Mesh).material === k.mat(P.kraft) && ((m as THREE.Mesh).material = loadMat)));

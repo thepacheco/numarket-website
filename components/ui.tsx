@@ -5,12 +5,32 @@ import { cta } from "@/content/site";
 import type { QA } from "@/content/faq";
 import SolidsField from "./solids/SolidsField";
 
-export function PageHero({ eyebrow, title, lead, children, art }: { eyebrow: string; title: ReactNode; lead?: ReactNode; children?: ReactNode; art?: ReactNode }) {
+export function PageHero({
+  eyebrow,
+  title,
+  lead,
+  children,
+  art,
+  artBack,
+}: {
+  eyebrow: string;
+  title: ReactNode;
+  lead?: ReactNode;
+  children?: ReactNode;
+  art?: ReactNode;
+  /* art placed large behind the content, as part of the background */
+  artBack?: ReactNode;
+}) {
   return (
-    <section className="page-hero">
+    <section className={`page-hero ${artBack ? "has-art-back" : ""}`}>
       <SolidsField textZone="left" />
       <div className="hero-gradient" aria-hidden="true" />
       <div className="hero-fade" aria-hidden="true" />
+      {artBack && (
+        <div className="hero-art-back">
+          {artBack}
+        </div>
+      )}
       <div className={`container ${art ? "hero-grid" : ""}`}>
         <div>
           <span className="eyebrow">{eyebrow}</span>
