@@ -29,7 +29,9 @@ export default function SampleReview({ slug = "construction", interactive = true
       .map((r) => ({ site: r.site, status: r.status, what: `${sk.label}: ${fmt(r.values.find((x) => x.key === v.statusKey)!.value, sk.fmt)}` }));
     const sites = [v.action.site, ...atRisk.map((r) => r.site).filter((s) => s !== v.action.site), ...v.sites].filter((s, i, a) => a.indexOf(s) === i).slice(0, 3);
     const actions = sites.map((s) => buildView(slug, "large", s, 3).action);
-    return { changes, atRisk, actions };
+    /* the standing usage check: data volume and platform use vs. the allowance */
+    const usage = { rows: Math.round((v.rowCount * 1375) / 1000) * 1000, pct: 48 + (slug.length * 7) % 30 };
+    return { changes, atRisk, actions, usage };
   }, [slug]);
   const [done, setDone] = useState<boolean[]>([false, false, false]);
   const ind = industries.find((i) => i.slug === slug)!;
@@ -118,6 +120,20 @@ export default function SampleReview({ slug = "construction", interactive = true
             </li>
           ))}
         </ol>
+      </section>
+      <section className="rd-usage">
+        <h4>Usage check</h4>
+        <div className="rd-usage-row">
+          <span>
+            <b className="tnum">{review.usage.rows.toLocaleString("en-US")}</b> new rows this month
+          </span>
+          <span className="rd-meter" aria-hidden="true">
+            <i style={{ width: `${review.usage.pct}%` }} />
+          </span>
+          <span>
+            <b className="tnum">{review.usage.pct}%</b> of your platform allowance · steady, no change needed
+          </span>
+        </div>
       </section>
     </article>
   );

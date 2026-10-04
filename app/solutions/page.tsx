@@ -9,8 +9,8 @@ import IndGlyph from "@/components/IndGlyph";
 
 export const metadata: Metadata = { title: "Solutions", description: "numarket by size, by industry, and by need." };
 
-const needIcons = ["spreadsheet", "sparkle", "check", "layers"];
-const needDemo = ["Collapse 5 file versions into one", "Ask AI on messy vs. clean data", "Make 3 reports agree", "Run a migration"];
+const needIcons = ["spreadsheet", "file", "check", "layers", "sparkle"];
+const needDemo = ["Collapse 5 file versions into one", "Turn a paper log into data", "Make 3 reports agree", "Run a migration", "Ask AI on messy vs. clean data"];
 
 export default function Solutions() {
   return (
@@ -32,7 +32,7 @@ export default function Solutions() {
       <section className="section soft">
         <div className="container">
           <SectionHead eyebrow="By need" title="What are you trying to fix?" lead="Each one has its own hands-on demo." />
-          <div className="grid g4 stagger">
+          <div className="grid need-grid stagger">
             {needLinks.map((n, i) => (
               <Link key={n.href} href={n.href} className="card need-card">
                 <div className="icon-badge">

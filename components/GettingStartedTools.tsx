@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import Icon from "./Icon";
 import { Dots } from "./ui";
 import { effort, readinessLevels } from "@/content/effort";
-import { sizes, tiers, money } from "@/content/tiers";
+import { engineering, sizes, tiers, money } from "@/content/tiers";
 
 /* ---------------- Readiness quiz ---------------- */
 
@@ -49,8 +49,8 @@ function Meter({ level, done, answered }: { level: number; done: boolean; answer
           return (
             <circle
               key={i}
-              cx={100 + Math.cos(a) * 90}
-              cy={100 + Math.sin(a) * 90}
+              cx={(100 + Math.cos(a) * 90).toFixed(2)}
+              cy={(100 + Math.sin(a) * 90).toFixed(2)}
               r={on ? 3.2 : 2}
               fill={on ? mix(i / N) : "var(--gray-200)"}
               style={{ transition: "all .5s", transitionDelay: `${i * 12}ms` }}
@@ -86,6 +86,21 @@ function Meter({ level, done, answered }: { level: number; done: boolean; answer
 
 type Loc = "ours" | "yours" | "unsure";
 type Timing = "asap" | "soon" | "exploring";
+/* where most of the data lives today (Operating Decisions v2.2, §2) */
+type Where = "systems" | "sheets" | "somePaper" | "paper";
+type Volume = "small" | "mid" | "big";
+
+const whereOpts: [Where, string][] = [
+  ["systems", "In business systems"],
+  ["sheets", "Spreadsheets"],
+  ["somePaper", "Some on paper"],
+  ["paper", "Mostly paper"],
+];
+const volumeOpts: [Volume, string][] = [
+  ["small", "Under 1 million"],
+  ["mid", "1–10 million"],
+  ["big", "Over 10 million"],
+];
 
 function estimate(employees: number, sources: number, users: number, loc: Loc, spreadsheets: boolean) {
   let tierId: "insight" | "operate" | "command";
@@ -118,9 +133,14 @@ export default function GettingStartedTools() {
   const [users, setUsers] = useState(12);
   const [loc, setLoc] = useState<Loc>("ours");
   const [timing, setTiming] = useState<Timing>("soon");
-  const [sheets, setSheets] = useState(true);
+  const [whereSel, setWhere] = useState<Where | null>(null);
+  const [volume, setVolume] = useState<Volume>("small");
 
-  const spreadsheets = quizDone ? level === 1 : sheets;
+  /* Until the visitor picks, the quiz sets it: Level 1 means mostly spreadsheets. */
+  const where: Where = whereSel ?? (quizDone ? (level === 1 ? "sheets" : "systems") : "sheets");
+  const fromQuiz = whereSel === null && quizDone;
+  const spreadsheets = where === "sheets";
+  const paperOnly = where === "paper";
   const est = useMemo(() => estimate(employees, sources, users, loc, spreadsheets), [employees, sources, users, loc, spreadsheets]);
 
   const contactHref = useMemo(() => {
@@ -132,11 +152,14 @@ export default function GettingStartedTools() {
       users: String(users),
       location: loc,
       timing,
+      where: whereOpts.find(([v]) => v === where)![1],
+      volume: volumeOpts.find(([v]) => v === volume)![1],
       estimate: `${money(est.setup[0])}–${money(est.setup[1])}${est.openEnded ? "+" : ""} setup; ${money(est.monthly[0])}${est.openEnded ? "+" : "–" + money(est.monthly[1])}/mo`,
     });
+    if (paperOnly) q.set("estimate", "Mostly paper: talk first (Engineering before Foundation)");
     if (quizDone) q.set("readiness", `Level ${level} — ${lvl.name}`);
     return `/contact?${q.toString()}`;
-  }, [est, employees, sources, users, loc, timing, quizDone, level, lvl.name]);
+  }, [est, employees, sources, users, loc, timing, quizDone, level, lvl.name, where, volume, paperOnly]);
 
   const setAnswer = (qi: number, oi: number) => setAnswers((a) => a.map((x, i) => (i === qi ? oi : x)));
 
@@ -263,16 +286,71 @@ export default function GettingStartedTools() {
                   ))}
                 </div>
               </div>
-              <label className="chk">
-                <input type="checkbox" checked={spreadsheets} disabled={quizDone} onChange={(e) => setSheets(e.target.checked)} />
-                <span>
-                  Our data is mostly in spreadsheets
-                  {quizDone && <em className="muted small"> (set by your quiz: Level {level})</em>}
+              <div className="field">
+                <span className="lbl">
+                  Where is most of your data today?
+                  {fromQuiz && <em className="muted small"> (set by your quiz: Level {level})</em>}
                 </span>
-              </label>
+                <div className="seg seg-wrap" role="group" aria-label="Where is most of your data today">
+                  {whereOpts.map(([v, l]) => (
+                    <button key={v} type="button" aria-pressed={where === v} onClick={() => setWhere(v)}>
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="field">
+                <span className="lbl">Records in your biggest system</span>
+                <div className="seg" role="group" aria-label="Records in your biggest system">
+                  {volumeOpts.map(([v, l]) => (
+                    <button key={v} type="button" aria-pressed={volume === v} onClick={() => setVolume(v)}>
+                      {l}
+                    </button>
+                  ))}
+                </div>
+                <span className="small muted">Every invoice line, timesheet entry, or transaction counts as one. A guess is fine.</span>
+              </div>
             </form>
 
+            {paperOnly ? (
+              <div className="est-out est-talk" aria-live="polite">
+                <div className="est-top">
+                  <span className="eyebrow">Let&apos;s talk first</span>
+                  <h3>Start by getting the paper into a system.</h3>
+                  <p>
+                    Foundation cleans data that&apos;s already digital, so a price for it now wouldn&apos;t mean much. The first step is an Engineering project: a phone
+                    form, or scanning what you already have. Once the data is digital, Foundation is priced by how many sources you have.
+                  </p>
+                </div>
+                <ul className="check-list">
+                  <li>
+                    <Icon name="check" />
+                    <span>A fixed quote for getting from paper to digital, from {money(engineering.from)}</span>
+                  </li>
+                  <li>
+                    <Icon name="check" />
+                    <span>We start with the one or two forms behind your most important numbers</span>
+                  </li>
+                  <li>
+                    <Icon name="check" />
+                    <span>Then Foundation, Workspace, and Insight Review, when you&apos;re ready</span>
+                  </li>
+                </ul>
+                <p className="small">
+                  <Link href="/solutions/paper-to-digital">See how paper to digital works →</Link>
+                </p>
+                <Link href={contactHref} className="btn btn-primary">
+                  Book a Readiness Check <Icon name="arrow" className="arrow" width={16} height={16} />
+                </Link>
+              </div>
+            ) : (
             <div className="est-out" aria-live="polite">
+              {volume === "big" && (
+                <p className="est-flag">
+                  <Icon name="alert" width={16} height={16} /> Scoping call recommended. Over 10 million records needs a short call to plan updates and price it correctly. It
+                  often fits the Large size.
+                </p>
+              )}
               <div className="est-top">
                 <span className="eyebrow">Recommended</span>
                 <h3>
@@ -332,12 +410,14 @@ export default function GettingStartedTools() {
               <p className="small muted">
                 {loc === "yours" && "Building in your own cloud is a Command engagement. "}
                 {spreadsheets && "Includes +20% setup and 1–2 extra weeks because the data starts in spreadsheets. "}
+                {where === "somePaper" && "Covers the data that's already digital. Getting the paper part into a system is quoted separately as an Engineering project. "}
                 Estimate only. Your Readiness Check gives you a fixed quote.
               </p>
               <Link href={contactHref} className="btn btn-primary">
                 Book my Readiness Check with this estimate <Icon name="arrow" className="arrow" width={16} height={16} />
               </Link>
             </div>
+            )}
           </div>
         </div>
       </section>

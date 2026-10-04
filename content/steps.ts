@@ -22,7 +22,7 @@ export const steps: Step[] = [
     title: "Clean",
     plain:
       "We fix duplicates, errors, missing pieces, and mismatched names so your numbers finally agree with each other.",
-    detail: "Standard business definitions, checks on every update, and a plain-English data dictionary.",
+    detail: "Written business definitions for every number (your data dictionary), and checks on every update.",
   },
   {
     n: 3,

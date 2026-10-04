@@ -5,12 +5,12 @@ export const metadata: Metadata = { title: "Why numarket", description: "Bigger 
 
 const points = [
   ["clean", "We fix the foundation, not just the view.", "Dashboards on messy data are a Band-Aid. We clean it first."],
-  ["key", "You own your data.", "No lock-in. Leave with your data, cleaning rules, apps, and dictionary."],
+  ["key", "You own your data.", "No lock-in. Leave with your data, cleaning rules, apps, and business definitions."],
   ["users", "Built for your size.", "Simple and affordable for a 20-person company. Flexible enough to work inside a large company's platform."],
   ["chat", "People, not just software.", "A real analyst reviews your numbers and tells you what to do."],
   ["spreadsheet", "Replace the spreadsheet shuffle.", "Your team enters data once, in one place, and everyone sees the same numbers."],
   ["sparkle", "Ready for AI.", "Ask questions in plain English today. Plug in any AI tool tomorrow."],
-  ["dollar", "Clear pricing.", "Every product has a published price. Fixed setup quotes. No surprise bills."],
+  ["dollar", "Clear pricing.", "Every product has a published price. Fixed setup quotes. An alert before usage reaches your allowance."],
 ];
 
 const cols = ["numarket", "Hire in-house", "Big consulting firm", "DIY software"];

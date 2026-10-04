@@ -3,13 +3,14 @@
 import { useMemo, useState } from "react";
 import Icon from "./Icon";
 import CrewScheduler from "./CrewScheduler";
+import PaperIntake from "./PaperIntake";
 import { engApps } from "@/content/engApps";
 import { industries, type IndustrySlug } from "@/content/industries";
 import { money } from "@/content/tiers";
 import { buildView } from "@/lib/sample-data";
 import { sampleCompany } from "@/lib/ask";
 
-/* Four custom apps Engineering builds — each one made for a single company.
+/* Five custom apps Engineering builds — each one made for a single company.
    Sample data throughout. */
 
 function WriteBack({ slug }: { slug: IndustrySlug }) {
@@ -177,6 +178,7 @@ function ClientPortal({ slug }: { slug: IndustrySlug }) {
 }
 
 const apps = [
+  { id: "paper", name: "Paper to digital", line: "A phone form replaces the paper — or scan the paper you have. Either way it lands in your clean table." },
   { id: "sched", name: "Scheduler", line: "Put people where they're needed and see the cost before you commit." },
   { id: "wb", name: "Write-back", line: "Approve once; it posts to your other system by itself." },
   { id: "est", name: "Estimate builder", line: "Prices from what similar work really cost you." },
@@ -184,7 +186,7 @@ const apps = [
 ] as const;
 
 export default function EngineeringApps({ slug = "construction" }: { slug?: IndustrySlug }) {
-  const [tab, setTab] = useState<(typeof apps)[number]["id"]>("sched");
+  const [tab, setTab] = useState<(typeof apps)[number]["id"]>("paper");
   const cur = apps.find((a) => a.id === tab)!;
   return (
     <div className="ea">
@@ -200,6 +202,7 @@ export default function EngineeringApps({ slug = "construction" }: { slug?: Indu
         {cur.line} <span className="label-sample">Custom app example · Sample data</span>
       </p>
       <div className="ea-body" key={`${tab}-${slug}`}>
+        {tab === "paper" && <PaperIntake slug={slug} />}
         {tab === "sched" && <CrewScheduler slug={slug} />}
         {tab === "wb" && <WriteBack slug={slug} />}
         {tab === "est" && <EstimateBuilder slug={slug} />}

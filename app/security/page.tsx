@@ -3,6 +3,7 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 import SecureVault from "@/components/SecureVault";
 import SecurityControls from "@/components/SecurityControls";
+import SecurityLayers from "@/components/SecurityLayers";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { faq } from "@/content/faq";
 
@@ -18,12 +19,11 @@ const promises = [
 
 const details = [
   { q: "Where is my data stored?", a: "In your own dedicated account on Snowflake, an enterprise cloud data platform. On Command, it can live in your own cloud instead." },
-  { q: "How do you connect to our systems?", a: "Read-only wherever possible. We never need to change anything in your source systems." },
+  { q: "How do you connect to our systems?", a: "Through the official connection your software already provides. You click “Allow,” and we get read-only access: it can copy data out, not change anything in your system." },
   { q: "Is anything stored on laptops?", a: "No. No client data is stored on laptops or personal devices." },
   { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },
-  { q: "Can you support healthcare data?", a: "Yes, at any size. Health data runs on a HIPAA-eligible configuration, and we sign a Business Associate Agreement. It adds +$500/mo on Small and +$800/mo on Mid; Large is quoted." },
   { q: "What if there's an incident?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-  { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and the data dictionary — or we transfer the whole database account to you. No charge. Then we delete our copies and confirm in writing." },
+  { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and your business definitions — or we transfer the whole database account to you. No charge. Then we delete our copies and confirm in writing." },
 ];
 
 export default function Security() {
@@ -36,6 +36,7 @@ export default function Security() {
             Your data. <em className="accent">Your rules.</em>
           </>
         }
+        lead="You approve a read-only connection to each tool. Your data lands in a database that's yours alone."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
@@ -50,6 +51,12 @@ export default function Security() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionHead eyebrow="Three layers" title="Follow your data from your tools to our team." lead="The three places security questions come up, in the order your data travels." />
+          <SecurityLayers />
         </div>
       </section>
       <section className="section soft">

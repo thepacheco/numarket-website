@@ -14,6 +14,12 @@ const systems: Record<string, string[]> = {
   Other: ["Spreadsheets (Excel / Google Sheets)", "Custom / In-house system", "Multiple systems", "Not sure / Other"],
 };
 
+/* Readiness Check questions (Operating Decisions v2.2, §2). */
+const dataToday = ["In business systems", "Spreadsheets", "Some on paper", "Mostly paper", "Not sure"];
+const dataEntry = ["Yes, as the work happens", "Pieced together afterward", "Some of each", "Not sure"];
+const dataVolume = ["Under 1 million", "1–10 million", "Over 10 million", "Not sure"];
+const outsideUs = ["No", "Yes", "Not sure"];
+
 const storage = [
   "Mostly spreadsheets / local files",
   "Microsoft 365 / SharePoint",
@@ -237,6 +243,26 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
           </div>
           <div className="form-row">
             <div className="field">
+              <label htmlFor="today">Where is most of your data today?</label>
+              <select id="today" name="Data Today" key={prefill.where} defaultValue={prefill.where ?? ""}>
+                <option value="">Select…</option>
+                {dataToday.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor="entry">Is data entered as the work happens?</label>
+              <select id="entry" name="Data Entry" defaultValue="">
+                <option value="">Select…</option>
+                {dataEntry.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="field">
               <label htmlFor="sys">Primary data system</label>
               <select id="sys" name="Primary Data System" defaultValue="">
                 <option value="">Select your main system…</option>
@@ -250,10 +276,25 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
               </select>
             </div>
             <div className="field">
-              <label htmlFor="st">Where your data lives</label>
-              <select id="st" name="Data Storage" defaultValue="">
+              <label htmlFor="other">Other systems you use</label>
+              <input id="other" name="Other Systems" placeholder="e.g. Procore, ADP, Excel" />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="field">
+              <label htmlFor="vol">Records in your biggest system</label>
+              <select id="vol" name="Data Volume" key={prefill.volume} defaultValue={prefill.volume ?? ""}>
                 <option value="">Select…</option>
-                {storage.map((o) => (
+                {dataVolume.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor="intl">Any customers or employees outside the US?</label>
+              <select id="intl" name="Outside US" defaultValue="">
+                <option value="">Select…</option>
+                {outsideUs.map((o) => (
                   <option key={o}>{o}</option>
                 ))}
               </select>
@@ -261,9 +302,20 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
           </div>
           <div className="form-row">
             <div className="field">
+              <label htmlFor="st">Where your files are stored</label>
+              <select id="st" name="Data Storage" defaultValue="">
+                <option value="">Select…</option>
+                {storage.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+            <div className="field">
               <label htmlFor="ppl">People who need access</label>
               <input id="ppl" name="People Who Need Access" inputMode="numeric" key={prefill.users} defaultValue={prefill.users ?? ""} />
             </div>
+          </div>
+          <div className="form-row">
             <div className="field">
               <label htmlFor="start">Preferred start</label>
               <select id="start" name="Preferred Start" key={defaultStart} defaultValue={defaultStart}>
@@ -340,7 +392,7 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
         )}
       </div>
       <p className="small muted">
-        We reply within {site.responseTime}. We never sell your information. See our <a href="/legal/privacy">Privacy Policy</a>.
+        We reply within {site.responseTime}. We use your details only to reply. See our <a href="/legal/privacy">Privacy Policy</a>.
       </p>
     </form>
   );

@@ -6,7 +6,7 @@ import SolidsField from "@/components/solids/SolidsField";
 import { site } from "@/content/site";
 import type { SolidKind } from "@/components/solids/geometry";
 
-export const metadata: Metadata = { title: "About Us", description: "numarket exists to make every company's data trustworthy and ready for AI. Founded in Atlanta, serving clients nationally." };
+export const metadata: Metadata = { title: "About Us", description: "numarket exists to make every company's numbers something they can trust. Founded in Atlanta, serving clients nationally." };
 
 const values: { kind: SolidKind; t: string; b: string }[] = [
   { kind: "foundation", t: "Trust the data.", b: "If the numbers aren't right, nothing built on them is — so we fix the foundation first." },
@@ -28,7 +28,7 @@ export default function About() {
         eyebrow="About us"
         title={
           <>
-            Make every company&apos;s data <em className="accent">trustworthy and ready for AI.</em>
+            Make every company&apos;s numbers <em className="accent">something they can trust.</em>
           </>
         }
         lead="That's the whole mission. Everything we build points at it."

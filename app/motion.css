@@ -2147,13 +2147,13 @@
   box-shadow: 0 18px 30px rgba(11, 31, 46, 0.1), 0 6px 0 #dfe7ee;
   transition: all 0.4s var(--ease);
 }
-.pl-layer:nth-child(4) .pl-face {
+.pl-layer:nth-child(5) .pl-face {
   background: linear-gradient(135deg, #16405c, var(--ink));
   color: #fff;
   border-color: #0b1f2e;
   box-shadow: 0 18px 40px rgba(87, 204, 153, 0.25), 0 6px 0 #061520;
 }
-.pl-layer:nth-child(6) .pl-face {
+.pl-layer:nth-child(7) .pl-face {
   background: #fff7f4;
   border: 1px dashed rgba(224, 122, 95, 0.6);
   color: #8e3a22;

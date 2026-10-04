@@ -18,10 +18,10 @@ const f = productPrices.foundation.bySize,
   w = productPrices.workspace.bySize,
   i = productPrices.insight.bySize;
 const rows: { kind: SolidKind; href: string; name: string; does: string; needs: string; price: string }[] = [
-  { kind: "foundation", href: "/products/foundation", name: "Foundation", does: "Connects every source (and moves you off old systems), cleans it, and keeps it in your private database — updated, tested, and hosted every month.", needs: "Nothing. It's required, and everything else sits on it.", price: `${money(f.small.setup)}–${money(f.mid.setup)}+ setup, ${money(f.small.monthly)}–${money(f.mid.monthly)}+/mo` },
+  { kind: "foundation", href: "/products/foundation", name: "Foundation", does: "Connects every source (and moves you off old systems), cleans it, writes down what every number means (business definitions), and keeps it in your private database — updated, tested, and hosted every month.", needs: "Nothing. It's required, and everything else sits on it.", price: `${money(f.small.setup)}–${money(f.mid.setup)}+ setup, ${money(f.small.monthly)}–${money(f.mid.monthly)}+/mo` },
   { kind: "workspace", href: "/products/workspace", name: "Workspace", does: "Your reports and your apps: dashboards, input screens, Ask Your Data, and alerts, from our standard building blocks.", needs: "Foundation.", price: `${money(w.small.setup)}–${money(w.mid.setup)}+ setup, ${money(w.small.monthly)}–${money(w.mid.monthly)}+/mo` },
   { kind: "insight", href: "/products/insight-review", name: "Insight Review", does: "An analyst reviews your numbers and hands you what changed, what's at risk, and action items with owners and dates.", needs: "Foundation. Works with or without Workspace.", price: `${money(i.small.monthly)}–${money(i.mid.monthly)}+/mo` },
-  { kind: "engineering", href: "/products/engineering", name: "Engineering", does: "Anything custom, built for you alone: apps, automations, write-backs, client portals, work in your own cloud.", needs: "Optional. Usually uses Foundation's clean data.", price: `From ${money(engineering.from)} per project, or ${money(engineering.hourly)}/hr` },
+  { kind: "engineering", href: "/products/engineering", name: "Engineering", does: "Anything custom, built for you alone: getting from paper to digital, apps, automations, write-backs, client portals, work in your own cloud.", needs: "Optional. Usually uses Foundation's clean data.", price: `From ${money(engineering.from)} per project, or ${money(engineering.hourly)}/hr` },
 ];
 
 export default function Platform() {

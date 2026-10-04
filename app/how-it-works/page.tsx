@@ -11,12 +11,12 @@ import type { SolidKind } from "@/components/solids/geometry";
 export const metadata: Metadata = { title: "How It Works", description: "Collect, Clean, Secure, See, Act, Own — what happens from the first call to your first monthly review, who does what, and what you get." };
 
 const detail: Record<string, { we: string; you: string; get: string }> = {
-  collect: { we: "Find every source and connect it with read-only access.", you: "List your tools and share read-only logins.", get: "All your data flowing into one place on a schedule." },
-  clean: { we: "Fix duplicates, errors, and mismatched names. Add checks on every update.", you: "Answer a few questions about what your numbers mean.", get: "Numbers that agree, and a plain-English dictionary." },
+  collect: { we: "Find every source and connect it with read-only access.", you: "List your tools and approve a read-only connection to each.", get: "All your data flowing into one place on a schedule." },
+  clean: { we: "Fix duplicates, errors, and mismatched names. Add checks on every update.", you: "Answer a few questions about what your numbers mean.", get: "Numbers that agree, and written business definitions." },
   secure: { we: "Build your private, encrypted database and set who sees what.", you: "Tell us who should see what.", get: "One secure home for your data, with every login recorded." },
   see: { we: "Set up dashboards, input screens, Ask Your Data, and alerts from our building blocks.", you: "Pick the spreadsheets to retire. Join a 30-minute training.", get: "An app your team signs into with the Microsoft or Google account they already use." },
   act: { we: "Review your numbers and write action items with owners and due dates.", you: "Show up and act on the list.", get: "A short to-do list every review, with follow-up on the last one." },
-  own: { we: "Keep everything documented and ready to hand over.", you: "Nothing.", get: "Your data, cleaning rules, apps, and dictionary if you ever leave." },
+  own: { we: "Keep everything documented and ready to hand over.", you: "Nothing.", get: "Your data, cleaning rules, apps, and business definitions if you ever leave." },
 };
 
 const productRow: { kind: SolidKind; href: string; steps: string; name: string }[] = [

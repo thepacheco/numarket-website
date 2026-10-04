@@ -18,9 +18,10 @@ export const industryLinks = industries.map((i) => ({ href: `/solutions/${i.slug
 /* Each need has its own page with its own interactive demo. */
 export const needLinks = [
   { href: "/solutions/replace-spreadsheets", title: "Replace spreadsheets" },
-  { href: "/solutions/ai-ready", title: "Get AI-ready" },
+  { href: "/solutions/paper-to-digital", title: "Go from paper to digital" },
   { href: "/solutions/trust-your-numbers", title: "Trust your numbers" },
   { href: "/solutions/move-off-old-systems", title: "Move off old systems" },
+  { href: "/solutions/ai-ready", title: "Get AI-ready" },
 ];
 
 export const resourceLinks = [

@@ -13,7 +13,7 @@ const groups = [
       "Multi-factor sign-in is required for everyone, including our team.",
       "Role-based access: each person sees only what their role allows.",
       "Access is reviewed every quarter and removed the same day someone leaves.",
-      "Connections to your tools are read-only wherever the tool allows it.",
+      "Connections to your tools use each tool's official, read-only connection wherever one exists.",
     ],
   },
   {
@@ -31,8 +31,8 @@ const groups = [
     t: "Isolation",
     c: "var(--navy)",
     items: [
-      "Each client gets a dedicated database account — never shared tables.",
-      "Your data is never combined with another client's, and never used to train anything for anyone else.",
+      "Each client gets its own dedicated database account and its own tables.",
+      "Your data is used only to deliver your service, and it stays separate from every other client's.",
       "On Command, your data can stay inside your own cloud.",
     ],
   },

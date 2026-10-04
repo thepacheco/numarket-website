@@ -22,10 +22,10 @@ export const docs: Doc[] = [
     slug: "access",
     group: "Getting started",
     title: "What access we need",
-    summary: "Read-only access to the tools that hold your numbers. Never admin rights we don't need.",
+    summary: "A read-only connection to the tools that hold your numbers, and only what we need.",
     body: [
       { p: "We only ask for what we need to copy your data. Wherever possible, that means a read-only user or an export." },
-      { h: "Typical requests", ul: ["Accounting (for example QuickBooks, Sage, NetSuite): a read-only user or report access", "Project and operations tools (for example Procore): a read-only user or API access", "Files (SharePoint, OneDrive, Google Drive): access to one shared folder", "HR and payroll: summary exports only, never personal records we don't need"] },
+      { h: "Typical requests", ul: ["Accounting (for example QuickBooks, Sage, NetSuite): a read-only user or report access", "Project and operations tools (for example Procore): a read-only user or API access", "Files (SharePoint, OneDrive, Google Drive): access to one shared folder", "HR and payroll: summary exports only"] },
       { note: "You can remove our access at any time. Every login we make is recorded." },
     ],
   },
@@ -98,11 +98,11 @@ export const docs: Doc[] = [
   {
     slug: "data-dictionary",
     group: "Your data",
-    title: "The data dictionary",
+    title: "Business definitions (your data dictionary)",
     summary: "What every number means, in plain English.",
     body: [
       { p: "Every number in your Workspace has a written definition we agree with you during the build — what's included, what's not, and where it comes from." },
-      { p: "Your analyst shares the dictionary at launch and keeps it up to date. When a definition changes, you'll be told first." },
+      { p: "Your analyst shares your business definitions at launch and keeps it up to date. When a definition changes, you'll be told first." },
     ],
   },
   {
@@ -113,7 +113,7 @@ export const docs: Doc[] = [
     body: [
       { p: "Data from your other systems updates on a schedule: once a day, overnight, on Small; up to every hour during business hours on Mid; and a custom schedule on Large. Near-real-time feeds are available as Engineering work." },
       { p: "What your team types into input screens shows up right away." },
-      { p: "Your data dictionary lists the refresh schedule for each source, and every dashboard shows when it was last updated." },
+      { p: "Your business definitions list the refresh schedule for each source, and every dashboard shows when it was last updated." },
     ],
   },
   {
@@ -152,7 +152,7 @@ export const docs: Doc[] = [
     summary: "After your term: full export or account transfer within 30 days, at no charge.",
     body: [
       { p: "Your data is yours. If you decide to leave after your term, you choose how to take it:" },
-      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, input screens, and Engineering builds.", "The data dictionary, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
+      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, input screens, and Engineering builds.", "Your business definitions, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
       { p: "One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
       { p: "We finish within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing." },
     ],

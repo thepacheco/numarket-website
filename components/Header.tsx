@@ -15,6 +15,7 @@ type MenuId = "products" | "solutions" | "resources" | null;
 export default function Header() {
   const [open, setOpen] = useState<MenuId>(null);
   const [mobile, setMobile] = useState(false);
+  const [mGroup, setMGroup] = useState<MenuId>(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
@@ -34,6 +35,7 @@ export default function Header() {
   useEffect(() => {
     setOpen(null);
     setMobile(false);
+    setMGroup(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -125,7 +127,7 @@ export default function Header() {
             <li {...hoverProps("solutions")}>
               {trigger("solutions", "Solutions")}
               <div id="menu-solutions" className={`mega ${open === "solutions" ? "open" : ""}`}>
-                <div className="mega-panel wide">
+                <div className="mega-panel mega-sol">
                   <div className="mega-col">
                     <p className="mega-h">By size</p>
                     {sizeLinks.map((l) => (
@@ -133,24 +135,23 @@ export default function Header() {
                         {l.title}
                       </Link>
                     ))}
-                    <p className="mega-h" style={{ marginTop: 10 }}>By need</p>
+                  </div>
+                  <div className="mega-col">
+                    <p className="mega-h">By need</p>
                     {needLinks.map((l) => (
                       <Link key={l.href} href={l.href}>
                         {l.title}
                       </Link>
                     ))}
                   </div>
-                  <div className="mega-col" style={{ gridColumn: "span 2" }}>
-                    <p className="mega-h">By industry</p>
-                    <div className="mega-ind">
-                      {industryLinks.map((l) => (
-                        <Link key={l.href} href={l.href} className={`ind-${l.href.split("/").pop()}`}>
-                          <IndGlyph />
-                          {l.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <Link href="/solutions" className="mega-more">
+                    <IndGlyph />
+                    <span>
+                      <strong>Browse all {industryLinks.length} industries</strong>
+                      <span>Pick yours and see its dashboard</span>
+                    </span>
+                    <Icon name="arrow" width={16} height={16} />
+                  </Link>
                 </div>
               </div>
             </li>
@@ -201,32 +202,89 @@ export default function Header() {
         </div>
       </div>
       <div id="mobile-panel" className={`mobile-panel ${mobile ? "open" : ""}`}>
-        <p className="mega-h">Products</p>
-        {productLinks.map((l) => (
-          <Link key={l.href} href={l.href} className="m-prod">
-            <SolidIcon kind={l.kind} size={20} />
-            {l.title}
+        <div className="m-scroll">
+          <Link href="/how-it-works" className="m-top">
+            How It Works
           </Link>
-        ))}
-        <p className="mega-h">Solutions</p>
-        {[...sizeLinks, ...needLinks, ...industryLinks].map((l) => (
-          <Link key={l.href} href={l.href}>
-            {l.title}
+          <Link href="/pricing" className="m-top">
+            Pricing
           </Link>
-        ))}
-        <p className="mega-h">Company</p>
-        <Link href="/how-it-works">How It Works</Link>
-        <Link href="/pricing">Pricing</Link>
-        <Link href="/demos">Demos</Link>
-        {resourceLinks.map((l) => (
-          <Link key={l.href} href={l.href}>
-            {l.title}
+          <Link href="/demos" className="m-top">
+            Demos
           </Link>
-        ))}
-        <Link href={cta.href} className="btn btn-primary">
-          {cta.label}
-        </Link>
+
+          <MobileGroup id="products" title="Products" open={mGroup} setOpen={setMGroup}>
+            {productLinks.map((l) => (
+              <Link key={l.href} href={l.href} className="m-prod">
+                <SolidIcon kind={l.kind} size={22} />
+                <span>
+                  <b>{l.title}</b>
+                  <small>{l.desc}</small>
+                </span>
+              </Link>
+            ))}
+          </MobileGroup>
+
+          <MobileGroup id="solutions" title="Solutions" open={mGroup} setOpen={setMGroup}>
+            <p className="m-sub">By size</p>
+            {sizeLinks.map((l) => (
+              <Link key={l.href} href={l.href}>
+                {l.title}
+              </Link>
+            ))}
+            <p className="m-sub">By need</p>
+            {needLinks.map((l) => (
+              <Link key={l.href} href={l.href}>
+                {l.title}
+              </Link>
+            ))}
+            <Link href="/solutions" className="m-more">
+              Browse all {industryLinks.length} industries <Icon name="arrow" width={16} height={16} />
+            </Link>
+          </MobileGroup>
+
+          <MobileGroup id="resources" title="Resources" open={mGroup} setOpen={setMGroup}>
+            {resourceLinks.map((l) => (
+              <Link key={l.href} href={l.href}>
+                {l.title}
+              </Link>
+            ))}
+          </MobileGroup>
+        </div>
+        <div className="m-cta">
+          <Link href={cta.href} className="btn btn-primary">
+            {cta.label}
+          </Link>
+        </div>
       </div>
     </header>
+  );
+}
+
+/* One collapsible section of the phone menu. Only one is open at a time. */
+function MobileGroup({
+  id,
+  title,
+  open,
+  setOpen,
+  children,
+}: {
+  id: Exclude<MenuId, null>;
+  title: string;
+  open: MenuId;
+  setOpen: (m: MenuId) => void;
+  children: React.ReactNode;
+}) {
+  const isOpen = open === id;
+  return (
+    <div className={`m-group ${isOpen ? "open" : ""}`}>
+      <button type="button" className="m-group-btn" aria-expanded={isOpen} aria-controls={`m-${id}`} onClick={() => setOpen(isOpen ? null : id)}>
+        {title}
+        <Icon name="chevron" width={18} height={18} />
+      </button>
+      <div id={`m-${id}`} className="m-group-body" hidden={!isOpen}>
+        {children}
+      </div>
+    </div>
   );
 }

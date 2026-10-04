@@ -7,7 +7,7 @@ import { BubblesArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = {
   title: "Contact — Get a Free Readiness Check",
-  description: "Book a free 30-minute AI Readiness Check, or send us a note. We reply within 1 business day.",
+  description: "Book a free 30-minute Readiness Check, or send us a note. We reply within 1 business day.",
 };
 
 export default function Contact() {

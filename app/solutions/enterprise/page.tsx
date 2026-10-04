@@ -6,7 +6,7 @@ import PlatformToggle from "@/components/PlatformToggle";
 import { faq } from "@/content/faq";
 import { EngineeringArt } from "@/components/ProductArt";
 
-export const metadata: Metadata = { title: "Larger Organizations", description: "Make the data you already have ready for AI. Your platform or ours." };
+export const metadata: Metadata = { title: "Larger Organizations", description: "Your systems are in place. We make the numbers agree, inside your platform or ours." };
 
 const phases = [
   { title: "Assess", time: "1–2 weeks", body: "Sources, definitions, gaps." },
@@ -23,10 +23,10 @@ export default function Enterprise() {
         eyebrow="Larger organizations"
         title={
           <>
-            Make the data you have <em className="accent">ready for AI.</em>
+            Your systems are in place. <em className="accent">Make the numbers agree.</em>
           </>
         }
-        lead="We fix the layer underneath — inside your platform or ours."
+        lead="We clean, define, and run the layer underneath, so every department reports the same number. Inside your platform or ours."
       >
         <Link href="/security" className="more">
           How we handle security reviews →

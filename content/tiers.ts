@@ -79,7 +79,7 @@ export const tiers: Tier[] = [
         "Checks on every update; bad data flagged, not published",
         "Your own private, encrypted database",
         "Platform usage included up to $400/mo",
-        "A plain-English dictionary of every number",
+        "Business definitions: what every number means",
       ],
       workspace: [
         "1 core dashboard and 1 input screen",
@@ -106,7 +106,7 @@ export const tiers: Tier[] = [
         "Checks on every update; bad data flagged, not published",
         "Your own private, encrypted database",
         "Platform usage included up to $800/mo",
-        "A plain-English dictionary of every number",
+        "Business definitions: what every number means",
       ],
       workspace: [
         "Dashboards by role (owner, manager, operations) and up to 5 input screens",
@@ -133,7 +133,7 @@ export const tiers: Tier[] = [
         "Checks on every update; bad data flagged, not published",
         "Our secure platform or your own cloud",
         "Platform usage passed through at cost + 15%",
-        "A plain-English dictionary of every number",
+        "Business definitions: what every number means",
       ],
       workspace: [
         "Dashboards and input screens configured for each team",

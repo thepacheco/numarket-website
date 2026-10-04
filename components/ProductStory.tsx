@@ -64,6 +64,18 @@ const screens = [
 ];
 const engScreens = [
   {
+    t: "Daily field report",
+    body: (
+      <div className="scr-list">
+        <span>
+          <b>Paper log scanned</b> · Data Center Shell
+        </span>
+        <span>Crew hours 11 · rain delay after 2 PM</span>
+        <span className="hl">Added to your clean table ✓</span>
+      </div>
+    ),
+  },
+  {
     t: "Crew scheduler",
     body: (
       <div className="scr-list">
@@ -161,8 +173,8 @@ const stories: Record<Exclude<ProductKind, "platform">, { steps: { eyebrow: stri
   foundation: {
     steps: [
       { eyebrow: "Find", title: "We find every source.", body: "Spreadsheets, accounting, project tools, files in email." },
-      { eyebrow: "Connect", title: "We connect them, read-only.", body: "Automatic updates. Nothing changes in your tools." },
-      { eyebrow: "Clean", title: "Names match. Duplicates go.", body: "Checks run on every update. Bad rows never reach a dashboard." },
+      { eyebrow: "Connect", title: "We connect them, read-only.", body: "Official, read-only connections that update on a schedule. Your team keeps working as usual." },
+      { eyebrow: "Clean", title: "Names match. Duplicates go.", body: "Checks run on every update. Odd rows are held back for review." },
       { eyebrow: "Secure", title: "Locked in your own database.", body: "Encrypted, private, and yours to keep." },
     ],
   },
@@ -184,10 +196,11 @@ const stories: Record<Exclude<ProductKind, "platform">, { steps: { eyebrow: stri
   },
   engineering: {
     steps: [
-      { eyebrow: "App 1 · Scheduler", title: "Schedule crews against the budget.", body: "Drag a crew onto a job and see labor cost and finish date before you commit. Built around one company's crews, rates, and jobs." },
-      { eyebrow: "App 2 · Write-back", title: "Approved change orders post themselves.", body: "Approve once in the app. It posts to QuickBooks and the job budget updates. Nobody types it twice." },
-      { eyebrow: "App 3 · Estimate builder", title: "Bids from your own past jobs.", body: "Pick the size and complexity. The price comes from what similar jobs really cost you, not a blank spreadsheet." },
-      { eyebrow: "App 4 · Client portal", title: "Customers check status themselves.", body: "A branded page where each owner sees progress and the next milestone — straight from your clean data." },
+      { eyebrow: "App 1 · Paper to digital", title: "Paper logs become data.", body: "Supers fill in a phone form instead of a paper log — or scan the logs you already have. Every entry lands in your clean table and the dashboard updates." },
+      { eyebrow: "App 2 · Scheduler", title: "Schedule crews against the budget.", body: "Drag a crew onto a job and see labor cost and finish date before you commit. Built around one company's crews, rates, and jobs." },
+      { eyebrow: "App 3 · Write-back", title: "Approved change orders post themselves.", body: "Approve once in the app. It posts to QuickBooks and the job budget updates. Nobody types it twice." },
+      { eyebrow: "App 4 · Estimate builder", title: "Bids from your own past jobs.", body: "Pick the size and complexity. The price comes from what similar jobs really cost you, not a blank spreadsheet." },
+      { eyebrow: "App 5 · Client portal", title: "Customers check status themselves.", body: "A branded page where each owner sees progress and the next milestone — straight from your clean data." },
     ],
   },
 };

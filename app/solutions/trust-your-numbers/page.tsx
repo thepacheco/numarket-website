@@ -14,7 +14,7 @@ const causes = [
 ];
 
 const trustFaq = [
-  { q: "What happens when a check fails?", a: "The bad rows are held back from every dashboard and report, we're alerted, and we fix it at the source. You see a note saying what was held back and why." },
+  { q: "What happens when a check fails?", a: "The odd rows are held back from every dashboard and report, and we're alerted. If our cleaning can fix it, we do. If the problem is in your source system, we show your team the exact record so it can be corrected there." },
   { q: "Who decides what a number means?", a: "You do. We draft the definitions from how your team already talks about the business, then a named person on your side approves each one." },
   { q: "Can we see who changed what?", a: "Yes. Every change made in an input screen is logged with who, what, and when." },
   { q: "Do we have to stop using our current reports?", a: "No. Point them at the clean database and they'll finally agree with each other." },
@@ -35,7 +35,7 @@ export default function Page() {
       points={[
         { icon: "clean", title: "Duplicates removed", body: "Entered twice? Counted once." },
         { icon: "users", title: "Names matched", body: "“ACME Corp.” and “Acme Corporation” are one customer." },
-        { icon: "shield", title: "Checked every update", body: "Bad rows are flagged, never published." },
+        { icon: "shield", title: "Checked every update", body: "Odd rows are held back and sent for review." },
       ]}
       extra={
         <>

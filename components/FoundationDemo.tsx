@@ -5,10 +5,11 @@ import Icon from "./Icon";
 import { useStages } from "./useTween";
 import { buildView, fmt, type Fmt } from "@/lib/sample-data";
 import { industries, type IndustrySlug } from "@/content/industries";
+import { FlaggedReview } from "./FoundationExtras";
 
 /* Foundation, step by step: three sources that disagree → duplicates merged →
    names matched → a stale number refreshed → one clean table they all agree on.
-   Then the data dictionary for three of the numbers. All from sample records. */
+   Then the few records that need a person to decide. All from sample records. */
 
 const abbrev = (s: string) =>
   s
@@ -36,13 +37,7 @@ export default function FoundationDemo({ slug }: { slug: IndustrySlug }) {
     }
     const rows = sites.map((s) => ({ site: s, v: val(s) }));
     const total = rows.reduce((t, r) => t + r.v, 0);
-    const dict = v.kpis.slice(0, 3).map((k) => ({
-      name: k.label,
-      means: k.hint ?? "Calculated fresh from your records for whatever period you pick.",
-      better: k.better === "up" ? "Higher is better" : k.better === "down" ? "Lower is better" : "Closer to plan is better",
-      from: `${ind.sources[0]} and ${ind.sources[1]}`,
-    }));
-    return { label, f, rows, total, dict };
+    return { label, f, rows, total };
   }, [slug, ind]);
   const { stage, playing, play, reset } = useStages(4, 1500);
   const [r0, r1, r2, r3] = d.rows;
@@ -154,30 +149,7 @@ export default function FoundationDemo({ slug }: { slug: IndustrySlug }) {
           </span>
         )}
       </div>
-      {agree && (
-        <div className="fd-dict on">
-          <h3 className="fd-h">The data dictionary · three of your numbers</h3>
-          <div className="fd-dict-grid">
-            {d.dict.map((x) => (
-              <dl key={x.name}>
-                <dt>{x.name}</dt>
-                <dd>
-                  <span>Means</span>
-                  {x.means}
-                </dd>
-                <dd>
-                  <span>Comes from</span>
-                  {x.from}
-                </dd>
-                <dd>
-                  <span>Reading it</span>
-                  {x.better}
-                </dd>
-              </dl>
-            ))}
-          </div>
-        </div>
-      )}
+      {agree && <FlaggedReview slug={slug} />}
       <p className="small muted">Sample data.</p>
     </div>
   );

@@ -229,7 +229,7 @@ export default function Home() {
                   <dd>6–10 weeks</dd>
                 </div>
               </dl>
-              <span className="more">Make your data AI-ready →</span>
+              <span className="more">Work inside your platform →</span>
             </Link>
           </div>
         </div>
@@ -238,7 +238,7 @@ export default function Home() {
       {/* PRICING TEASER */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing. No surprise bills." lead="Each product has its own price. Take all three as a plan and save about 10%." />
+          <SectionHead eyebrow="Pricing" title="Clear pricing, published up front." lead="Each product has its own price. Take all three as a plan and save about 10%." />
           <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>

@@ -9,10 +9,10 @@ const VaultCanvas = dynamic(() => import("./journey/VaultCanvas"), { ssr: false 
 
 /* Layered shields around your database. Hover or tap a ring to see what it does. */
 const layers = [
-  { key: "backup", label: "Backups", color: "#6c5dd3", title: "Backups", body: "Your data is backed up automatically, so a bad day never means lost data." },
+  { key: "backup", label: "Backups", color: "#6c5dd3", title: "Backups", body: "Your data is backed up automatically and can be restored to an earlier point." },
   { key: "audit", label: "Audit log", color: "#2e9e6b", title: "Everything logged", body: "Every login and every change is recorded — who, what, and when." },
   { key: "access", label: "Access", color: "#2a8f91", title: "You control who sees what", body: "Named accounts, multi-factor sign-in, and roles you decide." },
-  { key: "encrypt", label: "Encryption", color: "#22577a", title: "Encrypted", body: "Encrypted at rest and in transit. Your database is yours alone — never shared." },
+  { key: "encrypt", label: "Encryption", color: "#22577a", title: "Encrypted", body: "Encrypted at rest and in transit. Your database is yours alone." },
 ];
 
 export default function SecureVault() {

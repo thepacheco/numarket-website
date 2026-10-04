@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
-import { MigrationDemo, ReconcileDemo } from "@/components/NeedDemos";
+import { MigrationDemo } from "@/components/NeedDemos";
+import FoundationDemo from "@/components/FoundationDemo";
+import { ConnectedRow, DefinitionsDemo, FoundationInside } from "@/components/FoundationExtras";
+import StatusReport from "@/components/StatusReport";
 import WorkspaceDemo from "@/components/WorkspaceDemo";
 import ProductStory from "@/components/ProductStory";
 import ProductSolid from "@/components/solids/ProductSolid";
 import SolidIcon from "@/components/solids/SolidIcon";
 import SampleReview from "@/components/SampleReview";
-import WsVsEng from "@/components/WsVsEng";
+import ScopeBox from "@/components/ScopeBox";
 import EngineeringApps from "@/components/EngineeringApps";
 import Roles from "@/components/Roles";
 import { CtaBand, Faq, SectionHead } from "@/components/ui";
@@ -26,17 +29,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const demoTitle: Record<string, [string, string]> = {
-  foundation: ["See it clean", "Three reports. Watch them agree."],
+  foundation: ["See it clean", "Three sources. Watch them agree."],
   workspace: ["Try it", "Change a number. Ask a question."],
   insight: ["A sample review", "What your analyst hands you."],
-  engineering: ["Try the apps", "Four custom apps, in use."],
+  engineering: ["Try the apps", "Paper to digital, and four custom apps."],
 };
 
 function Demo({ kind }: { kind: string }) {
   if (kind === "foundation")
     return (
       <div style={{ display: "grid", gap: 28 }}>
-        <ReconcileDemo />
+        <FoundationDemo slug="construction" />
         <div>
           <h3 className="demo-sub">Moving off an old system? That&apos;s Foundation too.</h3>
           <p className="muted" style={{ marginBottom: 14 }}>
@@ -137,10 +140,28 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {(p.kind === "workspace" || p.kind === "engineering") && (
+      {p.kind === "foundation" && (
         <section className="section-tight">
           <div className="container">
-            <WsVsEng />
+            <SectionHead eyebrow="What's inside" title="Four parts, one foundation." />
+            <FoundationInside />
+          </div>
+        </section>
+      )}
+
+      {p.kind === "foundation" && (
+        <section className="section-tight">
+          <div className="container split">
+            <SectionHead eyebrow="Your tools stay" title="We meet you in the tools you already use." lead="QuickBooks, your project tool, Excel, shared folders: keep all of it. We connect to them." />
+            <ConnectedRow />
+          </div>
+        </section>
+      )}
+
+      {p.kind !== "insight" && (
+        <section className="section-tight">
+          <div className="container">
+            <ScopeBox show={p.kind === "foundation" ? ["foundation", "engineering"] : p.kind === "workspace" ? ["workspace", "engineering"] : ["foundation", "workspace", "engineering"]} />
           </div>
         </section>
       )}
@@ -159,8 +180,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      {p.kind === "foundation" && (
+        <section className="section">
+          <div className="container">
+            <SectionHead eyebrow="Business definitions" title="Every number, defined once." lead="Your data dictionary is part of Foundation: what each number means, where it comes from, and who on your team owns it. It's what keeps every dashboard and every answer from Ask Your Data using the same meaning." />
+            <DefinitionsDemo slug="construction" />
+          </div>
+        </section>
+      )}
+
       {p.kind === "workspace" && (
         <section className="section">
+          <div className="container">
+            <SectionHead eyebrow="Reports" title="Your weekly status report, built automatically." lead="In your branding, or rebuilt for one of your customers. Same clean numbers, sent on a schedule." />
+            <StatusReport />
+          </div>
+        </section>
+      )}
+
+      {p.kind === "workspace" && (
+        <section className="section soft">
           <div className="container">
             <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view they need. Your team signs in with the Microsoft or Google account they already use." />
             <Roles />

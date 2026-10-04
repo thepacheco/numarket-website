@@ -7,14 +7,15 @@ import Icon from "./Icon";
 const layers = [
   { name: "Ask Your Data", icon: "chat", plain: "Plain-English questions, answered from your numbers.", tech: "Snowflake Cortex + business definitions written for you." },
   { name: "Workspace", icon: "window", plain: "The app your team uses.", tech: "Streamlit apps inside Snowflake, with single sign-on through Microsoft, Google, or Okta." },
+  { name: "Business definitions", icon: "book", plain: "What every number means, written down with you. Part of Foundation.", tech: "Documented models and a data catalog on top of your database. It's what keeps dashboards and Ask Your Data using the right numbers." },
   { name: "Clean layer", icon: "clean", plain: "Rules that fix and check every update.", tech: "dbt models and tests, run on a schedule. Bad rows are flagged, not published." },
   { name: "Your private database", icon: "lock", plain: "Encrypted, and separate from every other client.", tech: "Its own separate Snowflake account inside numarket's Snowflake organization. You own the data in it." },
-  { name: "Connectors", icon: "plug", plain: "Secure, read-only pipes.", tech: "Snowflake's own connectors or open-source Airbyte; paid connectors only on Large. APIs and SharePoint / OneDrive / Drive file sync." },
+  { name: "Connectors", icon: "plug", plain: "Official, read-only connections. You click “Allow” once.", tech: "Snowflake's own connectors or open-source Airbyte; paid connectors only on Large. APIs and SharePoint / OneDrive / Drive file sync." },
   { name: "Your sources", icon: "spreadsheet", plain: "Whatever you use today.", tech: "Accounting, project tools, HR, ERP, spreadsheets." },
 ];
 
 export default function PlatformLayers() {
-  const [sel, setSel] = useState(3);
+  const [sel, setSel] = useState(4);
   const cur = layers[sel];
   return (
     <div className="pl">

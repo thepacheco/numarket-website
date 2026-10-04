@@ -24,7 +24,7 @@ const steps = [
 const aiFaq = [
   { q: "Do we need to buy an AI tool?", a: "No. Ask Your Data comes with Workspace. Type a question in plain English and get an answer from your own numbers." },
   { q: "How do we know the answer is right?", a: "Answers come from your cleaned database and the definitions we wrote with you, and they show the numbers they used. If a question can't be answered from your data, it says so." },
-  { q: "Where does our data go?", a: "It stays in your private database. Ask Your Data runs there, and your data is never mixed with other clients'." },
+  { q: "Where does our data go?", a: "It stays in your private database, separate from every other client. Ask Your Data runs there." },
   { q: "How long until we're AI-ready?", a: "As long as Foundation takes to set up: about 2–10 weeks depending on size. You can start asking questions the day Workspace launches." },
   { q: "Can we use other AI tools on top?", a: "Yes. Once your data is clean and defined, other tools can use it through the same access rules. We can set that up as Engineering work." },
 ];

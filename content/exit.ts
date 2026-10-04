@@ -6,7 +6,7 @@ export const exitPackage: { t: string; b: string }[] = [
   { t: "The structure", b: "Every table, field, and relationship." },
   { t: "The cleaning rules", b: "The code that cleans and matches your data. It runs on other databases with modest changes." },
   { t: "Your apps", b: "The code for your dashboards, input screens, and anything Engineering built for you." },
-  { t: "The dictionary", b: "What every number means, in plain English." },
+  { t: "Business definitions", b: "What every number means, in plain English — your data dictionary." },
   { t: "Or keep it running", b: "We transfer the whole database account to you, so you pay the database provider directly." },
 ];
 export const exitTiming = "Delivered within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing.";
