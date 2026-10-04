@@ -10,7 +10,7 @@ import { industries, type IndustrySlug } from "@/content/industries";
    client's branding, or rebuilt for one of the client's own customers. */
 
 const customer: Record<IndustrySlug, string> = {
-  construction: "Fulton County Schools",
+  construction: "Halden County Schools",
   manufacturing: "Brightline Appliances",
   "food-production": "Peachtree Conference Center",
   healthcare: "Northside Referral Network",
