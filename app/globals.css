@@ -705,35 +705,13 @@ table.t .hl {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
-.mega-panel .mega-more {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: var(--gray-50);
-  border: 1px solid var(--border);
+.mega-panel.mega-inds {
+  min-width: 520px;
 }
-.mega-panel .mega-more > span {
-  flex: 1;
-  display: grid;
-}
-.mega-panel .mega-more strong {
-  color: var(--ink);
+.mega-panel.mega-inds .mega-ind a {
+  padding: 9px 12px;
+  border-radius: 8px;
   font-size: 14.5px;
-}
-.mega-panel .mega-more span span {
-  font-size: 13px;
-  color: var(--text-2);
-}
-.mega-panel .mega-more svg {
-  color: var(--teal-700);
-  flex: none;
-}
-.mega-panel .mega-more:hover {
-  border-color: var(--teal);
 }
 .mega-products {
   min-width: 420px;
@@ -888,13 +866,14 @@ table.t .hl {
     color: var(--text-3);
     margin: 12px 0 2px;
   }
-  .mobile-panel .m-more {
-    display: inline-flex;
+  .mobile-panel .m-ind {
+    display: flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 6px;
-    color: var(--link);
-    font-weight: 600;
+    gap: 10px;
+  }
+  .mobile-panel .m-ind svg {
+    color: var(--ic, var(--teal-700));
+    flex: none;
   }
   .m-cta {
     padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));

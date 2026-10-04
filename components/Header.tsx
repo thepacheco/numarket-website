@@ -10,7 +10,7 @@ import { cta } from "@/content/site";
 import { industryLinks, needLinks, productLinks, resourceLinks, sizeLinks } from "./nav-data";
 import IndGlyph from "./IndGlyph";
 
-type MenuId = "products" | "solutions" | "resources" | null;
+type MenuId = "products" | "solutions" | "industries" | "resources" | null;
 
 export default function Header() {
   const [open, setOpen] = useState<MenuId>(null);
@@ -73,12 +73,15 @@ export default function Header() {
     onMouseLeave: scheduleClose,
   });
 
+  const onIndustry = industryLinks.some((l) => pathname === l.href);
   const section = (id: Exclude<MenuId, null>) =>
     id === "products"
       ? pathname.startsWith("/products")
       : id === "solutions"
-        ? pathname.startsWith("/solutions")
-        : resourceLinks.some((l) => l.href !== "/platform" && pathname.startsWith(l.href));
+        ? pathname.startsWith("/solutions") && !onIndustry
+        : id === "industries"
+          ? onIndustry
+          : resourceLinks.some((l) => l.href !== "/platform" && pathname.startsWith(l.href));
   const cur = (href: string) => (pathname === href || pathname.startsWith(href + "/") ? "current" : "");
 
   const trigger = (id: Exclude<MenuId, null>, label: string) => (
@@ -144,14 +147,21 @@ export default function Header() {
                       </Link>
                     ))}
                   </div>
-                  <Link href="/solutions" className="mega-more">
-                    <IndGlyph />
-                    <span>
-                      <strong>Browse all {industryLinks.length} industries</strong>
-                      <span>Pick yours and see its dashboard</span>
-                    </span>
-                    <Icon name="arrow" width={16} height={16} />
-                  </Link>
+                </div>
+              </div>
+            </li>
+            <li {...hoverProps("industries")}>
+              {trigger("industries", "Industries")}
+              <div id="menu-industries" className={`mega ${open === "industries" ? "open" : ""}`}>
+                <div className="mega-panel mega-inds">
+                  <div className="mega-ind">
+                    {industryLinks.map((l) => (
+                      <Link key={l.href} href={l.href} className={`ind-${l.href.split("/").pop()}`}>
+                        <IndGlyph />
+                        {l.title}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </li>
@@ -238,9 +248,15 @@ export default function Header() {
                 {l.title}
               </Link>
             ))}
-            <Link href="/solutions" className="m-more">
-              Browse all {industryLinks.length} industries <Icon name="arrow" width={16} height={16} />
-            </Link>
+          </MobileGroup>
+
+          <MobileGroup id="industries" title="Industries" open={mGroup} setOpen={setMGroup}>
+            {industryLinks.map((l) => (
+              <Link key={l.href} href={l.href} className={`m-ind ind-${l.href.split("/").pop()}`}>
+                <IndGlyph />
+                {l.title}
+              </Link>
+            ))}
           </MobileGroup>
 
           <MobileGroup id="resources" title="Resources" open={mGroup} setOpen={setMGroup}>
