@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import DemosByProduct from "@/components/DemosByProduct";
 import { CtaBand, PageHero } from "@/components/ui";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Demos",
@@ -21,6 +22,16 @@ export default function Demos() {
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
+          <div className="portal-demo">
+            <div>
+              <p className="portal-demo-eyebrow">The real software</p>
+              <h2>Open the numarket Portal</h2>
+              <p>The app your team signs into: dashboards, status reports as PDFs, input screens, uploads, and Ask Your Data. Pick a person (owner, project manager, superintendent, or CFO) and see exactly what they see. A fictional construction company; resets every night. No sign-up.</p>
+            </div>
+            <a href={site.portalDemoUrl} className="btn btn-primary" target="_blank" rel="noopener">
+              Open the live demo
+            </a>
+          </div>
           <h2 className="sr-only">Demos by product</h2>
           <DemosByProduct />
         </div>

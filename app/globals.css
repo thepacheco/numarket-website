@@ -1711,3 +1711,46 @@ p a:not(.btn),
 [hidden] {
   display: none !important;
 }
+
+/* Live Portal demo callout on /demos */
+.portal-demo {
+  display: flex;
+  gap: 20px 32px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--p-workspace);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.portal-demo > div {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+.portal-demo h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+.portal-demo p {
+  margin: 0;
+}
+.portal-demo-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--p-workspace);
+  margin-bottom: 6px !important;
+}
+@media (max-width: 600px) {
+  .portal-demo {
+    padding: 20px 16px;
+  }
+  .portal-demo .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

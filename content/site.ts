@@ -15,6 +15,8 @@ export const site = {
     "https://script.google.com/macros/s/AKfycbxG2dRg1FTBqH5Kc74uCW_ayrDqxm5NyZGHDtCRVeVmYLdIxqJQ7_hIZXiomnhlU3zr/exec",
   /* Paste the Calendly link here. While empty, the contact page shows the form only. */
   calendlyUrl: "https://calendly.com/nu-market/30min",
+  /* The live Portal demo (fictional company, resets nightly). */
+  portalDemoUrl: "https://app.numarket.us/sign-in",
   linkedin: "",
 };
 
