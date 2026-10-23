@@ -64,7 +64,7 @@ const groups = [
       "We only collect what your dashboards need.",
       "Sensitive fields (like Social Security numbers or patient identifiers) are masked or left out unless you require them.",
       "No client data is stored on laptops or personal devices.",
-      "Healthcare data is handled under a signed Business Associate Agreement.",
+      "Health data is accepted only under a signed Business Associate Agreement, on a HIPAA-eligible configuration.",
     ],
   },
   {

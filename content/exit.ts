@@ -7,7 +7,7 @@ export const exitPackage: { t: string; b: string }[] = [
   { t: "The cleaning rules", b: "The code that cleans and matches your data. It runs on other databases with modest changes." },
   { t: "Your apps", b: "The code for your dashboards, input screens, and anything Engineering built for you." },
   { t: "Business definitions", b: "What every number means, in plain English — your data dictionary." },
-  { t: "Or keep it running", b: "We transfer the whole database account to you, so you pay the database provider directly." },
+  { t: "Or keep it running", b: "Where the database provider allows it, we move the whole database account into your name, so you pay the provider directly." },
 ];
 export const exitTiming = "Delivered within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing.";
 export const exitCaveat = "Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you.";

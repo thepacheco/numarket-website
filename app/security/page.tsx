@@ -23,7 +23,7 @@ const details = [
   { q: "Is anything stored on laptops?", a: "No. No client data is stored on laptops or personal devices." },
   { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },
   { q: "What if there's an incident?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-  { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and your business definitions — or we transfer the whole database account to you. No charge. Then we delete our copies and confirm in writing." },
+  { q: "How does leaving work?", a: "Within 30 days of the end of your contract: your data in open files (Parquet and CSV) in your own cloud storage, the structure, the cleaning rules, your app code, and your business definitions — or, where the database provider allows it, we move the whole database account into your name. No charge. Then we delete our copies and confirm in writing." },
 ];
 
 export default function Security() {

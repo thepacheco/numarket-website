@@ -23,7 +23,7 @@ const layers = [
     items: [
       "Every client gets a separate database account, with its own tables.",
       "Encrypted at rest and in transit.",
-      "Health data runs on a higher-security, HIPAA-eligible edition.",
+      "Health data, when it's in scope, runs on a higher-security, HIPAA-eligible edition under a signed BAA.",
     ],
   },
   {
