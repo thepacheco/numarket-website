@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PageHero } from "@/components/ui";
 import { legal } from "@/content/legal";
-import { site } from "@/content/site";
 
 export const dynamicParams = false;
 
@@ -15,6 +14,9 @@ export async function generateMetadata({ params }: { params: Promise<{ doc: stri
   const d = legal[(await params).doc];
   return d ? { title: d.title, robots: { index: false } } : {};
 }
+
+/* Change this date whenever the legal text changes. */
+const legalEffective = "October 23, 2026";
 
 export default async function LegalPage({ params }: { params: Promise<{ doc: string }> }) {
   const key = (await params).doc;
@@ -44,10 +46,7 @@ export default async function LegalPage({ params }: { params: Promise<{ doc: str
             </nav>
           </aside>
           <article className="doc-article prose">
-            <p className="notice" style={{ marginBottom: 20 }}>
-              <b>Draft — pending attorney review.</b> This text is a working draft and is not yet in effect.
-            </p>
-            <p className="small muted">Effective date: to be set on publication · Last updated: {site.year}</p>
+            <p className="small muted">Effective {legalEffective} · Last updated {legalEffective}</p>
             {d.sections.map(([h, ps], i) => (
               <section key={h} id={`s${i + 1}`} style={{ scrollMarginTop: 90 }}>
                 <h2>{h}</h2>

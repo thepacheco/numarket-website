@@ -41,13 +41,15 @@ export default function IndustryExplorer({
     if (s === "small" || s === "large") setSize(s);
   }, [syncUrl]);
 
+  /* keep the address clean: only add ?industry=&size= once the visitor picks something */
   useEffect(() => {
     if (!syncUrl) return;
+    if (slug === initialIndustry && size === initialSize && !window.location.search) return;
     const url = new URL(window.location.href);
     url.searchParams.set("industry", slug);
     url.searchParams.set("size", size);
     window.history.replaceState(null, "", url.toString());
-  }, [slug, size, syncUrl]);
+  }, [slug, size, syncUrl, initialIndustry, initialSize]);
 
   /* a filter value from another industry/size makes no sense — reset it */
   useEffect(() => setSite(null), [slug, size]);

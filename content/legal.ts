@@ -1,4 +1,4 @@
-/* Legal page drafts. These must be reviewed by an attorney before launch. */
+/* Legal pages: Terms, Privacy, DPA. When the text changes, update the effective date in app/legal/[doc]/page.tsx. */
 
 export type LegalDoc = { title: string; lead: string; sections: [string, string[]][] };
 

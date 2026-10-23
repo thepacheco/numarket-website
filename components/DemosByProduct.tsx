@@ -33,7 +33,9 @@ export default function DemosByProduct() {
     if (i && industries.some((x) => x.slug === i)) setSlug(i as IndustrySlug);
     if (t && tabs.some((x) => x.id === t)) setTab(t as SolidKind);
   }, []);
+  /* keep the address clean until the visitor picks an industry or product */
   useEffect(() => {
+    if (slug === "construction" && tab === "foundation" && !window.location.search) return;
     const q = new URLSearchParams(window.location.search);
     q.set("industry", slug);
     q.set("product", tab);
