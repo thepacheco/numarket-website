@@ -69,7 +69,7 @@ export default function Enterprise() {
         <div className="container split">
           <div className="card tier popular">
             <span className="badge">Command</span>
-            <h3>From $40,000 setup · $10,000/mo</h3>
+            <h3>From $40,000 setup · $12,000/mo</h3>
             <CheckList items={["Unlimited sources and users", "Fully custom dashboards", "Weekly review + daily exec brief", "A dedicated analyst", "Your platform or ours"]} />
           </div>
           <div>

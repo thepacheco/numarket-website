@@ -87,9 +87,11 @@ export function TermsGlance() {
   const terms = [
     ["Term", "12 months, then month to month. Command can be 12–36."],
     ["Setup", "Fixed price in your proposal. Half at signing, half at launch."],
-    ["Changes", "Workspace hours are included every month. Anything custom is Engineering, quoted first."],
+    ["Changes", "Change hours are included every month (2 on Small, 6 on Mid). Extra hours are $175. Anything custom is Engineering, quoted first."],
+    ["Your systems", "If a change in one of your systems breaks a connection, we fix it from your change hours. Cleaning up the same bad entries every month isn't included; we flag them so they're fixed at the source."],
     ["Monthly", "A predictable fee, billed in advance. No per-user fees inside your size."],
-    ["Platform usage", "Included up to an allowance. Over it: cost + 15%, and we warn you at 85%."],
+    ["Platform usage", "Included up to an allowance. We warn you at 70% and 85%. Over it: cost + 15%."],
+    ["Growth", "Extra sources, history, questions, and logins have published prices (see As you grow). You approve before anything is added."],
     ["Healthcare", "HIPAA data needs a higher-security database edition: +$500/mo Small, +$800/mo Mid, Large quoted."],
     ["Leaving", "You own your data. Full export package within 30 days, free."],
   ];

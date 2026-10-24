@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 const layers = [
   { cls: "l4", name: "Insight Review", note: "what to do next" },
-  { cls: "l3", name: "Workspace", note: "dashboards · input screens · Ask Your Data" },
-  { cls: "l2", name: "Foundation", note: "your private, clean database" },
+  { cls: "l3", name: "Workspace", note: "dashboards · status reports · Ask Your Data" },
+  { cls: "l2", name: "Foundation", note: "your data: clean, explorable, with alerts and forms" },
   { cls: "l1", name: "Your systems & spreadsheets", note: "" },
 ];
 

@@ -37,14 +37,14 @@ export const steps: Step[] = [
     title: "See",
     plain:
       "Dashboards that update automatically, and a simple app where your team views status, enters updates, and asks questions in plain English.",
-    detail: "Dashboards that refresh on their own, input screens that replace emailed spreadsheets, and Ask Your Data.",
+    detail: "Dashboards that refresh on their own, status reports in your branding, and Ask Your Data. Explore, alerts, and forms come with Foundation.",
   },
   {
     n: 5,
     key: "act",
     title: "Act",
     plain: "Every month we tell you what changed, what's at risk, and exactly what to do next.",
-    detail: "An Insight Review with a numarket analyst. Action items with owners and due dates. Automatic alerts.",
+    detail: "An Insight Review with a numarket analyst. Action items with owners and due dates, tracked to done. A QBR pack every quarter.",
   },
   {
     n: 6,

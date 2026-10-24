@@ -17,7 +17,7 @@ const values: { kind: SolidKind; t: string; b: string }[] = [
 
 const ahead = [
   ["More industries", "Deeper starting kits for the businesses we see most: construction, logistics, healthcare, manufacturing, and food."],
-  ["The numarket Portal", "One branded app your team signs into with Microsoft or Google, with input screens designed for phones in the field."],
+  ["The numarket Portal", "One branded app your team signs into with Microsoft or Google, with forms designed for phones in the field."],
   ["A partner network", "Accountants, IT providers, and advisors who bring us in when a client's numbers need fixing."],
 ];
 

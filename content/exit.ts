@@ -5,7 +5,7 @@ export const exitPackage: { t: string; b: string }[] = [
   { t: "Your data", b: "A full copy in standard open files (Parquet and CSV), delivered to your own cloud storage." },
   { t: "The structure", b: "Every table, field, and relationship." },
   { t: "The cleaning rules", b: "The code that cleans and matches your data. It runs on other databases with modest changes." },
-  { t: "Your apps", b: "The code for your dashboards, input screens, and anything Engineering built for you." },
+  { t: "Your apps", b: "The code for your dashboards, forms, and anything Engineering built for you." },
   { t: "Business definitions", b: "What every number means, in plain English — your data dictionary." },
   { t: "Or keep it running", b: "Where the database provider allows it, we move the whole database account into your name, so you pay the provider directly." },
 ];

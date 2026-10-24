@@ -42,7 +42,33 @@ function base(font: string) {
     g.fillStyle = color;
     g.fillText(text, x, y);
   };
-  return { c, g, t };
+  /* Text that wraps inside the card instead of running off its edge. The
+     last line is shortened with an ellipsis if it still doesn't fit. */
+  const wrap = (text: string, x: number, y: number, size: number, color = "#0b1f2e", weight = 600, maxLines = 2, right = W - 40) => {
+    g.font = `${weight} ${size}px ${font}`;
+    g.fillStyle = color;
+    const max = right - x;
+    const lines: string[] = [];
+    let line = "";
+    for (const word of text.split(" ")) {
+      const next = line ? `${line} ${word}` : word;
+      if (g.measureText(next).width <= max || !line) line = next;
+      else {
+        lines.push(line);
+        line = word;
+      }
+    }
+    if (line) lines.push(line);
+    const shown = lines.slice(0, maxLines);
+    if (lines.length > maxLines) {
+      let last = shown[maxLines - 1];
+      while (last && g.measureText(`${last}…`).width > max) last = last.slice(0, -1);
+      shown[maxLines - 1] = `${last.trimEnd()}…`;
+    }
+    shown.forEach((l, i) => g.fillText(l, x, y + i * size * 1.35));
+    return shown.length;
+  };
+  return { c, g, t, wrap };
 }
 
 function tex(c: HTMLCanvasElement) {
@@ -59,7 +85,7 @@ export function panelTextures(font: string) {
 
   /* 1. Dashboard */
   const d = base(font);
-  d.t("Summit Builders · Dashboard", 34, 58, 22, "#52667a", 600);
+  d.wrap("Summit Builders · Dashboard", 34, 58, 22, "#52667a", 600, 1);
   const kp = v.kpis;
   [kp[0], kp[1]].forEach((k, i) => {
     const x = 34 + i * 290;
@@ -67,7 +93,7 @@ export function panelTextures(font: string) {
     d.g.beginPath();
     d.g.roundRect(x, 82, 270, 104, 16);
     d.g.fill();
-    d.t(k.label, x + 18, 116, 18, "#52667a", 600);
+    d.wrap(k.label, x + 18, 116, 18, "#52667a", 600, 1, x + 252);
     d.t(fmt(k.value, k.fmt), x + 18, 164, 40, "#0b1f2e", 700);
   });
   const vals = v.table.map((r) => r.values.find((x) => x.key === "actual")!.value);
@@ -91,7 +117,7 @@ export function panelTextures(font: string) {
     f.g.beginPath();
     f.g.roundRect(34, y + 12, W - 68, 56, 12);
     f.g.stroke();
-    f.t(value, 52, y + 50, 22, "#0b1f2e", 500);
+    f.wrap(value, 52, y + 50, 22, "#0b1f2e", 500, 1, W - 52);
   };
   field("Job", worst.site, 110);
   field("Cost to date", fmt(v.table.find((r) => r.site === worst.site)!.values.find((x) => x.key === "actual")!.value, "money"), 214);
@@ -114,7 +140,7 @@ export function panelTextures(font: string) {
   a.g.roundRect(34, 190, 470, 150, 20);
   a.g.fill();
   a.t(`${ob.count} jobs · ${fmt(ob.total, "money")} over`, 58, 240, 30, "#1f8a5b", 700);
-  ob.rows.slice(0, 2).forEach((r, i) => a.t(`${r.site}: ${fmt(r.over, "money")}`, 58, 284 + i * 34, 21, "#243746", 500));
+  ob.rows.slice(0, 2).forEach((r, i) => a.wrap(`${r.site}: ${fmt(r.over, "money")}`, 58, 284 + i * 34, 21, "#243746", 500, 1, 486));
 
   /* 4. Alert */
   const al = base(font);
@@ -128,8 +154,8 @@ export function panelTextures(font: string) {
   al.g.fill();
   al.t("ALERT", 44, 70, 20, "#b93b22", 700);
   al.t("Budget line crossed", 44, 128, 34, "#0b1f2e", 700);
-  al.t(`${worst.site}`, 44, 190, 26, "#243746", 600);
-  al.t(`${fmt(worst.over, "money")} over budget for work done`, 44, 232, 22, "#52667a", 500);
+  al.wrap(`${worst.site}`, 44, 190, 26, "#243746", 600, 1);
+  al.wrap(`${fmt(worst.over, "money")} over budget for work done`, 44, 232, 22, "#52667a", 500, 2);
   al.t("Sent to: Project manager", 44, 340, 20, "#52667a", 500);
 
   /* 5. Action item (back of the dashboard) */
@@ -142,9 +168,8 @@ export function panelTextures(font: string) {
   ac.g.lineWidth = 4;
   ac.g.stroke();
   ac.t("ACTION ITEM", 40, 70, 20, "#1f8a5b", 700);
-  ac.t("Review change orders", 40, 130, 36, "#0b1f2e", 700);
-  ac.t(`on ${worst.site}`, 40, 178, 36, "#0b1f2e", 700);
-  ac.t(v.action.detail.split(". ")[1] ?? "", 40, 236, 20, "#52667a", 500);
+  ac.wrap(`Review change orders on ${worst.site}`, 40, 130, 36, "#0b1f2e", 700, 2);
+  ac.wrap(v.action.detail.split(". ")[1] ?? "", 40, 232, 20, "#52667a", 500, 2);
   ac.t("Owner: PM team", 40, 330, 22, "#243746", 600);
   ac.t("Due: Friday", 300, 330, 22, "#243746", 600);
 

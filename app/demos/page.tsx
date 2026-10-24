@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Demos",
-  description: "Try each product on sample data: Foundation cleaning, a Workspace dashboard and input screen, an Insight Review, and a custom Engineering app — for eight industries.",
+  description: "Try each product on sample data: Foundation cleaning and a form, a Workspace dashboard, an Insight Review, and a custom Engineering app — for eight industries.",
 };
 
 export default function Demos() {
@@ -26,7 +26,7 @@ export default function Demos() {
             <div>
               <p className="portal-demo-eyebrow">The real software</p>
               <h2>Open the numarket Portal</h2>
-              <p>The app your team signs into: dashboards, status reports as PDFs, input screens, uploads, and Ask Your Data. Pick a person (owner, project manager, superintendent, or CFO) and see exactly what they see. A fictional construction company; resets every night. No sign-up.</p>
+              <p>The app your team signs into: Explore and alerts, forms and uploads, dashboards, status reports as PDFs, and Ask Your Data. Pick a person (owner, project manager, superintendent, or CFO) and see exactly what they see. A fictional construction company; resets every night. No sign-up.</p>
             </div>
             <a href={site.portalDemoUrl} className="btn btn-primary" target="_blank" rel="noopener">
               Open the live demo

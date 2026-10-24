@@ -181,9 +181,9 @@ const stories: Record<Exclude<ProductKind, "platform">, { steps: { eyebrow: stri
   workspace: {
     steps: [
       { eyebrow: "See", title: "Dashboards that update automatically.", body: "The numbers each person needs, updated on their own." },
-      { eyebrow: "Enter", title: "Input screens.", body: "Your team types it once. No more emailed spreadsheets." },
+      { eyebrow: "Report", title: "Status reports.", body: "The Monday report fills itself in, in your branding." },
       { eyebrow: "Ask", title: "Ask Your Data.", body: "Plain-English questions, answered from your numbers." },
-      { eyebrow: "Alert", title: "Alerts.", body: "Told as soon as the next update shows a problem." },
+      { eyebrow: "Home", title: "Your own Home page.", body: "Pin the numbers and charts you check every day." },
     ],
   },
   insight: {

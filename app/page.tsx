@@ -1,25 +1,13 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import SolidsField from "@/components/solids/SolidsField";
+import HeroSolids from "@/components/solids/HeroSolids";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
 import MoneyStats from "@/components/MoneyStats";
 import { CtaBand, Dots, PrimaryCta, SectionHead } from "@/components/ui";
 import { sizes, tiers, money } from "@/content/tiers";
-
-/* Hero visual: messy tiles tidy themselves into rows above a secure core. */
-const tiles = [
-  { l: 17, t: 10, x: -60, y: 90, r: -14 },
-  { l: 42, t: 10, x: 110, y: 160, r: 11 },
-  { l: 67, t: 10, x: -40, y: 250, r: -8 },
-  { l: 17, t: 27, x: 150, y: -60, r: 16 },
-  { l: 42, t: 27, x: -170, y: 40, r: -19 },
-  { l: 67, t: 27, x: 40, y: -130, r: 9 },
-  { l: 17, t: 44, x: 120, y: -150, r: -6 },
-  { l: 42, t: 44, x: 190, y: -40, r: 22 },
-  { l: 67, t: 44, x: -150, y: -110, r: -12 },
-];
 
 const problems = [
   { icon: "spreadsheet", text: "Numbers in 12 spreadsheets" },
@@ -42,7 +30,7 @@ export default function Home() {
             <h1>
               The data team you <em className="accent">don&apos;t have to hire.</em>
             </h1>
-            <p className="lead">We pull your numbers into one private database, keep them clean, and give your team dashboards that update automatically, plus an analyst who tells you what to do next. One predictable monthly fee.</p>
+            <p className="lead">Clean data, dashboards that update on their own, and an analyst who tells you what to do next. One monthly fee.</p>
             <div className="btn-row">
               <PrimaryCta />
               <Link href="#journey" className="btn btn-secondary">
@@ -61,42 +49,7 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <div className="journey" role="img" aria-label="Scattered files becoming organized rows of clean data above a secure database.">
-            {tiles.map((t, i) => (
-              <div
-                key={i}
-                className="tile clean"
-                style={
-                  {
-                    left: `${t.l}%`,
-                    top: `${t.t}%`,
-                    "--x0": `${t.x}%`,
-                    "--y0": `${t.y}%`,
-                    "--r0": `${t.r}deg`,
-                    "--x1": "0%",
-                    "--y1": "0%",
-                    animationDelay: `${i * 0.08}s`,
-                  } as React.CSSProperties
-                }
-              >
-                <i style={{ width: "80%" }} />
-                <i style={{ width: "55%" }} />
-                <i style={{ width: "68%" }} />
-              </div>
-            ))}
-            <div className="core">
-              <div>
-                <Icon name="lock" />
-                YOUR PRIVATE
-                <br />
-                DATABASE
-              </div>
-            </div>
-            <div className="journey-label">
-              <span>Scattered → </span>
-              <b>Cleaned · Secured · Yours</b>
-            </div>
-          </div>
+          <HeroSolids />
         </div>
       </section>
 

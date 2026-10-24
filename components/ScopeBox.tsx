@@ -16,7 +16,7 @@ const info: Record<K, { name: string; tag: string; body: string; foot: string }>
   workspace: {
     name: "Workspace",
     tag: "Configured, not built",
-    body: "We pick from a library we've already built — dashboard layouts, input-screen templates, Ask Your Data, alerts, report layouts — and point it at your data.",
+    body: "We pick from a library we've already built — dashboard layouts, form templates, Ask Your Data, alerts, report layouts — and point it at your data.",
     foot: "Fast. Included in the monthly price. Maintained by us.",
   },
   engineering: {

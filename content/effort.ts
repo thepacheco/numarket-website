@@ -26,8 +26,8 @@ export const effort: Effort[] = [
     whoInvolved: "Owner or office manager",
     needFromYou: "A read-only connection or export for each tool, one review meeting",
     firstDashboard: "2–3 weeks",
-    setup: "$7,500–$12,000",
-    monthly: "$2,500–$3,500",
+    setup: "$9,500–$14,000",
+    monthly: "$3,000–$3,800",
     disruption: "None",
     newSoftware: "No",
     checklist: [
@@ -46,8 +46,8 @@ export const effort: Effort[] = [
     whoInvolved: "Ops or finance lead",
     needFromYou: "Read-only connections to your systems, 2–3 review meetings",
     firstDashboard: "4–6 weeks",
-    setup: "$15,000–$35,000",
-    monthly: "$4,000–$7,000",
+    setup: "$19,000–$40,000",
+    monthly: "$5,750–$7,500",
     disruption: "None",
     newSoftware: "No",
     checklist: [
@@ -67,7 +67,7 @@ export const effort: Effort[] = [
     needFromYou: "Security review, read access, steering meetings",
     firstDashboard: "6–10 weeks",
     setup: "$40,000–$150,000+",
-    monthly: "$10,000+",
+    monthly: "$12,000+",
     disruption: "None — we work alongside existing systems",
     newSoftware: "No (we can use what IT already owns)",
     checklist: [

@@ -50,7 +50,7 @@ export function PriceConfigurator() {
             ))}
           </div>
           <p className="small muted cfg-limits">
-            {sz.sources} · {sz.users}.{" "}
+            {sz.sources} · {sz.users} · {sz.rows.replace("Up to about", "up to about")}.{" "}
             <Link href="/getting-started#estimator">Not sure? Take the 2-minute estimate.</Link>
           </p>
         </fieldset>
@@ -102,7 +102,7 @@ export function PriceConfigurator() {
           <p className="cfg-plan muted">Add all three products to get the {tiers.find((t) => t.size === size)!.name} plan price.</p>
         )}
         <p className="small muted">
-          Platform usage: {allowance[size].toLowerCase()}. {sz.updates}.
+          Platform usage: {allowance[size].toLowerCase()}. {sz.updates}. Growing past your size? <Link href="#add-ons">See what extra sources, history, and questions cost.</Link>
         </p>
         <p className="cfg-eng">
           <SolidIcon kind="engineering" size={22} />

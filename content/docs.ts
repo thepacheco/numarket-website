@@ -64,12 +64,12 @@ export const docs: Doc[] = [
   },
   {
     slug: "input-screens",
-    group: "Using your Workspace",
-    title: "Entering data in input screens",
+    group: "Your data",
+    title: "Entering data in forms",
     summary: "Fill in the form and save. It's checked as you type and logged with your name.",
     body: [
-      { p: "Input screens replace the spreadsheets people used to email around. Anything you save appears in the dashboards right away." },
-      { ol: ["Open the input screen from the Workspace menu (for example “Daily log” or “Update job budget”).", "Fill in the fields. If something looks off — a number far too high, a missing date — you'll see a message before saving.", "Press Save. The entry is logged with your name and time."] },
+      { p: "Forms replace the paper and spreadsheets people used to pass around, for information that isn't in any of your systems. What you save becomes part of your data and shows on dashboards at the next update." },
+      { ol: ["Open Enter data in the menu and pick the form (for example “Daily field report” or “Change order log”).", "Fill in the fields. If something looks off, like a number far too high or a missing date, you'll see a message before saving.", "Press Save. The entry is logged with your name and time. Have a spreadsheet instead? Upload it on the same page; every row gets the same checks."] },
       { note: "Made a mistake? Open the entry and edit it. The change history is kept." },
     ],
   },
@@ -86,13 +86,13 @@ export const docs: Doc[] = [
   },
   {
     slug: "alerts",
-    group: "Using your Workspace",
+    group: "Your data",
     title: "Setting up alerts",
-    summary: "Tell us the line you care about. You'll hear about it when it's crossed.",
+    summary: "Pick what you care about. You'll hear about it when the next update finds it.",
     body: [
-      { p: "Alerts watch a number for you and send an email or chat message when it crosses a line you choose." },
-      { ol: ["Pick the number (for example, a job's budget or a clinic's staffing).", "Pick the line (for example, 5% over budget).", "Pick who gets told and how (email, Slack, or Teams)."] },
-      { p: "Send those three things to your analyst. Alerts are included in every plan." },
+      { p: "Alerts watch your data for you. Every update is checked against your alerts; anything new shows on the bell in your Portal, and by email if you turn email on." },
+      { ol: ["Open Explore, then Alerts.", "Pick a ready-made alert (a job over budget, customers more than 60 days late, cash below a level, a Monday summary of every job) and set your line.", "Or filter any view in Explore (for example, RFIs open more than 30 days) and choose Alert me. You'll hear when something new matches."] },
+      { p: "Alerts are included in every plan. Each person sets their own." },
     ],
   },
   {
@@ -112,7 +112,7 @@ export const docs: Doc[] = [
     summary: "Data from your systems updates on a schedule, set by your size.",
     body: [
       { p: "Data from your other systems updates on a schedule: once a day, overnight, on Small; up to every hour during business hours on Mid; and a custom schedule on Large. Near-real-time feeds are available as Engineering work." },
-      { p: "What your team types into input screens shows up right away." },
+      { p: "What your team types into forms shows up at the next update." },
       { p: "Your business definitions list the refresh schedule for each source, and every dashboard shows when it was last updated." },
     ],
   },
@@ -152,7 +152,7 @@ export const docs: Doc[] = [
     summary: "After your term: full export or account transfer within 30 days, at no charge.",
     body: [
       { p: "Your data is yours. If you decide to leave after your term, you choose how to take it:" },
-      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, input screens, and Engineering builds.", "Your business definitions, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
+      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, forms, and Engineering builds.", "Your business definitions, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
       { p: "One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
       { p: "We finish within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing." },
     ],
@@ -166,7 +166,7 @@ export const docs: Doc[] = [
       { h: "Database", p: "Where your clean data is stored — privately, just for your company." },
       { h: "Automatic data updates", p: "Secure connections that copy data from your tools on a schedule. Sometimes called “pipelines.”" },
       { h: "Dashboard", p: "A screen of your key numbers that updates automatically." },
-      { h: "Input screen", p: "A simple form that replaces a spreadsheet people used to email around." },
+      { h: "Form", p: "A simple screen that replaces a paper form or a spreadsheet people used to email around. Found under Enter data." },
       { h: "Ask Your Data", p: "Plain-English questions answered from your own numbers." },
       { h: "Insight Review", p: "A regular meeting where your analyst explains what changed and what to do next." },
       { h: "Platform usage", p: "The storage and computing cost of running your database. Included up to an allowance in your plan." },

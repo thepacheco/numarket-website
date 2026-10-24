@@ -136,18 +136,18 @@ export function ReconcileDemo() {
   );
 }
 
-/* ============ Replace spreadsheets: five files become one input screen ============ */
+/* ============ Replace spreadsheets: five files become one form ============ */
 
 const sheetSteps = [
   { t: "Spot the conflict", d: "Five files, five different numbers." },
-  { t: "Replace the files", d: "One input screen, owned by the PM." },
+  { t: "Replace the files", d: "One form, owned by the PM." },
   { t: "Enter it once", d: "Checked as it's typed, logged with a name." },
   { t: "Everyone sees it", d: "Owner, PM, and super see the same number." },
 ];
 const sheetCaption = [
   "Route 9 Bridge's cost to date lives in five spreadsheets and an email. Which one is right?",
   "Step 1 — The versions disagree by thousands of dollars. Nobody knows which one the owner is looking at.",
-  "Step 2 — We replace all five with one simple input screen. The files stop being the source.",
+  "Step 2 — We replace all five with one simple form. The files stop being the source.",
   "Step 3 — The PM enters the number once. It's checked as it's typed and logged with their name.",
   "Step 4 — The owner, the PM, and the superintendent all see the same number, right away.",
   "Done. One number, entered once, trusted by everyone.",

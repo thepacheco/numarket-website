@@ -5,10 +5,10 @@ import { solids, solidColor, solidInk, type SolidKind } from "./geometry";
 import { drawSolid, fitCanvas, subscribe } from "./draw";
 
 export const layers: { kind: SolidKind; name: string; line: string; shape: string }[] = [
-  { kind: "foundation", name: "Foundation", line: "Your data, collected, cleaned, and secured. Everything sits on it.", shape: "Cube" },
-  { kind: "workspace", name: "Workspace", line: "Your reports and your apps, built from our standard blocks.", shape: "Dodecahedron" },
-  { kind: "insight", name: "Insight Review", line: "An analyst tells you what changed and what to do next.", shape: "Octahedron" },
-  { kind: "engineering", name: "Engineering", line: "Optional. Anything custom, built for you alone.", shape: "Icosahedron" },
+  { kind: "foundation", name: "Foundation", line: "Your data: collected, cleaned, secured, and yours to explore. Everything sits on it.", shape: "Cube" },
+  { kind: "workspace", name: "Workspace", line: "Your dashboards and reports, built for you from our standard blocks.", shape: "Dodecahedron" },
+  { kind: "insight", name: "Insight Review", line: "Your analyst tells you what changed and what to do next.", shape: "Octahedron" },
+  { kind: "engineering", name: "Engineering", line: "Optional. Apps and automations built for you alone.", shape: "Icosahedron" },
 ];
 const nested = [0.36, 0.56, 0.78, 1.0];
 

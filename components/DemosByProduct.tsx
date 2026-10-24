@@ -17,7 +17,7 @@ import { industries, type IndustrySlug } from "@/content/industries";
 
 const tabs: { id: SolidKind; name: string; line: string }[] = [
   { id: "foundation", name: "Foundation", line: "Messy sources in, one clean table out, the few items that need a person, and what every number means." },
-  { id: "workspace", name: "Workspace", line: "The dashboard, an input screen, Ask Your Data, and the weekly report." },
+  { id: "workspace", name: "Workspace", line: "The dashboard, a form, Ask Your Data, and the weekly report." },
   { id: "insight", name: "Insight Review", line: "What your analyst hands you, with action items to check off." },
   { id: "engineering", name: "Engineering", line: "Paper to digital, plus four custom apps, each built for one company." },
 ];
@@ -79,7 +79,7 @@ export default function DemosByProduct() {
           <div className="dbp-stack">
             <h3 className="dbp-h">The dashboard</h3>
             <IndustryExplorer initialIndustry={slug} initialSize="large" lockIndustry />
-            <h3 className="dbp-h">An input screen</h3>
+            <h3 className="dbp-h">A form</h3>
             <IndustryEntry slug={slug} />
             <h3 className="dbp-h">Change a number, or ask a question</h3>
             <WorkspaceDemo askIndustry={slug} />

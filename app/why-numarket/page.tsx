@@ -15,7 +15,7 @@ const points = [
 
 const cols = ["numarket", "Hire in-house", "Big consulting firm", "DIY software"];
 const rows: [string, string[]][] = [
-  ["Cost", ["Priced by product; plans from $2,500/mo + setup", "$85K–$110K/yr per analyst + tools", "$150K–$500K+", "Licenses + your team's time"]],
+  ["Cost", ["Priced by product; plans from $3,000/mo + setup", "$85K–$110K/yr per analyst + tools", "$150K–$500K+", "Licenses + your team's time"]],
   ["Time to value", ["2–10 weeks", "Months to hire and ramp", "Months", "Depends on your team"]],
   ["Who cleans the data", ["We do", "Your hire (if they can)", "They do, once", "You do"]],
   ["Who explains it", ["An analyst, every month", "Your hire", "A final presentation", "Nobody"]],

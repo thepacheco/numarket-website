@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PlanCards, PriceConfigurator, ProductPriceTable } from "@/components/PricingTiers";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { faq } from "@/content/faq";
+import { addOns } from "@/content/tiers";
 import { TermsGlance } from "@/components/PricingOps";
 
 export const metadata: Metadata = {
@@ -42,18 +43,35 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="section soft">
+      <section className="section soft" id="add-ons">
+        <div className="container">
+          <SectionHead eyebrow="As you grow" title="Everything that grows has a price." lead="Normal use is included in your plan. If you add sources, history, questions, or people who query the database directly, here is exactly what it costs. Nothing is billed without a warning first." />
+          <div className="addons">
+            {addOns.map((a) => (
+              <div key={a.name} className="addon">
+                <div>
+                  <b>{a.name}</b>
+                  <span className="small muted">{a.why}</span>
+                </div>
+                <span className="addon-price tnum">{a.price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="container">
           <SectionHead eyebrow="The rules" title="No fine print." />
           <TermsGlance />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section soft">
         <div className="container split">
           <div>
-            <SectionHead eyebrow="Platform usage" title="What's “platform usage”?" lead="Running your database costs money. Foundation includes it, up to an allowance." />
-            <p className="muted">Over the allowance? Billed at cost + 15%, on its own invoice line. We warn you at 85%.</p>
+            <SectionHead eyebrow="Platform usage" title="What's “platform usage”?" lead="Updating your database, storing your history, and paid connectors to some systems cost money each month. Foundation includes that, up to an allowance most clients never reach." />
+            <p className="muted">You see it on your Usage page. We warn you at 70% and again at 85%. Over the allowance? Billed at cost + 15%, on its own invoice line.</p>
           </div>
           <div className="card">
             <h3>Mid allowance: $800/mo</h3>
@@ -61,6 +79,7 @@ export default function Pricing() {
             <div className="usage">
               <div className="usage-bar">
                 <span className="usage-typ" style={{ width: "55%" }} />
+                <span className="usage-alert" style={{ left: "70%" }} />
                 <span className="usage-alert" style={{ left: "85%" }} />
               </div>
               <div className="usage-legend">
@@ -68,7 +87,7 @@ export default function Pricing() {
                   <i className="sw typ" /> Usage so far this month
                 </span>
                 <span>
-                  <i className="sw alert" /> We alert you here (85%)
+                  <i className="sw alert" /> We warn you at 70% and 85%
                 </span>
               </div>
               <div className="usage-scale tnum">
@@ -81,7 +100,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="section soft">
+      <section className="section">
         <div className="container">
           <SectionHead eyebrow="FAQ" title="Pricing questions." />
           <Faq items={faq.pricing} />
