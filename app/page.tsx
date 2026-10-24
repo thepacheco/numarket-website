@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import SolidsField from "@/components/solids/SolidsField";
-import HeroSolids from "@/components/solids/HeroSolids";
+import HeroFlow from "@/components/HeroFlow";
 import IndustryExplorer from "@/components/IndustryExplorer";
 import ProductBento from "@/components/ProductBento";
 import DataJourney from "@/components/DataJourney";
@@ -49,7 +49,7 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          <HeroSolids />
+          <HeroFlow />
         </div>
       </section>
 
