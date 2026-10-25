@@ -92,7 +92,7 @@ export function TermsGlance() {
     ["Monthly", "A predictable fee, billed in advance. No per-user fees inside your size."],
     ["Platform usage", "Included up to an allowance. We warn you at 70% and 85%. Over it: cost + 15%."],
     ["Growth", "Extra sources, history, questions, and logins have published prices (see As you grow). You approve before anything is added."],
-    ["Healthcare", "HIPAA data needs a higher-security database edition: +$500/mo Small, +$800/mo Mid, Large quoted."],
+    ["Healthcare", "Health data (HIPAA) is by request: we review your situation first, then quote it, with a signed Business Associate Agreement."],
     ["Leaving", "You own your data. Full export package within 30 days, free."],
   ];
   return (

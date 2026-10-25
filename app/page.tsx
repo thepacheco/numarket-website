@@ -190,7 +190,7 @@ export default function Home() {
       {/* PRICING TEASER */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing, published up front." lead="Priced by size. Take all three products and a discount applies, shown line by line." />
+          <SectionHead eyebrow="Pricing" title="Clear pricing, published up front." lead="Priced by size and by product. The total is exactly the sum, line by line." />
           <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>

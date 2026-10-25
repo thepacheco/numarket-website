@@ -70,7 +70,7 @@ export default function Enterprise() {
           <div className="card tier popular">
             <span className="badge">Large · all three products</span>
             <h3>From $40,000 setup · from $12,000/mo</h3>
-            <CheckList items={["9 or more data sources, 50 or more app users", "Dashboards and reports configured for each team", "Weekly reviews plus a daily executive brief", "A named analyst who knows your data", "Our secure platform, or your own cloud (quoted)"]} />
+            <CheckList items={["9 or more data sources, 50 or more app users", "Dashboards and reports configured for each team", "Weekly reviews plus a daily executive brief", "A named analyst who knows your data", "Our secure platform (your own cloud by request)"]} />
           </div>
           <div>
             <SectionHead eyebrow="FAQ" title="IT and leadership ask." />

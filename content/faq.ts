@@ -6,7 +6,7 @@ export const faq: Record<string, QA[]> = {
     { q: "What's the difference between Workspace and Engineering?", a: "Workspace is your dashboards and reports, built for your business from our standard building blocks, plus Ask Your Data. It's included in the monthly price. Engineering is when you need something built that doesn't exist yet, like a crew scheduler or an automation that writes back to QuickBooks. It's priced as a project." },
     { q: "How often does my data update?", a: "Data from your other systems updates on a schedule: once a day overnight on Small, up to every hour during business hours on Mid, and a custom schedule on Large. What your team types into forms shows up right away." },
     { q: "What happens if I leave?", a: "Within 30 days you get your data in open files (Parquet and CSV) in your own cloud storage, the structure of every table, the cleaning rules, the code for your apps, and your business definitions. Then we delete our copies and confirm it in writing. One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
-    { q: "Why does healthcare cost more?", a: "Health data (HIPAA) has to run on a higher-security edition of the database, which costs about twice as much to run. That's +$500/mo on Small and +$800/mo on Mid. Large is quoted." },
+    { q: "Do you work with healthcare data?", a: "By request. Health data (HIPAA) needs a signed Business Associate Agreement and a higher-security setup that costs more to run, so we review your situation first and quote it." },
     { q: "How long is the contract?", a: "12 months. Large can be 12 to 36 months. After the term, continue month to month, or leave and take your data with you." },
     { q: "What is platform usage?", a: "Updating your private database, storing your history, and paid connectors to some systems cost money each month. Foundation includes that up to an allowance ($400/mo on Small, $800/mo on Mid), which most clients never reach. If you go over, the extra is billed at cost + 15% and shown on its own invoice line. We alert you at 85%. On Large it's passed through at cost + 15%." },
     { q: "Are there per-user fees?", a: "No. Everyone within your size's user limit is included." },
@@ -41,6 +41,6 @@ export const faq: Record<string, QA[]> = {
     { q: "Who owns the data?", a: "You do. Always. The contract says so." },
     { q: "Is my data mixed with other clients' data?", a: "No. Every client gets their own separate, encrypted database." },
     { q: "What if something goes wrong?", a: "We notify you within 72 hours of any confirmed security incident, with what happened and what we're doing about it." },
-    { q: "Can you support healthcare data?", a: "Yes, at any size. Health data runs on a HIPAA-eligible configuration, and we sign a Business Associate Agreement. It adds +$500/mo on Small and +$800/mo on Mid; Large is quoted." },
+    { q: "Can you support healthcare data?", a: "By request. We review your situation first. If we take it on, health data runs on a HIPAA-eligible setup under a signed Business Associate Agreement, and the extra cost is in your quote." },
   ],
 };

@@ -5,20 +5,18 @@ import { useState } from "react";
 import Icon from "./Icon";
 import SolidIcon from "./solids/SolidIcon";
 import type { SolidKind } from "./solids/geometry";
-import { allowance, engineering, hipaa, money, productPrices, quote, separately, sizes, tiers, type PriceSize, type PricedProduct } from "@/content/tiers";
+import { allowance, engineering, hipaaNote, money, productPrices, quote, sizes, tiers, type PriceSize, type PricedProduct } from "@/content/tiers";
 
 const solidOf: Record<PricedProduct, SolidKind> = { foundation: "foundation", workspace: "workspace", insight: "insight" };
 const fmtFrom = (n: number, from?: boolean) => `${from ? "from " : ""}${money(n)}`;
 
 /* Build your price: pick a size, turn products on or off. The result is an
-   itemized bill: each product, the all-three discount on its own line, and
-   the total, so every number visibly adds up. */
+   itemized bill: each product and the total, which is exactly their sum. */
 export function PriceConfigurator() {
   const [size, setSize] = useState<PriceSize>("mid");
   const [ws, setWs] = useState(true);
   const [ir, setIr] = useState(true);
-  const [hc, setHc] = useState(false);
-  const q = quote(size, ws, ir, hc);
+  const q = quote(size, ws, ir);
   const sz = sizes.find((s) => s.id === size)!;
   const toggle = (id: PricedProduct, on: boolean, set?: (v: boolean) => void, locked?: boolean) => {
     const p = productPrices[id].bySize[size];
@@ -63,16 +61,7 @@ export function PriceConfigurator() {
             {toggle("insight", ir, setIr)}
           </div>
         </fieldset>
-        <fieldset>
-          <legend>3. Anything else</legend>
-          <label className="cfg-check">
-            <input type="checkbox" checked={hc} onChange={(e) => setHc(e.target.checked)} />
-            <span>
-              <b>Healthcare data (HIPAA)</b>
-              <small>{hipaa[size] ? `+${money(hipaa[size]!)}/mo for the higher-security database edition` : "Quoted for Large"}</small>
-            </span>
-          </label>
-        </fieldset>
+        <p className="small muted cfg-hipaa">{hipaaNote}</p>
       </div>
       <div className="cfg-out" aria-live="polite">
         <table className="cfg-bill tnum">
@@ -98,36 +87,18 @@ export function PriceConfigurator() {
                   </tr>
                 );
               })}
-            {q.bundle && (
-              <tr className="cfg-disc">
-                <th scope="row">All-three discount</th>
-                <td>−{money(separately(size).setup - q.bundle.setupFrom)}</td>
-                <td>−{money(separately(size).monthly - q.bundle.monthlyFrom)}</td>
-              </tr>
-            )}
-            {hc && hipaa[size] ? (
-              <tr>
-                <th scope="row">Healthcare (HIPAA)</th>
-                <td>$0</td>
-                <td>+{money(hipaa[size]!)}</td>
-              </tr>
-            ) : null}
           </tbody>
           <tfoot>
             <tr>
               <th scope="row">Your price</th>
               <td>{fmtFrom(q.setup, q.from)}</td>
-              <td>
-                {fmtFrom(q.monthly, q.from)}
-                {q.hipaaQuoted ? " + HIPAA quote" : ""}
-              </td>
+              <td>{fmtFrom(q.monthly, q.from)}</td>
             </tr>
           </tfoot>
         </table>
         <p className="cfg-year">
           First year (setup + 12 months): <b className="tnum">{fmtFrom(q.firstYear, q.from)}</b>
         </p>
-        {!q.bundle && <p className="cfg-plan muted">Take all three products and a discount applies: {money(separately(size).setup - tiers.find((t) => t.size === size)!.setupFrom)} off setup and {money(separately(size).monthly - tiers.find((t) => t.size === size)!.monthlyFrom)} off every month.</p>}
         <p className="small muted">
           Platform usage: {allowance[size].toLowerCase()}. {sz.updates}. Growing past your size? <Link href="#add-ons">See what extra sources, history, and questions cost.</Link>
         </p>
@@ -165,9 +136,6 @@ export function PlanCards() {
                   <small>/mo</small>
                 </b>
                 <small>+ {fmtFrom(t.setupFrom, t.from)} setup</small>
-                <small className="plan-sep">
-                  Separately {fmtFrom(separately(t.size).setup, t.from)} + {fmtFrom(separately(t.size).monthly, t.from)}/mo
-                </small>
               </span>
               <span className="plan-more">
                 {isOpen ? "Hide details" : "What's included"} <Icon name="chevron" width={14} height={14} />

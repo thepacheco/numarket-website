@@ -54,7 +54,7 @@ export default function SmallBusiness() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Two sizes for small and growing companies." lead="All three products, with the discount applied. See every line on the Pricing page." />
+          <SectionHead eyebrow="Pricing" title="Two sizes for small and growing companies." lead="All three products. See every line on the Pricing page." />
           <div className="grid g2 stagger">
             {tiers
               .filter((t) => t.id !== "command")

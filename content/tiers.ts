@@ -1,9 +1,9 @@
-/* Pricing (v3, October 2026; the model is in docs/numarket-product-and-pricing.md §5).
-   Prices are set by size (Small, Mid, Large). Each product is priced on its
-   own; taking all three gives a discount, shown as its own line so the math
-   always adds up. Plans are named by size only. Base fees cover the people
-   who run it; normal usage is included; anything that grows with volume has
-   a published price (addOns below). Engineering is always quoted separately. */
+/* Pricing (v3, October 2026; the model is in numarket-platform/docs/product-and-pricing.md).
+   Prices are set by size (Small, Mid, Large). Each product has a price, and
+   the price for all three is exactly their sum: no bundle discount, so every
+   total on the site adds up. Base fees cover the people who run it; normal
+   usage is included; anything that grows with volume has a published price
+   (addOns below). Engineering is always quoted separately. */
 
 export type TierId = "insight" | "operate" | "command";
 export type PriceSize = "small" | "mid" | "large";
@@ -35,24 +35,25 @@ export const productPrices: Record<PricedProduct, { name: string; required?: boo
     name: "Workspace",
     what: "Dashboards built for your business, status reports in your branding, Ask Your Data, and change hours",
     bySize: {
-      small: { setup: 3000, monthly: 850 },
-      mid: { setup: 6000, monthly: 1400 },
-      large: { setup: 15000, monthly: 3000, from: true },
+      small: { setup: 2500, monthly: 750 },
+      mid: { setup: 5000, monthly: 1250 },
+      large: { setup: 10000, monthly: 3000, from: true },
     },
   },
   insight: {
     name: "Insight Review",
     what: "A named analyst: reviews, the meeting, action items tracked to done, the QBR pack",
     bySize: {
-      small: { setup: 0, monthly: 1250, note: "A review every month" },
-      mid: { setup: 0, monthly: 2500, note: "A review every two weeks" },
-      large: { setup: 0, monthly: 5000, from: true, note: "Weekly reviews plus a daily brief" },
+      small: { setup: 0, monthly: 1000, note: "A review every month" },
+      mid: { setup: 0, monthly: 2000, note: "A review every two weeks" },
+      large: { setup: 0, monthly: 4000, from: true, note: "Weekly reviews plus a daily brief" },
     },
   },
 };
 
 export const engineering = { from: 5000, hourly: 175 };
-export const hipaa: Record<PriceSize, number | null> = { small: 500, mid: 800, large: null };
+/* Healthcare (HIPAA) data is by request: reviewed first, then quoted. */
+export const hipaaNote = "Healthcare data (HIPAA) is by request: we review your situation first, then quote it.";
 export const allowance: Record<PriceSize, string> = { small: "$400/mo included", mid: "$800/mo included", large: "Passed through at cost + 15%" };
 
 /* Everything that grows with volume has a price, so no client's usage can
@@ -66,9 +67,15 @@ export const addOns: { name: string; price: string; why: string }[] = [
   { name: "Extra change hours", price: "$175/hr, in blocks of 5", why: "New dashboards, fields, or reports beyond your included hours." },
   { name: "Read-only login for Power BI or Excel", price: "$150/mo, includes 25 database credits", why: "Your own queries, on their own capped warehouse." },
   { name: "Enterprise single sign-on (Okta, Entra ID)", price: "$250/mo per connection", why: "For companies that require sign-in through their own identity provider." },
-  { name: "Healthcare (HIPAA)", price: "+$500/mo Small, +$800/mo Mid", why: "A higher-security database edition that costs about twice as much to run." },
+  { name: "Healthcare (HIPAA)", price: "By request, quoted", why: "Health data needs a signed Business Associate Agreement and a higher-security setup, so we review each case first." },
   { name: "Platform usage above your allowance", price: "Cost + 15%", why: "Shown on your Usage page. We warn you at 70% and 85%." },
 ];
+
+/** All three products at one size: exactly the sum of the product prices. */
+export function total(size: PriceSize) {
+  const ps = Object.values(productPrices).map((p) => p.bySize[size]);
+  return { setup: ps.reduce((t, p) => t + p.setup, 0), monthly: ps.reduce((t, p) => t + p.monthly, 0) };
+}
 
 export type Tier = {
   id: TierId;
@@ -88,8 +95,8 @@ export const tiers: Tier[] = [
     name: "Small",
     size: "small",
     bestFor: "Small businesses getting organized",
-    setupFrom: 9500,
-    monthlyFrom: 3000,
+    setupFrom: total("small").setup,
+    monthlyFrom: total("small").monthly,
     includes: {
       foundation: [
         "Up to 3 data sources connected",
@@ -118,8 +125,8 @@ export const tiers: Tier[] = [
     name: "Mid",
     size: "mid",
     bestFor: "Growing and mid-size companies",
-    setupFrom: 19000,
-    monthlyFrom: 5750,
+    setupFrom: total("mid").setup,
+    monthlyFrom: total("mid").monthly,
     popular: true,
     includes: {
       foundation: [
@@ -149,8 +156,8 @@ export const tiers: Tier[] = [
     name: "Large",
     size: "large",
     bestFor: "Larger organizations",
-    setupFrom: 40000,
-    monthlyFrom: 12000,
+    setupFrom: total("large").setup,
+    monthlyFrom: total("large").monthly,
     from: true,
     includes: {
       foundation: [
@@ -158,7 +165,7 @@ export const tiers: Tier[] = [
         "Update schedule set with you",
         "Checks on every update; bad data flagged, not published",
         "Explore, alerts, and forms for every team",
-        "Our secure platform or your own cloud",
+        "Our secure platform (your own cloud by request)",
         "Platform usage passed through at cost + 15%",
         "Business definitions: what every number means",
       ],
@@ -175,34 +182,12 @@ export const tiers: Tier[] = [
 
 export const tierBySize = (s: PriceSize) => tiers.find((t) => t.size === s)!;
 
-/** What all three products cost bought one by one, before the all-three discount. */
-export function separately(size: PriceSize) {
-  const ps = Object.values(productPrices).map((p) => p.bySize[size]);
-  return { setup: ps.reduce((t, p) => t + p.setup, 0), monthly: ps.reduce((t, p) => t + p.monthly, 0) };
-}
-
-/* Totals for any combination. Foundation is always on. */
-export function quote(size: PriceSize, withWorkspace: boolean, withInsight: boolean, healthcare: boolean) {
+/* Totals for any combination: the sum of the products chosen. Foundation is always on. */
+export function quote(size: PriceSize, withWorkspace: boolean, withInsight: boolean) {
   const f = productPrices.foundation.bySize[size];
   const w = productPrices.workspace.bySize[size];
   const i = productPrices.insight.bySize[size];
-  let setup = f.setup + (withWorkspace ? w.setup : 0);
-  let monthly = f.monthly + (withWorkspace ? w.monthly : 0) + (withInsight ? i.monthly : 0);
-  const aLaCarte = { setup, monthly };
-  const bundle = withWorkspace && withInsight ? tierBySize(size) : null;
-  if (bundle) {
-    setup = bundle.setupFrom;
-    monthly = bundle.monthlyFrom;
-  }
-  const hip = healthcare ? hipaa[size] : 0;
-  if (hip) monthly += hip;
-  return {
-    setup,
-    monthly,
-    firstYear: setup + monthly * 12,
-    from: size === "large",
-    bundle,
-    saves: bundle ? { setup: aLaCarte.setup - setup, monthly: aLaCarte.monthly + (hip ?? 0) - monthly } : null,
-    hipaaQuoted: healthcare && hipaa[size] === null,
-  };
+  const setup = f.setup + (withWorkspace ? w.setup : 0) + (withInsight ? i.setup : 0);
+  const monthly = f.monthly + (withWorkspace ? w.monthly : 0) + (withInsight ? i.monthly : 0);
+  return { setup, monthly, firstYear: setup + monthly * 12, from: size === "large" };
 }

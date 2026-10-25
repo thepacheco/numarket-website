@@ -89,7 +89,7 @@ export default function Platform() {
             ))}
           </div>
           <p className="small muted" style={{ marginTop: 14 }}>
-            Take Foundation, Workspace, and Insight Review together as a plan and save about 10%. <Link href="/pricing">See pricing →</Link>
+            Each product has a published price by size, and taking all three is simply the sum. <Link href="/pricing">See pricing →</Link>
           </p>
         </div>
       </section>

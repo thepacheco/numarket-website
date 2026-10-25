@@ -407,7 +407,7 @@ export default function GettingStartedTools() {
                 </ul>
               </div>
               <p className="small muted">
-                {loc === "yours" && "Building in your own cloud is quoted on Large. "}
+                {loc === "yours" && "Building in your own cloud is by request on Large. "}
                 {spreadsheets && "Includes +20% setup and 1–2 extra weeks because the data starts in spreadsheets. "}
                 {where === "somePaper" && "Covers the data that's already digital. Getting the paper part into a system is quoted separately as an Engineering project. "}
                 Estimate only. Your Readiness Check gives you a fixed quote.

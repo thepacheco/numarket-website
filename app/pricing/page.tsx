@@ -7,7 +7,7 @@ import { TermsGlance } from "@/components/PricingOps";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Published prices by size. Take all three products and a discount applies, shown line by line. Engineering is quoted per project.",
+  description: "Published prices by size and by product. The total is exactly the sum of what you choose. Engineering is quoted per project.",
 };
 
 export default function Pricing() {
@@ -20,7 +20,7 @@ export default function Pricing() {
             One price for your size. <em className="accent">Every line shown.</em>
           </>
         }
-        lead="Pick your size and the products you want. You see each product's price, the discount for taking all three, and the total."
+        lead="Pick your size and the products you want. You see each product's price and the total, which is exactly their sum."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
@@ -31,14 +31,14 @@ export default function Pricing() {
 
       <section className="section soft" id="plans">
         <div className="container">
-          <SectionHead eyebrow="All three products" title="By size." lead="Foundation, Workspace, and Insight Review together, with the discount applied. Click a size to see everything it includes." />
+          <SectionHead eyebrow="All three products" title="By size." lead="Foundation, Workspace, and Insight Review together. Click a size to see everything it includes." />
           <PlanCards />
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Product by product" title="Taking only some products?" lead="Foundation is required, because everything else is built on your data. These are the prices before the all-three discount." />
+          <SectionHead eyebrow="Product by product" title="Taking only some products?" lead="Foundation is required, because everything else is built on your data. Every price here adds up to the totals above." />
           <ProductPriceTable />
         </div>
       </section>
