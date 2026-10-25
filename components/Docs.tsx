@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import Icon from "./Icon";
-import { docGroups, docs, docText } from "@/content/docs";
+import { docGroups, docHref, docs, docText } from "@/content/docs";
 import { site } from "@/content/site";
 
 function useSearch(q: string) {
@@ -64,7 +64,7 @@ export function DocsHub() {
             {hits.length} result{hits.length === 1 ? "" : "s"}
           </p>
           {hits.map((d) => (
-            <Link key={d.slug} href={`/docs/${d.slug}`} className="docs-hit">
+            <Link key={d.slug} href={docHref(d)} className="docs-hit">
               <b>
                 <Highlight text={d.title} q={q} />
               </b>
@@ -92,7 +92,7 @@ export function DocsHub() {
                   .map((d) => (
                     <li key={d.slug}>
                       <Icon name="arrow" />
-                      <Link href={`/docs/${d.slug}`}>{d.title}</Link>
+                      <Link href={docHref(d)}>{d.title}</Link>
                     </li>
                   ))}
               </ul>
@@ -115,7 +115,7 @@ export function DocsSide({ current }: { current: string }) {
         <div className="docs-group">
           <h2>Results</h2>
           {hits.map((d) => (
-            <Link key={d.slug} href={`/docs/${d.slug}`} aria-current={d.slug === current ? "page" : undefined}>
+            <Link key={d.slug} href={docHref(d)} aria-current={d.slug === current ? "page" : undefined}>
               {d.title}
             </Link>
           ))}
@@ -128,7 +128,7 @@ export function DocsSide({ current }: { current: string }) {
             {docs
               .filter((d) => d.group === g)
               .map((d) => (
-                <Link key={d.slug} href={`/docs/${d.slug}`} aria-current={d.slug === current ? "page" : undefined}>
+                <Link key={d.slug} href={docHref(d)} aria-current={d.slug === current ? "page" : undefined}>
                   {d.title}
                 </Link>
               ))}

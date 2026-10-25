@@ -1,7 +1,7 @@
 /* Client documentation. Plain language first. */
 
 export type Block = { h?: string; p?: string; ol?: string[]; ul?: string[]; note?: string };
-export type Doc = { slug: string; group: string; title: string; summary: string; body: Block[] };
+export type Doc = { slug: string; group: string; title: string; summary: string; body: Block[]; href?: string };
 
 export const docGroups = ["Getting started", "Using your Workspace", "Your data", "Changes & support", "Security", "Leaving", "Reference"];
 
@@ -172,7 +172,20 @@ export const docs: Doc[] = [
       { h: "Platform usage", p: "The storage and computing cost of running your database. Included up to an allowance in your plan." },
     ],
   },
+  {
+    slug: "presentation",
+    href: "/docs/presentation",
+    group: "Reference",
+    title: "Presentation",
+    summary: "The deck we walk new clients through, start to finish.",
+    body: [
+      { p: "The problem, the four products, what your team gets, the cost difference, security, common questions, and what happens after yes. 17 slides." },
+    ],
+  },
 ];
+
+/* Where a doc lives: most render from this file; a few have their own page. */
+export const docHref = (d: Doc) => d.href ?? `/docs/${d.slug}`;
 
 export const docBySlug = (s: string) => docs.find((d) => d.slug === s);
 export const docText = (d: Doc) => [d.title, d.summary, ...d.body.flatMap((b) => [b.h, b.p, b.note, ...(b.ol ?? []), ...(b.ul ?? [])])].filter(Boolean).join(" ");

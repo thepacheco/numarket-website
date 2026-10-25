@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import IndGlyph from "./IndGlyph";
 import SolidIcon from "./solids/SolidIcon";
 import type { SolidKind } from "./solids/geometry";
 import FoundationDemo from "./FoundationDemo";
@@ -9,86 +8,135 @@ import { DefinitionsDemo } from "./FoundationExtras";
 import StatusReport from "./StatusReport";
 import IndustryExplorer from "./IndustryExplorer";
 import IndustryEntry from "./IndustryEntry";
-import WorkspaceDemo from "./WorkspaceDemo";
+import { AskYourData } from "./WorkspaceDemo";
 import SampleReview from "./SampleReview";
 import EngineeringApps from "./EngineeringApps";
 import { MigrationDemo } from "./NarratedDemos";
 import { industries, type IndustrySlug } from "@/content/industries";
 
-const tabs: { id: SolidKind; name: string; line: string }[] = [
-  { id: "foundation", name: "Foundation", line: "Messy sources in, one clean table out, the few items that need a person, and what every number means." },
-  { id: "workspace", name: "Workspace", line: "The dashboard, a form, Ask Your Data, and the weekly report." },
-  { id: "insight", name: "Insight Review", line: "What your analyst hands you, with action items to check off." },
-  { id: "engineering", name: "Engineering", line: "Paper to digital, plus four custom apps, each built for one company." },
+/* One product at a time, one view at a time. The product lines follow the
+   hand-off doc: Foundation is your data, Workspace is what we build on it,
+   Insight Review is your analyst, Engineering is apps built for you. */
+const tabs: { id: SolidKind; name: string; tag: string; views: [string, string][] }[] = [
+  {
+    id: "foundation",
+    name: "Foundation",
+    tag: "Your data",
+    views: [
+      ["clean", "Clean it"],
+      ["enter", "Enter data"],
+      ["define", "What each number means"],
+      ["move", "Move off an old system"],
+    ],
+  },
+  {
+    id: "workspace",
+    name: "Workspace",
+    tag: "Dashboards & reports",
+    views: [
+      ["dashboard", "Dashboard"],
+      ["report", "Status report"],
+      ["ask", "Ask Your Data"],
+    ],
+  },
+  { id: "insight", name: "Insight Review", tag: "Your analyst", views: [] },
+  { id: "engineering", name: "Engineering", tag: "Apps built for you", views: [] },
 ];
 
-/* Demos organized by product, filtered by industry. */
+function View({ tab, view, slug }: { tab: SolidKind; view: string; slug: IndustrySlug }) {
+  if (tab === "foundation") {
+    if (view === "enter") return <IndustryEntry slug={slug} />;
+    if (view === "define") return <DefinitionsDemo slug={slug} />;
+    if (view === "move") return <MigrationDemo />;
+    return <FoundationDemo slug={slug} />;
+  }
+  if (tab === "workspace") {
+    if (view === "report") return <StatusReport slug={slug} />;
+    if (view === "ask") return <AskYourData initial={slug} />;
+    return <IndustryExplorer initialIndustry={slug} initialSize="large" lockIndustry />;
+  }
+  if (tab === "insight") return <SampleReview slug={slug} />;
+  return <EngineeringApps slug={slug} />;
+}
+
 export default function DemosByProduct() {
   const [slug, setSlug] = useState<IndustrySlug>("construction");
   const [tab, setTab] = useState<SolidKind>("foundation");
+  const [view, setView] = useState("clean");
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const i = q.get("industry");
-    const t = q.get("product");
+    const t = tabs.find((x) => x.id === q.get("product"));
     if (i && industries.some((x) => x.slug === i)) setSlug(i as IndustrySlug);
-    if (t && tabs.some((x) => x.id === t)) setTab(t as SolidKind);
+    if (t) {
+      setTab(t.id);
+      const v = q.get("view");
+      setView(t.views.some(([id]) => id === v) ? v! : (t.views[0]?.[0] ?? ""));
+    }
   }, []);
-  /* keep the address clean until the visitor picks an industry or product */
+  /* keep the address clean until the visitor picks something */
   useEffect(() => {
-    if (slug === "construction" && tab === "foundation" && !window.location.search) return;
-    const q = new URLSearchParams(window.location.search);
-    q.set("industry", slug);
+    if (slug === "construction" && tab === "foundation" && view === "clean" && !window.location.search) return;
+    const q = new URLSearchParams();
     q.set("product", tab);
+    if (view) q.set("view", view);
+    q.set("industry", slug);
     window.history.replaceState(null, "", `${window.location.pathname}?${q.toString()}`);
-  }, [slug, tab]);
+  }, [slug, tab, view]);
   const cur = tabs.find((t) => t.id === tab)!;
+  const pick = (id: SolidKind) => {
+    setTab(id);
+    setView(tabs.find((t) => t.id === id)!.views[0]?.[0] ?? "");
+  };
   return (
     <div className="dbp">
-      <div className="dbp-filter">
-        <span className="dbp-l">Industry</span>
-        <div className="calc-inds" role="tablist" aria-label="Industry">
-          {industries.map((i) => (
-            <button key={i.slug} type="button" role="tab" aria-selected={slug === i.slug} className={`ind-chip ind-${i.slug}`} onClick={() => setSlug(i.slug)}>
-              <IndGlyph /> {i.short}
-            </button>
-          ))}
-        </div>
-      </div>
       <div className="dbp-tabs" role="tablist" aria-label="Product">
         {tabs.map((t) => (
-          <button key={t.id} type="button" role="tab" id={`dt-${t.id}`} aria-selected={tab === t.id} aria-controls="dbp-panel" className="dbp-tab" onClick={() => setTab(t.id)}>
-            <SolidIcon kind={t.id} size={26} />
-            <span>{t.name}</span>
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            id={`dt-${t.id}`}
+            aria-selected={tab === t.id}
+            aria-controls="dbp-panel"
+            className={`dbp-tab dbp-${t.id}`}
+            onClick={() => pick(t.id)}
+          >
+            <SolidIcon kind={t.id} size={28} />
+            <span>
+              <b>{t.name}</b>
+              <small>{t.tag}</small>
+            </span>
           </button>
         ))}
       </div>
-      <div id="dbp-panel" role="tabpanel" aria-labelledby={`dt-${tab}`} className="dbp-panel" key={`${tab}-${slug}`}>
-        <p className="dbp-line">
-          {cur.line} <span className="label-sample">Sample data</span>
-        </p>
-        {tab === "foundation" && (
-          <div className="dbp-stack">
-            <FoundationDemo slug={slug} />
-            <h3 className="dbp-h">Business definitions: point at any number</h3>
-            <DefinitionsDemo slug={slug} />
-            <h3 className="dbp-h">Moving off an old system, table by table</h3>
-            <MigrationDemo />
-          </div>
-        )}
-        {tab === "workspace" && (
-          <div className="dbp-stack">
-            <h3 className="dbp-h">The dashboard</h3>
-            <IndustryExplorer initialIndustry={slug} initialSize="large" lockIndustry />
-            <h3 className="dbp-h">A form</h3>
-            <IndustryEntry slug={slug} />
-            <h3 className="dbp-h">Change a number, or ask a question</h3>
-            <WorkspaceDemo askIndustry={slug} />
-            <h3 className="dbp-h">The weekly status report, sent on its own</h3>
-            <StatusReport slug={slug} />
-          </div>
-        )}
-        {tab === "insight" && <SampleReview slug={slug} />}
-        {tab === "engineering" && <EngineeringApps slug={slug} />}
+      <div id="dbp-panel" role="tabpanel" aria-labelledby={`dt-${tab}`} className="dbp-panel">
+        <div className="dbp-head">
+          {cur.views.length > 0 ? (
+            <div className="dbp-views" role="group" aria-label={`${cur.name} views`}>
+              {cur.views.map(([id, name]) => (
+                <button key={id} type="button" aria-pressed={view === id} onClick={() => setView(id)}>
+                  {name}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <span />
+          )}
+          <label className="dbp-ind">
+            <span>Industry</span>
+            <select className="filter-select" value={slug} onChange={(e) => setSlug(e.target.value as IndustrySlug)}>
+              {industries.map((i) => (
+                <option key={i.slug} value={i.slug}>
+                  {i.short}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="dbp-body" key={`${tab}-${view}-${slug}`}>
+          <View tab={tab} view={view} slug={slug} />
+        </div>
       </div>
     </div>
   );

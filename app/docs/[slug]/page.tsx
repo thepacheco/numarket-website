@@ -3,11 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
 import { DocsSide, Helpful } from "@/components/Docs";
-import { docBySlug, docs } from "@/content/docs";
+import { docBySlug, docHref, docs } from "@/content/docs";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return docs.map((d) => ({ slug: d.slug }));
+  return docs.filter((d) => !d.href).map((d) => ({ slug: d.slug }));
 }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const d = docBySlug((await params).slug);
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function DocPage({ params }: { params: Promise<{ slug: string }> }) {
   const d = docBySlug((await params).slug);
-  if (!d) notFound();
+  if (!d || d.href) notFound();
   const i = docs.indexOf(d);
   const prev = docs[i - 1];
   const next = docs[i + 1];
@@ -59,7 +59,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
           <Helpful title={d.title} />
           <div className="doc-nav">
             {prev ? (
-              <Link href={`/docs/${prev.slug}`}>
+              <Link href={docHref(prev)}>
                 <span>← Previous</span>
                 {prev.title}
               </Link>
@@ -67,7 +67,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
               <span />
             )}
             {next ? (
-              <Link href={`/docs/${next.slug}`} style={{ textAlign: "right" }}>
+              <Link href={docHref(next)} style={{ textAlign: "right" }}>
                 <span>Next →</span>
                 {next.title}
               </Link>

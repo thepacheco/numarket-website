@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>numarket — Presentation</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="numarket: the data team you don't have to hire. Foundation, Workspace, Insight Review and Engineering.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%230B1F2E'/%3E%3Cline x1='75' y1='25' x2='25' y2='75' stroke='%233382B5' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath transform='translate(23 22) scale(0.045)' d='M68 432 V235 A182 182 0 0 1 432 235 V432' fill='none' stroke='%2300C675' stroke-width='136' stroke-linecap='round'/%3E%3Cpath transform='translate(54.5 55) scale(0.045)' d='M68 68 V265 A182 182 0 0 0 432 265 V68' fill='none' stroke='%23fff' stroke-width='136' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#22577a;--navy-700:#1a4461;--navy-900:#0f2c40;--teal:#38a3a5;--teal-700:#23797b;
+  --green:#57cc99;--green-700:#1f8a5b;--light-green:#80ed99;--mint:#c7f9cc;--mint-50:#effdf1;
+  --ink:#0b1f2e;--ink-2:#102a3d;--chaos:#e07a5f;--logo-green:#00a862;
+  --series-a:#1d6fa5;--series-b:#2e9e6b;--series-c:#d9603f;
+  --p-workspace:#2a8f91;--p-insight:#2e9e6b;--p-eng:#6c5dd3;
+  --good:#1a7a50;--good-bg:#e6f7ee;--watch:#8a5700;--watch-bg:#fff4dc;--risk:#b93b22;--risk-bg:#fdebe6;
+  --gray-25:#fafbfc;--gray-50:#f5f7fa;--border:#e8edf2;--border-strong:#d7dfe7;--text-2:#52667a;--text-3:#5c6f81;
+  --shadow-sm:0 1px 2px rgba(11,31,46,.06);
+  --shadow:0 2px 4px rgba(11,31,46,.04),0 8px 24px rgba(11,31,46,.06);
+  --shadow-lg:0 4px 8px rgba(11,31,46,.04),0 24px 64px rgba(11,31,46,.12);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"DM Serif Display",Georgia,serif;
+  --logo:"Space Grotesk","DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#07141e;font-family:var(--sans);color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;background:#fff;overflow:hidden;border-radius:4px}
+#stage.dark{background:var(--ink)}
+
+/* ---------- chrome ---------- */
+.chrome-top{position:absolute;left:0;right:0;top:0;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;z-index:20;pointer-events:none}
+.chrome-top .logo{font-size:30px;transition:opacity .4s}
+.where{font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);transition:color .4s}
+#stage.dark .where{color:#a9bfcf}
+.progress{position:absolute;left:0;top:0;height:4px;width:100%;background:transparent;z-index:21}
+.progress i{display:block;height:100%;width:0;background:var(--green);transition:width .6s var(--ease)}
+.chrome-bot{position:absolute;left:0;right:0;bottom:0;height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;z-index:20}
+.dots-nav{display:flex;gap:10px}
+.dots-nav button{position:relative;width:10px;height:10px;border-radius:50%;border:0;background:var(--border-strong);cursor:pointer;transition:all .3s var(--ease);padding:0}
+.dots-nav button.on{width:30px;border-radius:999px;background:var(--navy)}
+.dots-nav button::after{content:attr(data-tip);position:absolute;left:50%;bottom:22px;translate:-50% 6px;padding:7px 12px;border-radius:8px;background:var(--ink);color:#fff;font:600 14px var(--sans);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,translate .2s;box-shadow:var(--shadow)}
+.dots-nav button::before{content:"";position:absolute;left:50%;bottom:16px;translate:-50% 6px;border:6px solid transparent;border-top-color:var(--ink);opacity:0;transition:opacity .2s,translate .2s}
+.dots-nav button:hover::after,.dots-nav button:focus-visible::after,.dots-nav button:hover::before,.dots-nav button:focus-visible::before{opacity:1;translate:-50% 0}
+.dots-nav button:first-child::after{left:0;translate:0 6px}.dots-nav button:first-child:hover::after,.dots-nav button:first-child:focus-visible::after{translate:0 0}
+#stage.dark .dots-nav button::after{background:#fff;color:var(--ink)}#stage.dark .dots-nav button::before{border-top-color:#fff}
+#stage.dark .dots-nav button{background:rgba(255,255,255,.22)}
+#stage.dark .dots-nav button.on{background:var(--light-green)}
+.ctrls{display:flex;gap:10px}
+.ctrls button{height:44px;min-width:44px;padding:0 14px;border-radius:999px;border:1px solid var(--border-strong);background:#fff;color:var(--ink);font:600 15px var(--sans);display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s var(--ease)}
+.ctrls button:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.ctrls button.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.ctrls button.primary:hover{background:var(--navy-700)}
+#stage.dark .ctrls button{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22);color:#fff}
+#stage.dark .ctrls button.primary{background:var(--light-green);border-color:var(--light-green);color:var(--ink)}
+.ctrls svg{width:18px;height:18px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+/* ---------- logo ---------- */
+.logo{font-family:var(--logo);font-weight:700;letter-spacing:-.03em;display:inline-flex;align-items:baseline;line-height:1;white-space:nowrap}
+.logo .nu{height:.53em;width:auto;margin-right:.07em;color:var(--ink);overflow:visible;transform:translateY(.02em)}
+.logo .mk{color:var(--logo-green)}
+.dark .logo .nu,#stage.dark .chrome-top .logo .nu{color:#fff}
+.dark .logo .mk,#stage.dark .chrome-top .logo .mk{color:var(--light-green)}
+
+/* ---------- scenes ---------- */
+.scene{position:absolute;inset:0;padding:110px 100px 104px;opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility 0s .5s}
+.scene.on{opacity:1;visibility:visible;transition:opacity .5s var(--ease),visibility 0s}
+.scene.dark{color:#d6e4ee}
+.split{display:grid;grid-template-columns:520px 1fr;gap:72px;align-items:center;height:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-700)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--green)}
+.dark .eyebrow{color:var(--light-green)}
+h1,h2{font-weight:700;color:var(--ink);line-height:1.06}
+h1{font-size:76px;letter-spacing:-.035em}
+h2{font-size:56px;letter-spacing:-.028em}
+.dark h1,.dark h2{color:#fff}
+em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--teal-700)}
+.dark em{color:var(--light-green)}
+.lead{font-size:22px;line-height:1.55;color:var(--text-2);max-width:500px}
+.dark .lead{color:#a9bfcf}
+.stack{display:flex;flex-direction:column;gap:22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--mint-50);color:var(--green-700);font-weight:600;font-size:17px;white-space:nowrap}
+.chip svg{width:18px;height:18px}
+.chip.navy{background:#e8f0f6;color:var(--navy)}
+.chip.dark{background:rgba(255,255,255,.08);color:#fff}
+.tag{display:inline-flex;align-items:center;gap:12px;font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.tag b{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;color:#fff;font-size:16px;letter-spacing:0}
+.sample{position:absolute;top:14px;right:16px;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--watch-bg);color:var(--watch)}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-sm);position:relative}
+.ico{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--mint-50),var(--mint));color:var(--green-700);flex:none}
+.ico svg{width:24px;height:24px}
+.note{font-size:15px;color:var(--text-3)}
+.dark .note{color:#a9bfcf}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.watch{background:var(--watch-bg);color:var(--watch)}
+.pill.risk{background:var(--risk-bg);color:var(--risk)}
+
+/* ---------- motion primitives ---------- */
+.a{opacity:0}
+.on .a{animation:rise .8s var(--ease) var(--d,0s) both}
+.on .a.pop{animation-name:pop}
+.on .a.fade{animation-name:fade}
+.on .a.left{animation-name:fromLeft}
+.on .a.drop{animation-name:drop}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes fromLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes drop{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:none}}
+.gy{transform-origin:bottom;transform:scaleY(0)}
+.on .gy{animation:growY 1s var(--ease) var(--d,0s) forwards}
+@keyframes growY{to{transform:scaleY(1)}}
+.gx{transform-origin:left;transform:scaleX(0)}
+.on .gx{animation:growX 1.4s var(--ease) var(--d,0s) forwards}
+@keyframes growX{to{transform:scaleX(1)}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1}
+.on .draw{animation:draw 1.4s var(--ease) var(--d,0s) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- 1 intro ---------- */
+#dotfield{position:absolute;inset:0;width:100%;height:100%}
+#dotfield circle{transition:transform 1.6s var(--ease),fill 1.2s var(--ease)}
+#dotfield.snap circle{transition:none}
+.intro{position:relative;display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px;max-width:860px}
+.intro .logo{font-size:120px}
+.drawlogo .nu path{stroke-dasharray:1;stroke-dashoffset:1}
+.on .drawlogo .nu path{animation:draw 1.1s var(--ease) .15s forwards}
+.on .drawlogo .nu path+path{animation-delay:.5s}
+.drawlogo .mk{opacity:0}
+.on .drawlogo .mk{animation:fromLeft .8s var(--ease) .9s both}
+.cta .logo{font-size:110px;margin-bottom:10px}
+.hint{font-size:16px;color:#a9bfcf;display:flex;align-items:center;gap:10px}
+.hint kbd{font:600 13px var(--sans);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:3px 8px;color:#fff}
+
+/* ---------- 2 problem ---------- */
+.mess{position:relative;height:600px}
+.mess svg.tangle{position:absolute;inset:0;width:100%;height:100%}
+.src{position:absolute;display:flex;align-items:center;gap:12px;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);font-weight:600;font-size:19px}
+.src .ico{width:44px;height:44px;background:#fdf0ec;color:var(--chaos)}
+.on .src{animation:pop .7s var(--ease) var(--d) both,bob 4s ease-in-out calc(var(--d) + .7s) infinite}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.pains{display:flex;flex-direction:column;gap:14px}
+.pain{display:flex;align-items:center;gap:16px;font-size:22px;font-weight:600}
+.pain .ico{background:#fdf0ec;color:var(--chaos)}
+
+/* ---------- 3 layers ---------- */
+.layers{display:flex;flex-direction:column-reverse;gap:14px}
+.slab{display:flex;align-items:center;gap:22px;padding:22px 28px;border-radius:18px;color:#fff;box-shadow:var(--shadow)}
+.slab .n{font-size:15px;font-weight:700;opacity:.7;width:28px}
+.slab .ico{background:rgba(255,255,255,.16);color:#fff}
+.slab h3{font-size:28px;font-weight:700;letter-spacing:-.015em}
+.slab p{font-size:17px;opacity:.85}
+.slab .sp{flex:1}
+.slab.opt{background:#fff!important;color:var(--p-eng);border:2px dashed var(--p-eng);box-shadow:none}
+.slab.opt .ico{background:#f0eefc;color:var(--p-eng)}
+.slab .badge{font-size:14px;font-weight:700;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.18)}
+.slab.opt .badge{background:#f0eefc}
+
+/* ---------- 4 foundation ---------- */
+.ftable{padding:26px 28px 22px}
+.ftable h4,.mock h4{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.frow{display:grid;grid-template-columns:1.2fr 1fr .8fr;border-bottom:1px solid var(--border);max-height:64px;overflow:hidden}
+.frow.head{font-size:14px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em}
+.frow>div{padding:13px 12px;font-size:19px;font-variant-numeric:tabular-nums}
+.fix{display:grid;background:#fde9e3;border-radius:6px}
+.fix>span{grid-area:1/1}
+.fix .bad{color:#b4432a}
+.fix .good{opacity:0;color:var(--ink)}
+.on .fix{animation:clean .5s ease var(--d) forwards}
+.on .fix .bad{animation:fade .35s ease var(--d) reverse forwards}
+.on .fix .good{animation:fade .45s ease var(--d) forwards}
+@keyframes clean{to{background:transparent}}
+.frow.dup{background:#fde9e3;position:relative}
+.frow.dup::after{content:"Duplicate";position:absolute;right:10px;top:50%;translate:0 -50%;font-size:13px;font-weight:700;color:#b4432a;background:#fff;border-radius:999px;padding:3px 9px}
+.on .frow.dup{animation:collapse .6s var(--ease) var(--d) forwards}
+@keyframes collapse{60%{opacity:0;max-height:64px}100%{opacity:0;max-height:0;border-width:0}}
+.vault{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+.flow-arrow{display:flex;align-items:center;gap:8px;color:var(--text-3);font-size:15px}
+
+/* ---------- mock browser ---------- */
+.browser{border-radius:16px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow-lg);overflow:hidden;position:relative}
+.browser .bar{display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;background:var(--gray-50);border-bottom:1px solid var(--border)}
+.browser .bar i{width:11px;height:11px;border-radius:50%;background:var(--border-strong)}
+.browser .sample{top:10px!important}
+.browser .url{margin-left:14px;font-size:14px;color:var(--text-3);background:#fff;border:1px solid var(--border);border-radius:8px;padding:5px 14px;flex:1;max-width:360px}
+.browser .body{padding:22px;display:grid;gap:16px;background:var(--gray-25)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.kpi small{display:block;font-size:14px;color:var(--text-3);font-weight:600}
+.kpi strong{display:block;font-size:38px;font-weight:700;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:14px;font-weight:600;color:var(--good)}
+.panel{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative}
+.panel h5{font-size:15px;font-weight:700;margin-bottom:12px}
+.bars{display:flex;align-items:flex-end;gap:12px;height:170px;position:relative;padding-top:6px}
+.bars i{flex:1;border-radius:6px 6px 0 0;background:var(--series-a)}
+.bars i.b{background:var(--series-b)}
+.bars svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.srow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:16px;font-weight:600}
+.srow:last-child{border:0}
+
+/* ---------- 6 insight ---------- */
+.report{padding:30px 32px;display:grid;gap:18px}
+.report header{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.report header b{font-size:22px}
+.report header span{font-size:15px;color:var(--text-3)}
+.rblock{display:flex;gap:18px;align-items:flex-start}
+.rblock .ico{width:52px;height:52px}
+.rblock small{display:block;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3)}
+.rblock p{font-size:21px;font-weight:600;line-height:1.4;margin-top:3px}
+.ico.blue{background:#e7f0f8;color:var(--series-a)}
+.ico.red{background:var(--risk-bg);color:var(--risk)}
+.gauge{display:flex;align-items:center;gap:18px;padding:16px 18px;border-radius:12px;background:var(--gray-25);border:1px solid var(--border)}
+.gauge svg{width:92px;height:56px}
+.gauge strong{font-size:34px;font-variant-numeric:tabular-nums}
+
+/* ---------- 7 engineering ---------- */
+.eng{display:flex;flex-direction:column;justify-content:center;gap:56px;height:100%}
+.flow{position:relative;height:300px}
+.flow>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.node{position:absolute;top:70px;width:270px;padding:24px;display:flex;flex-direction:column;gap:14px;background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.node b{font-size:21px;line-height:1.3}
+.node small{font-size:15px;color:var(--text-3)}
+.node .ico{background:#f0eefc;color:var(--p-eng)}
+.node.end{border:2px solid var(--p-eng)}
+
+/* ---------- 8 examples ---------- */
+.ex{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.mock{padding:24px;min-height:400px;display:flex;flex-direction:column;gap:14px}
+.mock .cap{margin-top:auto;padding-top:14px;border-top:1px solid var(--border);font-size:17px;font-weight:600;display:flex;align-items:center;gap:10px}
+.mock .cap svg{width:20px;height:20px;color:var(--green-700)}
+.minikpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.minikpi div{background:var(--gray-25);border:1px solid var(--border);border-radius:10px;padding:10px}
+.minikpi small{font-size:12px;color:var(--text-3);font-weight:600;display:block}
+.minikpi b{font-size:22px;font-variant-numeric:tabular-nums}
+.gbars{display:flex;align-items:flex-end;gap:18px;height:150px;padding:0 6px;border-bottom:1px solid var(--border)}
+.gbars div{flex:1;display:flex;gap:4px;align-items:flex-end;height:100%}
+.gbars i{flex:1;border-radius:4px 4px 0 0;background:var(--series-a)}
+.gbars i+i{background:var(--series-b)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--text-3);font-weight:600}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--series-a);vertical-align:-1px}
+.legend span+span::before{background:var(--series-b)}
+.mail{display:grid;gap:10px;font-size:15px}
+.mail .from{display:flex;align-items:center;gap:10px;font-weight:600}
+.mail .subj{font-size:18px;font-weight:700}
+.mail li{list-style:none;display:flex;gap:10px;align-items:flex-start;line-height:1.4;font-size:15px}
+.mail li svg{width:18px;height:18px;color:var(--green-700);flex:none;margin-top:2px}
+
+/* ---------- 9 time ---------- */
+.trow{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--border)}
+.trow.hd{font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);padding-top:0}
+.task{font-size:23px;font-weight:600;white-space:nowrap;position:relative;justify-self:start;color:var(--ink)}
+.task::after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:3px;background:var(--chaos);transform:scaleX(0);transform-origin:left;border-radius:2px}
+.on .task::after{animation:growX .5s var(--ease) var(--d) forwards}
+.on .task{animation:dim .5s ease calc(var(--d) + .3s) forwards}
+@keyframes dim{to{color:#9aaab8}}
+.trow .arr{color:var(--border-strong);justify-self:center}
+.trow .arr svg{width:28px;height:28px}
+.auto{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--green-700);background:var(--mint-50);padding:10px 16px;border-radius:12px;justify-self:start}
+.auto svg{width:20px;height:20px}
+
+/* ---------- 10 cost ---------- */
+.cost{display:flex;flex-direction:column;justify-content:center;gap:44px;height:100%}
+.crow{display:grid;grid-template-columns:330px 1fr;gap:36px;align-items:center}
+.crow h3{font-size:26px;color:#fff;font-weight:700}
+.crow p{font-size:16px;color:#a9bfcf;line-height:1.45;margin-top:4px}
+.track{display:flex;align-items:center;gap:22px}
+.cbar{height:72px;border-radius:12px}
+.cbar.pmo{width:760px;background:var(--series-c)}
+.cbar.nm{width:200px;background:var(--light-green)}
+.cval{font-size:40px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.save{display:flex;align-items:flex-end;gap:56px;padding-top:30px;border-top:1px solid rgba(255,255,255,.1)}
+.save .big{font-size:110px;font-weight:700;letter-spacing:-.04em;line-height:.9;color:var(--light-green);font-variant-numeric:tabular-nums}
+.save small{display:block;font-size:20px;color:#d6e4ee;margin-top:12px;font-weight:600}
+.save .mini{display:flex;flex-direction:column;gap:12px;padding-bottom:6px}
+
+/* ---------- 11 compare ---------- */
+.cmp{display:grid;grid-template-columns:250px repeat(4,1fr);margin-top:34px;position:relative}
+.cmp .hl{position:absolute;top:-12px;bottom:-12px;right:0;width:calc((100% - 250px)/4);background:var(--mint-50);border:2px solid var(--green);border-radius:18px}
+.cmp>div{position:relative;padding:14px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:84px}
+.cmp .ch{flex-direction:row;align-items:center;gap:12px;font-size:19px;font-weight:700;border-bottom:2px solid var(--border)}
+.cmp .ch .ico{width:42px;height:42px}
+.cmp .rl{font-size:19px;font-weight:700}
+.mark{display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:700}
+.mark svg{width:20px;height:20px}
+.mark.y{color:var(--good)}.mark.p{color:var(--watch)}.mark.n{color:var(--risk)}
+.cmp small{font-size:15px;color:var(--text-2)}
+.cmp .us small{color:var(--ink);font-weight:600}
+
+/* ---------- 12 portal ---------- */
+.roles{display:flex;gap:8px;padding:6px;background:var(--gray-50);border:1px solid var(--border);border-radius:999px;align-self:flex-start}
+.roles span{padding:9px 16px;border-radius:999px;font-size:15px;font-weight:600;color:var(--text-2);transition:all .35s var(--ease)}
+.roles span.on{background:var(--navy);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tile{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;min-height:128px;transition:opacity .4s var(--ease),filter .4s;position:relative}
+.tile b{font-size:18px}
+.tile .ico{width:42px;height:42px}
+.tile .lk{position:absolute;top:16px;right:16px;color:var(--text-3);opacity:0;transition:opacity .3s}
+.tile .lk svg{width:20px;height:20px}
+.tile.locked{opacity:.38;filter:grayscale(1)}
+.tile.locked .lk{opacity:1}
+.who{font-size:17px;color:var(--text-2);min-height:26px}
+.who b{color:var(--ink)}
+a.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--navy);color:#fff;font-weight:600;font-size:18px;text-decoration:none;transition:all .2s var(--ease);align-self:flex-start}
+a.btn:hover{background:var(--navy-700);transform:translateY(-1px)}
+a.btn svg{width:18px;height:18px;transition:transform .2s}
+a.btn:hover svg{transform:translateX(3px)}
+.dark a.btn{background:var(--light-green);color:var(--ink)}
+
+/* ---------- 13 cta ---------- */
+.cta{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px;height:100%}
+.cta h1{font-size:96px}
+.contact{display:flex;gap:36px;font-size:19px;color:#a9bfcf}
+.contact a{color:#d6e4ee;text-decoration:none}
+.contact a:hover{color:var(--light-green);text-decoration:underline;text-underline-offset:3px}
+
+
+/* ---------- founder ---------- */
+.fcard{padding:34px;display:grid;gap:26px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stat{background:var(--gray-25);border:1px solid var(--border);border-radius:14px;padding:20px}
+.stat strong{display:block;font-size:56px;font-weight:700;color:var(--navy);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.stat small{display:block;font-size:15px;color:var(--text-2);font-weight:600;margin-top:8px;line-height:1.35}
+.sig{display:flex;align-items:center;gap:16px}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:22px;flex:none}
+.sig b{font-size:20px;display:block}.sig div span{font-size:16px;color:var(--text-2)}
+/* ---------- security ---------- */
+.secrow{display:flex;gap:18px;align-items:center}
+.secrow b{font-size:21px;display:block}.secrow span{font-size:17px;color:var(--text-2)}
+.rings{position:relative;height:600px}
+.rings>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pulse{transform-box:fill-box;transform-origin:center}
+.on .pulse{animation:pulse 3s ease-out 2.4s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.18);opacity:0}}
+.core{position:absolute;left:50%;top:50%;translate:-50% -50%;width:160px;height:160px;border-radius:50%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;gap:6px}
+.core svg{width:40px;height:40px}
+.rl2{position:absolute;translate:-50% -50%;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);font-size:16px;font-weight:700;white-space:nowrap}
+.rl2 svg{width:18px;height:18px;color:var(--green-700)}
+/* ---------- faq ---------- */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+.q{padding:28px 30px;display:flex;gap:18px;align-items:flex-start}
+.q h3{font-size:23px;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.q p{font-size:19px;color:var(--text-2);line-height:1.5;margin-top:8px}
+/* ---------- steps ---------- */
+.tl{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:44px}
+.tl .line{position:absolute;left:12.5%;right:12.5%;top:30px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--navy),var(--green))}
+.stp{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;position:relative}
+.stp .num{width:64px;height:64px;border-radius:50%;background:#fff;border:3px solid var(--navy);display:grid;place-items:center;font-weight:700;font-size:22px;color:var(--navy)}
+.stp.last .num{background:var(--green);border-color:var(--green);color:var(--ink)}
+.stp h3{font-size:25px;font-weight:700;margin-top:6px}
+.stp p{font-size:18px;color:var(--text-2);line-height:1.45;max-width:300px}
+.need{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:48px;padding:22px 26px;border-radius:16px;background:var(--gray-25);border:1px solid var(--border)}
+.need>b{font-size:18px;margin-right:6px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div id="viewport">
+<div id="stage">
+  <div class="progress"><i id="prog"></i></div>
+  <div class="chrome-top">
+    <span class="logo" id="toplogo" aria-label="numarket"><svg class="nu" viewBox="0 -15 1116 530" aria-hidden="true"><path d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/><path d="M684 68 V265 A182 182 0 0 0 1048 265 V68" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/></svg><span class="mk">market</span></span>
+    <span class="where" id="where"></span>
+  </div>
+
+  <!-- 1 INTRO -->
+  <section class="scene dark" data-id="intro" data-label="Welcome">
+    <svg id="dotfield" viewBox="0 0 1600 900" aria-hidden="true"></svg>
+    <div class="intro">
+      <span class="logo drawlogo" aria-label="numarket"><svg class="nu" viewBox="0 -15 1116 530" aria-hidden="true"><path pathLength="1" d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/><path pathLength="1" d="M684 68 V265 A182 182 0 0 0 1048 265 V68" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/></svg><span class="mk">market</span></span>
+      <span class="eyebrow a" style="--d:1.3s">Trust the Data</span>
+      <h1 class="a" style="--d:1.5s">We don’t just deliver your data.<br><em>We prepare you for what’s next.</em></h1>
+      <p class="hint a" style="--d:2.2s"><kbd>→</kbd> or tap Next to begin</p>
+    </div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="scene" data-id="problem" data-label="The problem">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">The problem</span>
+        <h2 class="a" style="--d:.2s">Your numbers live <em>everywhere.</em></h2>
+        <div class="pains">
+          <div class="pain a left" style="--d:1.6s"><span class="ico" data-i="clock"></span>Reports built by hand</div>
+          <div class="pain a left" style="--d:1.8s"><span class="ico" data-i="alert"></span>Numbers that disagree</div>
+          <div class="pain a left" style="--d:2.0s"><span class="ico" data-i="trend"></span>Decisions made too late</div>
+        </div>
+      </div>
+      <div class="mess">
+        <svg class="tangle" viewBox="0 0 860 600" aria-hidden="true">
+          <g fill="none" stroke="#e07a5f" stroke-width="2" stroke-dasharray="6 8" opacity=".55">
+            <path class="a fade" style="--d:1s" d="M160 90 C 420 160, 300 330, 620 120"/>
+            <path class="a fade" style="--d:1.1s" d="M150 300 C 380 260, 520 470, 700 330"/>
+            <path class="a fade" style="--d:1.2s" d="M640 130 C 560 300, 260 360, 230 500"/>
+            <path class="a fade" style="--d:1.3s" d="M180 110 C 200 300, 560 520, 640 500"/>
+            <path class="a fade" style="--d:1.4s" d="M690 330 C 600 420, 420 560, 240 500"/>
+          </g>
+        </svg>
+        <div class="src" style="left:40px;top:50px;--d:.3s;rotate:-4deg"><span class="ico" data-i="spreadsheet"></span>Spreadsheets</div>
+        <div class="src" style="left:520px;top:80px;--d:.45s;rotate:3deg"><span class="ico" data-i="dollar"></span>Accounting</div>
+        <div class="src" style="left:20px;top:260px;--d:.6s;rotate:2deg"><span class="ico" data-i="mail"></span>Email attachments</div>
+        <div class="src" style="left:560px;top:290px;--d:.75s;rotate:-3deg"><span class="ico" data-i="layers"></span>Project tools</div>
+        <div class="src" style="left:150px;top:460px;--d:.9s;rotate:-2deg"><span class="ico" data-i="file"></span>Paper forms</div>
+        <div class="src" style="left:520px;top:470px;--d:1.05s;rotate:4deg"><span class="ico" data-i="database"></span>Old systems</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 LAYERS -->
+  <section class="scene" data-id="system" data-label="The system">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">The system</span>
+        <h2 class="a" style="--d:.2s">One system.<br><em>Four layers.</em></h2>
+        <p class="lead a" style="--d:.35s">Not a one-time delivery. Each layer builds on the one below, so your company keeps getting smarter.</p>
+      </div>
+      <div class="layers">
+        <div class="slab a drop" style="--d:.6s;background:var(--navy)"><span class="n">01</span><span class="ico" data-i="database"></span><div><h3>Foundation</h3><p>Your data · connected, cleaned, secured</p></div><span class="sp"></span><span class="badge">Start here</span></div>
+        <div class="slab a drop" style="--d:.95s;background:var(--p-workspace)"><span class="n">02</span><span class="ico" data-i="see"></span><div><h3>Workspace</h3><p>Dashboards · Reports · Ask Your Data</p></div></div>
+        <div class="slab a drop" style="--d:1.3s;background:var(--p-insight)"><span class="n">03</span><span class="ico" data-i="target"></span><div><h3>Insight Review</h3><p>Your analyst · what to do next</p></div></div>
+        <div class="slab opt a drop" style="--d:1.65s"><span class="n">04</span><span class="ico" data-i="code"></span><div><h3>Engineering</h3><p>Apps built for you</p></div><span class="sp"></span><span class="badge">Optional</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 FOUNDATION -->
+  <section class="scene" data-id="foundation" data-label="01 · Foundation">
+    <div class="split">
+      <div class="stack">
+        <span class="tag a" style="--d:.1s;color:var(--navy)"><b style="background:var(--navy)">01</b>Foundation</span>
+        <h2 class="a" style="--d:.2s">Ready for<br><em>what’s next.</em></h2>
+        <p class="lead a" style="--d:.35s">We prepare your whole system for the future: one clean, secure database that’s ready to report, ready to run and ready for AI.</p>
+        <div class="chips">
+          <span class="chip a pop" style="--d:.6s"><svg data-i="collect"></svg>Collect</span>
+          <span class="chip a pop" style="--d:.7s"><svg data-i="clean"></svg>Clean</span>
+          <span class="chip a pop" style="--d:.8s"><svg data-i="shield"></svg>Secure</span>
+          <span class="chip a pop" style="--d:.9s"><svg data-i="key"></svg>Own</span>
+        </div>
+      </div>
+      <div class="card ftable a" style="--d:.3s">
+        <span class="sample">Sample data</span>
+        <h4>Job costs · 3 sources merged</h4>
+        <div class="frow head"><div>Job</div><div>Vendor</div><div>Amount</div></div>
+        <div class="frow"><div>Route 9 Bridge</div><div><span class="fix" style="--d:1.2s"><span class="bad">ACME inc.</span><span class="good">Acme Inc.</span></span></div><div><span class="fix" style="--d:1.45s"><span class="bad">$12,4OO</span><span class="good">$12,400</span></span></div></div>
+        <div class="frow"><div><span class="fix" style="--d:1.7s"><span class="bad">route 9 brdg</span><span class="good">Route 9 Bridge</span></span></div><div>Steel Co.</div><div><span class="fix" style="--d:1.95s"><span class="bad">— missing</span><span class="good">$8,950</span></span></div></div>
+        <div class="frow"><div>Data Center Shell</div><div>Acme Inc.</div><div>$21,300</div></div>
+        <div class="frow dup" style="--d:2.3s"><div>Data Center Shell</div><div>Acme, Inc</div><div>$21,300</div></div>
+        <div class="frow"><div>Harbor Lot</div><div>Ready Mix</div><div><span class="fix" style="--d:2.6s"><span class="bad">N/A</span><span class="good">$4,120</span></span></div></div>
+        <div class="vault">
+          <span class="chip navy a pop" style="--d:3.1s"><svg data-i="check"></svg>5 fixes · 1 duplicate removed</span>
+          <span class="chip navy a pop" style="--d:3.4s"><svg data-i="lock"></svg>Encrypted · yours</span>
+          <span class="chip a pop" style="--d:3.7s"><svg data-i="sparkle"></svg>AI-ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 WORKSPACE -->
+  <section class="scene" data-id="workspace" data-label="02 · Workspace">
+    <div class="split">
+      <div class="stack">
+        <span class="tag a" style="--d:.1s;color:var(--p-workspace)"><b style="background:var(--p-workspace)">02</b>Workspace</span>
+        <h2 class="a" style="--d:.2s">Reports that<br><em>build themselves.</em></h2>
+        <p class="lead a" style="--d:.35s">Dashboards and status reports we build for how your company works, updated automatically. Ask a question in plain English.</p>
+        <div class="chips">
+          <span class="chip a pop" style="--d:.6s"><svg data-i="see"></svg>Dashboards</span>
+          <span class="chip a pop" style="--d:.7s"><svg data-i="chat"></svg>Ask Your Data</span>
+          <span class="chip a pop" style="--d:.8s"><svg data-i="send"></svg>Auto-sent reports</span>
+        </div>
+      </div>
+      <div class="browser a" style="--d:.25s">
+        <div class="bar"><i></i><i></i><i></i><span class="url">app.numarket.us / dashboard</span></div>
+        <span class="sample" style="top:56px">Sample data</span>
+        <div class="body">
+          <div class="kpis">
+            <div class="kpi"><small>Jobs on track</small><strong data-count="18" data-delay="500">0</strong><span>▲ 3 vs last month</span></div>
+            <div class="kpi"><small>Budget used</small><strong data-count="64" data-suffix="%" data-delay="650">0</strong><span>On plan</span></div>
+            <div class="kpi"><small>Hours saved / week</small><strong data-count="22" data-delay="800">0</strong><span>Reports automated</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px">
+            <div class="panel"><h5>Monthly spend</h5>
+              <div class="bars">
+                <i class="gy" style="height:42%;--d:.9s"></i><i class="gy" style="height:55%;--d:1s"></i><i class="gy" style="height:48%;--d:1.1s"></i><i class="gy" style="height:66%;--d:1.2s"></i><i class="gy" style="height:72%;--d:1.3s"></i><i class="gy b" style="height:63%;--d:1.4s"></i><i class="gy b" style="height:80%;--d:1.5s"></i>
+              </div>
+            </div>
+            <div class="panel"><h5>Job status</h5>
+              <div class="srow a fade" style="--d:1.6s">Route 9 Bridge <span class="pill watch">Watch</span></div>
+              <div class="srow a fade" style="--d:1.8s">Data Center Shell <span class="pill good">On track</span></div>
+              <div class="srow a fade" style="--d:2.0s">Harbor Lot <span class="pill risk">At risk</span></div>
+              <div class="srow a fade" style="--d:2.2s">Main St. Clinic <span class="pill good">On track</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 INSIGHT -->
+  <section class="scene" data-id="insight" data-label="03 · Insight Review">
+    <div class="split">
+      <div class="stack">
+        <span class="tag a" style="--d:.1s;color:var(--p-insight)"><b style="background:var(--p-insight)">03</b>Insight Review</span>
+        <h2 class="a" style="--d:.2s">Know what<br>to <em>do next.</em></h2>
+        <p class="lead a" style="--d:.35s">On a set schedule, monthly to weekly, an analyst reviews your numbers and tells you, in plain English, what to act on.</p>
+        <div class="chips">
+          <span class="chip a pop" style="--d:.6s"><svg data-i="clock"></svg>Monthly to weekly</span>
+          <span class="chip a pop" style="--d:.7s"><svg data-i="chat"></svg>Plain English</span>
+          <span class="chip a pop" style="--d:.8s"><svg data-i="act"></svg>Action items</span>
+        </div>
+      </div>
+      <div class="card report a" style="--d:.25s">
+        <span class="sample">Sample data</span>
+        <header><b>October Insight Review</b><span>Prepared by your numarket analyst</span></header>
+        <div class="rblock a left" style="--d:.9s"><span class="ico blue" data-i="trend"></span><div><small>What changed</small><p>Material costs up 6% on two jobs since September.</p></div></div>
+        <div class="rblock a left" style="--d:1.5s"><span class="ico red" data-i="alert"></span><div><small>What’s at risk</small><p>Route 9 Bridge is 9 days behind; penalty clause in 3 weeks.</p></div></div>
+        <div class="rblock a left" style="--d:2.1s"><span class="ico" data-i="target"></span><div><small>What to do next</small><p>Move one crew from Harbor Lot; approve the change order by Friday.</p></div></div>
+        <div class="gauge a" style="--d:2.6s">
+          <svg viewBox="0 0 100 56" aria-hidden="true"><path d="M8 50 A42 42 0 0 1 92 50" fill="none" stroke="#e8edf2" stroke-width="10" stroke-linecap="round"/><path class="draw" pathLength="1" style="--d:2.8s;stroke-dasharray:1;" d="M8 50 A42 42 0 0 1 80 20" fill="none" stroke="#2e9e6b" stroke-width="10" stroke-linecap="round"/></svg>
+          <div><small class="note">Portfolio health</small><br><strong data-count="78" data-delay="2800">0</strong> <span class="pill good">Good</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 ENGINEERING -->
+  <section class="scene" data-id="engineering" data-label="04 · Engineering">
+    <div class="eng">
+      <div class="stack" style="max-width:1100px">
+        <span class="tag a" style="--d:.1s;color:var(--p-eng)"><b style="background:var(--p-eng)">04</b>Engineering · optional</span>
+        <h2 class="a" style="--d:.2s">Automate the busywork. <em>When you need it.</em></h2>
+      </div>
+      <div class="flow">
+        <svg viewBox="0 0 1400 300" aria-hidden="true">
+          <g fill="none" stroke="#6c5dd3" stroke-width="3" stroke-linecap="round">
+            <path class="draw" pathLength="1" style="--d:1s" d="M290 150 H370"/>
+            <path class="draw" pathLength="1" style="--d:1.6s" d="M660 150 H740"/>
+            <path class="draw" pathLength="1" style="--d:2.2s" d="M1030 150 H1110"/>
+          </g>
+          <circle r="7" fill="#80ed99"><animateMotion dur="3.2s" repeatCount="indefinite" path="M290 150 H1110"/></circle>
+        </svg>
+        <div class="node a" style="left:0;--d:.6s"><span class="ico" data-i="file"></span><b>Field report submitted</b><small>From the job site</small></div>
+        <div class="node a" style="left:370px;--d:1.2s"><span class="ico" data-i="gauge"></span><b>Checked against budget</b><small>Automatically</small></div>
+        <div class="node a" style="left:740px;--d:1.8s"><span class="ico" data-i="alert"></span><b>Over by 5% or more?</b><small>Rule you set</small></div>
+        <div class="node end a" style="left:1110px;--d:2.4s"><span class="ico" data-i="send"></span><b>PM alerted, QBR updated</b><small>No one has to chase it</small></div>
+      </div>
+      <div class="chips"><span class="chip navy a pop" style="--d:2.9s"><svg data-i="dollar"></svg>Quoted before we start</span><span class="chip navy a pop" style="--d:3.05s"><svg data-i="plug"></svg>Connects to your tools</span></div>
+    </div>
+  </section>
+
+  <!-- 8 EXAMPLES -->
+  <section class="scene" data-id="examples" data-label="What you get">
+    <div class="stack" style="height:100%;justify-content:center;gap:34px">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow a" style="--d:.1s">What your team gets</span>
+        <h2 class="a" style="--d:.2s">QBRs, status reports, updates. <em>Done for you.</em></h2>
+      </div>
+      <div class="ex">
+        <div class="card mock a" style="--d:.4s"><span class="sample">Sample data</span>
+          <h4>Q3 Business Review</h4>
+          <div class="minikpi"><div><small>Revenue</small><b data-count="4.2" data-dec="1" data-prefix="$" data-suffix="M" data-delay="700">0</b></div><div><small>Margin</small><b data-count="18" data-suffix="%" data-delay="800">0</b></div><div><small>On time</small><b data-count="91" data-suffix="%" data-delay="900">0</b></div></div>
+          <div class="gbars">
+            <div><i class="gy" style="height:50%;--d:1s"></i><i class="gy" style="height:58%;--d:1.05s"></i></div>
+            <div><i class="gy" style="height:62%;--d:1.15s"></i><i class="gy" style="height:66%;--d:1.2s"></i></div>
+            <div><i class="gy" style="height:70%;--d:1.3s"></i><i class="gy" style="height:84%;--d:1.35s"></i></div>
+          </div>
+          <div class="legend"><span>Plan</span><span>Actual</span></div>
+          <div class="cap"><svg data-i="refresh"></svg>Builds itself every quarter</div>
+        </div>
+        <div class="card mock a" style="--d:.6s"><span class="sample">Sample data</span>
+          <h4>Weekly status report</h4>
+          <div class="srow a fade" style="--d:1.2s">Permits <span class="pill good">On track</span></div>
+          <div class="srow a fade" style="--d:1.35s">Steel delivery <span class="pill watch">Watch</span></div>
+          <div class="srow a fade" style="--d:1.5s">Inspections <span class="pill good">On track</span></div>
+          <div class="srow a fade" style="--d:1.65s">Change orders <span class="pill risk">At risk</span></div>
+          <div class="srow a fade" style="--d:1.8s">Safety <span class="pill good">On track</span></div>
+          <div class="cap"><svg data-i="see"></svg>Updated automatically</div>
+        </div>
+        <div class="card mock a" style="--d:.8s"><span class="sample">Sample data</span>
+          <h4>Monday update</h4>
+          <div class="mail">
+            <div class="from"><svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#0B1F2E"/><line x1="75" y1="25" x2="25" y2="75" stroke="#3382B5" stroke-width="2.6" stroke-linecap="round"/><path transform="translate(23 22) scale(0.045)" d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="#00C675" stroke-width="136" stroke-linecap="round"/><path transform="translate(54.5 55) scale(0.045)" d="M68 68 V265 A182 182 0 0 0 432 265 V68" fill="none" stroke="#fff" stroke-width="136" stroke-linecap="round"/></svg>numarket · to your team</div>
+            <div class="subj">3 items need you this week</div>
+            <ul style="display:grid;gap:8px">
+              <li class="a fade" style="--d:1.3s"><svg data-i="check"></svg>Approve Route 9 change order</li>
+              <li class="a fade" style="--d:1.5s"><svg data-i="check"></svg>Two field reports missing from Harbor Lot</li>
+              <li class="a fade" style="--d:1.7s"><svg data-i="check"></svg>Budget review moved to Thursday</li>
+            </ul>
+          </div>
+          <div class="cap"><svg data-i="send"></svg>Sent automatically, 7:00 AM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 TIME -->
+  <section class="scene" data-id="time" data-label="Where time goes">
+    <div class="split" style="grid-template-columns:470px 1fr">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">How you save time</span>
+        <h2 class="a" style="--d:.2s">Most PMO work is <em>reminders.</em></h2>
+        <p class="lead a" style="--d:.35s">Meetings, follow-ups and forwarded spreadsheets. We automate that, so your people spend their time on decisions.</p>
+      </div>
+      <div>
+        <div class="trow hd a fade" style="--d:.3s"><span>A typical PMO team’s week</span><span></span><span>With numarket</span></div>
+        <div class="trow"><span class="task a fade" style="--d:.8s">Status meetings for updates</span><span class="arr a fade" style="--d:1.2s" data-i="arrow"></span><span class="auto a pop" style="--d:1.3s"><svg data-i="window"></svg>Teams enter updates in the app</span></div>
+        <div class="trow"><span class="task a fade" style="--d:1.6s">Reminder emails and follow-ups</span><span class="arr a fade" style="--d:2s" data-i="arrow"></span><span class="auto a pop" style="--d:2.1s"><svg data-i="bell"></svg>Automatic reminders</span></div>
+        <div class="trow"><span class="task a fade" style="--d:2.4s">Forwarding info to other people</span><span class="arr a fade" style="--d:2.8s" data-i="arrow"></span><span class="auto a pop" style="--d:2.9s"><svg data-i="send"></svg>Scheduled reports</span></div>
+        <div class="trow"><span class="task a fade" style="--d:3.2s">Building the QBR by hand</span><span class="arr a fade" style="--d:3.6s" data-i="arrow"></span><span class="auto a pop" style="--d:3.7s"><svg data-i="see"></svg>A QBR that builds itself</span></div>
+        <div class="trow"><span class="task a fade" style="--d:4s">Guessing what’s at risk</span><span class="arr a fade" style="--d:4.4s" data-i="arrow"></span><span class="auto a pop" style="--d:4.5s"><svg data-i="target"></svg>Risks and next steps, every review</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 COST -->
+  <section class="scene dark" data-id="cost" data-label="The cost difference">
+    <div class="cost">
+      <div class="stack" style="gap:14px">
+        <span class="eyebrow a" style="--d:.1s">The cost difference · illustrative scenario</span>
+        <h2 class="a" style="--d:.2s">Same goal. <em>A fraction of the cost.</em></h2>
+      </div>
+      <div class="crow a fade" style="--d:.5s">
+        <div><h3>Traditional PMO program</h3><p>Team of 5 · 12 months<br>Meetings, reminders, manual reports</p></div>
+        <div class="track"><div class="cbar pmo gx" style="--d:.7s"></div><span class="cval" data-count="700000" data-prefix="$" data-delay="700" data-dur="1400">$0</span></div>
+      </div>
+      <div class="crow a fade" style="--d:1.6s">
+        <div><h3 style="display:flex;align-items:center;gap:12px"><span class="logo" style="font-size:30px"><svg class="nu" viewBox="0 -15 1116 530" aria-hidden="true"><path d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/><path d="M684 68 V265 A182 182 0 0 0 1048 265 V68" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/></svg><span class="mk">market</span></span></h3><p>Command plan (Large) · all three products<br>Year one, including setup</p></div>
+        <div class="track"><div class="cbar nm gx" style="--d:1.8s"></div><span class="cval" data-count="184000" data-prefix="$" data-delay="1800" data-dur="1100">$0</span></div>
+      </div>
+      <div class="save">
+        <div class="a" style="--d:3s"><div class="big" data-count="516000" data-prefix="$" data-delay="3000" data-dur="1500">$0</div><small>saved in year one, about 74% less</small></div>
+        <div class="mini">
+          <span class="chip dark a pop" style="--d:4s"><svg data-i="refresh"></svg>Year two: $144,000. No setup fee.</span>
+          <span class="chip dark a pop" style="--d:4.2s"><svg data-i="key"></svg>And you keep a system you own</span>
+          <span class="note a fade" style="--d:4.4s">Illustrative scenario. Your numbers come from your free Readiness Check.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 COMPARE -->
+  <section class="scene" data-id="compare" data-label="How we compare">
+    <div class="stack" style="height:100%;justify-content:center;gap:0">
+      <span class="eyebrow a" style="--d:.1s">How we compare</span>
+      <h2 class="a" style="--d:.2s;margin-top:14px">A partner, not a staffing firm <em>or a software license.</em></h2>
+      <div class="cmp">
+        <span class="hl a fade" style="--d:.5s"></span>
+        <div class="ch"></div>
+        <div class="ch a fade" style="--d:.3s"><span class="ico" data-i="users"></span>PMO program</div>
+        <div class="ch a fade" style="--d:.35s"><span class="ico" data-i="building"></span>Consulting firm</div>
+        <div class="ch a fade" style="--d:.4s"><span class="ico" data-i="window"></span>Software only</div>
+        <div class="ch us a fade" style="--d:.45s"><span class="logo" style="font-size:30px"><svg class="nu" viewBox="0 -15 1116 530" aria-hidden="true"><path d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/><path d="M684 68 V265 A182 182 0 0 0 1048 265 V68" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/></svg><span class="mk">market</span></span></div>
+      </div>
+      <p class="note a fade" style="--d:3s;margin-top:22px">Typical approaches; individual providers vary.</p>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="scene" data-id="founder" data-label="Who we are">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">Who’s behind numarket</span>
+        <h2 class="a" style="--d:.2s">Built by someone who’s <em>sat in the PMO seat.</em></h2>
+        <p class="lead a" style="--d:.35s">Years in data science, analytics, PMO and recruiting taught me one thing: your data is the full record of how your company has worked. Most teams don’t use it because they’re afraid of getting the next step wrong. We make it data you can trust, so every owner, executive and employee decides with years of experience behind them.</p>
+        <div class="sig a" style="--d:.6s"><span class="avatar">BP</span><div><b>Brandon Pacheco</b><span>Founder · Atlanta, Georgia</span></div></div>
+      </div>
+      <div class="card fcard a" style="--d:.3s">
+        <div class="stats">
+          <div class="stat a pop" style="--d:.6s"><strong data-count="7" data-suffix="+" data-delay="700">0</strong><small>years in data science and analytics</small></div>
+          <div class="stat a pop" style="--d:.75s"><strong data-count="13" data-delay="850">0</strong><small>years building businesses</small></div>
+          <div class="stat a pop" style="--d:.9s"><strong data-count="10" data-delay="1000">0</strong><small>industries supported</small></div>
+        </div>
+        <div class="chips">
+          <span class="chip navy a pop" style="--d:1.30s"><svg data-i="utilities"></svg>Energy</span>
+          <span class="chip navy a pop" style="--d:1.38s"><svg data-i="gauge"></svg>Oil and gas</span>
+          <span class="chip navy a pop" style="--d:1.46s"><svg data-i="manufacturing"></svg>Manufacturing</span>
+          <span class="chip navy a pop" style="--d:1.54s"><svg data-i="send"></svg>Aerospace</span>
+          <span class="chip navy a pop" style="--d:1.62s"><svg data-i="healthcare"></svg>Healthcare</span>
+          <span class="chip navy a pop" style="--d:1.70s"><svg data-i="layers"></svg>Pharmaceutical</span>
+          <span class="chip navy a pop" style="--d:1.78s"><svg data-i="food"></svg>Food production</span>
+          <span class="chip navy a pop" style="--d:1.86s"><svg data-i="refresh"></svg>Waste management</span>
+          <span class="chip navy a pop" style="--d:1.94s"><svg data-i="file"></svg>Paper and pulp</span>
+          <span class="chip navy a pop" style="--d:2.02s"><svg data-i="code"></svg>IT</span>
+        </div>
+              </div>
+    </div>
+  </section>
+
+  <!-- 12 PORTAL -->
+  <section class="scene" data-id="portal" data-label="Your system">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">Your system · the numarket Portal</span>
+        <h2 class="a" style="--d:.2s">One sign-in. <em>You decide who sees what.</em></h2>
+        <p class="lead a" style="--d:.35s">Owners see everything. A superintendent sees only their field reports. Every role is set by you.</p>
+        <a class="btn a" style="--d:.6s" href="https://app.numarket.us/sign-in" target="_blank" rel="noopener">Try the live demo <svg data-i="arrow"></svg></a>
+      </div>
+      <div class="browser a" style="--d:.3s">
+        <div class="bar"><i></i><i></i><i></i><span class="url">app.numarket.us</span></div>
+        <span class="sample" style="top:56px">Sample data</span>
+        <div class="body" style="gap:18px">
+          <div class="roles" id="roles"><span data-r="0">Owner</span><span data-r="1">Editor</span><span data-r="2">Contributor</span><span data-r="3">Viewer</span></div>
+          <div class="who" id="who"></div>
+          <div class="tiles" id="tiles">
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="see"></span><b>Dashboards</b></div>
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="building"></span><b>All jobs</b></div>
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="file"></span><b>Reports</b></div>
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="send"></span><b>Edit &amp; publish</b></div>
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="construction"></span><b>Field reports</b></div>
+            <div class="tile"><span class="lk" data-i="lock"></span><span class="ico" data-i="gear"></span><b>Admin</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="scene" data-id="security" data-label="Security">
+    <div class="split">
+      <div class="stack">
+        <span class="eyebrow a" style="--d:.1s">Security &amp; ownership</span>
+        <h2 class="a" style="--d:.2s">Your data stays <em>yours.</em></h2>
+        <div class="secrow a left" style="--d:.5s"><span class="ico" data-i="lock"></span><div><b>Encrypted, private database</b><span>Built for your company alone</span></div></div>
+        <div class="secrow a left" style="--d:.7s"><span class="ico" data-i="users"></span><div><b>You control who sees what</b><span>A role for every person</span></div></div>
+        <div class="secrow a left" style="--d:.9s"><span class="ico" data-i="shield"></span><div><b>Built on Snowflake</b><span>An enterprise-grade data platform</span></div></div>
+        <div class="secrow a left" style="--d:1.1s"><span class="ico" data-i="key"></span><div><b>No lock-in</b><span>Leave with a clean, organized database</span></div></div>
+      </div>
+      <div class="rings">
+        <svg viewBox="0 0 800 600" aria-hidden="true">
+          <circle class="pulse" cx="400" cy="300" r="270" fill="none" stroke="#57cc99" stroke-width="2"/>
+          <circle class="draw" pathLength="1" style="--d:1.4s" cx="400" cy="300" r="270" fill="none" stroke="#c7f9cc" stroke-width="3"/>
+          <circle class="draw" pathLength="1" style="--d:1s" cx="400" cy="300" r="200" fill="none" stroke="#57cc99" stroke-width="3" stroke-dasharray="1"/>
+          <circle class="draw" pathLength="1" style="--d:.6s" cx="400" cy="300" r="130" fill="none" stroke="#38a3a5" stroke-width="3"/>
+        </svg>
+        <div class="core a pop" style="--d:.3s"><svg data-i="database"></svg>Your data</div>
+        <span class="rl2 a pop" style="--d:1s;left:50%;top:calc(50% - 130px)"><svg data-i="lock"></svg>Encrypted</span>
+        <span class="rl2 a pop" style="--d:1.4s;left:calc(50% + 200px);top:50%"><svg data-i="users"></svg>Role-based access</span>
+        <span class="rl2 a pop" style="--d:1.8s;left:50%;top:calc(50% + 270px)"><svg data-i="key"></svg>Yours to keep</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="scene" data-id="questions" data-label="Common questions">
+    <div class="stack" style="height:100%;justify-content:center;gap:0">
+      <span class="eyebrow a" style="--d:.1s">Common questions</span>
+      <h2 class="a" style="--d:.2s;margin-top:14px">What clients <em>ask first.</em></h2>
+      <div class="faq">
+        <div class="card q a" style="--d:.5s"><span class="ico" data-i="see"></span><div><h3>We already use Power BI, Smartsheet or Excel.</h3><p>Keep them. We clean and connect the data underneath, so every tool finally shows the same numbers.</p></div></div>
+        <div class="card q a" style="--d:.8s"><span class="ico" data-i="gear"></span><div><h3>Does our IT team have to do anything?</h3><p>Very little. Usually access to your systems and one point of contact. We handle the rest.</p></div></div>
+        <div class="card q a" style="--d:1.1s"><span class="ico" data-i="clean"></span><div><h3>What if our data is a mess?</h3><p>That’s normal, and it’s why Foundation comes first. Cleaning it up is our job, not yours.</p></div></div>
+        <div class="card q a" style="--d:1.4s"><span class="ico" data-i="window"></span><div><h3>Do we need to buy new software?</h3><p>No. Your team signs in to the numarket Portal. Nothing to install.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="scene" data-id="next-steps" data-label="After yes">
+    <div class="stack" style="height:100%;justify-content:center;gap:0">
+      <span class="eyebrow a" style="--d:.1s">Getting started</span>
+      <h2 class="a" style="--d:.2s;margin-top:14px">What happens <em>after yes.</em></h2>
+      <div class="tl">
+        <div class="line gx" style="--d:.5s"></div>
+        <div class="stp a pop" style="--d:.5s"><span class="num">1</span><h3>Readiness Check</h3><p>Free. We review your data and your goals.</p></div>
+        <div class="stp a pop" style="--d:.9s"><span class="num">2</span><h3>Proposal</h3><p>Clear scope and one monthly fee.</p></div>
+        <div class="stp a pop" style="--d:1.3s"><span class="num">3</span><h3>Setup</h3><p>2–3 weeks for smaller teams, 6–10 weeks for larger ones.</p></div>
+        <div class="stp last a pop" style="--d:1.7s"><span class="num"><svg data-i="check" style="width:28px;height:28px"></svg></span><h3>Go live</h3><p>Your team signs in. Monthly reviews begin.</p></div>
+      </div>
+      <div class="need a" style="--d:2.2s">
+        <b>What to send us:</b>
+        <span class="chip"><svg data-i="layers"></svg>The systems you use</span>
+        <span class="chip"><svg data-i="file"></svg>2–3 reports you build today</span>
+        <span class="chip"><svg data-i="target"></svg>Your top 3 questions</span>
+        <span class="chip"><svg data-i="users"></svg>Who needs access</span>
+      </div>
+      <p class="note a fade" style="--d:2.5s;margin-top:16px">Timelines are estimates and are confirmed after the Readiness Check.</p>
+    </div>
+  </section>
+
+  <!-- 13 CTA -->
+  <section class="scene dark" data-id="start" data-label="Next step">
+    <div class="cta">
+      <span class="logo drawlogo" aria-label="numarket"><svg class="nu" viewBox="0 -15 1116 530" aria-hidden="true"><path pathLength="1" d="M68 432 V235 A182 182 0 0 1 432 235 V432" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/><path pathLength="1" d="M684 68 V265 A182 182 0 0 0 1048 265 V68" fill="none" stroke="currentColor" stroke-width="136" stroke-linecap="round"/></svg><span class="mk">market</span></span>
+      <h1 class="a" style="--d:1.3s">How ready is <em>your data?</em></h1>
+      <p class="lead a" style="--d:1.5s;max-width:640px">Book a free Readiness Check. We’ll look at your data and tell you plainly what it would take.</p>
+      <a class="btn a" style="--d:1.7s;align-self:center" href="/contact" target="_top">Get a Free Readiness Check <svg data-i="arrow"></svg></a>
+      <div class="contact a fade" style="--d:2s"><a href="mailto:hello@numarket.us">hello@numarket.us</a><a href="tel:+18637779264">(863) 777-9264</a><a href="/" target="_top">numarket.us</a></div>
+    </div>
+  </section>
+
+  <div class="chrome-bot">
+    <div class="dots-nav" id="dots" role="tablist" aria-label="Slides"></div>
+    <div class="ctrls">
+      <button id="play" aria-label="Play automatically"><svg data-i="play"></svg><span>Play</span></button>
+      <button id="prev" aria-label="Previous"><svg data-i="back"></svg></button>
+      <button id="next" class="primary" aria-label="Next"><span>Next</span><svg data-i="arrow"></svg></button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+const P={utilities:'M13 2L4 14h7l-1 8 9-12h-7z',manufacturing:'M3 21V11l5 3V11l5 3V11l5 3V5h3v16zM7 17h2M12 17h2',healthcare:'M9 3h6v6h6v6h-6v6H9v-6H3V9h6z',food:'M3 17h18M5 17a7 7 0 0114 0M12 7v3M10 7h4M2 20h20',book:'M4 5a2 2 0 012-2h14v16H6a2 2 0 00-2 2zM4 21V5',check:'M5 12.5l4.5 4.5L19 7.5',arrow:'M5 12h14M13 6l6 6-6 6',back:'M19 12H5M11 6l-6 6 6 6',lock:'M7 11V8a5 5 0 0110 0v3M5 11h14v10H5z',key:'M15 7a4 4 0 11-3.9 5H3v3h3v3h3v-3h2.1A4 4 0 0115 7z',shield:'M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z',database:'M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zm0 0v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3',collect:'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM17 14v6M14 17h6',clean:'M4 20l6-6M14 4l6 6-8 8-6-6zM3 21h7',see:'M3 20V10M9 20V4M15 20v-8M21 20V7',act:'M5 12.5l4.5 4.5L19 7.5M4 4h16',spreadsheet:'M4 4h16v16H4zM4 9h16M4 14h16M10 4v16',chat:'M4 5h16v11H9l-5 4z',bell:'M6 16V11a6 6 0 1112 0v5l2 2H4zM10 21h4',users:'M9 11a4 4 0 100-8 4 4 0 000 8zM2 21v-1a6 6 0 0112 0v1M16 3.5a4 4 0 010 7.5M18 14a6 6 0 014 5.6V21',building:'M4 21V5l8-2v18M12 7l8 2v12M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01M2 21h20',clock:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2',dollar:'M12 3v18M17 7.5C17 5.6 14.8 4.5 12 4.5S7 5.6 7 7.5 9 10.4 12 11s5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3',gauge:'M4 17a8 8 0 1116 0M12 17l4-6',plug:'M9 3v5M15 3v5M6 8h12v4a6 6 0 01-12 0zM12 18v3',layers:'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5',file:'M6 3h8l5 5v13H6zM14 3v5h5',mail:'M3 5h18v14H3zM3 6l9 7 9-7',sparkle:'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z',code:'M8 8l-5 4 5 4M16 8l5 4-5 4M14 4l-4 16',window:'M3 5h18v14H3zM3 9h18M6.5 7h.01M9 7h.01',target:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 17a5 5 0 100-10 5 5 0 000 10zM12 13a1 1 0 100-2 1 1 0 000 2z',gear:'M12 15a3 3 0 100-6 3 3 0 000 6zM19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z',play:'M7 4l13 8-13 8z',pause:'M8 5v14M16 5v14',send:'M4 12l16-8-6 16-2-7z',refresh:'M20 11a8 8 0 10-2.3 5.7M20 4v7h-7',close:'M6 6l12 12M18 6L6 18',minus:'M5 12h14',alert:'M12 4l9 16H3zM12 10v4M12 17h.01',trend:'M3 17l6-6 4 4 8-8M15 7h6v6',construction:'M3 18h18M5 18v-3a7 7 0 0114 0v3M12 8V5M9 9.5L8 7M15 9.5l1-2.5'};
+function svg(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+P[n]+'"/></svg>'}
+function paint(root){root.querySelectorAll('[data-i]').forEach(el=>{const n=el.dataset.i;if(!P[n])return;if(el.tagName.toLowerCase()==='svg'){el.outerHTML=svg(n)}else{el.innerHTML=svg(n)}})}
+
+/* comparison table rows */
+const rows=[
+ ['Done for you',['p','Staff you manage'],['p','For one project'],['n','You build it'],['y','We build and run it']],
+ ['Predictable price',['n','Hourly or per head'],['n','Project fees'],['y','Per seat'],['y','One monthly fee']],
+ ['Live in weeks',['n','Hire and onboard'],['n','Discovery first'],['p','Depends on you'],['y','2–10 weeks']],
+ ['You keep the value',['n','Know-how walks out'],['p','Report goes stale'],['p','Hard to move data'],['y','Your data, no lock-in']],
+ ['Ready for AI',['n','Not the goal'],['p','Recommendations'],['p','If you set it up'],['y','AI-ready data']]
+];
+const W={y:['check','Yes'],p:['minus','Partly'],n:['close','No']};
+const cmp=document.querySelector('.cmp');let d=.7;
+rows.forEach(r=>{let h='<div class="rl a fade" style="--d:'+d+'s">'+r[0]+'</div>';
+ r.slice(1).forEach((c,i)=>{h+='<div class="a fade'+(i===3?' us':'')+'" style="--d:'+(d+.08*(i+1)).toFixed(2)+'s"><span class="mark '+c[0]+'">'+svg(W[c[0]][0])+W[c[0]][1]+'</span><small>'+c[1]+'</small></div>'});
+ cmp.insertAdjacentHTML('beforeend',h);d+=.4});
+cmp.querySelector('.hl').style.top='-12px';
+
+paint(document);
+
+/* ---------- fit to viewport ---------- */
+const stage=document.getElementById('stage'),vp=document.getElementById('viewport');
+function fit(){const s=Math.min(vp.clientWidth/1600,vp.clientHeight/900);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+addEventListener('resize',fit);fit();
+
+/* ---------- intro dot field ---------- */
+const field=document.getElementById('dotfield');const heights=[2,3,3,4,4,5,6,6,7,8,9,10];const dots=[];const targets=[];
+heights.forEach((h,c)=>{for(let r=0;r<h;r++){targets.push([1040+c*36,760-r*36,r/h])}});
+targets.forEach(()=>{const el=document.createElementNS('http://www.w3.org/2000/svg','circle');el.setAttribute('r','9');el.setAttribute('cx','0');el.setAttribute('cy','0');field.appendChild(el);dots.push(el)});
+let introTimer;
+function scatter(){field.classList.add('snap');dots.forEach(el=>{el.style.transform='translate('+(80+Math.random()*1440)+'px,'+(90+Math.random()*720)+'px)';el.style.fill='#e07a5f';el.style.opacity=.55});void field.getBoundingClientRect();field.classList.remove('snap')}
+function organize(){dots.forEach((el,i)=>{const t=targets[i];el.style.transitionDelay=(i*12)+'ms';el.style.transform='translate('+t[0]+'px,'+t[1]+'px)';el.style.fill=t[2]>.6?'#80ed99':'#57cc99';el.style.opacity=.95})}
+
+/* ---------- counters ---------- */
+let gen=0;
+function counters(scene){const g=gen;scene.querySelectorAll('[data-count]').forEach(el=>{
+ const to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',dur=+(el.dataset.dur||1200),delay=+(el.dataset.delay||0);
+ const fmt=v=>pre+v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;
+ el.textContent=fmt(0);
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return}
+ setTimeout(()=>{const t0=performance.now();(function step(t){if(g!==gen)return;const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(dec?to*e:Math.round(to*e));if(p<1)requestAnimationFrame(step)})(t0)},delay)})}
+
+/* ---------- portal roles ---------- */
+const access=[[1,1,1,1,1,1],[1,0,1,1,1,0],[0,0,0,0,1,0],[1,1,1,0,0,0]];
+const whoTxt=['<b>Owner · COO</b> sees every job, every report and admin settings.','<b>Editor · Project manager</b> enters data and publishes reports for their jobs.','<b>Contributor · Superintendent</b> fills in daily field reports only.','<b>Viewer · CFO</b> reads every dashboard and report. Read-only.'];
+let roleTimer,role=0;
+function setRole(r){role=r;document.querySelectorAll('#roles span').forEach((s,i)=>s.classList.toggle('on',i===r));document.querySelectorAll('#tiles .tile').forEach((t,i)=>t.classList.toggle('locked',!access[r][i]));document.getElementById('who').innerHTML=whoTxt[r]}
+document.querySelectorAll('#roles span').forEach(s=>s.addEventListener('click',()=>{clearInterval(roleTimer);setRole(+s.dataset.r)}));
+
+/* ---------- navigation ---------- */
+const scenes=[...document.querySelectorAll('.scene')];const dotsNav=document.getElementById('dots');
+scenes.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label',(i+1)+': '+s.dataset.label);b.dataset.tip=s.dataset.label;b.onclick=()=>{stopPlay();go(i)};dotsNav.appendChild(b)});
+let cur=-1;
+function go(i){
+ i=Math.max(0,Math.min(scenes.length-1,i));if(i===cur)return;
+ gen++;clearTimeout(introTimer);clearInterval(roleTimer);
+ if(cur>=0)scenes[cur].classList.remove('on');
+ cur=i;const s=scenes[i];void s.offsetWidth;s.classList.add('on');
+ stage.classList.toggle('dark',s.classList.contains('dark'));
+ document.getElementById('toplogo').style.opacity=(s.dataset.id==='intro'||s.dataset.id==='start')?0:1;
+ document.getElementById('where').textContent=String(i+1).padStart(2,'0')+' / '+scenes.length+'  ·  '+s.dataset.label;
+ document.getElementById('prog').style.width=((i+1)/scenes.length*100)+'%';
+ [...dotsNav.children].forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-selected',k===i)});
+ document.getElementById('prev').disabled=i===0;
+ document.querySelector('#next span').textContent=i===scenes.length-1?'Restart':'Next';
+ try{history.replaceState(null,'','#'+s.dataset.id)}catch(e){}
+ counters(s);
+ if(s.dataset.id==='intro'){scatter();introTimer=setTimeout(organize,700)}
+ if(s.dataset.id==='portal'){setRole(0);let r=0;roleTimer=setInterval(()=>{r=(r+1)%4;setRole(r)},2600)}
+}
+function next(){cur===scenes.length-1?go(0):go(cur+1)}
+function prev(){go(cur-1)}
+document.getElementById('next').onclick=()=>{stopPlay();next()};
+document.getElementById('prev').onclick=()=>{stopPlay();prev()};
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();stopPlay();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();stopPlay();prev()}else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(scenes.length-1)}});
+let tx=null;vp.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+vp.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){stopPlay();dx<0?next():prev()}tx=null});
+
+/* autoplay */
+let playT=null;const playBtn=document.getElementById('play');
+function setPlayUI(on){playBtn.innerHTML=svg(on?'pause':'play')+'<span>'+(on?'Pause':'Play')+'</span>';playBtn.setAttribute('aria-label',on?'Pause':'Play automatically')}
+function stopPlay(){if(playT){clearInterval(playT);playT=null;setPlayUI(false)}}
+playBtn.onclick=()=>{if(playT){stopPlay()}else{setPlayUI(true);playT=setInterval(()=>{if(cur===scenes.length-1){stopPlay()}else next()},9000)}};
+
+const start=scenes.findIndex(s=>'#'+s.dataset.id===location.hash);
+go(start>=0?start:0);
+addEventListener('hashchange',()=>{const i=scenes.findIndex(s=>'#'+s.dataset.id===location.hash);if(i>=0){stopPlay();go(i)}});
+})();
+</script>
+</body>
+</html>

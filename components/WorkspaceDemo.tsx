@@ -215,7 +215,7 @@ function Typed({ text, onDone }: { text: string; onDone: () => void }) {
   );
 }
 
-function AskYourData({ initial = "construction" }: { initial?: IndustrySlug }) {
+export function AskYourData({ initial = "construction" }: { initial?: IndustrySlug }) {
   const [slug, setSlug] = useState<IndustrySlug>(initial);
   const qs = useMemo(() => questionsFor(slug), [slug]);
   const [log, setLog] = useState<{ qa: QA; done: boolean; thinking: boolean }[]>([]);

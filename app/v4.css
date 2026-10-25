@@ -1,0 +1,222 @@
+/* v4: presentation, demos, engineering color, sweep fixes */
+
+/* ---------- Docs › Presentation ---------- */
+.pres {
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+}
+.pres-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #07141e;
+  box-shadow: var(--shadow-lg, 0 24px 64px rgba(11, 31, 46, 0.12));
+  border: 1px solid var(--border);
+}
+.pres-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.pres-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+.pres-hint {
+  flex: 1 1 260px;
+}
+.pres-outline h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin: 6px 0 10px;
+}
+.pres-outline ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 6px;
+}
+.pres-outline button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.pres-outline button span {
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: 700;
+}
+.pres-outline button:hover {
+  border-color: var(--border-strong, #d7dfe7);
+}
+.pres-outline button[aria-current="step"] {
+  border-color: var(--navy);
+  background: #eef4f8;
+}
+
+/* ---------- Demos: one product, one view ---------- */
+.dbp-tab {
+  justify-content: flex-start;
+  text-align: left;
+  padding: 12px 14px;
+}
+.dbp-tab > span {
+  display: grid;
+  gap: 1px;
+  line-height: 1.2;
+}
+.dbp-tab b {
+  font-size: 15.5px;
+}
+.dbp-tab small {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+.dbp-tab[aria-selected="true"] {
+  box-shadow: 0 6px 18px rgba(11, 31, 46, 0.08), inset 0 -3px 0 var(--pc, var(--navy));
+}
+.dbp-foundation {
+  --pc: var(--p-foundation);
+}
+.dbp-workspace {
+  --pc: var(--p-workspace);
+}
+.dbp-insight {
+  --pc: var(--p-insight);
+}
+.dbp-engineering {
+  --pc: var(--p-engineering);
+}
+.dbp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dbp-views {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.dbp-views button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.dbp-views button:hover {
+  color: var(--ink);
+}
+.dbp-views button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.dbp-ind {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.dbp-ind select {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.dbp-body {
+  animation: fadeUp 0.3s var(--ease) both;
+}
+.portal-strip {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding: 18px 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--gray-50, #f5f7fa);
+}
+.portal-strip > div {
+  display: grid;
+  gap: 2px;
+}
+.portal-strip span {
+  color: var(--text-2);
+}
+
+/* ---------- Platform: what we are not ---------- */
+.notwe {
+  display: grid;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+.notwe-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 8px 28px;
+  padding: 18px 22px;
+}
+.notwe-row + .notwe-row {
+  border-top: 1px solid var(--border);
+}
+.notwe-row b {
+  font-size: 16.5px;
+  line-height: 1.35;
+}
+.notwe-row p {
+  margin: 0;
+  color: var(--text-2);
+}
+@media (max-width: 700px) {
+  .notwe-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Docs on phones: the sidebar was sticky over the article ---------- */
+@media (max-width: 860px) {
+  .docs-side {
+    position: static;
+  }
+  .docs-side nav.docs-group {
+    display: none;
+  }
+}

@@ -98,5 +98,5 @@ export const startSteps = [
 export const valueCompare = [
   { option: "Hire one data analyst", cost: "~$85K–$110K + benefits + tools", reality: "One person, one skill set, months to ramp up. When they leave, the knowledge leaves." },
   { option: "Big consulting firm", cost: "$150K–$500K+", reality: "Long timelines. Built for enterprises." },
-  { option: "numarket Operate plan (Mid)", cost: "~$63K first year, ~$48K after", reality: "A full data team, a hosted platform, Ask Your Data, monthly action items — and you own everything.", highlight: true },
+  { option: "numarket Operate plan (Mid)", cost: "~$88K first year, ~$69K after", reality: "A full data team, a hosted platform, Ask Your Data, monthly action items — and you own everything.", highlight: true },
 ];

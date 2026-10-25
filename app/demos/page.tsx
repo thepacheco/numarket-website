@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Demos",
-  description: "Try each product on sample data: Foundation cleaning and a form, a Workspace dashboard, an Insight Review, and a custom Engineering app — for eight industries.",
+  description: "Try each product on sample data: clean data and forms in Foundation, a dashboard and status report in Workspace, an Insight Review, and custom Engineering apps.",
 };
 
 export default function Demos() {
@@ -15,25 +15,24 @@ export default function Demos() {
         eyebrow="Demos · Sample data"
         title={
           <>
-            See each product work — <em className="accent">on sample data.</em>
+            See it work, <em className="accent">one product at a time.</em>
           </>
         }
-        lead="Pick your industry, then a product. Every number comes from the same sample records."
+        lead="Pick a product, then a view. Switch the industry any time."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="portal-demo">
-            <div>
-              <p className="portal-demo-eyebrow">The real software</p>
-              <h2>Open the numarket Portal</h2>
-              <p>The app your team signs into: Explore and alerts, forms and uploads, dashboards, status reports as PDFs, and Ask Your Data. Pick a person (owner, project manager, superintendent, or CFO) and see exactly what they see. A fictional construction company; resets every night. No sign-up.</p>
-            </div>
-            <a href={site.portalDemoUrl} className="btn btn-primary" target="_blank" rel="noopener">
-              Open the live demo
-            </a>
-          </div>
           <h2 className="sr-only">Demos by product</h2>
           <DemosByProduct />
+          <div className="portal-strip">
+            <div>
+              <b>Want the whole thing?</b>
+              <span>Open the Portal your team would sign into. Pick a person and see exactly what they see.</span>
+            </div>
+            <a href={site.portalDemoUrl} className="btn btn-secondary" target="_blank" rel="noopener">
+              Open the Portal demo
+            </a>
+          </div>
         </div>
       </section>
       <CtaBand title={<>Want to see it on <em className="accent">your</em> numbers?</>} />

@@ -79,7 +79,7 @@ export default function Home() {
                 Everything a data team does. <em className="accent">Done for you.</em>
               </>
             }
-            lead="Four parts, one monthly fee. Tap one for a quick look."
+            lead="Three products on one monthly fee, plus custom apps when you need them. Tap one for a quick look."
           />
           <ProductBento />
         </div>

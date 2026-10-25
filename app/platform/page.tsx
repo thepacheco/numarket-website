@@ -24,6 +24,13 @@ const rows: { kind: SolidKind; href: string; name: string; does: string; needs: 
   { kind: "engineering", href: "/products/engineering", name: "Engineering", does: "Anything custom, built for you alone: getting from paper to digital, apps, automations, write-backs, client portals, work in your own cloud.", needs: "Optional. Usually uses Foundation's clean data.", price: `From ${money(engineering.from)} per project, or ${money(engineering.hourly)}/hr` },
 ];
 
+/* From the product hand-off doc, section 1. */
+const notWe: [string, string][] = [
+  ["Not a work-management tool like Monday, Asana, or Smartsheet", "Those are where people manage tasks and type in status. We don't manage tasks. We pull the numbers from the tools you already use and report on them."],
+  ["Not a blank BI tool like Power BI or Tableau", "Those leave the cleanup and the building to you. We do both. Want Power BI anyway? Point it at the clean data we keep."],
+  ["Not a consulting firm", "We don't do a one-time study and leave. The data stays clean and the reports keep running, every month."],
+];
+
 export default function Platform() {
   return (
     <>
@@ -35,6 +42,24 @@ export default function Platform() {
           </h1>
           <p className="lead">Foundation sits at the center. Workspace reads from it. Insight Review reads from both. Engineering is the optional custom layer on the outside.</p>
           <NestedSolids />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHead
+            eyebrow="Where we fit"
+            title="What we are, and what we're not."
+            lead="A data team you subscribe to. Our software reads from the systems you already use; people rarely type into it."
+          />
+          <div className="notwe">
+            {notWe.map(([not, diff]) => (
+              <div key={not} className="notwe-row">
+                <b>{not}</b>
+                <p>{diff}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
