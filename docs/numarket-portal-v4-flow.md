@@ -1,6 +1,6 @@
 # numarket Portal v4: one flow, from a number to a decision
 
-**Version 1 · October 25, 2026 · Owner: Brandon.** Internal. Written from
+**Version 2 · October 25, 2026 · Owner: Brandon.** Internal. Written from
 Brandon's walkthrough of the live demo (Summit Builders) on October 24. It
 builds on `numarket-product-and-pricing.md` (v3), which stays the source of
 truth for the products, prices, and who does what. Where this file and v3
@@ -380,9 +380,9 @@ name, with a live preview. The branding appears in:
 
 | Not building | Why |
 |---|---|
-| A dashboard builder for clients | Results vary, and trust depends on everyone seeing the same numbers. We build dashboards; clients request them (v3 §2, §4). |
-| A task board (Kanban), projects, or subtasks | We're not a work-management tool (v3 §1). Action items are decisions tied to numbers. |
-| Team chat | Questions go to the analyst, with the number attached. People already chat in their own tools. |
+| A dashboard builder for clients | Results vary, and trust depends on everyone seeing the same numbers. We build dashboards; clients request them (v3 §2, §4). They can change *how* a chart is shown (line, bars, table, heat map) but not what it measures. |
+| A task manager for the client's own work (projects, subtasks, everyone's to-dos) | We're not a work-management tool (v3 §1). Action items are decisions tied to numbers. The one board we keep is **Requests**: what numarket is doing for the client (§19). |
+| Team chat | Questions go to the analyst, with the number attached. People already chat in their own tools. Sending a chart to a teammate (§19) is a notice and an email, not a conversation. |
 
 ---
 
@@ -399,3 +399,36 @@ name, with a live preview. The branding appears in:
 under a minute; the PM sees it at the next update; the owner can go from a red
 number to the rows behind it to an assigned action item in four clicks; and
 the QBR pack prints like something we'd hand a board.
+
+---
+
+## 19. October 25 additions (Brandon), and what's built
+
+Brandon read v1 and added these. All of them are built in the Portal
+(`thepacheco/numarket-platform`, branch `claude/pensive-meitner-g01fkc`),
+tested, and waiting to be merged to `main`, which deploys
+app.numarket.us.
+
+| Brandon asked | Built as |
+|---|---|
+| One Kanban for everything numarket works on for the client: app ideas, help desk issues, improvements, change requests. Filterable, so they can see exactly where we are. | **Requests** (top of the menu). Columns Submitted → Planned → In progress → Ready for your review → Done. Filter by kind (changes, app ideas, issues, improvements), by product, or "only mine". Each card has its history; numarket's replies show on the card; the person who asked (or an admin) approves it or sends it back. Shows change hours used this month and the plan's reply time. "Request a change" on every dashboard and "Suggest an app" on Apps open the same form; dashboard changes include a sketch from our blocks. |
+| Owners decide what each role can see, maybe only one or two dashboards. | **Settings → Roles → Dashboards each role sees.** Owners always see everything; data scopes still apply. Enforced on the dashboards list, each page, CSV export, Home pins, report design, and sending. |
+| Pin parts of the QBR (with its history) to Home. | **"Add to my Home"** on the QBR's "What changed" table; Home shows the latest quarter at a glance. |
+| Pinning a drilled-down chart should ask: this view, or the whole thing? | The pin asks **"As you see it now (Route 9 Bridge · Last 3 months · Table)"** or **"The full view"**. Home redraws the pinned view with a label, rechecked against what the person may see. |
+| Let people look at a chart another way, like a heat map. Not reinventing Power BI. | **See it as**: line, bars, table, or heat map, on every chart, from the same blocks. |
+| "Up X vs the prior 6 months": let them compare other ways. | Periods (this month to 12 months, year to date, custom) plus **Compare with: the period before, or the same time last year.** The QBR compares with the quarter before or the same quarter last year. |
+| A P&L-style matrix you can click down into and roll back up. | The P&L is a **matrix**: sections rolled up to totals; click a section to open its accounts, "Open every account" / "Roll up"; each account opens its rows. |
+| Click on a number and see the rows behind it. | **Rows** on every number and chart opens Explore with the same period and job. In tables, a job opens the dashboard for that job; a customer, vendor, or cause opens its own rows. |
+| Track changes over time; click an alert and see what changed. | **What changed** on Home: your pinned numbers last month vs. the month before, then alerts, numarket's replies, data questions, entries, new reviews, and action items moved, over a day, 7 days, or 30 days. |
+| Quickly send a chart to someone by email, with the details attached. | **Send** on every chart: pick a teammate (only people who may see that view), add a note; it lands on their bell with a link to the same view, and by email with a picture of the chart and the rows as a CSV once email is set up. The demo never sends email. |
+
+Also built from v1: product colors and foldable groups in the menu
+(Engineering purple), no sales lines in the demo, action items as one
+list (owner, due, done-when, the number behind it, remind the owner),
+and the QBR pack as one finished document with risk cards.
+
+**Not built yet** (next round): the Why side panel as one place (today
+the drill is spread across Rows links, the matrix, and tables), Ask your
+analyst threads on any number, the Data health flow map, the phone-first
+Contributor layout and the manager's Today list, wall-screen mode,
+branding logo upload, alert history and snooze.
