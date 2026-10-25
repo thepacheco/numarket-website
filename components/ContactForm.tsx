@@ -48,7 +48,7 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
   }, []);
 
   const fromEstimator = prefill.from === "estimator";
-  const defaultPath = prefill.tier ? (prefill.tier === "Command" ? "Larger organization" : "Small or growing business") : "";
+  const defaultPath = prefill.tier ? (prefill.tier === "Large" ? "Larger organization" : "Small or growing business") : "";
   const defaultStart = prefill.timing === "asap" ? "ASAP" : prefill.timing === "soon" ? "1–3 months" : prefill.timing === "exploring" ? "Just exploring" : "";
 
   /* Returns true when the required fields are filled in. */
@@ -98,7 +98,7 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
           <Icon name="check" />
         </div>
         <h3>Got it.</h3>
-        <p>We&apos;ll reply within {site.responseTime} — and come prepared.</p>
+        <p>We&apos;ll be in touch, and we&apos;ll come prepared.</p>
       </div>
     );
   }
@@ -392,7 +392,7 @@ export default function ContactForm({ variant = "contact" }: { variant?: Variant
         )}
       </div>
       <p className="small muted">
-        We reply within {site.responseTime}. We use your details only to reply. See our <a href="/legal/privacy">Privacy Policy</a>.
+        We use your details only to reply. See our <a href="/legal/privacy">Privacy Policy</a>.
       </p>
     </form>
   );

@@ -18,7 +18,7 @@ const promises = [
 ];
 
 const details = [
-  { q: "Where is my data stored?", a: "In your own dedicated account on Snowflake, an enterprise cloud data platform. On Command, it can live in your own cloud instead." },
+  { q: "Where is my data stored?", a: "In your own dedicated account on Snowflake, an enterprise cloud data platform. On Large, it can live in your own cloud instead (quoted)." },
   { q: "How do you connect to our systems?", a: "Through the official connection your software already provides. You click “Allow,” and we get read-only access: it can copy data out, not change anything in your system." },
   { q: "Is anything stored on laptops?", a: "No. No client data is stored on laptops or personal devices." },
   { q: "What contracts do we sign?", a: "A Master Services Agreement with a data-ownership clause, plus a Data Processing Addendum." },

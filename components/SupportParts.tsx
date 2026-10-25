@@ -4,65 +4,6 @@ import { useRef, useState } from "react";
 import Icon from "./Icon";
 import { site } from "@/content/site";
 
-/* ---------- response targets by plan ---------- */
-const plans = {
-  Insight: { normal: ["1", "business day"], urgent: ["Same", "business day"], channels: "Email" },
-  Operate: { normal: ["4", "business hours"], urgent: ["4", "hours"], channels: "Email, phone, shared channel" },
-  Command: { normal: ["2", "hours"], urgent: ["1", "hour"], channels: "Dedicated analyst, every channel" },
-} as const;
-type Plan = keyof typeof plans;
-
-function Ring({ k }: { k: number }) {
-  const c = 2 * Math.PI * 18;
-  return (
-    <svg className="clock-ring" viewBox="0 0 44 44" aria-hidden="true">
-      <circle cx="22" cy="22" r="18" fill="none" stroke="var(--gray-100)" strokeWidth="5" />
-      <circle cx="22" cy="22" r="18" fill="none" stroke="var(--green)" strokeWidth="5" strokeLinecap="round" strokeDasharray={`${c * k} ${c}`} transform="rotate(-90 22 22)" style={{ transition: "stroke-dasharray .7s" }} />
-    </svg>
-  );
-}
-
-export function SlaPicker() {
-  const [plan, setPlan] = useState<Plan>("Operate");
-  const p = plans[plan];
-  const speed = plan === "Insight" ? 0.35 : plan === "Operate" ? 0.65 : 0.95;
-  return (
-    <div className="sla">
-      <div className="seg" role="group" aria-label="Plan" style={{ justifySelf: "start" }}>
-        {(Object.keys(plans) as Plan[]).map((k) => (
-          <button key={k} type="button" aria-pressed={plan === k} onClick={() => setPlan(k)}>
-            {{ Insight: "Small", Operate: "Mid", Command: "Large" }[k]}
-          </button>
-        ))}
-      </div>
-      <div className="sla-cards" aria-live="polite">
-        <div className="sla-card" key={`a${plan}`}>
-          <Ring k={speed} />
-          <span className="lbl2">Normal requests</span>
-          <span>
-            <span className="big-num">{p.normal[0]}</span> <b>{p.normal[1]}</b>
-          </span>
-          <span className="small muted">First response, during business hours</span>
-        </div>
-        <div className="sla-card" key={`b${plan}`}>
-          <Ring k={Math.min(1, speed + 0.1)} />
-          <span className="lbl2">Urgent (app down)</span>
-          <span>
-            <span className="big-num">{p.urgent[0]}</span> <b>{p.urgent[1]}</b>
-          </span>
-          <span className="small muted">First response when your Workspace is unavailable</span>
-        </div>
-        <div className="sla-card" key={`c${plan}`}>
-          <Ring k={speed} />
-          <span className="lbl2">How to reach us</span>
-          <b style={{ fontSize: 20, color: "var(--ink)" }}>{p.channels}</b>
-          <span className="small muted">Plus the docs, any time</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ---------- support request form ---------- */
 export function SupportForm() {
   const ref = useRef<HTMLFormElement>(null);

@@ -103,7 +103,7 @@ export default function IndustryStory({ slug, size = "large" }: { slug: Industry
       title: "The leak shows up.",
       body: (
         <p>
-          <b style={{ color: "var(--ink)" }}>{leak.title}:</b> an estimated {fmt(lost, "money")} a year for this sample company — worst at {leak.worst}. Illustrative, from sample data.
+          <b style={{ color: "var(--ink)" }}>{leak.title}:</b> an estimated {fmt(lost, "money")} a year for {co}, worst at {leak.worst}.
         </p>
       ),
     },

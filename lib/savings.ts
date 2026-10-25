@@ -23,7 +23,7 @@ export type Leak = {
 };
 
 export const firstYearCost = (size: Size) => (size === "small" ? 7500 + 2500 * 12 : 40000 + 10000 * 12);
-export const planFor = (size: Size) => (size === "small" ? "Insight" : "Command");
+export const planFor = (size: Size) => (size === "small" ? "Small" : "Large");
 
 /* `assume` overrides the editable assumption (if the industry has one). */
 export function leakFor(slug: IndustrySlug, size: Size, assume?: number): Leak {
@@ -154,7 +154,7 @@ export function estimateNotes(slug: IndustrySlug, size: Size, company: string, s
   const l = leakFor(slug, size, assume);
   const lost = leakTotal(l);
   const out = [
-    `A made-up ${size === "small" ? "small" : "larger"} company (${company}) with ${siteCount} ${siteNoun} and 12 months of generated sample records. Not a real client.`,
+    `${company}: ${siteCount} ${siteNoun} and 12 months of records.`,
     l.qty === null ? `${l.qtyLabel}, added up from those records: ${fmt(lost, "money")} a year.` : `${l.qtyLabel}: ${fmt(l.qty, l.qtyFmt)} × ${l.unitLabel.toLowerCase()}: ${fmt(l.unit, "money2")} = ${fmt(lost, "money")} a year.`,
   ];
   if (l.assumption) out.push(`${l.assumption.label}: $${(assume ?? l.assumption.value).toFixed(2)} — a typical figure for the industry, not a measured one.`);

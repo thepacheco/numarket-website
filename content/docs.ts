@@ -129,10 +129,10 @@ export const docs: Doc[] = [
     slug: "change-requests",
     group: "Changes & support",
     title: "Requesting a change",
-    summary: "New dashboard, field, or source? Ask your analyst. Monthly hours are included.",
+    summary: "New dashboard, field, or source? Add it to Requests in your Portal. Monthly hours are included.",
     body: [
-      { p: "Each plan includes change-request hours every month (4 on Insight, 10 on Operate, a dedicated analyst on Command)." },
-      { ol: ["Send your analyst what you want to see and why.", "We reply with an estimate in hours.", "If it fits in your monthly hours, we schedule it. If not, we tell you before any extra work starts."] },
+      { p: "Change hours are included every month: 2 on Small and 6 on Mid; on Large they're set in your contract. Extra hours are $175, in blocks of 5." },
+      { ol: ["Add a request in your Portal (or email your analyst): what you want to see and why.", "We reply with an estimate in hours.", "If it fits in your monthly hours, we schedule it. If not, we tell you before any extra work starts.", "You review it and sign it off on the Requests board."] },
     ],
   },
   {
@@ -152,7 +152,7 @@ export const docs: Doc[] = [
     summary: "After your term: full export or account transfer within 30 days, at no charge.",
     body: [
       { p: "Your data is yours. If you decide to leave after your term, you choose how to take it:" },
-      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, forms, and Engineering builds.", "Your business definitions, in plain English.", "Or a transfer of the whole database account, so you keep it running and pay the provider directly."] },
+      { ul: ["Your data in open files (Parquet and CSV), delivered to your own cloud storage.", "The structure: every table, field, and relationship.", "The cleaning rules: the code that cleans and matches your data.", "Your apps: the code for your dashboards, forms, and Engineering builds.", "Your business definitions, in plain English.", "Or, where Snowflake allows it (confirmed in your contract), a transfer of the whole database account, so you keep it running and pay the provider directly."] },
       { p: "One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
       { p: "We finish within 30 days of the end of your contract, at no charge. After handover, we delete our copies and confirm it in writing." },
     ],

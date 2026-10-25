@@ -6,7 +6,7 @@ import Icon from "./Icon";
 /* Exploded stack: click a layer to lift it and read what it does. */
 const layers = [
   { name: "Ask Your Data", icon: "chat", plain: "Plain-English questions, answered from your numbers.", tech: "Snowflake Cortex + business definitions written for you." },
-  { name: "Workspace", icon: "window", plain: "The app your team uses.", tech: "Streamlit apps inside Snowflake, with single sign-on through Microsoft, Google, or Okta." },
+  { name: "Workspace", icon: "window", plain: "The app your team uses.", tech: "The numarket Portal, a web app for phone or computer. It reads only your published, checked data, never your systems directly." },
   { name: "Business definitions", icon: "book", plain: "What every number means, written down with you. Part of Foundation.", tech: "Documented models and a data catalog on top of your database. It's what keeps dashboards and Ask Your Data using the right numbers." },
   { name: "Clean layer", icon: "clean", plain: "Rules that fix and check every update.", tech: "dbt models and tests, run on a schedule. Bad rows are flagged, not published." },
   { name: "Your private database", icon: "lock", plain: "Encrypted, and separate from every other client.", tech: "Its own separate Snowflake account inside numarket's Snowflake organization. You own the data in it." },

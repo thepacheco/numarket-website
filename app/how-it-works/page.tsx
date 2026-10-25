@@ -14,7 +14,7 @@ const detail: Record<string, { we: string; you: string; get: string }> = {
   collect: { we: "Find every source and connect it with read-only access.", you: "List your tools and approve a read-only connection to each.", get: "All your data flowing into one place on a schedule." },
   clean: { we: "Fix duplicates, errors, and mismatched names. Add checks on every update.", you: "Answer a few questions about what your numbers mean.", get: "Numbers that agree, and written business definitions." },
   secure: { we: "Build your private, encrypted database and set who sees what.", you: "Tell us who should see what.", get: "One secure home for your data, with every login recorded." },
-  see: { we: "Build your dashboards and status reports from our building blocks, and set up Explore, alerts, forms, and Ask Your Data.", you: "Pick the spreadsheets to retire. Join a 30-minute training.", get: "An app your team signs into with the Microsoft or Google account they already use." },
+  see: { we: "Build your dashboards and status reports from our building blocks, and set up Explore, alerts, forms, and Ask Your Data.", you: "Pick the spreadsheets to retire. Join a 30-minute training.", get: "The numarket Portal on phone or computer, with a named account for each person." },
   act: { we: "Review your numbers and write action items with owners and due dates.", you: "Show up and act on the list.", get: "A short to-do list every review, with follow-up on the last one." },
   own: { we: "Keep everything documented and ready to hand over.", you: "Nothing.", get: "Your data, cleaning rules, apps, and business definitions if you ever leave." },
 };

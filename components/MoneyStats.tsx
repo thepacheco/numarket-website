@@ -10,7 +10,7 @@ import { fmt } from "@/lib/sample-data";
 export default function MoneyStats() {
   return (
     <>
-    <p className="est-label money-label">Illustrative estimates for a typical small company in each industry, from sample data — not client results.</p>
+    <p className="est-label money-label">Estimates for a typical small company in each industry.</p>
     <div className="money-grid">
       {industries.map((i) => {
         const leak = leakFor(i.slug, "small");

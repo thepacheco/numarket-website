@@ -27,7 +27,7 @@ const modes = {
       ["Who pays the platform bill", "You pay your cloud provider directly"],
       ["Who manages access", "Your IT team; numarket works as named users"],
       ["What IT has to do", "A security review first, then we build inside"],
-      ["Sizes", "Large (the Command plan)"],
+      ["Sizes", "Large"],
     ],
   },
 } as const;

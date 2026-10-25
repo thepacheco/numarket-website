@@ -354,8 +354,7 @@ export default function GettingStartedTools() {
               <div className="est-top">
                 <span className="eyebrow">Recommended</span>
                 <h3>
-                  {est.tier.name} plan · {sizes.find((s) => s.id === est.tier.size)!.name}
-                  {est.tier.popular && <span className="pill" style={{ marginLeft: 10 }}>Most popular</span>}
+                  {sizes.find((s) => s.id === est.tier.size)!.name} · all three products
                 </h3>
                 <p>
                   {est.tier.bestFor}. Includes Foundation, Workspace, and Insight Review. <Link href="/pricing">Fewer products? Build your price →</Link>
@@ -408,7 +407,7 @@ export default function GettingStartedTools() {
                 </ul>
               </div>
               <p className="small muted">
-                {loc === "yours" && "Building in your own cloud is a Command engagement. "}
+                {loc === "yours" && "Building in your own cloud is quoted on Large. "}
                 {spreadsheets && "Includes +20% setup and 1–2 extra weeks because the data starts in spreadsheets. "}
                 {where === "somePaper" && "Covers the data that's already digital. Getting the paper part into a system is quoted separately as an Engineering project. "}
                 Estimate only. Your Readiness Check gives you a fixed quote.

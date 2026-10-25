@@ -68,9 +68,9 @@ export default function Enterprise() {
       <section className="section soft">
         <div className="container split">
           <div className="card tier popular">
-            <span className="badge">Command</span>
-            <h3>From $40,000 setup · $12,000/mo</h3>
-            <CheckList items={["Unlimited sources and users", "Fully custom dashboards", "Weekly review + daily exec brief", "A dedicated analyst", "Your platform or ours"]} />
+            <span className="badge">Large · all three products</span>
+            <h3>From $40,000 setup · from $12,000/mo</h3>
+            <CheckList items={["9 or more data sources, 50 or more app users", "Dashboards and reports configured for each team", "Weekly reviews plus a daily executive brief", "A named analyst who knows your data", "Our secure platform, or your own cloud (quoted)"]} />
           </div>
           <div>
             <SectionHead eyebrow="FAQ" title="IT and leadership ask." />

@@ -66,7 +66,7 @@ export default function Partners() {
       </section>
       <section className="section" id="apply">
         <div className="container split">
-          <SectionHead eyebrow="Partner inquiry" title="Let's talk." lead="We reply within 1 business day." />
+          <SectionHead eyebrow="Partner inquiry" title="Let's talk." lead="Tell us who you work with and how you'd like to refer." />
           <ContactForm variant="partner" />
         </div>
       </section>

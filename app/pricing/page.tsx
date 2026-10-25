@@ -7,7 +7,7 @@ import { TermsGlance } from "@/components/PricingOps";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Each product has its own published price by size. Take all three as a plan and save about 10%. Engineering is quoted per project.",
+  description: "Published prices by size. Take all three products and a discount applies, shown line by line. Engineering is quoted per project.",
 };
 
 export default function Pricing() {
@@ -17,10 +17,10 @@ export default function Pricing() {
         eyebrow="Pricing"
         title={
           <>
-            Priced by product. <em className="accent">Bundled by plan.</em>
+            One price for your size. <em className="accent">Every line shown.</em>
           </>
         }
-        lead="Pick your size and the products you want. Take all three and it becomes a plan that saves about 10%."
+        lead="Pick your size and the products you want. You see each product's price, the discount for taking all three, and the total."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
@@ -31,14 +31,14 @@ export default function Pricing() {
 
       <section className="section soft" id="plans">
         <div className="container">
-          <SectionHead eyebrow="The plans" title="All three products, bundled." lead="Click a plan to see everything it includes." />
+          <SectionHead eyebrow="All three products" title="By size." lead="Foundation, Workspace, and Insight Review together, with the discount applied. Click a size to see everything it includes." />
           <PlanCards />
         </div>
       </section>
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Or buy separately" title="Every product has its own price." lead="Foundation is required. Everything else sits on it." />
+          <SectionHead eyebrow="Product by product" title="Taking only some products?" lead="Foundation is required, because everything else is built on your data. These are the prices before the all-three discount." />
           <ProductPriceTable />
         </div>
       </section>
@@ -62,7 +62,7 @@ export default function Pricing() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="The rules" title="No fine print." />
+          <SectionHead eyebrow="Terms" title="Contract terms." lead="The same terms go into your agreement." />
           <TermsGlance />
         </div>
       </section>

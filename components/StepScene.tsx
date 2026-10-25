@@ -19,7 +19,7 @@ const tiles = [
   { tx: 14, ty: 68, tr: -8, gx: 63, gy: 40 },
 ];
 
-const captions = ["Your data today: everywhere", "Cleaned. Matched. Trusted.", "Stored privately. Yours.", "Screens for your whole team", "Know what to do next", "Leave anytime. It's all yours."];
+const captions = ["Your data today: everywhere", "Cleaned. Matched. Trusted.", "Stored privately. Yours.", "Screens for your whole team", "Know what to do next", "If you leave, your data goes with you."];
 const short = ["Pull it together", "Fix the mess", "Lock it down", "Put it to work", "Tell you what to do", "It's yours"];
 const DUR = 4500;
 

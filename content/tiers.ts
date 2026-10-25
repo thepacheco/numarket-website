@@ -1,8 +1,9 @@
 /* Pricing (v3, October 2026; the model is in docs/numarket-product-and-pricing.md §5).
-   Every product has its own price by size. The three plans are bundles of all
-   three products and save about 10%. Base fees cover the people who run it;
-   normal usage is included; anything that grows with volume has a published
-   price (addOns below). Engineering is always quoted separately. */
+   Prices are set by size (Small, Mid, Large). Each product is priced on its
+   own; taking all three gives a discount, shown as its own line so the math
+   always adds up. Plans are named by size only. Base fees cover the people
+   who run it; normal usage is included; anything that grows with volume has
+   a published price (addOns below). Engineering is always quoted separately. */
 
 export type TierId = "insight" | "operate" | "command";
 export type PriceSize = "small" | "mid" | "large";
@@ -64,7 +65,7 @@ export const addOns: { name: string; price: string; why: string }[] = [
   { name: "Extra Ask Your Data questions", price: "$40 per 100", why: "Each answer runs AI in your database." },
   { name: "Extra change hours", price: "$175/hr, in blocks of 5", why: "New dashboards, fields, or reports beyond your included hours." },
   { name: "Read-only login for Power BI or Excel", price: "$150/mo, includes 25 database credits", why: "Your own queries, on their own capped warehouse." },
-  { name: "Enterprise single sign-on (Okta, Entra ID)", price: "$250/mo per connection", why: "Microsoft and Google sign-in are always included." },
+  { name: "Enterprise single sign-on (Okta, Entra ID)", price: "$250/mo per connection", why: "For companies that require sign-in through their own identity provider." },
   { name: "Healthcare (HIPAA)", price: "+$500/mo Small, +$800/mo Mid", why: "A higher-security database edition that costs about twice as much to run." },
   { name: "Platform usage above your allowance", price: "Cost + 15%", why: "Shown on your Usage page. We warn you at 70% and 85%." },
 ];
@@ -84,7 +85,7 @@ export type Tier = {
 export const tiers: Tier[] = [
   {
     id: "insight",
-    name: "Insight",
+    name: "Small",
     size: "small",
     bestFor: "Small businesses getting organized",
     setupFrom: 9500,
@@ -109,12 +110,12 @@ export const tiers: Tier[] = [
         "Up to 15 app users, no per-user fees",
         "2 hours of changes a month",
       ],
-      insight: ["A review every month, with a meeting", "What changed, what's at risk, 3–5 action items with owners and due dates", "Action items tracked to done", "Support replies within 1 business day"],
+      insight: ["A review every month, with a meeting", "What changed, what's at risk, 3–5 action items with owners and due dates", "Action items tracked to done"],
     },
   },
   {
     id: "operate",
-    name: "Operate",
+    name: "Mid",
     size: "mid",
     bestFor: "Growing and mid-size companies",
     setupFrom: 19000,
@@ -140,12 +141,12 @@ export const tiers: Tier[] = [
         "Up to 50 app users, no per-user fees",
         "6 hours of changes a month",
       ],
-      insight: ["A review every two weeks, with a meeting", "What changed, what's at risk, 3–5 action items with owners and due dates", "Action items tracked to done, and a quarterly (QBR) pack", "Support replies within 4 business hours"],
+      insight: ["A review every two weeks, with a meeting", "What changed, what's at risk, 3–5 action items with owners and due dates", "Action items tracked to done, and a quarterly (QBR) pack"],
     },
   },
   {
     id: "command",
-    name: "Command",
+    name: "Large",
     size: "large",
     bestFor: "Larger organizations",
     setupFrom: 40000,
@@ -165,14 +166,20 @@ export const tiers: Tier[] = [
         "Dashboards and reports configured for each team",
         "Ask Your Data, sized to your use",
         "50+ app users",
-        "A dedicated analyst for changes",
+        "Change hours set in your contract",
       ],
-      insight: ["Weekly reviews plus a daily executive brief", "What changed, what's at risk, and action items with owners and due dates", "QBR and board packs", "Support replies within 2 hours"],
+      insight: ["Weekly reviews plus a daily executive brief", "What changed, what's at risk, and action items with owners and due dates", "QBR and board packs"],
     },
   },
 ];
 
 export const tierBySize = (s: PriceSize) => tiers.find((t) => t.size === s)!;
+
+/** What all three products cost bought one by one, before the all-three discount. */
+export function separately(size: PriceSize) {
+  const ps = Object.values(productPrices).map((p) => p.bySize[size]);
+  return { setup: ps.reduce((t, p) => t + p.setup, 0), monthly: ps.reduce((t, p) => t + p.monthly, 0) };
+}
 
 /* Totals for any combination. Foundation is always on. */
 export function quote(size: PriceSize, withWorkspace: boolean, withInsight: boolean, healthcare: boolean) {

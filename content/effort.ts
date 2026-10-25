@@ -89,7 +89,7 @@ export const readinessLevels = [
 
 export const startSteps = [
   { title: "Free Readiness Check", time: "30 min", body: "We ask where your data lives and what decisions you're trying to make. You get a readiness score and 3 findings." },
-  { title: "Proposal", time: "Within 2 business days", body: "A fixed setup price, a fixed monthly price, a timeline, and exactly what you'll get." },
+  { title: "Proposal", time: "After the Readiness Check", body: "A fixed setup price, a fixed monthly price, a timeline, and exactly what you'll get." },
   { title: "Kickoff", time: "1 hour", body: "We get read-only access to your tools. You tell us who needs to see what." },
   { title: "Build", time: "2–10 weeks", body: "We collect, clean, and secure your data, then build your Workspace. You see progress every week." },
   { title: "Launch + first Insight Review", time: "1 week", body: "Your team gets access and a 30-minute training. You get your first list of action items." },
@@ -98,5 +98,5 @@ export const startSteps = [
 export const valueCompare = [
   { option: "Hire one data analyst", cost: "~$85K–$110K + benefits + tools", reality: "One person, one skill set, months to ramp up. When they leave, the knowledge leaves." },
   { option: "Big consulting firm", cost: "$150K–$500K+", reality: "Long timelines. Built for enterprises." },
-  { option: "numarket Operate plan (Mid)", cost: "~$88K first year, ~$69K after", reality: "A full data team, a hosted platform, Ask Your Data, monthly action items — and you own everything.", highlight: true },
+  { option: "numarket, Mid size (all three products)", cost: "~$88K first year, ~$69K after", reality: "A full data team, a hosted platform, Ask Your Data, monthly action items — and you own everything.", highlight: true },
 ];

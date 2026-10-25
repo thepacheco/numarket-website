@@ -7,7 +7,7 @@ import { BubblesArt } from "@/components/HeroArts";
 
 export const metadata: Metadata = {
   title: "Contact — Get a Free Readiness Check",
-  description: "Book a free 30-minute Readiness Check, or send us a note. We reply within 1 business day.",
+  description: "Book a free 30-minute Readiness Check, or send us a note.",
 };
 
 export default function Contact() {
@@ -21,7 +21,7 @@ export default function Contact() {
             Let&apos;s see how ready <em className="accent">your data</em> is.
           </>
         }
-        lead={`30 minutes. Free. We reply within ${site.responseTime}.`}
+        lead="30 minutes. Free. Pick a time below, or send a note."
       />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container split">

@@ -41,9 +41,10 @@ function Demo({ kind }: { kind: string }) {
       <div style={{ display: "grid", gap: 28 }}>
         <FoundationDemo slug="construction" />
         <div>
-          <h3 className="demo-sub">Moving off an old system? That&apos;s Foundation too.</h3>
+          <h3 className="demo-sub">Only if you&apos;re replacing a system: we move it, too.</h3>
           <p className="muted" style={{ marginBottom: 14 }}>
-            Your data is mapped, moved table by table, and counted twice before the old system is switched off.
+            Switching accounting software or retiring an old database? We map the old data, move it table by table, and count it twice before you switch
+            the old system off. It&apos;s priced into your setup quote. If you aren&apos;t replacing anything, skip this.
           </p>
           <MigrationDemo />
         </div>
@@ -201,7 +202,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {p.kind === "workspace" && (
         <section className="section soft">
           <div className="container">
-            <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view they need. Your team signs in with the Microsoft or Google account they already use." />
+            <SectionHead eyebrow="Who uses it" title="Everyone sees the same numbers." lead="Each person gets the view their role needs, from the owner to the crew in the field." />
             <Roles />
           </div>
         </section>

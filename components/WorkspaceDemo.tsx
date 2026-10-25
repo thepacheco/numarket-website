@@ -239,7 +239,7 @@ export function AskYourData({ initial = "construction" }: { initial?: IndustrySl
     <div className="ask">
       <div className="ask-top">
         <label htmlFor="ask-ind" className="small" style={{ fontWeight: 600 }}>
-          Sample company:
+          Company:
         </label>
         <select id="ask-ind" className="filter-select" value={slug} onChange={(e) => setSlug(e.target.value as IndustrySlug)}>
           {industries.map((i) => (

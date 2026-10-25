@@ -7,7 +7,7 @@ export const faq: Record<string, QA[]> = {
     { q: "How often does my data update?", a: "Data from your other systems updates on a schedule: once a day overnight on Small, up to every hour during business hours on Mid, and a custom schedule on Large. What your team types into forms shows up right away." },
     { q: "What happens if I leave?", a: "Within 30 days you get your data in open files (Parquet and CSV) in your own cloud storage, the structure of every table, the cleaning rules, the code for your apps, and your business definitions. Then we delete our copies and confirm it in writing. One thing to know: Ask Your Data runs on Snowflake. If you move your database somewhere else, that feature needs to be rebuilt there. Everything else comes with you." },
     { q: "Why does healthcare cost more?", a: "Health data (HIPAA) has to run on a higher-security edition of the database, which costs about twice as much to run. That's +$500/mo on Small and +$800/mo on Mid. Large is quoted." },
-    { q: "How long is the contract?", a: "12 months. Command can be 12 to 36 months. After the term, continue month to month or leave with your data." },
+    { q: "How long is the contract?", a: "12 months. Large can be 12 to 36 months. After the term, continue month to month, or leave and take your data with you." },
     { q: "What is platform usage?", a: "Updating your private database, storing your history, and paid connectors to some systems cost money each month. Foundation includes that up to an allowance ($400/mo on Small, $800/mo on Mid), which most clients never reach. If you go over, the extra is billed at cost + 15% and shown on its own invoice line. We alert you at 85%. On Large it's passed through at cost + 15%." },
     { q: "Are there per-user fees?", a: "No. Everyone within your size's user limit is included." },
     { q: "How does billing work?", a: "Setup is billed 50% at signing and 50% at launch. Monthly fees are billed in advance." },
@@ -26,7 +26,7 @@ export const faq: Record<string, QA[]> = {
     { q: "Can we start small?", a: "Yes. Start with one team or one question. Add more when you're ready." },
   ],
   smallBusiness: [
-    { q: "Is this overkill for a company my size?", a: "No. The Insight plan is built for small companies with up to 3 data sources. You get a data team for less than the cost of one hire." },
+    { q: "Is this overkill for a company my size?", a: "No. The Small size is built for small companies with up to 3 data sources. You get a data team for less than the cost of one hire." },
     { q: "Do I need IT?", a: "No. We host and run everything. You approve a read-only connection to each tool and spend about 3–5 hours in total." },
     { q: "What if my data is a mess?", a: "That's exactly what we fix." },
     { q: "Will my team actually use it?", a: "The Workspace replaces the spreadsheets they email around today, so it saves them time from week one. Training takes 30 minutes." },

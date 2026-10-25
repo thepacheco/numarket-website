@@ -54,14 +54,13 @@ export default function SmallBusiness() {
 
       <section className="section">
         <div className="container">
-          <SectionHead eyebrow="Plans" title="Two plans built for your size." />
+          <SectionHead eyebrow="Pricing" title="Two sizes for small and growing companies." lead="All three products, with the discount applied. See every line on the Pricing page." />
           <div className="grid g2 stagger">
             {tiers
               .filter((t) => t.id !== "command")
               .map((t) => (
                 <div key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>
-                  {t.popular && <span className="badge">Most popular</span>}
-                  <h3>{t.name}</h3>
+                  <h3>{t.name} · all three products</h3>
                   <div className="price">
                     <span className="big tnum">
                       {money(t.monthlyFrom)}

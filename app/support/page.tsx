@@ -2,23 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import { BubblesArt } from "@/components/HeroArts";
-import { SlaPicker, SupportForm } from "@/components/SupportParts";
+import { SupportForm } from "@/components/SupportParts";
 import { CtaBand, Faq, PageHero, SectionHead } from "@/components/ui";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "Support", description: "Real people who know your data. How to reach us, how fast we respond, and how requests get resolved." };
+export const metadata: Metadata = { title: "Support", description: "Real people who know your data. How to reach us and how requests get resolved." };
 
 const channels = [
-  { icon: "mail", title: "Email", body: site.email, href: `mailto:${site.email}`, avail: "Every plan", c: "var(--p-foundation)" },
-  { icon: "phone", title: "Phone", body: site.phone, href: site.phoneHref, avail: "Every plan · urgent issues", c: "var(--p-workspace)" },
-  { icon: "chat", title: "Shared channel", body: "Slack or Teams, with your analyst in it", href: "#request", avail: "Operate & Command", c: "var(--p-insight)" },
-  { icon: "users", title: "Dedicated analyst", body: "One person who knows your data end to end", href: "#request", avail: "Command", c: "var(--p-engineering)" },
+  { icon: "mail", title: "Email", body: site.email, href: `mailto:${site.email}`, avail: "Every size", c: "var(--p-foundation)" },
+  { icon: "phone", title: "Phone", body: site.phone, href: site.phoneHref, avail: "Every size · urgent issues", c: "var(--p-workspace)" },
+  { icon: "chat", title: "Shared channel", body: "Slack or Teams, with your analyst in it", href: "#request", avail: "Mid and Large", c: "var(--p-insight)" },
 ];
 
 const flow = [
-  { icon: "send", t: "Tell us", d: "Email, call, chat, or the form below.", time: "Minutes", c: "var(--chaos)" },
-  { icon: "target", t: "We triage", d: "Urgent issues jump the line. You get a person, not a bot.", time: "Within your plan's target", c: "var(--teal-700)" },
-  { icon: "gear", t: "We fix it", d: "We trace it to the source and fix the cause, not the symptom.", time: "You get an ETA", c: "var(--p-engineering)" },
+  { icon: "send", t: "Tell us", d: "Email, call, or the form below.", time: "Any time", c: "var(--chaos)" },
+  { icon: "target", t: "We look at it", d: "Urgent issues go first. You hear from a person, not a bot.", time: "Business hours", c: "var(--teal-700)" },
+  { icon: "gear", t: "We fix it", d: "We trace it to the source and fix the cause, not the symptom.", time: "We tell you when", c: "var(--p-engineering)" },
   { icon: "check", t: "You confirm", d: "We show you the fix and add a check so it doesn't come back.", time: "Closed together", c: "var(--good)" },
 ];
 
@@ -32,16 +31,15 @@ const selfServe = [
 ];
 
 const levels = [
-  { lv: "1", c: "var(--teal-700)", t: "Your analyst or support", d: "Most requests are resolved here." },
-  { lv: "2", c: "var(--navy)", t: "Support lead", d: "If a request misses its target or needs more hands." },
-  { lv: "3", c: "var(--ink)", t: "Founder", d: `Still not right? Email ${site.email} with “Escalate” in the subject.` },
+  { lv: "1", c: "var(--teal-700)", t: "Your analyst", d: "Most requests are resolved here." },
+  { lv: "2", c: "var(--ink)", t: "Founder", d: `Still not right? Email ${site.email} with “Escalate” in the subject.` },
 ];
 
 const supportFaq = [
   { q: "What counts as urgent?", a: "Your Workspace is down, or a number your team relies on today is clearly wrong. Call us for urgent issues." },
   { q: "Are change requests the same as support?", a: "No. Fixing something that's broken is always included. New dashboards, fields, or sources use your plan's monthly change hours — we tell you the estimate first." },
-  { q: "What are business hours?", a: "Weekdays, Eastern Time. Command clients agree on extended coverage in their contract." },
-  { q: "Can we talk to the same person every time?", a: "Yes. On Operate and Command, your analyst knows your data and your team. On Insight, the same small team handles your account." },
+  { q: "What are business hours?", a: "Weekdays, Eastern Time. On Large, extended coverage can be agreed in the contract." },
+  { q: "Can we talk to the same person every time?", a: "Yes. You have a named analyst who knows your data and your team." },
 ];
 
 export default function Support() {
@@ -55,7 +53,7 @@ export default function Support() {
             Real people who <em className="accent">know your data.</em>
           </>
         }
-        lead="Not a ticket queue. The team that built your Workspace answers."
+        lead="Not a ticket queue. The people who set up your Workspace answer."
       >
         <div className="btn-row">
           <a href="#request" className="btn btn-primary">
@@ -103,17 +101,10 @@ export default function Support() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <SectionHead eyebrow="Response targets" title="How fast we respond." lead="Pick your plan." />
-          <SlaPicker />
-        </div>
-      </section>
-
       <section className="section soft">
         <div className="container split">
           <div>
-            <SectionHead eyebrow="Self-serve" title="Answers in two minutes." />
+            <SectionHead eyebrow="Guides" title="Look it up yourself." />
             <div className="selfserve stagger" style={{ gridTemplateColumns: "1fr" }}>
               {selfServe.map(([href, t]) => (
                 <Link key={href} href={href}>

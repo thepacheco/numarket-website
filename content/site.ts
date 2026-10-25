@@ -9,7 +9,6 @@ export const site = {
   city: "Atlanta, Georgia",
   url: "https://numarket.us",
   year: 2026,
-  responseTime: "1 business day",
   /* Google Apps Script endpoint that writes form submissions to the Google Sheet */
   formEndpoint:
     "https://script.google.com/macros/s/AKfycbxG2dRg1FTBqH5Kc74uCW_ayrDqxm5NyZGHDtCRVeVmYLdIxqJQ7_hIZXiomnhlU3zr/exec",

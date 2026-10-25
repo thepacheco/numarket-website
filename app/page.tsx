@@ -111,7 +111,6 @@ export default function Home() {
                 Pick your business. <em className="accent">Get the dashboard.</em>
               </>
             }
-            lead="Sample numbers that add up. Filter anything."
           />
           <IndustryExplorer syncUrl />
         </div>
@@ -191,19 +190,18 @@ export default function Home() {
       {/* PRICING TEASER */}
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="Pricing" title="Clear pricing, published up front." lead="Each product has its own price. Take all three as a plan and save about 10%." />
+          <SectionHead eyebrow="Pricing" title="Clear pricing, published up front." lead="Priced by size. Take all three products and a discount applies, shown line by line." />
           <div className="grid g3 stagger">
             {tiers.map((t) => (
               <Link href="/pricing" key={t.id} className={`card tier ${t.popular ? "popular" : ""}`}>
-                {t.popular && <span className="badge">Most popular</span>}
                 <div>
                   <h3>{t.name}</h3>
                   <p className="small">
-                    {sizes.find((s) => s.id === t.size)!.name} · {sizes.find((s) => s.id === t.size)!.sources.toLowerCase()}
+                    {sizes.find((s) => s.id === t.size)!.sources} · {sizes.find((s) => s.id === t.size)!.users.toLowerCase()}
                   </p>
                 </div>
                 <div className="price">
-                  <span className="per">From</span>
+                  {t.from && <span className="per">From</span>}
                   <span className="big tnum">
                     {money(t.monthlyFrom)}
                     <span className="per">/mo</span>
@@ -215,8 +213,8 @@ export default function Home() {
             ))}
           </div>
           <p style={{ marginTop: 18 }}>
-            <Link href="/pricing#how-it-runs" className="more">
-              See exactly what the monthly fee pays for →
+            <Link href="/pricing" className="more">
+              See every line of the price →
             </Link>
           </p>
         </div>

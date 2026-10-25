@@ -11,13 +11,12 @@ export const metadata: Metadata = { title: "About Us", description: "numarket ex
 const values: { kind: SolidKind; t: string; b: string }[] = [
   { kind: "foundation", t: "Trust the data.", b: "If the numbers aren't right, nothing built on them is — so we fix the foundation first." },
   { kind: "workspace", t: "Show before we sell.", b: "We demo working tools on sample data, not slides." },
-  { kind: "insight", t: "Plain language.", b: "If a restaurant owner wouldn't understand it, we rewrite it." },
+  { kind: "insight", t: "Plain language.", b: "Every number comes with a definition in everyday words, and every review ends with what to do next." },
   { kind: "engineering", t: "You own it.", b: "Your data, your cleaning rules, your apps — and your decision to stay or go." },
 ];
 
 const ahead = [
   ["More industries", "Deeper starting kits for the businesses we see most: construction, logistics, healthcare, manufacturing, and food."],
-  ["The numarket Portal", "One branded app your team signs into with Microsoft or Google, with forms designed for phones in the field."],
   ["A partner network", "Accountants, IT providers, and advisors who bring us in when a client's numbers need fixing."],
 ];
 
@@ -61,7 +60,7 @@ export default function About() {
 
       <section className="section soft">
         <div className="container">
-          <SectionHead eyebrow="How we work" title="Four rules we don't bend." />
+          <SectionHead eyebrow="How we work" title="Four principles." />
           <div className="about-values stagger">
             {values.map((v) => (
               <div className="card about-value" key={v.t}>

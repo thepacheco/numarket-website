@@ -33,7 +33,7 @@ const groups = [
     items: [
       "Each client gets its own dedicated database account and its own tables.",
       "Your data is used only to deliver your service, and it stays separate from every other client's.",
-      "On Command, your data can stay inside your own cloud.",
+      "On Large, your data can stay inside your own cloud (quoted).",
     ],
   },
   {

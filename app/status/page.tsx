@@ -9,7 +9,7 @@ const components = ["Client Workspaces", "Data refresh (automatic updates)", "As
 export default function Status() {
   return (
     <>
-      <PageHero eyebrow="For clients" title="Is my Workspace working?" lead="This page will show whether client Workspaces, data updates, and Ask Your Data are running. It turns on with automated monitoring when the first client launches — until then, we show nothing rather than made-up numbers." />
+      <PageHero eyebrow="For clients" title="Is my Workspace working?" lead="This page will show whether client Workspaces, data updates, and Ask Your Data are running. It turns on with automated monitoring when the first client launches — until then, it shows nothing rather than placeholder numbers." />
       <section className="section-tight" style={{ paddingTop: 0 }}>
         <div className="container">
           <div className="table-wrap">

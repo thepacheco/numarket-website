@@ -51,7 +51,9 @@ this way, so what a client sees matches what they pay for.
 ### Foundation: your data
 **Behind the scenes:** read-only connections to each source (the client clicks
 "Allow"), cleaning and matching rules, checks on every update, the client's own
-private Snowflake database, backups, and the exit package.
+private Snowflake database, backups, and the exit package. If the client is
+replacing a system, moving its history is Foundation work, priced into the
+setup quote (decided October 2026; it used to be listed under Engineering).
 
 **What the client gets in the Portal:**
 - **Explore**: look through any of their data. Start from a view (open RFIs,
@@ -145,7 +147,7 @@ Foundation + Workspace.
 ### Engineering: built for you
 Custom apps and automations for one client: paper-to-digital intake (scan a
 form, it becomes data), estimate builders, approval workflows, write-backs into
-their systems, migrations off old software, and later things like meeting
+their systems, and later things like meeting
 notes. Quoted as a project, then optional support.
 
 ---
@@ -294,6 +296,27 @@ targeting 60%+ margin.
 ---
 
 ## 6. What changes where
+
+**Website, October 25 (Brandon's review):**
+- **Plans are named by size only:** Small, Mid, Large, "all three products".
+  The names Insight / Operate / Command are retired (the "Insight" plan was
+  confused with the Insight Review product).
+- **The price math is shown line by line:** each product, then "All-three
+  discount", then the total. Small: $7,000 + $3,000 + $0 setup − $500 =
+  $9,500; $1,250 + $850 + $1,250 monthly − $350 = $3,000. Mid: $20,000 − $1,000
+  = $19,000; $6,400 − $650 = $5,750. Large: from $45,000 − $5,000 = $40,000;
+  from $13,000 − $1,000 = $12,000.
+- **No response-time promises anywhere** (no "reply within 1 business day",
+  no per-plan response targets, no "answers in two minutes"). Support hours
+  are business hours, Eastern Time. Any service level goes in the contract
+  only, once it can be staffed.
+- **Term is 12 months, then month to month** (Large 12 to 36). "Leave any
+  time" is gone; the line is "If you leave, your data goes with you."
+- **No "Most popular", no "unlimited",** no Microsoft/Google sign-in lines in
+  marketing copy, no "made-up company / not a real client" in estimates.
+- **Who does what is explicit:** Workspace = we build and change the screens
+  (change hours); Insight Review = a person reads the numbers and follows up;
+  Engineering = software that does work beyond reporting.
 
 **Website (for the website chat):**
 - **The product lines changed (v2, October 24).** Use these, word for word where possible:

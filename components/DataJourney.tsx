@@ -17,7 +17,7 @@ const labels = [
   "Stored privately. Yours.",
   "Screens for your whole team.",
   "Know what to do next.",
-  "Leave anytime. It's all yours.",
+  "If you leave, your data goes with you.",
 ];
 
 function webglOK() {

@@ -48,7 +48,7 @@ export function SetupTimeline() {
       <div className="ops-top">
         <TierSwitch id={id} set={setId} />
         <p className="small muted">
-          {t.name} plan setup from <b className="tnum">{money(t.setupFrom)}</b> · about <b>{p.weeks} weeks</b> · your time: <b>{p.hours}</b> total
+          {t.name} setup, all three products: <b className="tnum">{t.from ? "from " : ""}{money(t.setupFrom)}</b> · about <b>{p.weeks} weeks</b> · your time: <b>{p.hours}</b> total
         </p>
       </div>
       <div className="gantt" key={id}>
@@ -85,7 +85,7 @@ export function SetupTimeline() {
 
 export function TermsGlance() {
   const terms = [
-    ["Term", "12 months, then month to month. Command can be 12–36."],
+    ["Term", "12 months, then month to month. Large can be 12 to 36 months."],
     ["Setup", "Fixed price in your proposal. Half at signing, half at launch."],
     ["Changes", "Change hours are included every month (2 on Small, 6 on Mid). Extra hours are $175. Anything custom is Engineering, quoted first."],
     ["Your systems", "If a change in one of your systems breaks a connection, we fix it from your change hours. Cleaning up the same bad entries every month isn't included; we flag them so they're fixed at the source."],
